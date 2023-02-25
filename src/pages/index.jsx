@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
+import Layout from "../../components/Layout";
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -14,11 +15,15 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
+          <Layout>
+              <p>Pagina principal</p>
 
         <h1>Esta es la pagina index</h1>
+              <h6>otra prueba</h6>
 
-
+          </Layout>
       </main>
+
     </>
   )
 }
