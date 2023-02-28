@@ -7,7 +7,8 @@ const initialState = {
     allProjectsCopia: [],
     detailUsuario: {},
     userProjects: [],
-    dashAdmin: { project: [], users : []},
+    dashAdmin: { projects: [], users : []},
+    pruebaConexion: "Prueba"
 
 
 }
