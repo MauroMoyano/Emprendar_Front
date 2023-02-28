@@ -1,6 +1,6 @@
-import CardUser from "components/card_user";
-import Proyect from "components/card_proyect";
-import DetailProyect  from "components/card_proyect_detail";
+import CardUser from "components/cardUser";
+import Proyect from "components/cardProject";
+import DetailProyect  from "components/cardProjectDetail";
 
 const Detail = () =>{
 
