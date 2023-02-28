@@ -1,0 +1,172 @@
+    
+    .all{
+        display: flex;
+        height: 100vb;
+        border: 2px solid black;
+        
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+
+        flex-direction: column;
+    }
+
+    .title{
+        height: 10vb;
+    }
+    .container{
+        height: 90vb;
+        display:grid;
+        grid-template-columns: repeat(2, 1fr);
+        border: 2px red solid;
+            
+
+    }
+    .aboutPage{
+        display: flex;
+        border: green 2px solid ;
+
+
+    }
+
+    .user{
+        display: flex; 
+        justify-content: center;
+        border: #240046 2px solid ;
+        align-content: center; 
+        align-items: center;
+        height: 90%; 
+
+    }
+
+    .main{
+        border:yellow 2px solid ;
+        display: flex;
+        background-color: #240046;
+        min-width: 50%; 
+        flex-direction: column;
+        border-radius: 1rem;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 7px 7px 10px 3px #24004628;
+        max-height: 490px;
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        padding: 24px;
+    }
+    .label {
+        color: #fff;
+        font-size: 2rem;
+        justify-content: center;
+        display: flex;
+        font-weight: bold;
+        cursor: pointer;
+        transition: .5s ease-in-out;
+      }
+    .form button {
+        width: 85%;
+        height: 40px;
+        margin: 12px auto 10%;
+        color: #fff;
+        background: #573b8a;
+        font-size: 1rem;
+        font-weight: bold;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: .2s ease-in;
+    }
+
+      
+    .form button:hover {
+        background-color: #6d44b8;
+    }
+
+    .input {
+        width: 100%;
+        height: 30px;
+        background: #e0dede;
+        padding: 10px;
+        border: none;
+        outline: none;
+        border-radius: 4px;
+    }
+      
+
+
+    /*logearse*/
+
+    /*Login*/
+    .logIn {
+     position: relative;
+        width: 100%;
+        height: 100%;
+    }
+  
+
+    .logIn label {
+        margin: 25% 0 5%;
+      }
+
+    /*registrarse*/
+
+    .sign_In {
+        background: #eee;
+        border-top-right-radius: 3rem;
+        border-top-left-radius: 3rem;
+
+        transform: translateY(5%);
+        transition: .8s ease-in-out;
+    }
+    
+    .sign_In label {
+        color: #573b8a;
+        transform: scale(.6);
+    }
+
+    /*funcionalidad del checkbok*/
+    .chk{
+        display: none;
+    }
+    
+    .chk:checked{
+        width: 60px;
+    }
+   
+    .chk:checked ~ .sign_In {
+        transform: translateY(-60%);
+      }
+      
+    .chk:checked ~ .sign_In label {
+      transform: scale(1);
+      margin: 10% 0 5%;
+    }
+    
+    .chk:checked ~ .sign_In label {
+      transform: scale(.6);
+      margin: 5% 0 5%;
+    } 
+   
+
+
+
+
+    .chk:checked ~ .logIn label {
+        transform: scale(.6);
+        margin: 5% 0 5%;
+    } 
+
+
+
+    .sign_In p {
+        font-size: .8rem;
+        cursor: pointer;
+    }
+
+    .sign_In p:hover {
+        color: #240046;
+    }
