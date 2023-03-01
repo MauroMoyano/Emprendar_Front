@@ -2,11 +2,10 @@ import Link from "next/link";
 
 
 export default function cardProject(props) {
-    const id = props.userId
     return (
         //link a ruta de detailuser paso params userId
         <div>
-            <Link href={`/detailUser/${id}`}>
+            <Link href={`/detailUser/${props.userId}`}>
                 <h1>{props.index}</h1>
                 <h1>{props.name}</h1>
                 <h1>{props.summary}</h1>

@@ -9,7 +9,6 @@ const Detail = () => {
     const [user, setUser] = useState()
     const router = useRouter()
     const {userId} = router.query
-    console.log("user " + userId)
 
     useEffect(() => {
         async function fetchData() {

@@ -10,16 +10,12 @@ export default function Paginated() {
     const page = []
 
     useEffect( () => {
-            fetchData().then(r => null)
-            async function fetchData(){
                 if (!allProjects.length) {
-                    await dispatch(getHomeProjects())
+                    dispatch(getHomeProjects())
                     // console.log("get ",allProjects)
                     // console.log("carga de get ")
                     /* setTimeout(()=>{dispatch(Loading())}, 0 )*/
                 }
-            }
-
         },
         [currentPage, allProjects])
 
@@ -54,6 +50,7 @@ export default function Paginated() {
                return (
                    <div key={id}>
                     <CardProject
+                        id={id}
                         name={title}
                         summary={summary}
                         description={description}
