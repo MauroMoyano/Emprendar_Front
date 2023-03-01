@@ -9,13 +9,16 @@ export default function Paginated() {
     const dispatch = useDispatch()
     const page = []
 
-    useEffect( () => {
+    useEffect(() => {
+            async function fetchData() {
                 if (!allProjects.length) {
-                    dispatch(getHomeProjects())
+                    await dispatch(getHomeProjects())
                     // console.log("get ",allProjects)
                     // console.log("carga de get ")
                     /* setTimeout(()=>{dispatch(Loading())}, 0 )*/
                 }
+            }
+            fetchData()
         },
         [currentPage, allProjects])
 
@@ -47,20 +50,20 @@ export default function Paginated() {
             }
             <button onClick={handleNextClick}> Next</button>
             <div>{page[currentPage]?.map(({id, title, summary, description, date, goal, img, userId}) => {
-               return (
-                   <div key={id}>
-                    <CardProject
-                        id={id}
-                        name={title}
-                        summary={summary}
-                        description={description}
-                        date={date}
-                        goal={goal}
-                        img={img}
-                        userId={userId}
-                    />
-                       <hr/>
-                   </div>
+                return (
+                    <div key={id}>
+                        <CardProject
+                            id={id}
+                            name={title}
+                            summary={summary}
+                            description={description}
+                            date={date}
+                            goal={goal}
+                            img={img}
+                            userId={userId}
+                        />
+                        <hr/>
+                    </div>
                 )
             })}
                 <hr/>
