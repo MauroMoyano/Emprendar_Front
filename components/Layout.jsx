@@ -1,11 +1,20 @@
 
 import style from './styles/Layout.module.css'
 import Link from 'next/link'
+import logo from '../public/assets/logo.png'
+import Image from 'next/image'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const Layout = ({children}) => {
 
     return (<div style={{fontFamily: 'sans-serif'}}>
             <nav className={style.nav}>
-                <h1>Emprendar</h1>
+
+
+                <p className={style.menu}>Menu &nabla;</p>
+
+                    <div className={style.logo}>
+                    <Image className={style.logo} src={logo}/>
+                    </div>
 
                 <div className={style.links}>
                     <Link href="/">Iniciar Sesion</Link>
@@ -16,7 +25,9 @@ const Layout = ({children}) => {
         <div>
             {children}
         </div>
-        <h1>Este es el Footer</h1>
+        <footer className={style.footer}>
+            <p> &copy; 2023, Emprendar.  All right reserved</p>
+        </footer>
     </div>)
 }
 

@@ -49,3 +49,12 @@
 .carrer {
     color: gray;
 }
+
+.icons {
+    display: flex;
+    gap: 1rem;
+}
+
+.icons svg {
+    font-size: 1.3rem;
+}
