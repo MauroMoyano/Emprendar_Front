@@ -6,13 +6,17 @@
     align-items: center;
     
 }
+
 .cards{
     padding: 1rem;
     display: flex;
     gap: 2rem;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
 }
-.cards > div {
+
+/* .cards > div {
     border: .2rem solid black;
     background: grey;
-}
+} */
