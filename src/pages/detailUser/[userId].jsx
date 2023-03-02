@@ -1,61 +1,67 @@
-import CardUser from "components/cardUser";
-import Project from "components/CardProject";
-import DetailProject from "components/cardProjectDetail";
 import {useRouter} from "next/router";
-import axios from "axios";
 import {useEffect, useState} from "react";
+import { useDispatch, useSelector } from "react-redux";
+import CardProjectDetail from "../../../components/CardProjectDetail"
+import style from "../styles/detail.module.css"
+import CardUser from "components/CardUser";
+import CardProject from "components/CardProject";
 
 const Detail = () => {
-    const [user, setUser] = useState()
     const router = useRouter()
-    const {userId} = router.query
+    const [state,setState] = useState(true)
+    const selectorUser = useSelector(state => state.detailUsuario)
+    
+    //FUNCION QUE TE PERMITE VER TODOS LOS PROYECTOS
+    const handlerState = () =>{
+        setState(false)
+    }    
 
-    useEffect(() => {
-        async function fetchData() {
-            const {data} = await axios.get(`http://localhost:3001/user/${userId}`)
-            setUser(data)
-        }
-        fetchData()
-    },[])
-console.log(user)
-    return (
-        <div>
-        <span>
-            <h1>Este es el componente Detail de usuario </h1>
+    const [checked, setChecked] = useState(false)
+    //Con esta funcion manejamos el estado del checkbox si es true mostramos un formulario de Log In si es false de Sign In
+    const handlerCheckbox = (event) =>{
+        event.target.id === "signIn" 
+            ?  setChecked(!checked)
+            : setChecked(false)
+    }
 
-            <br/>
+    console.log(state);
+    return(
+        <div className={style.ConteinerDetailproject}>
+            <CardUser />
+            <div>
+                <label onClick={handlerCheckbox}  id="logIn" className={style.label} htmlFor="chk" aria-hidden="true">Detalle del pryecto</label> 
+                <CardProjectDetail />
+                <input type="checkbox" className={style.chk} id ="chk" aria-hidden="true" checked={checked}/>
+              
+               <div className={style.tarjetsProjets}>
+                <label onClick={handlerCheckbox}  id="signIn" className={style.label} htmlFor="chk" aria-hidden="true">mas proyecto de este user</label> 
 
-            <h1>{user?.user_name}</h1>
-            <h1>{user?.name}</h1>
-            <h1>{user?.last_name}</h1>
-            <h1>{user?.email}</h1>
-            <h1>{user?.reputation}</h1>
-
-
-            <br/>
-        </span>
-            <span>
-            <h1>componente de resumen de proyectos</h1>
-                <ul>
-                {
-                    user?.userProjects.map((p)=>{
-                        return (<li>
-                            <h1>{p.title}</h1>
-                        </li>)
-                    })
-                }
-            </ul>
-        </span>
-
+                 {
+                     state?selectorUser.userProjects.map(({id, title, summary, description, date, goal, img, userId}) => {
+                         return (
+                             <CardProject 
+                                     key={id}
+                                     idProject={id}
+                                     name={title}
+                                     summary={summary}
+                                     description={description}
+                                     date={date}
+                                     goal={goal}
+                                     img={img}
+                                     userId={userId}
+                                 />
+                             
+                             
+                         )
+                     })
+                     :null
+                     } 
+                    </div>
+            </div>
         </div>
-        // if (condition) {
-        //muestro unoo especifico
-        // } else {
-        //     muestro todos
-        // }
-
     )
-
+   
+      
 
 }
 export default Detail;

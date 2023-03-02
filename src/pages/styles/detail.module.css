@@ -1,0 +1,86 @@
+.ConteinerDetailproject{
+    height: 100vh;
+    background: grey;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 7px 7px 10px 3px #24004628;
+    max-height:100vb;
+
+}
+.ConteinerDetailproject label {
+    font-size: 2rem;
+    background: blue;
+    color: aliceblue;
+}
+
+
+
+.buttonAll{
+    background: rgb(231, 231, 209);
+    height: 10vb;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+
+.buttonAll button{
+    font-size: 2rem;
+    height: 50%;
+}
+
+
+.cardDetailProject{ 
+    border: .5rem solid rgb(95, 89, 89) ;
+    height: 90vb;
+
+}
+
+
+.cardDetailProject > p{
+    padding: 1rem;
+    font-size: 2rem;
+} 
+
+.cardDetailProject > button {
+    font-size: 1.5rem;
+}
+
+
+
+
+
+.cardUser{
+    border: .5rem solid black;
+}
+
+.cardUser > img {
+    width: 300px;
+}
+
+
+.tarjetsProjets{
+    display: flex;
+    flex-direction: column;
+    height: 90vb;
+
+}
+
+.tarjetsProjets div{
+    border: 2px solid ;
+
+}
+
+
+.chk{
+    display: none;
+}
+.chk:checked ~ .tarjetsProjets{
+    transform: translateY(-100%);
+    
+}
+
+

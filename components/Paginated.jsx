@@ -2,6 +2,7 @@ import CardProject from "./CardProject";
 import {useEffect} from "react";
 import {useSelector, useDispatch} from "react-redux";
 import {currentPageHandler, getHomeProjects} from "../redux/actions";
+import style from "../src/pages/styles/paginated.module.css"
 
 export default function Paginated() {
     const currentPage = useSelector(state => state.currentPage)
@@ -39,21 +40,25 @@ export default function Paginated() {
     }
 
     return (
-        <div>
-            <h1>Este es el componete Paginated</h1>
-            <button onClick={handlePrevClick}> Back</button>
-            {
-                page?.map((p, index) => <button onClick={handlePage}
-                                                value={index}
-                                                key={index}>{index + 1}</button>)
+        <div className={style.container}>
+            <div>    
+               
+                <button onClick={handlePrevClick}> Back</button>
+                {
+                    page?.map((p, index) => <button onClick={handlePage}
+                                                    value={index}
+                                                    key={index}>{index + 1}</button>)
 
-            }
-            <button onClick={handleNextClick}> Next</button>
-            <div>{page[currentPage]?.map(({id, title, summary, description, date, goal, img, userId}) => {
+                }
+                <button onClick={handleNextClick}> Next</button>
+            </div>
+
+            <div className={style.cards}>
+                {page[currentPage]?.map(({id, title, summary, description, date, goal, img, userId}) => {
                 return (
-                    <div key={id}>
-                        <CardProject
-                            id={id}
+                    <CardProject
+                            key={id}
+                            idProject={id}
                             name={title}
                             summary={summary}
                             description={description}
@@ -62,8 +67,8 @@ export default function Paginated() {
                             img={img}
                             userId={userId}
                         />
-                        <hr/>
-                    </div>
+                    
+                    
                 )
             })}
                 <hr/>
