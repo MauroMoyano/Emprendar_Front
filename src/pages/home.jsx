@@ -1,13 +1,13 @@
 import Paginated from "../../components/Paginated";
 import {useDispatch, useSelector} from "react-redux"
-import {filterCategory, filterCountry, orderTop} from "../../redux/actions";
+import {filterCategory, filterCountry, getHomeProjects, orderTop} from "../../redux/actions";
 import Layout from "../../components/Layout";
 
 export default function Home() {
 
     const dispatch = useDispatch()
-    const category  = useSelector(state => state.category)
-    const country  = useSelector(state => state.country)
+    const category = useSelector(state => state.category)
+    const country = useSelector(state => state.country)
 
     const handleFilterCountry = (event) => {
         dispatch(filterCountry(event.target.value))
@@ -20,6 +20,10 @@ export default function Home() {
     const handleFilterCategory = (event) => {
         dispatch(filterCategory(event.target.value))
     }
+
+    const handlerDeleteSearch = (event) => {
+        dispatch(getHomeProjects())
+    }
     /////////////////////////  // filtros
 
     return (
@@ -27,15 +31,15 @@ export default function Home() {
             <h1>Este es el componente Home</h1>
 
             <select onChange={handleOrderTop}>
-                <option disabled selected>highest donations</option>
+                <option disabled selected>Highest Donations</option>
                 <option value="Ascendente">Ascendente</option>
                 <option value="Descendente">Descendente</option>
             </select>
 
             <select onChange={handleFilterCountry}>
-                <option disabled selected>Title</option>
+                <option disabled selected>Country</option>
                 {
-                    country.map((c, index) => {
+                    country?.map((c, index) => {
                         return <option value={c} key={index}>{c}</option>
                     })
                 }
@@ -46,11 +50,12 @@ export default function Home() {
             <select onChange={handleFilterCategory}>
                 <option disabled selected>Category</option>
                 {
-                    category.map((c, index) => {
+                    category?.map((c, index) => {
                         return <option value={c} key={index}>{c}</option>
                     })
                 }
             </select>
+            <button onClick={handlerDeleteSearch}>Delete Search</button>
 
             {/*/////////////////////////////filtros/////////////////////////////*/}
 

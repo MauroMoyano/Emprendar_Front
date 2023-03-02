@@ -14,9 +14,22 @@ export const FILTER_COUNTRY = "FILTER_COUNTRY"
 export const getHomeProjects = () => {
     return async function (dispatch) {
         const {data} = await axios.get("http://localhost:3001/project/")
-        const category = await axios.get("http://localhost:3001/category")
-        console.log("categorias ", category.data)
-        dispatch({type: GET_HOME_PROJECTS, payload: {data, category}})
+        // const category = await axios.get("http://localhost:3001/category")
+
+        const arrayCountry = []
+        let arrayCategory = []
+
+        data.forEach((project)=>{
+            arrayCountry.push(project.country)
+        })
+        const country = [...new Set(arrayCountry)]
+        // console.log("contry dentro de la action ", country)
+        data.forEach((project)=>[
+            arrayCategory = [...arrayCategory, ...project.category]
+        ])
+        const category = [...new Set(arrayCategory)]
+
+        dispatch({type: GET_HOME_PROJECTS, payload: {data, category, country}})
     }
 }
 

@@ -1,4 +1,3 @@
-// import { Sansita } from 'next/font/google'
 import {
     CURRENT_PAGE,
     GET_HOME_PROJECTS,
@@ -31,13 +30,14 @@ const rootReducer = (state = initialState, action) => {
     switch (action.type) {
 
         case GET_HOME_PROJECTS:
-            // console.log("action dentro de get home " + JSON.stringify(Object.keys(action.payload)))
+            // console.log("action dentro de get home " + JSON.stringify(action.payload.category))
             return {
                 ...state,
                 allProjects: action.payload.data,
                 allProjectsCopy: action.payload.data,
                 currentPage: 0,
-                // category: action.payload.category
+                category: action.payload.category,
+                country: action.payload.country
     }
 
 case
@@ -73,7 +73,6 @@ case
         }
 case
     FILTER_CATEGORY:
-        state.allProjects = state.allProjectsCopy
     return {
         ...state,
         allProjects: state.allProjects.filter(project => project.category.some(c => c === action.payload)),
@@ -82,10 +81,9 @@ case
 
 case
     FILTER_COUNTRY:
-        state.allProjects = state.allProjectsCopy
     return {
         ...state,
-        allProjects: state.allProjects.filter(project => project.country.some(c => c === action.payload)),
+        allProjects: state.allProjects.filter(project => project.country === action.payload),
         currentPage: 0
     }
 

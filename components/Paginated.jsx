@@ -21,7 +21,7 @@ export default function Paginated() {
             }
             fetchData()
         },
-        [currentPage, allProjects])
+        [currentPage])
 
     for (let i = 0; i < allProjects.length ; i = i + 3) {
         page.push(allProjects.slice(i, i + 3 || allProjects.length))
