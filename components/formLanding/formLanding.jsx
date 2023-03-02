@@ -1,122 +1,231 @@
-import style from "../../src/pages/styles/landing.module.css"
+import style from "../../src/pages/styles/landing.module.css";
 import { useState } from "react";
-import validate from "./validateSignIn"
-const validateSignIn = (form, users) =>{
-//user va a contener todos los user para ver si ya existe ese usuario
-    const error = {}
-    const {name,last_name,user_name,email,password,profile_img} = form;
+import clienteAxios from "config/clienteAxios";
+const validateSignIn = (form, users) => {
+  //user va a contener todos los user para ver si ya existe ese usuario
+  const error = {};
+  const { name, last_name, user_name, email, password, profile_img } = form;
 
-    !name||!last_name||!user_name||!email ||!password||!profile_img 
-        ? error.error = "Se necesitan todos los datos para crear una cuenta"  
-        : null
-    return error
-}
+  !name || !last_name || !user_name || !email || !password || !profile_img
+    ? (error.error = "Se necesitan todos los datos para crear una cuenta")
+    : null;
+  return error;
+};
 
-export default function FormLanding(){
+import { useRouter } from "next/router";
+
+export default function FormLanding() {
+  //SIGN IN
+  const [error, setError] = useState({});
+
+  const [confirm, setConfirm] = useState({});
+
+  const router = useRouter()
+  const [formSignIn, setFormSignIn] = useState({
+    name: "",
+    last_name: "",
+    user_name: "",
+    email: "",
+    password: "",
+    profile_img: "",
+  });
+
+  //manejo de estado formSignIn
+  const handlerSignIn = (event) => {
+    const prop = event.target.name;
+    const value = event.target.value;
+    setFormSignIn({ ...formSignIn, [prop]: value });
+
+    //hardcodeo el seundo parametro para ver si funciona
+    //validateSignIn({...formSignIn,[prop]:value},[{name:"santiago"}])
+    setError();
+  };
+  //envio de datos SignIn
+  const sendDataSignIn = async (data) => {
+    //despachar action
+    console.log(data);
+
+    try {
+      const response = await clienteAxios.post("/user", data);
+      console.log(response);
+
+      setConfirm({
+        msg: "Usuario creado correctamente, revisa tu casilla de email para confirmar tu cuenta",
+      });
+
+      setFormSignIn({
+        name: "",
+        last_name: "",
+        user_name: "",
+        email: "",
+        password: "",
+        profile_img: "",
+      });
+
     
-    //SIGN IN 
-    const [error,setError] = useState({
-        error:""
-    })
+    
+    } catch (error) {
+      setError({ error: error.response.data.message });
+      console.log(error);
 
-
-    const [formSignIn,setFormSignIn] = useState({
-        name:"",
-        last_name:"",
-        user_name:"",
-        email:"",
-        password:"",
-        profile_img:""
-    })
-
-    //manejo de estado formSignIn 
-    const handlerSignIn = (event) =>{
-        const prop = event.target.name; 
-        const value = event.target.value;
-        setFormSignIn({...formSignIn,[prop]:value})
-
-        //hardcodeo el seundo parametro para ver si funciona
-        //validateSignIn({...formSignIn,[prop]:value},[{name:"santiago"}])
-        setError()
+      setTimeout(() => {
+        setError({});
+      }, 3000);
     }
-    //envio de datos SignIn
-    const sendDataSignIn = (data) =>{
-        //despachar action
-        console.log(data);
-        setFormSignIn(
-           { name:"",
-            last_name:"",
-            user_name:"",
-            email:"",
-            password:"",
-            profile_img:""}
-        )
-    }
-   
+  };
 
-    //LOG IN
-    const [formLogIn, setFormLogIn] = useState({
-        user_name:"",
-        password:""
-    })
-
-    //manejo de estado formSignIn 
-    const handlerLogIn = (event) =>{
-        const prop = event.target.name; 
-        const value = event.target.value;
-        setFormLogIn({...formLogIn,[prop]:value})
-    }
-    //envio de datos SignIn
-    const sendDataLogIn = (data) =>{
-        //despachar action
-        setFormLogIn({
-            user_name:"",
-            password:""
-        })
-
-    }
     
 
+  //LOG IN
+  const [formLogIn, setFormLogIn] = useState({
+    email: "",
+    password: "",
+  });
 
-    //funcion que elimina el default que recarga la pagina cuando se envia un formulario
-    const handlerSubmit = (event) =>{
-        event.preventDefault() 
+  //manejo de estado formSignIn
+  const handlerLogIn = (event) => {
+    const prop = event.target.name;
+    const value = event.target.value;
+    setFormLogIn({ ...formLogIn, [prop]: value });
+  };
+  //envio de datos SignIn
+  const sendDataLogIn = async (data) => {
+    //despachar action
+    try {
+      const resultado = await clienteAxios.post("/user/login", formLogIn);
+
+    router.push('/home')
+      console.log(resultado);
+    } catch (error) {
+      setError({ error: error.response.data.message });
+      console.log(error);
+
+      setTimeout(() => {
+        setError({});
+      }, 3000);
     }
+  };
 
-    const [checked, setChecked] = useState(false)
-    //Con esta funcion manejamos el estado del checkbox si es true mostramos un formulario de Log In si es false de Sign In
-    const handlerCheckbox = (event) =>{
-        event.target.id === "signIn" 
-            ?  setChecked(!checked)
-            : setChecked(false)
-    }
-   
-    return(
-        <div  className={style.main}>
-            <input type="checkbox" className={style.chk} id ="chk" aria-hidden="true" checked={checked}/>
+  //funcion que elimina el default que recarga la pagina cuando se envia un formulario
+  const handlerSubmit = (event) => {
+    event.preventDefault();
+  };
 
-            <div className={style.logIn}>
-                <form onClick={handlerSubmit} className={style.form}>
-                    <label onClick={handlerCheckbox}  id="logIn" className={style.label} htmlFor="chk" aria-hidden="true">Log in</label> 
-                    <input className={style.input} name="user_name" value={formLogIn.user_name} onChange={handlerLogIn} type="text" placeholder="Nombre de Usuario"/>
-                    <input className={style.input} name="password" value={formLogIn.password}   onChange={handlerLogIn} type="text" placeholder="Contraseña"/>
-                    <button onClick={()=>sendDataLogIn(formLogIn)}>Entrar</button>
-                </form>
-            </div>
-            <div className={style.sign_In}>
-                <form onClick={handlerSubmit} className={style.form}>
-                    <label onClick={handlerCheckbox} id="signIn" className={style.label} htmlFor="chk" aria-hidden="true">Registrarse</label> 
-                    <input className={style.input} name="name" value={formSignIn.name} onChange={handlerSignIn} type="text" placeholder="Nombre"/>
-                    <input className={style.input} name="last_name" value={formSignIn.last_name}onChange={handlerSignIn} type="text" placeholder="Apellido"/>
-                    <input className={style.input} name="user_name" value={formSignIn.user_name}onChange={handlerSignIn} type="text" placeholder="Nombre de Usuario"/>
-                    <input className={style.input} name="email" value={formSignIn.email}onChange={handlerSignIn} type="text" placeholder="Email"/>
-                    <input className={style.input} name="password" value={formSignIn.password}onChange={handlerSignIn} type="text" placeholder="Contraseña"/>
-                    <input className={style.input} name="profile_img" value={formSignIn.profile_img}onChange={handlerSignIn} type="text" placeholder="foto"/>
-                    <p onClick={handlerCheckbox}>Ya tengo cuenta</p>
-                    <button onClick={()=>sendDataSignIn(formSignIn)}>Registrarse</button>
-                </form>
-            </div>
+  const [checked, setChecked] = useState(false);
+  //Con esta funcion manejamos el estado del checkbox si es true mostramos un formulario de Log In si es false de Sign In
+  const handlerCheckbox = (event) => {
+    event.target.id === "signIn" ? setChecked(!checked) : setChecked(false);
+  };
 
+  return (
+    <>
+      {confirm?.msg && <p className={style.confirmMessage}>{confirm.msg}</p>}
+      {error?.error && <p className={style.errorMessage}>{error.error}</p>}
+      <div className={style.main}>
+        <input
+          type="checkbox"
+          className={style.chk}
+          id="chk"
+          aria-hidden="true"
+          checked={checked}
+        />
+
+        <div className={style.logIn}>
+          <form onClick={handlerSubmit} className={style.form}>
+            <label
+              onClick={handlerCheckbox}
+              id="logIn"
+              className={style.label}
+              htmlFor="chk"
+              aria-hidden="true"
+            >
+              Iniciar Sesion
+            </label>
+            <input
+              className={style.input}
+              name="email"
+              value={formLogIn.email}
+              onChange={handlerLogIn}
+              type="email"
+              placeholder="Email del usuario"
+            />
+            <input
+              className={style.input}
+              name="password"
+              value={formLogIn.password}
+              onChange={handlerLogIn}
+              type="password"
+              placeholder="Contraseña"
+            />
+            <button onClick={() => sendDataLogIn(formLogIn)}>Entrar</button>
+          </form>
         </div>
-    )
+        <div className={style.sign_In}>
+          <form onClick={handlerSubmit} className={style.form}>
+            <label
+              onClick={handlerCheckbox}
+              id="signIn"
+              className={style.label}
+              htmlFor="chk"
+              aria-hidden="true"
+            >
+              Registrarse
+            </label>
+            <input
+              className={style.input}
+              name="name"
+              value={formSignIn.name}
+              onChange={handlerSignIn}
+              type="text"
+              placeholder="Nombre"
+            />
+            <input
+              className={style.input}
+              name="last_name"
+              value={formSignIn.last_name}
+              onChange={handlerSignIn}
+              type="text"
+              placeholder="Apellido"
+            />
+            <input
+              className={style.input}
+              name="user_name"
+              value={formSignIn.user_name}
+              onChange={handlerSignIn}
+              type="text"
+              placeholder="Nombre de Usuario"
+            />
+            <input
+              className={style.input}
+              name="email"
+              value={formSignIn.email}
+              onChange={handlerSignIn}
+              type="text"
+              placeholder="Email"
+            />
+            <input
+              className={style.input}
+              name="password"
+              value={formSignIn.password}
+              onChange={handlerSignIn}
+              type="password"
+              placeholder="Contraseña"
+            />
+            <input
+              className={style.input}
+              name="profile_img"
+              value={formSignIn.profile_img}
+              onChange={handlerSignIn}
+              type="text"
+              placeholder="foto"
+            />
+            <p onClick={handlerCheckbox}>Ya tengo cuenta</p>
+            <button onClick={() => sendDataSignIn(formSignIn)}>
+              Registrarse
+            </button>
+          </form>
+        </div>
+      </div>
+    </>
+  );
 }
