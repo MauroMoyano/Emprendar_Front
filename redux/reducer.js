@@ -1,4 +1,5 @@
-import {CURRENT_PAGE, GET_HOME_PROJECTS} from './actions'
+import { Sansita } from 'next/font/google'
+import {CURRENT_PAGE, GET_HOME_PROJECTS, GET_DETAIL_PROJECT,RESET_DETAIL_PROJECT, GET_USER} from './actions'
 
 
 const initialState = {
@@ -6,6 +7,9 @@ const initialState = {
     allProjects: [],
     allProjectsCopia: [],
     detailUsuario: {},
+    detailProject :{
+        name:"fakedata"
+    },
     userProjects: [],
     dashAdmin: { projects: [], users : []},
     currentPage: 0
@@ -21,7 +25,21 @@ const rootReducer = (state = initialState, action) => {
 
         case CURRENT_PAGE:
             return {...state, currentPage: action.payload}
-
+            
+        case GET_DETAIL_PROJECT :
+            return {
+                ...state, detailProject: action.payload
+            }
+        case RESET_DETAIL_PROJECT :
+            return {
+                ...state, detailProject: {}
+            }
+        case GET_USER :
+            return {
+                ...state, detailUsuario:action.payload
+            }
+    
+        
         default:
             return {...state}
     }

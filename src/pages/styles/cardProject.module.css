@@ -1,0 +1,12 @@
+.container{
+    background: rgb(158, 153, 153);
+    border-radius: 1rem;
+    padding: 1rem;
+
+}
+
+.container a {
+    text-decoration: none;
+    color: aliceblue;
+    text-align: center;
+}
