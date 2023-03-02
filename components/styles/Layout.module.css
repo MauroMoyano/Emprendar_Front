@@ -1,0 +1,46 @@
+.nav {
+    color: rgba(60, 23, 67, 1);
+    border-bottom: .3rem solid rgba(60, 23, 67, 1);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: space-between;
+    padding: 1rem;
+    align-items: center;
+}
+
+.nav h1 {
+    color: rgba(60, 23, 67, 1);
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.links a {
+    text-decoration: none;
+    font-size: 1.1rem;
+}
+
+.links {
+    display: flex;
+    justify-content: flex-end;
+    gap: 2rem;
+    flex: 1;
+}
+
+
+.footer {
+    border-top: .3rem solid rgba(60, 23, 67, 1);
+    padding: 1rem 0;
+    text-align: center;
+    color:rgba(60, 23, 67, 1); ;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+
+}
+
+.logo img {
+    width:340px;
+    height: 80px ;
+}
