@@ -1,0 +1,22 @@
+.nav {
+    border-bottom: .3rem solid rgba(60, 23, 67, 1);
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    align-items: center;
+}
+
+.nav h1 {
+    color: rgba(60, 23, 67, 1);
+    text-transform: uppercase;
+}
+
+.links a {
+    text-decoration: none;
+    font-size: 1.1rem;
+}
+
+.links {
+    display: flex;
+    gap: 2rem;
+}
