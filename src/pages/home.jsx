@@ -1,54 +1,65 @@
 import Paginated from "../../components/Paginated";
 import {useDispatch, useSelector} from "react-redux"
-export default function Home(){
+import {filterCategory, filterCountry, getHomeProjects, orderTop} from "../../redux/actions";
+import Layout from "../../components/Layout";
 
-   /* const dispatch = useDispatch()
-    // const  = useSelector(state => state)
+export default function Home() {
 
-    const handleFilterLocation = (event) => {
-        dispatch(/!*funcion*!/(event.target.value))
+    const dispatch = useDispatch()
+    const category = useSelector(state => state.category)
+    const country = useSelector(state => state.country)
+
+    const handleFilterCountry = (event) => {
+        dispatch(filterCountry(event.target.value))
     }
 
     const handleOrderTop = (event) => {
-        dispatch(/!*funcion*!/(event.target.value))
+        dispatch(orderTop(event.target.value))
     }
 
-    const handleFilterUser = (event) => {
-        dispatch(/!*funcion*!/(event.target.value))
-    }*/
-  /////////////////////////  // filtros
+    const handleFilterCategory = (event) => {
+        dispatch(filterCategory(event.target.value))
+    }
 
-    return(
-        <div>
+    const handlerDeleteSearch = (event) => {
+        dispatch(getHomeProjects())
+    }
+    /////////////////////////  // filtros
+
+    return (
+        <Layout>
             <h1>Este es el componente Home</h1>
 
-            {/*<select onChange={handleOrderLocation}>
-                <option disabled selected>Title</option>
-                <option value="Ascendente">Ascendente</option>
-                <option value="Descendente">Descendente</option>
-            </select>*/}
-            {/*en este filtro se buscara todos los proyectos que coincidan con el pais seleccionado. para eso necesitamos cargar un array con todos los paises disponibles y mapearlos en el select*/}
-
-
-           {/* <select onChange={handleOrderTop}>
-                <option disabled selected>highest donations</option>
+            <select onChange={handleOrderTop}>
+                <option disabled selected>Highest Donations</option>
                 <option value="Ascendente">Ascendente</option>
                 <option value="Descendente">Descendente</option>
             </select>
 
-
-            <select onChange={handleFilterUser}>
-                <option disabled selected>Diets</option>
+            <select onChange={handleFilterCountry}>
+                <option disabled selected>Country</option>
                 {
-                    diets.map((d, index) => {
-                        return <option value={d} key={index}>{d}</option>
+                    country?.map((c, index) => {
+                        return <option value={c} key={index}>{c}</option>
                     })
                 }
-            </select>*/}
+            </select>
+
+            {/*en este filtro se buscara todos los proyectos que coincidan con el pais seleccionado. para eso necesitamos cargar un array con todos los paises disponibles y mapearlos en el select*/}
+
+            <select onChange={handleFilterCategory}>
+                <option disabled selected>Category</option>
+                {
+                    category?.map((c, index) => {
+                        return <option value={c} key={index}>{c}</option>
+                    })
+                }
+            </select>
+            <button onClick={handlerDeleteSearch}>Delete Search</button>
 
             {/*/////////////////////////////filtros/////////////////////////////*/}
 
             <Paginated/>
-        </div>
+        </Layout>
     )
 }

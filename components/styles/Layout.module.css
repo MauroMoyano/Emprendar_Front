@@ -1,0 +1,55 @@
+.divGral{
+    height: 150px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.nav {
+    color: #3C1642;
+    background: #fff;
+    border-bottom: .3rem solid #3C1642;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    justify-content: space-between;
+    padding: 1rem;
+    align-items: center;
+    height: 80px;
+}
+
+.nav h1 {
+    color: #3C1642;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.links a {
+    text-decoration: none;
+    font-size: 1.1rem;
+}
+
+.links {
+    display: flex;
+    justify-content: flex-end;
+    gap: 2rem;
+    flex: 1;
+}
+
+
+.footer {
+    border-top: .3rem solid #3C1642;
+    padding: 1rem 0;
+    text-align: center;
+    color:#3C1642;
+    background: #fff;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    /* width: ; */
+}
+
+.logo img {
+    width:181.33px;
+    height: 42.66px;
+    
+}

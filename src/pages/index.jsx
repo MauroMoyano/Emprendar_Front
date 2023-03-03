@@ -1,18 +1,30 @@
 import { useState } from "react";
 import style from "./styles/landing.module.css"
 import FormLanding from "components/formLanding/formLanding";
+import logo from '../../public/assets/logo.png'
+import Image from "next/image";
+import Head from "next/head";
 export default function Landing(){
 
 
-
     return(
-       <div className={style.all}>
-            <div className={style.title}>
-                <h1>Emprendar</h1>
+        <>
+        <Head>
+        <title>Emprendar</title>
+             </Head>
+
+       <div className={style.all} style={{fontFamily: 'sans-serif'}}>
+            <div className={style.logo}>
+
+                <Image src={logo}  />
+
             </div>
+            
              <div className={style.container}>
                 <div className={style.aboutPage}>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Omnis officia quae veniam ab, nulla, suscipit iste natus deleniti eligendi autem nostrum eum accusamus consequuntur nesciunt assumenda sint maiores quis neque.</p>
+                    <p>¡Bienvenido a Emprendar! Somos una plataforma de crowdfunding que se enfoca en apoyar y financiar emprendimientos innovadores y prometedores.</p>
+
+                    <p>En Emprendar, creemos en la creatividad, la pasión y el talento de los emprendedores. Sabemos que empezar un negocio puede ser difícil y costoso, pero también sabemos que las grandes ideas merecen una oportunidad. Por eso, hemos creado una comunidad de personas comprometidas en ayudar a que estas ideas se conviertan en realidad.</p>
                 </div>
 
                 <div className={style.user}>
@@ -21,6 +33,7 @@ export default function Landing(){
                 
         </div>
        </div>
+       </>
     )
 }
 
