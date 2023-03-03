@@ -6,32 +6,29 @@ export default function CardUser({userId}){
     return(
         <div className={style.cardUser}>
             <div className={style.perfil}>
-            <button>
-                <Link  href={`/home`} >Inicio</Link>
-            </button>
+
                 <img src="https://images.ecestaticos.com/E_3gjOzXKgpERrgZvKPeNw9eux4=/0x0:1024x683/600x450/filters:fill(white):format(jpg)/f.elconfidencial.com%2Foriginal%2Fd51%2Fd35%2F17b%2Fd51d3517ba2cc066b0b6170e25e3245b.jpg"alt="" />
-                <h1>{selectorUser.user_name}</h1>
             </div>
             <div className={style.detailPerfil}>
-                <div className={style.campos}>
-                    <p className={style.datos}>Nombre :</p>
-                    <h3>{selectorUser.name}</h3>
-                </div>
+                    <h4>Username</h4>
+                    <h5>{selectorUser.user_name}</h5>
+                    <br />
+                    <h4>Nombre</h4>
+                    <h5>{selectorUser.name}</h5>
+                    <br />
+                 
+                    <h4>Apellido</h4>
+                    <h5>{selectorUser.last_name}</h5>
+                    <br />
 
-                <div className={style.campos}>
-                    <p className={style.datos}>Apellido :</p>
-                    <h3> {selectorUser.last_name}</h3>
-                </div>
+                    <h4>Email</h4>
+                    <h5>{selectorUser.email}</h5>
+                    <br />
 
-                <div className={style.campos}>
-                    <p className={style.datos}>Reputacion :</p>
-                    <h3>{selectorUser.reputation}</h3>
-                </div>
-
-                <div  className={style.campos}>
-                    <p className={style.datos}>Email :</p>
-                    <h3>{selectorUser.email}</h3>
-                </div>
+                    <h4>Reputacion</h4>
+                    <p>{selectorUser.reputation}</p>
+                    
+                     
 
             </div>
           
