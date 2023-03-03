@@ -14,9 +14,7 @@ const initialState = {
     allProjects: [],
     allProjectsCopy: [],
     detailUsuario: {},
-    detailProject: {
-        name: "fakedata"
-    },
+    detailProject :{},
     userProjects: [],
     category: [],
     country: [],

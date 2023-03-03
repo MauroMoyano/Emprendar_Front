@@ -3,22 +3,12 @@ import { useDispatch } from "react-redux";
 import style from "./styles/CardProject.module.css"
 import { getDetailProject, getUser } from "redux/actions";
 
-export default function cardProject(props) {
-
-    //al tocar una tarjeta tendria que llenar el estado de detailProject de redux despachando la action  
-    const dispatch = useDispatch()
-
-    const handlerDetailProject = (idProject) => {
-        dispatch(getDetailProject(idProject))
-        dispatch(getUser(props.userId))
-    }
-
+export default function CardProject(props) {
 
 
     return (
-        //link a ruta de detailuser paso params userId
-        <div onClick={() => handlerDetailProject(props.idProject)} className={style.divGral}>
-            <Link href={`/detailUser/${props.userId}`}>
+        <div  className={style.divGral}>
+            <Link href={`/detailUser/${props.userId}/${props.idProject}`}>
                 <div className={style.container}>
                     <div className={style.divImg}>
                         <img src={props.img} alt="Image not found" />
