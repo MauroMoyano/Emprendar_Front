@@ -2,6 +2,7 @@ import Paginated from "../../components/Paginated";
 import {useDispatch, useSelector} from "react-redux"
 import {filterCategory, filterCountry, getHomeProjects, orderTop} from "../../redux/actions";
 import Layout from "../../components/Layout";
+import style from "./styles/home.module.css"
 
 export default function Home() {
 
@@ -28,36 +29,46 @@ export default function Home() {
 
     return (
         <Layout>
-            <h1>Este es el componente Home</h1>
+            
+            <div className={style.filtersContainer}>
+                <div>
+                    <select onChange={handleOrderTop}>
+                    <option disabled selected>Highest Donations</option>
+                    <option value="Ascendente">Ascendente</option>
+                    <option value="Descendente">Descendente</option>
+                    </select>
+                </div>
+                <div>
+                    <select onChange={handleFilterCountry}>
+                    <option disabled selected>Country</option>
+                    {
+                        country?.map((c, index) => {
+                            return <option value={c} key={index}>{c}</option>
+                        })
+                    }
+                </select>
+                </div>
 
-            <select onChange={handleOrderTop}>
-                <option disabled selected>Highest Donations</option>
-                <option value="Ascendente">Ascendente</option>
-                <option value="Descendente">Descendente</option>
-            </select>
+                
 
-            <select onChange={handleFilterCountry}>
-                <option disabled selected>Country</option>
-                {
-                    country?.map((c, index) => {
-                        return <option value={c} key={index}>{c}</option>
-                    })
-                }
-            </select>
+                {/*en este filtro se buscara todos los proyectos que coincidan con el pais seleccionado. para eso necesitamos cargar un array con todos los paises disponibles y mapearlos en el select*/}
 
-            {/*en este filtro se buscara todos los proyectos que coincidan con el pais seleccionado. para eso necesitamos cargar un array con todos los paises disponibles y mapearlos en el select*/}
+                <div>
+                    <select onChange={handleFilterCategory}>
+                    <option disabled selected>Category</option>
+                    {
+                        category?.map((c, index) => {
+                            return <option value={c} key={index}>{c}</option>
+                        })
+                    }
+                    </select>
+                </div>
+                <div>
+                    <button onClick={handlerDeleteSearch}>Delete Search</button>
+                </div>
 
-            <select onChange={handleFilterCategory}>
-                <option disabled selected>Category</option>
-                {
-                    category?.map((c, index) => {
-                        return <option value={c} key={index}>{c}</option>
-                    })
-                }
-            </select>
-            <button onClick={handlerDeleteSearch}>Delete Search</button>
-
-            {/*/////////////////////////////filtros/////////////////////////////*/}
+                {/*/////////////////////////////filtros/////////////////////////////*/}
+            </div>
 
             <Paginated/>
         </Layout>

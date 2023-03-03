@@ -41,16 +41,16 @@ for (let i = 0; i < allProjects.length ; i = i + 6) {
 
     return (
         <div className={style.container}>
-            <div>
+            <div className={style.paginatedContainer}>
 
-                <button onClick={handlePrevClick}> Back</button>
+                <button onClick={handlePrevClick}>&laquo; Anterior</button>
                 {
                     page?.map((p, index) => <button onClick={handlePage}
                         value={index}
                         key={index}>{index + 1}</button>)
 
                 }
-                <button onClick={handleNextClick}> Next</button>
+                <button onClick={handleNextClick}>Siguiente &raquo;</button>
             </div>
 
             <div className={style.cards}>
