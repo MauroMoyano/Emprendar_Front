@@ -18,12 +18,13 @@ export default function Paginated() {
                 // console.log("carga de get ")
                 /* setTimeout(()=>{dispatch(Loading())}, 0 )*/
             }
-            fetchData()
-        },
-        [currentPage])
 
-for (let i = 0; i < allProjects.length ; i = i + 3) {
-        page.push(allProjects.slice(i, i + 3 || allProjects.length))
+        }
+        fetchData()
+    },[currentPage])
+
+for (let i = 0; i < allProjects.length ; i = i + 6) {
+        page.push(allProjects.slice(i, i + 6 || allProjects.length))
     }
 
     const handlePage = (event) => {
