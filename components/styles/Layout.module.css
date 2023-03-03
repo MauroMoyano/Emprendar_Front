@@ -1,15 +1,22 @@
+.divGral{
+    height: 150px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
 .nav {
-    color: rgba(60, 23, 67, 1);
-    border-bottom: .3rem solid rgba(60, 23, 67, 1);
+    color: #3C1642;
+    background: #fff;
+    border-bottom: .3rem solid #3C1642;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     justify-content: space-between;
     padding: 1rem;
     align-items: center;
+    height: 80px;
 }
 
 .nav h1 {
-    color: rgba(60, 23, 67, 1);
+    color: #3C1642;
     text-transform: uppercase;
     margin: 0;
 }
@@ -28,19 +35,21 @@
 
 
 .footer {
-    border-top: .3rem solid rgba(60, 23, 67, 1);
+    border-top: .3rem solid #3C1642;
     padding: 1rem 0;
     text-align: center;
-    color:rgba(60, 23, 67, 1); ;
+    color:#3C1642;
+    background: #fff;
 }
 
 .logo {
     display: flex;
     justify-content: center;
-
+    /* width: ; */
 }
 
 .logo img {
-    width:340px;
-    height: 80px ;
+    width:181.33px;
+    height: 42.66px;
+    
 }
