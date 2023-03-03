@@ -1,11 +1,29 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import style from "./styles/landing.module.css"
 import FormLanding from "components/formLanding/formLanding";
 import logo from '../../public/assets/logo.png'
 import Image from "next/image";
 import Head from "next/head";
+import { useSelector, useDispatch } from "react-redux";
+import { authedUser } from "redux/actions";
+import { useRouter } from "next/router";
+
 export default function Landing(){
 
+    const router = useRouter()
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+       
+        const token = localStorage.getItem('token')
+
+            if(token) {
+              
+                dispatch(authedUser()).then(() => {
+                    router.push("/home");
+                  });
+            }
+    }, [dispatch])
 
     return(
         <>

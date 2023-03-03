@@ -1,6 +1,10 @@
 import style from "../../src/pages/styles/landing.module.css";
 import { useState } from "react";
 import clienteAxios from "config/clienteAxios";
+import { useSelector, useDispatch } from "react-redux";
+import { loginUser, signInUser } from "redux/actions";
+import { useRouter } from "next/router";
+
 const validateSignIn = (form, users) => {
   //user va a contener todos los user para ver si ya existe ese usuario
   const error = {};
@@ -12,9 +16,14 @@ const validateSignIn = (form, users) => {
   return error;
 };
 
-import { useRouter } from "next/router";
 
 export default function FormLanding() {
+
+
+  const message = useSelector(state => state.message)
+
+  const dispatch =useDispatch()
+
   //SIGN IN
   const [error, setError] = useState({});
 
@@ -45,33 +54,13 @@ export default function FormLanding() {
     //despachar action
     console.log(data);
 
-    try {
-      const response = await clienteAxios.post("/user", data);
-      console.log(response);
-
-      setConfirm({
-        msg: "Usuario creado correctamente, revisa tu casilla de email para confirmar tu cuenta",
-      });
-
-      setFormSignIn({
-        name: "",
-        last_name: "",
-        user_name: "",
-        email: "",
-        password: "",
-        profile_img: "",
-      });
-
-    
-    
-    } catch (error) {
-      setError({ error: error.response.data.message });
-      console.log(error);
-
-      setTimeout(() => {
-        setError({});
-      }, 3000);
-    }
+      try {
+        dispatch(signInUser(data))
+     
+      } catch (error) {
+          console.log('error')
+      }
+     
   };
 
     
@@ -91,19 +80,14 @@ export default function FormLanding() {
   //envio de datos SignIn
   const sendDataLogIn = async (data) => {
     //despachar action
-    try {
-      const resultado = await clienteAxios.post("/user/login", formLogIn);
-
-    router.push('/home')
-      console.log(resultado);
-    } catch (error) {
-      setError({ error: error.response.data.message });
-      console.log(error);
-
-      setTimeout(() => {
-        setError({});
-      }, 3000);
-    }
+        try {
+          dispatch(loginUser(data, () => {
+            router.push('/home')
+          } ))
+        } catch (error) {
+          console.log('error')
+        }
+        
   };
 
   //funcion que elimina el default que recarga la pagina cuando se envia un formulario
@@ -120,7 +104,7 @@ export default function FormLanding() {
   return (
     <>
       {confirm?.msg && <p className={style.confirmMessage}>{confirm.msg}</p>}
-      {error?.error && <p className={style.errorMessage}>{error.error}</p>}
+      {message && <p className={style.errorMessage}>{message}</p>}
       <div className={style.main}>
         <input
           type="checkbox"
