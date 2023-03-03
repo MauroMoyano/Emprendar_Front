@@ -66,11 +66,11 @@ export default function CreateProject() {
             errors = {...errors, title: ""}
         } else {
             // console.log("pasando por validate              else")
-            errors = {...errors, title: "Hay errores en el titulo."}
+            errors = {...errors, title: "El título es necesario"}
         }
 
         if (form.summary.length > 200) {
-            errors = {...errors, summary: "Hay errores en el resumen"}
+            errors = {...errors, summary: "El límite de caracteres es 200"}
         } else {
             errors = {...errors, summary: ""}
         }
@@ -85,60 +85,70 @@ export default function CreateProject() {
 
 
     }
-
+ 
     return (
         <Layout>
             <form onSubmit={submitHandler} className={style.formContainer}>
+                <h1 className={style.title}>Crea tu proyecto:</h1>
                 <div className={style.formInput}>
                     <div>
-                        <label>Title : </label>
-                        <input type="text" value={form.title} onChange={changeHandler} name="title"/>
-                        {errors.title && <span>{errors.title}</span>}
+                        {errors.title && <span className={style.danger}>{errors.title}</span>}
                     </div>
+                    <div  className={style.question}>
+                        <input type="text" value={form.title} onChange={changeHandler} name="title"/>
+                        <label className={form.title !== "" ? style.fix : ""}>Título</label>
+                    </div>
+                   
                     <div>
-                        <label>Summary : </label>
+                        {errors.summary && <span className={style.danger}>{errors.summary}</span>}
+                    </div>
+                    <div  className={style.question}>
                         <input type="text" value={form.summary.replace(/<[^>]+>/g, '')} onChange={changeHandler}
                                name="summary"/>
-                        {errors.summary && <span>{errors.summary}</span>}
+                        <label className={form.summary !== "" ? style.fix : ""}>Resumen</label> 
                     </div>
+
                     <div>
-                        <label>Description : </label>
+                        {errors.description && <span className={style.danger}>{errors.description}</span>}
+                    </div>
+                    <div  className={style.questionText}>
                         <textarea rows="8" cols="30" value={form.description} onChange={changeHandler} name="description"/>
-                        {errors.description && <span>{errors.description}</span>}
+                        <label className={form.description !== "" ? style.fixTextarea : ""}>Tu descripción aquí...</label>
                     </div>
                     <div>
-                        <label>Goal : </label>
+                        {errors.goal && <span className={style.danger}>{errors.goal}</span>}
+                    </div>
+                    <div  className={style.question}>
                         <input type="text" value={form.goal} onChange={changeHandler} name="goal"/>
-                        {errors.goal && <span>{errors.goal}</span>}
+                        <label className={form.goal !== "" ? style.fix : ""}>Meta</label>
                     </div>
                     <div>
-                        <label>Country : </label>
+                        {errors.country && <span className={style.danger}>{errors.country}</span>}
+                    </div>
+                    <div  className={style.question}>
                         <input type="text" value={form.country} onChange={changeHandler} name="country"/>
-                        {errors.country && <span>{errors.country}</span>}
+                        <label className={form.country !== "" ? style.fix : ""}>País</label>
                     </div>
                 </div>
-                <div className={style.formInput}>
-                    <label>Category : </label>
+                <div className={style.containerQuestionCategory}>
+                    <h2>Categorías: </h2>
+                    <div className={style.questionCategory}>
                     {
                         arrCategory.map((cat, index) => {
                             return (
-                                <div className={style.formInput} key={index}>
+                                <div className={style.divInput} key={index}>
                                     <label>{cat}</label>
                                     <input type="checkbox" name={cat}
                                            value={cat}
                                            onChange={handleCheck}/>
-
                                 </div>
                             )
-
                         })
                     }
                 </div>
-
-                <button  type="submit">Submit</button>
-
+                </div>  
+                <button className={style.submit} type="submit">Enviar datos</button>
             </form>
-            )
         </Layout>
     )
 }
