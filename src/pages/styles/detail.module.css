@@ -1,23 +1,31 @@
 .ConteinerDetailproject{
     height: 100vh;
-    background: grey;
-
+    background: #FFFFFF;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: .8fr 1.2fr;
     overflow: hidden;
     position: relative;
-    box-shadow: 7px 7px 10px 3px #24004628;
-    max-height:100vb;
+    /* max-height:100vb; */
+    
 
 }
-.ConteinerDetailproject label {
+
+.ConteinerDetailproject  label {
+     background: #3C1642;
+    color: #fff;
     font-size: 2rem;
-    background: blue;
-    color: aliceblue;
+    width: 100%;
+    display: flex;
+    text-align: center;
+    
+    font-family: 'Varela'; 
+    border-bottom: #CCCCCC .2rem solid;
+
+    justify-content: center;
 }
 
 
-
+/* background:  #CCCCCC; */
 .buttonAll{
     background: rgb(231, 231, 209);
     height: 10vb;
@@ -27,14 +35,90 @@
     
 }
 
-.buttonAll button{
-    font-size: 2rem;
-    height: 50%;
+
+.cardUser {
+    border-right: #3C1642 .2rem solid;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vb;    
+}
+
+.cardUser button{
+    color: #fff;
+    font-size: 1.5rem;
+    padding: .5rem;
+    
+}
+
+.perfil{
+    padding-top: 2rem;
+    border-bottom: #CCCCCC .2rem solid;
+    width: 100%;
+    background: #3C1642;
+    padding-left: 1rem;
+
 }
 
 
+
+
+.perfil > img {
+    width: 300px;
+    border-radius: 40%;
+
+}
+
+.perfil >  h1{
+    padding-bottom: 1rem;
+    color: #CCCCCC;
+    font-size: 3rem;
+}
+
+
+.detailPerfil {
+    height: 80%;
+    width: 100%;
+    background: #fff;
+}
+
+.detailPerfil div{
+    height: 25%;
+}
+
+
+
+.campos{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+
+}
+
+.campos h3{
+    font-size: 2rem;
+}
+
+.datos{
+    font-size: 1.5rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .cardDetailProject{ 
-    border: .5rem solid rgb(95, 89, 89) ;
     height: 90vb;
 
 }
@@ -53,9 +137,6 @@
 
 
 
-.cardUser{
-    border: .5rem solid black;
-}
 
 .cardUser > img {
     width: 300px;
@@ -63,15 +144,30 @@
 
 
 .tarjetsProjets{
+    transition: 1s;
+
     display: flex;
     flex-direction: column;
     height: 90vb;
+}
 
+.tarjetsProjets label {
+    background: #3C1642;
+    color: #fff;
+    font-size: 2rem;
+    width: 100%;
+    display: flex;
+    text-align: center;
+    
+    font-family: 'Varela'; 
+    border-bottom: #CCCCCC .2rem solid;
+
+    justify-content: center;
 }
 
 .tarjetsProjets div{
+    background: yellowgreen;
     border: 2px solid ;
-
 }
 
 
@@ -79,6 +175,7 @@
     display: none;
 }
 .chk:checked ~ .tarjetsProjets{
+    transition: 1s;
     transform: translateY(-100%);
     
 }
