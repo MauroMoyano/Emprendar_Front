@@ -1,0 +1,32 @@
+.filtersContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin: 30px;
+}
+
+.filtersContainer button{
+        display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 10px;
+      font-weight: bold;
+      font-size: large;
+      color: black;
+      padding: 8px 16px;
+      background-color: none;
+      border: 3px solid #260157;
+      border-radius: 15px;
+      cursor: pointer;
+
+}
+    
+.filtersContainer button:hover{
+        background-color: #c92f5b;
+}
+
+.filterPlusButton{
+    display: flex;
+    flex-direction: row;
+}
