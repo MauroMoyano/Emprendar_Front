@@ -14,7 +14,6 @@ export const FILTER_COUNTRY = "FILTER_COUNTRY"
 export const getHomeProjects = () => {
     return async function (dispatch) {
         const {data} = await axios.get("http://localhost:3001/project/")
-        // const category = await axios.get("http://localhost:3001/category")
 
         const arrayCountry = []
         let arrayCategory = []
@@ -23,7 +22,7 @@ export const getHomeProjects = () => {
             arrayCountry.push(project.country)
         })
         const country = [...new Set(arrayCountry)]
-        // console.log("contry dentro de la action ", country)
+
         data.forEach((project)=>[
             arrayCategory = [...arrayCategory, ...project.category]
         ])
