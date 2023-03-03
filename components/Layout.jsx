@@ -4,7 +4,11 @@ import Link from 'next/link'
 import logo from '../public/assets/logo.png'
 import Image from 'next/image'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useSelector, useDispatch } from 'react-redux';
+import { logOut } from 'redux/actions';
 const Layout = ({children}) => {
+
+    const dispatch = useDispatch()
 
     return (<div className={style.divGral}>
             <nav className={style.nav}>
@@ -26,7 +30,7 @@ const Layout = ({children}) => {
                 </div> */}
 
                 <div>
-                    <a href="/"><button>Cerrar Sesión</button></a>
+                    <a href="/"><button onClick={ () => dispatch(logOut()) }>Cerrar Sesión</button></a>
                 </div>
 
             </nav>
