@@ -23,8 +23,8 @@ export default function Paginated() {
         fetchData()
     },[currentPage])
 
-for (let i = 0; i < allProjects.length ; i = i + 3) {
-        page.push(allProjects.slice(i, i + 3 || allProjects.length))
+for (let i = 0; i < allProjects.length ; i = i + 6) {
+        page.push(allProjects.slice(i, i + 6 || allProjects.length))
     }
 
     const handlePage = (event) => {
