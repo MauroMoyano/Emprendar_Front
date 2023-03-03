@@ -1,0 +1,85 @@
+.divGral {
+    background: #fff;
+    border: 1px solid #3C1642;
+    border-radius: 1.25rem;
+    padding: 1rem;    
+    width: 37.965830752322909381556599060845%;
+    height: 250px;
+    cursor: pointer;
+    transition: box-shadow .3s ease;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.divGral:hover{
+    box-shadow: 0px 5px 5px #6c757d;
+}
+
+.divGral a {
+    text-decoration: none;
+    color: aliceblue;
+    text-align: center;
+
+}
+
+.container {
+    /* border: 1px solid blue; */
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    color:#3C1642;
+}
+
+.divImg {
+    border: 1px solid #3C1642;
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 186.683px;
+    border-radius: 20px;
+    background: #000;
+    color: #fff;
+}
+
+.divInfo {
+    /* border: 1px solid black; */
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+}
+
+.divInfo h1 {
+    /* border: 1px solid black; */
+    font-size: 20px;
+    text-decoration: underline;
+}
+
+.divInfo h4 {
+    /* border: 1px solid black; */
+    font-size: 15px;
+    font-weight: normal;
+
+}
+
+.description {
+    /* border: 1px solid red; */
+    text-align: justify;
+    font-size: 12px;
+}
+
+.date {
+    /* border: 1px solid green; */
+    font-size: 10px;
+    text-align: left;
+}
+
+/* .divInfo h3 {
+    border: 1px solid black;
+} */
