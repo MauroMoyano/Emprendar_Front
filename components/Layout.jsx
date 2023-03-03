@@ -6,7 +6,7 @@ import Image from 'next/image'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const Layout = ({children}) => {
 
-    return (<div style={{fontFamily: 'sans-serif'}}>
+    return (<div className={style.divGral}>
             <nav className={style.nav}>
 
 
@@ -26,7 +26,7 @@ const Layout = ({children}) => {
             {children}
         </div>
         <footer className={style.footer}>
-            <p> &copy; 2023, Emprendar.  All right reserved</p>
+            <p> &copy; 2023, Emprendar.  All rights reserved</p>
         </footer>
     </div>)
 }
