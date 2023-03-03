@@ -7,12 +7,32 @@
     color: #3C1642;
     background: #fff;
     border-bottom: .3rem solid #3C1642;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    display: flex;
+    flex-direction: row;
     justify-content: space-between;
     padding: 1rem;
     align-items: center;
     height: 80px;
+}
+
+.nav button{
+    display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 10px;
+  font-weight: bold;
+  font-size: large;
+  color: black;
+  padding: 8px 16px;
+  background-color: #fff;
+  border: 0px solid #260157;
+  border-radius: 10px;
+  cursor: pointer;
+
+}
+
+.nav button:hover{
+    background-color: #c92f5b;
 }
 
 .nav h1 {
@@ -21,7 +41,7 @@
     margin: 0;
 }
 
-.links a {
+.nav a {
     text-decoration: none;
     font-size: 1.1rem;
 }
@@ -49,6 +69,7 @@
 }
 
 .logo img {
+    justify-content: center;
     width:181.33px;
     height: 42.66px;
     

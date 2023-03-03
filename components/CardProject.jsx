@@ -13,12 +13,19 @@ export default function CardProject(props) {
                     <div className={style.divImg}>
                         <img src={props.img} alt="Image not found" />
                     </div>
-                    <div className={style.divInfo}>
-                        <h1>{props.name}</h1>
-                        <h4>{props.summary}</h4>
-                        <p className={style.description}>{props.description}</p>
-                        <p className={style.date}>{props.date}</p>
-                        <h3>Objetivo: ${props.goal}.00</h3>
+                    <div className={style.containerInfo}>
+                        <div className={style.divInfo}>
+                            <div>
+                                <h1>{props.name[0].toUpperCase() + props.name.slice(1)}</h1>
+                                <p className={style.date}>{props.date}</p>
+                                <h4>{props.summary}</h4>
+                                {/* <p className={style.description}>{props.description}</p> */}
+
+                            </div>
+                        </div>
+                        <div className={style.theGoal}>
+                            <h3>Objetivo: ${props.goal}.00</h3>
+                        </div>
                     </div>
                 </div>
             </Link>

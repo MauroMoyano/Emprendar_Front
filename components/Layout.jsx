@@ -9,18 +9,26 @@ const Layout = ({children}) => {
     return (<div className={style.divGral}>
             <nav className={style.nav}>
 
+                <div>
+                    <a href="/aboutUs"><button>Acerca de nosotros</button></a>
+                </div>
 
-                <p className={style.menu}>Menu &nabla;</p>
+                {/* <p className={style.menu}>Menu &nabla;</p> */}
 
                     <div className={style.logo}>
-                    <Image className={style.logo} src={logo}/>
+                        <a href='/home'><Image className={style.logo} src={logo}/></a>
                     </div>
 
-                <div className={style.links}>
+                {/* <div className={style.links}>
                     <Link href="/">Iniciar Sesion</Link>
                     <Link href="/">Registrarse</Link>
 
+                </div> */}
+
+                <div>
+                    <a href="/"><button>Cerrar Sesión</button></a>
                 </div>
+
             </nav>
         <div>
             {children}

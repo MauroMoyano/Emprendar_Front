@@ -45,22 +45,53 @@
 }
 
 .cardUser button{
-    color: #fff;
+    background-color: rgb(255, 255, 255);
+    border-radius: 5px;
+    border: 0 solid rgb(54, 54, 54);
+    cursor: pointer;
+    gap: 5px;
+    margin: 10px;
+    width: 40px;
+    height: 40px;
+    transition: 0.6s;
+    margin-top: 25px;
+    padding-top: 3px;
+    color: aliceblue;
+    /* color: #fff;
     font-size: 1.5rem;
-    padding: .5rem;
+    padding: .5rem; */
     
 }
 
 .perfil{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 350px;
     padding-top: 2rem;
     border-bottom: #CCCCCC .2rem solid;
     width: 100%;
     background: #3C1642;
     padding-left: 1rem;
-
 }
 
+/* 
+.buttonBack{
+    display: flex;
+    justify-content: left;
+    background-color: aqua;
+    margin-left: -50px;
+}
 
+.imageUser{
+    border-radius: 20px;
+    width: 280px;
+}
+
+.userNameWelcome{
+    background-color: red;
+} */
 
 
 .perfil > img {
