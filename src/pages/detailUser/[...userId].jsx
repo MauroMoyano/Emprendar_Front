@@ -53,58 +53,59 @@ export default function Detail(props) {
 
 
     return (
-        <Layout>
-            <div className={style.ConteinerDetailproject}>
-                <CardUser/>
-                <div>
-                    <label onClick={handlerCheckbox} id="logIn" className={style.label} htmlFor="chk"
-                           aria-hidden="true">Detalle
-                        del Proyecto</label>
-                    {Object.keys(selectorProject).length ?
-                        <CardProjectDetail
-                            obj={selectorProject}
-                        />
-                        : <>cargando en el detail</>
-                    }
-                    <input type="checkbox" className={style.chk} id="chk" aria-hidden="true" checked={checked}/>
-
-                    <div className={style.tarjetsProjets}>
-                        <label onClick={handlerCheckbox} id="signIn" className={style.label} htmlFor="chk"
-                               aria-hidden="true">Más Proyectos</label>
-
-                        {
-                            selectorUser.userProjects ? selectorUser.userProjects.map((obj) => {
-                                    const {id, title, summary, description, date, goal, img, userId} = obj
-                                    //enviar este obj al state si es necesario
-                                    return (
-                                        <div onClick={(event) => handlerDetailProject(event, obj)} id="logIn">
-
-                                            <CardDetail
-                                                key={id}
-                                                idProject={id}
-                                                name={title}
-                                                summary={summary}
-                                                description={description}
-                                                date={date}
-                                                goal={goal}
-                                                img=""
-                                                userId={userId}
-                                            />
-                                        </div>
-                                    )
-                                })
-                                : null
+              <Layout>
+                <div className={style.allComponent}>
+                    <div className={style.ConteinerDetailproject}>
+                    <CardUser/>
+                    <div>
+                        <label onClick={handlerCheckbox} id="logIn" className={style.label} htmlFor="chk"
+                            aria-hidden="true">Detalle
+                            del Proyecto</label>
+                        {Object.keys(selectorProject).length ?
+                            <CardProjectDetail 
+                                obj={selectorProject}
+                            />
+                            : <>cargando en el detail</>
                         }
+                        <input type="checkbox" className={style.chk} id="chk" aria-hidden="true" checked={checked}/>
+
+                        <div className={style.tarjetsProjets}>
+                            <label onClick={handlerCheckbox} id="signIn" className={style.label} htmlFor="chk"
+                                aria-hidden="true">Más Proyectos</label>
+
+                            {
+                                selectorUser.userProjects ? selectorUser.userProjects.map((obj) => {
+                                        const {id, title, summary, description, date, goal, img, userId} = obj
+                                        //enviar este obj al state si es necesario
+                                        return (
+                                            <div onClick={(event) => handlerDetailProject(event, obj)} id="logIn">
+
+                                                <CardDetail
+                                                    key={id}
+                                                    idProject={id}
+                                                    name={title}
+                                                    summary={summary}
+                                                    description={description}
+                                                    date={date}
+                                                    goal={goal}
+                                                    img=""
+                                                    userId={userId}
+                                                />
+                                            </div>
+                                        )
+                                    })
+                                    : null
+                            }
+                        </div>
                     </div>
                 </div>
-            </div>
+          </div>
         </Layout>
     )
 }
 
 
 export async function getServerSideProps({query}) {
-    console.log("estas son la squerys", query);
     return {
         props: {
             userId: query.userId[0],
