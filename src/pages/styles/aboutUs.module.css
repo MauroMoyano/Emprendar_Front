@@ -1,11 +1,12 @@
 .container {
     max-width: 1200px;
-    margin: 10rem auto;
+    margin: 2rem auto;
 }
 
 .title {
     text-align: center;
     margin-bottom: 1rem;
+    color: #3C1642;
 }
 
 .subTitle {
@@ -13,29 +14,27 @@
     margin-bottom: 1rem;
 }
 
-.containerCards {
-  margin-top: 2em;
- display: grid;
- grid-template-columns: repeat(3, 16rem);
-    justify-content: center;
+.containerCards {    
+    margin-top: 2em;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 1.5rem;
 }
 
 .card {
-
     width: 14rem;
-    height: 14rem;
-    border : 0.5rem solid rgba(60, 23, 67, 1);
-    border-radius: 50%
 }
 
-.card img {
-    
+.card img {    
     max-width: 100%;
-    border-radius: 50%
+    border-radius: 50%;   
+    border: 0.5rem solid #3C1642;
+ 
 }
 
 .info {
-    margin-top: .8rem;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -57,4 +56,7 @@
 
 .icons svg {
     font-size: 1.3rem;
+    color: #3C1642;
+
 }
+
