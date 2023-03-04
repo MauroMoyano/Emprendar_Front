@@ -11,6 +11,7 @@ export const GET_USER = " GET_USER ";
 export const ORDER_TOP = "ORDER_TOP";
 export const FILTER_CATEGORY = "FILTER_CATEGORY";
 export const FILTER_COUNTRY = "FILTER_COUNTRY";
+export const CREATE_PROJECT = "CREATE_PROJECT";
 
 //types para el registro
 
@@ -24,7 +25,9 @@ export const LOGOUT = "LOGOUT"
 
 //Types para el autenticado
 export const USER_AUTHED = "USER_AUTHED"
-//
+//Types para confirmar el Email
+export const CONFIRM_EMAIL = "CONFIRM_EMAIL";
+export const CONFIRM_EMAIL_ERROR = "CONFIRM_EMAIL_ERROR";
 // const BACK_APP_URL = process.env.BACK_APP_URL
 
 export const getHomeProjects = () => {
@@ -171,4 +174,28 @@ export const logOut =  () => {
         })
     }
   };
-  
+
+export const confirmEmail = (token) =>{
+  return async function(dispatch){
+    try {
+      const response = await clienteAxios.get(`user/confirmar/${token}`);
+
+      dispatch({
+        type: CONFIRM_EMAIL,
+        payload: response.data.message
+      })
+      
+    } catch (error) {
+        dispatch({
+          type: CONFIRM_EMAIL_ERROR,
+          payload: error.response.data.message
+        })
+        console.log('error', error);
+    }
+  }
+}
+ 
+
+export const createProject= (obj) => {
+  return {type: CREATE_PROJECT, payload: obj}
+}
