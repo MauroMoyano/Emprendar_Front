@@ -66,7 +66,7 @@ export const getDetailProject = (id) => {
 
 export const getUser = (id) => {
   return async function (dispatch) {
-    const { data } = await axios.get(v);
+    const { data } = await axios.get(`http://localhost:3001/user/${id} `);
     dispatch({ type: GET_USER, payload: data });
   };
 };
