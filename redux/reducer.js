@@ -12,6 +12,9 @@ import {
   LOGIN_ERROR,
   LOGOUT,
   USER_AUTHED,
+  CONFIRM_EMAIL,
+  CONFIRM_EMAIL_ERROR,
+  CREATE_PROJECT,
 } from "./actions";
 
 const initialState = {
@@ -142,6 +145,19 @@ const rootReducer = (state = initialState, action) => {
         token: null,
         autenticado: null,
       };
+
+    case CONFIRM_EMAIL:
+    case CONFIRM_EMAIL_ERROR:
+      return{
+        ...state,
+        message: action.payload,
+      };
+
+      case CREATE_PROJECT:
+        return {
+          ...state,
+          allProjects: [action.payload, ...state.allProjects]
+        }
 
     default:
       return { ...state };
