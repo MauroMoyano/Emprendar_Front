@@ -14,7 +14,9 @@ import {
   USER_AUTHED,
   CONFIRM_EMAIL,
   CONFIRM_EMAIL_ERROR,
-  CREATE_PROJECT, SEARCH_VALUE,
+  CREATE_PROJECT,
+  SIGNIN_SUCESS,
+  CLEAN_MESSAGE
 } from "./actions";
 
 const initialState = {
@@ -114,9 +116,12 @@ const rootReducer = (state = initialState, action) => {
         ),
         currentPage: 0,
       };
-
-    case LOGIN_ERROR:
-    case SIGNIN_ERROR:
+    
+      case CONFIRM_EMAIL:
+      case CONFIRM_EMAIL_ERROR:
+      case SIGNIN_SUCESS:
+      case LOGIN_ERROR:
+      case SIGNIN_ERROR:
       return {
         ...state,
         message: action.payload,
@@ -145,7 +150,7 @@ const rootReducer = (state = initialState, action) => {
         token: null,
         autenticado: null,
       };
-
+¿¿
     case CONFIRM_EMAIL:
     case CONFIRM_EMAIL_ERROR:
       return{
@@ -158,6 +163,7 @@ const rootReducer = (state = initialState, action) => {
           ...state,
           allProjects: [action.payload, ...state.allProjects]
         }
+
 
     case SEARCH_VALUE:
       return {
