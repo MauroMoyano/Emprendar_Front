@@ -16,7 +16,7 @@ import {
   CONFIRM_EMAIL_ERROR,
   CREATE_PROJECT,
   SIGNIN_SUCESS,
-  CLEAN_MESSAGE
+  CLEAN_MESSAGE, SEARCH_VALUE
 } from "./actions";
 
 const initialState = {
@@ -150,7 +150,6 @@ const rootReducer = (state = initialState, action) => {
         token: null,
         autenticado: null,
       };
-¿¿
     case CONFIRM_EMAIL:
     case CONFIRM_EMAIL_ERROR:
       return{

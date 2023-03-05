@@ -4,10 +4,12 @@ import style from "./styles/createProject.module.css"
 import axios from "axios";
 import {useDispatch, useSelector} from "react-redux";
 import {authedUser, createProject} from "../../redux/actions";
+import {useRouter} from "next/router";
 
 export default function CreateProject() {
 
     const dispatch = useDispatch()
+    const router = useRouter()
 
     useEffect(() => {
 
@@ -57,15 +59,14 @@ export default function CreateProject() {
 
     const submitHandler = async (event) => {
         event.preventDefault()
-        setForm({...form, userId, user_name})
+        setForm({...form, userId: userId , user_name: user_name})
         await axios.post("http://localhost:3001/project", form)
         dispatch(createProject(form))
-        history.push('/home')
+        await router.push('/home')
     }
 
     const handleCheck = (event) => {
         const check = event.target.value
-    console.log("checkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk", check)
         let arrAux = [...form.category]
         if (arrAux.length) {
             const aux = arrAux.filter((cat) => cat !== check)
