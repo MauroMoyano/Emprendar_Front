@@ -6,6 +6,8 @@ import style from "./styles/home.module.css"
 
 export default function Home() {
 
+
+
     const dispatch = useDispatch()
     const category = useSelector(state => state.category)
     const country = useSelector(state => state.country)
@@ -22,7 +24,7 @@ export default function Home() {
         dispatch(filterCategory(event.target.value))
     }
 
-    const handlerDeleteSearch = (event) => {
+    const handlerDeleteSearch = () => {
         dispatch(getHomeProjects())
     }
     /////////////////////////  // filtros

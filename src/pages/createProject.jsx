@@ -1,13 +1,30 @@
 import Layout from "../../components/Layout";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import style from "./styles/createProject.module.css"
 import axios from "axios";
-import {useDispatch} from "react-redux";
-
+import {useDispatch, useSelector} from "react-redux";
+import {authedUser, createProject} from "../../redux/actions";
 
 export default function CreateProject() {
+
     const dispatch = useDispatch()
-    let arrCategory = ["tecnologia", "ambiental", "cultural", "social", "medicina", "educacion", "emprendimiento"]
+
+    useEffect(() => {
+
+        const token = localStorage.getItem('token')
+
+        if(token) {
+
+            dispatch(authedUser()).then(() => {
+            });
+        }
+    }, [dispatch])
+
+    let arrCategory = ["Tecnología", "Ambiental", "Cultural", "Social", "Medicina", "Educación", "Emprendimiento"]
+    let arrCountry = ['Argentina', 'Chile', 'Bolivia', 'Paraguay', 'Uruguay', 'Colombia', 'Peru']
+
+    const userId = useSelector( state => state.user?.id )
+    const user_name = useSelector( state => state.user?.user_name )
 
     const [form, setForm] = useState({
         title: "",
@@ -15,7 +32,9 @@ export default function CreateProject() {
         description: "",
         goal: "",
         country: "",
-        category: []
+        category: [],
+        userId,
+        user_name
     })
 
     const [errors, setErrors] = useState({
@@ -26,7 +45,9 @@ export default function CreateProject() {
         country: ""
     })
 
-    const changeHandler = (event)=>  {
+
+
+    const changeHandler = (event) => {
         const property = event.target.name
         const value = event.target.value
 
@@ -36,24 +57,30 @@ export default function CreateProject() {
 
     const submitHandler = async (event) => {
         event.preventDefault()
-        const {data} = await axios.post("http://localhost:3001/project", form)
-        dispatch(createProject(data))
+        setForm({...form, userId, user_name})
+        await axios.post("http://localhost:3001/project", form)
+        dispatch(createProject(form))
         history.push('/home')
     }
 
     const handleCheck = (event) => {
         const check = event.target.value
-
-        if (arrCategory.length) {
-            const aux = arrCategory.filter((cat) => cat !== check)
-            aux.length === arrCategory.length //si da verdadera significa que no estaba check dentro de arrCategory, por lo tanto lo pusheamos
-                ? arrCategory.push(check)
-                : arrCategory = [...aux] // si estaba adentro devolvemos el array filtrado
+    console.log("checkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk", check)
+        let arrAux = [...form.category]
+        if (arrAux.length) {
+            const aux = arrAux.filter((cat) => cat !== check)
+            aux.length === arrAux.length //si da verdadera significa que no estaba check dentro de arrCategory, por lo tanto lo pusheamos
+                ? arrAux.push(check)
+                : arrAux = [...aux] // si estaba adentro devolvemos el array filtrado
 
         } else {
-            arrCategory.push(check)
+            arrAux.push(check)
         }
-        setForm({...form, Category: arrCategory})
+        setForm({...form, category: arrAux})
+    }
+
+    const handleCountry = (event) => {
+        setForm({...form, country: event.target.value})
     }
 
     const validate = (form) => {
@@ -85,7 +112,7 @@ export default function CreateProject() {
 
 
     }
- 
+
     return (
         <Layout>
             <form onSubmit={submitHandler} className={style.formContainer}>
@@ -94,59 +121,75 @@ export default function CreateProject() {
                     <div>
                         {errors.title && <span className={style.danger}>{errors.title}</span>}
                     </div>
-                    <div  className={style.question}>
+                    <div className={style.question}>
                         <input type="text" value={form.title} onChange={changeHandler} name="title"/>
                         <label className={form.title !== "" ? style.fix : ""}>Título</label>
                     </div>
-                   
+
                     <div>
                         {errors.summary && <span className={style.danger}>{errors.summary}</span>}
                     </div>
-                    <div  className={style.question}>
+                    <div className={style.question}>
                         <input type="text" value={form.summary.replace(/<[^>]+>/g, '')} onChange={changeHandler}
                                name="summary"/>
-                        <label className={form.summary !== "" ? style.fix : ""}>Resumen</label> 
+                        <label className={form.summary !== "" ? style.fix : ""}>Resumen</label>
                     </div>
 
                     <div>
                         {errors.description && <span className={style.danger}>{errors.description}</span>}
                     </div>
-                    <div  className={style.questionText}>
-                        <textarea rows="8" cols="30" value={form.description} onChange={changeHandler} name="description"/>
-                        <label className={form.description !== "" ? style.fixTextarea : ""}>Tu descripción aquí...</label>
+                    <div className={style.questionText}>
+                        <textarea rows="8" cols="30" value={form.description} onChange={changeHandler}
+                                  name="description"/>
+                        <label className={form.description !== "" ? style.fixTextarea : ""}>Tu descripción
+                            aquí...</label>
                     </div>
                     <div>
                         {errors.goal && <span className={style.danger}>{errors.goal}</span>}
                     </div>
-                    <div  className={style.question}>
+                    <div className={style.question}>
                         <input type="text" value={form.goal} onChange={changeHandler} name="goal"/>
                         <label className={form.goal !== "" ? style.fix : ""}>Meta</label>
                     </div>
                     <div>
                         {errors.country && <span className={style.danger}>{errors.country}</span>}
                     </div>
-                    <div  className={style.question}>
-                        <input type="text" value={form.country} onChange={changeHandler} name="country"/>
+                    <div className={style.question}>
+                        {/*<input type="text" value={form.country} onChange={changeHandler} name="country"/>*/}
+
+                        <div className={style.questionCategory}>
+                            {
+                                <select onChange={handleCountry}>
+                                    <option disabled selected>Country</option>
+                                    {
+                                        arrCountry.map((c, index) => {
+                                            return <option value={c} key={index}>{c}</option>
+                                        })
+                                    }
+                                </select>
+                            }
+                        </div>
+
                         <label className={form.country !== "" ? style.fix : ""}>País</label>
                     </div>
                 </div>
                 <div className={style.containerQuestionCategory}>
                     <h2>Categorías: </h2>
                     <div className={style.questionCategory}>
-                    {
-                        arrCategory.map((cat, index) => {
-                            return (
-                                <div className={style.divInput} key={index}>
-                                    <label>{cat}</label>
-                                    <input type="checkbox" name={cat}
-                                           value={cat}
-                                           onChange={handleCheck}/>
-                                </div>
-                            )
-                        })
-                    }
+                        {
+                            arrCategory.map((cat, index) => {
+                                return (
+                                    <div className={style.divInput} key={index}>
+                                        <label>{cat}</label>
+                                        <input type="checkbox" name={cat}
+                                               value={cat}
+                                               onChange={handleCheck}/>
+                                    </div>
+                                )
+                            })
+                        }
+                    </div>
                 </div>
-                </div>  
                 <button className={style.submit} type="submit">Enviar datos</button>
             </form>
         </Layout>
