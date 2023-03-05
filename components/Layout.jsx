@@ -33,6 +33,10 @@ const Layout = ({children}) => {
                 </Link>
             </div>
 
+            <div>
+                <Link href="/createProject"><button> Crea tu Proyecto </button></Link>
+            </div>
+
             {/* <p className={style.menu}>Menu &nabla;</p> */}
 
             <div className={style.logo}>
