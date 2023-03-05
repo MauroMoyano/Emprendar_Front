@@ -50,13 +50,22 @@ export default function FormLanding() {
     setError();
   };
   //envio de datos SignIn
-  const sendDataSignIn = async (data) => {
+  const sendDataSignIn = async (data ) => {
     //despachar action
     console.log(data);
 
       try {
-        dispatch(signInUser(data))
-     
+        dispatch(signInUser(data, () => { 
+            setFormSignIn({
+              name: "",
+              last_name: "",
+              user_name: "",
+              email: "",
+              password: "",
+              profile_img: "",
+            })
+         } )) 
+        
       } catch (error) {
           console.log('error')
       }
@@ -103,8 +112,13 @@ export default function FormLanding() {
 
   return (
     <>
-      {confirm?.msg && <p className={style.confirmMessage}>{confirm.msg}</p>}
-      {message && <p className={style.errorMessage}>{message}</p>}
+
+    {console.log(message)}
+
+      {message && message.includes('éxito')  ? <p className={style.confirmMessage}>{message}</p> :null }
+
+      {message && !message.includes('éxito') ? <p className={style.errorMessage}>{message}</p>: null}
+
       <div className={style.main}>
         <input
           type="checkbox"

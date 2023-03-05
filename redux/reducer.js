@@ -15,6 +15,8 @@ import {
   CONFIRM_EMAIL,
   CONFIRM_EMAIL_ERROR,
   CREATE_PROJECT,
+  SIGNIN_SUCESS,
+  CLEAN_MESSAGE
 } from "./actions";
 
 const initialState = {
@@ -114,9 +116,12 @@ const rootReducer = (state = initialState, action) => {
         ),
         currentPage: 0,
       };
-
-    case LOGIN_ERROR:
-    case SIGNIN_ERROR:
+    
+      case CONFIRM_EMAIL:
+      case CONFIRM_EMAIL_ERROR:
+      case SIGNIN_SUCESS:
+      case LOGIN_ERROR:
+      case SIGNIN_ERROR:
       return {
         ...state,
         message: action.payload,
@@ -146,18 +151,19 @@ const rootReducer = (state = initialState, action) => {
         autenticado: null,
       };
 
-    case CONFIRM_EMAIL:
-    case CONFIRM_EMAIL_ERROR:
-      return{
-        ...state,
-        message: action.payload,
-      };
-
+     
       case CREATE_PROJECT:
         return {
           ...state,
           allProjects: [action.payload, ...state.allProjects]
         }
+
+
+        case CLEAN_MESSAGE:
+          return {
+            ...state,
+            message: null
+          }
 
     default:
       return { ...state };

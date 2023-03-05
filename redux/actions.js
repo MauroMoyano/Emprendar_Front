@@ -13,6 +13,7 @@ export const FILTER_CATEGORY = "FILTER_CATEGORY";
 export const FILTER_COUNTRY = "FILTER_COUNTRY";
 export const CREATE_PROJECT = "CREATE_PROJECT";
 
+
 //types para el registro
 
 export const SIGNIN_SUCESS = "SIGNIN_SUCESS";
@@ -29,6 +30,8 @@ export const USER_AUTHED = "USER_AUTHED"
 export const CONFIRM_EMAIL = "CONFIRM_EMAIL";
 export const CONFIRM_EMAIL_ERROR = "CONFIRM_EMAIL_ERROR";
 // const BACK_APP_URL = process.env.BACK_APP_URL
+
+export const CLEAN_MESSAGE = "CLEAN_MESSAGE"
 
 export const getHomeProjects = () => {
   return async function (dispatch) {
@@ -88,7 +91,7 @@ export const resetDetailProject = (id) => {
 };
 
 //registrar usuarios
-export const signInUser = (data) => {
+export const signInUser = (data, cb) => {
 
     return async function(dispatch) {
 
@@ -99,6 +102,8 @@ export const signInUser = (data) => {
                 type: SIGNIN_SUCESS,
                 payload: response.data.message
             })
+
+            cb()
         } catch (error) {
             dispatch({
                 type: SIGNIN_ERROR,
@@ -199,3 +204,12 @@ export const confirmEmail = (token) =>{
 export const createProject= (obj) => {
   return {type: CREATE_PROJECT, payload: obj}
 }
+
+
+export const cleanMessage = () => { 
+  return async function(dispatch) {
+    dispatch({
+      type: CLEAN_MESSAGE
+    })
+  } 
+ }
