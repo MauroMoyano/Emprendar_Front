@@ -12,6 +12,7 @@ export const ORDER_TOP = "ORDER_TOP";
 export const FILTER_CATEGORY = "FILTER_CATEGORY";
 export const FILTER_COUNTRY = "FILTER_COUNTRY";
 export const CREATE_PROJECT = "CREATE_PROJECT";
+export const SEARCH_VALUE = "SEARCH_VALUE"
 
 
 //types para el registro
@@ -31,7 +32,9 @@ export const CONFIRM_EMAIL = "CONFIRM_EMAIL";
 export const CONFIRM_EMAIL_ERROR = "CONFIRM_EMAIL_ERROR";
 // const BACK_APP_URL = process.env.BACK_APP_URL
 
+
 export const CLEAN_MESSAGE = "CLEAN_MESSAGE"
+
 
 export const getHomeProjects = () => {
   return async function (dispatch) {
@@ -89,6 +92,16 @@ export const resetDetailProject = (id) => {
     type: RESET_DETAIL_PROJECT,
   };
 };
+
+export const searchProject = (value) => {
+
+    return async function(dispatch){
+        const {data} = await axios.get(`http://localhost:3001/project?name=${value} `)
+        console.log("data ", data)
+        dispatch({ type: SEARCH_VALUE, payload: data})
+    }
+
+}
 
 //registrar usuarios
 export const signInUser = (data, cb) => {

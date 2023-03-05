@@ -150,20 +150,26 @@ const rootReducer = (state = initialState, action) => {
         token: null,
         autenticado: null,
       };
+¿¿
+    case CONFIRM_EMAIL:
+    case CONFIRM_EMAIL_ERROR:
+      return{
+        ...state,
+        message: action.payload,
+      };
 
-     
-      case CREATE_PROJECT:
-        return {
+    case CREATE_PROJECT:
+      return {
           ...state,
           allProjects: [action.payload, ...state.allProjects]
         }
 
 
-        case CLEAN_MESSAGE:
-          return {
-            ...state,
-            message: null
-          }
+    case SEARCH_VALUE:
+      return {
+        ...state,
+        allProjects: action.payload
+      }
 
     default:
       return { ...state };
