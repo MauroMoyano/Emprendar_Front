@@ -54,14 +54,13 @@ for (let i = 0; i < allProjects.length ; i = i + 6) {
             </div>
 
             <div className={style.cards}>
-                {page[currentPage]?.map(({ id, title, summary, description, date, goal, img, userId }) => {
+                {page[currentPage]?.map(({ id, title, summary,  date, goal, img, userId }) => {
                     return (
                         <CardProject
                             key={id}
                             idProject={id}
                             name={title}
                             summary={summary}
-                            description={description}
                             date={date}
                             goal={goal}
                             img={img}

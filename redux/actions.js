@@ -38,24 +38,21 @@ export const CLEAN_MESSAGE = "CLEAN_MESSAGE"
 
 export const getHomeProjects = () => {
   return async function (dispatch) {
-    const { data } = await axios.get("http://localhost:3001/project/");
-
-    const arrayCountry = [];
-    let arrayCategory = [];
-
-    data.forEach((project) => {
-      arrayCountry.push(project.country);
-    });
-    const country = [...new Set(arrayCountry)];
-
-    data.forEach((project) => [
-      (arrayCategory = [...arrayCategory, ...project.category]),
-    ]);
-    const category = [...new Set(arrayCategory)];
-
+    //pido todos los proyectos y me devuelve un array con ellos
+    const { data } = await axios.get("http://localhost:3001/project");
+  
+    //pido todos las categorias al back y me devuelve un array con ellas
+    const category =  (await axios.get("http://localhost:3001/category")).data;
+    
+    //pido todos los paises al back y me devuelve un array con ellos
+    const country =  (await axios.get("http://localhost:3001/country")).data;
+  
     dispatch({ type: GET_HOME_PROJECTS, payload: { data, category, country } });
   };
 };
+
+
+
 
 export const currentPageHandler = (value) => {
   return { type: CURRENT_PAGE, payload: value };
@@ -79,6 +76,8 @@ export const orderTop = (value) => {
   return { type: ORDER_TOP, payload: value };
 };
 
+
+//filtro por categoria
 export const filterCategory = (value) => {
   return { type: FILTER_CATEGORY, payload: value };
 };
