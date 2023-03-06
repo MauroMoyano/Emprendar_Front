@@ -156,7 +156,7 @@ export const loginUser =  (data,cb) => {
 
 export const authedUser = (redirect) => {
     return async function (dispatch) {
-
+      redirect = redirect ?? null
       const token = localStorage.getItem("token");
         
       if(token) {
@@ -173,8 +173,9 @@ export const authedUser = (redirect) => {
                 payload: response.data.user
             })
 
-            const router = useRouter()
-            router.push('/home')            
+          if(redirect) {
+            redirect()
+          }
         }
       } catch (error) {
         console.log('error', error)

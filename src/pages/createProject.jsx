@@ -17,8 +17,7 @@ export default function CreateProject() {
 
         if(token) {
 
-            dispatch(authedUser()).then(() => {
-            });
+            dispatch(authedUser())
         }
     }, [dispatch])
 
@@ -60,6 +59,7 @@ export default function CreateProject() {
     const submitHandler = async (event) => {
         event.preventDefault()
         setForm({...form, userId: userId , user_name: user_name})
+        console.log(form)
         await axios.post("http://localhost:3001/project", form)
         dispatch(createProject(form))
         await router.push('/home')

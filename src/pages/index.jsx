@@ -19,9 +19,10 @@ export default function Landing(){
 
             if(token) {
               
-                dispatch(authedUser()).then(() => {
-                    router.push("/home");
-                  });
+                dispatch(authedUser( () => { 
+                    router.push('/home')
+                 } ))
+                  
             }
     }, [dispatch])
 
