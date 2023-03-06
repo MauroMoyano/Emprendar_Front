@@ -106,7 +106,7 @@ const aboutUs = () => {
             </div>
             {/*---------------------------------------------------------------------*/}
             <div className={style.card}>
-              <img src="img/jony.jpeg" alt="Jony" />
+              <img src="img/jony.jpg" alt="Jony" />
 
               <div className={style.info}>
                 <p className={style.name}>Jonathan Hernández</p>
