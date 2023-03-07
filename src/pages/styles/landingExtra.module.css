@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+/* font-family: 'Roboto Condensed', sans-serif; */
+
+
+/* navBar */
+.header{
+    display: flex;
+    background: linear-gradient(to bottom, white, rgb(210, 217, 223));
+    width: 100%;
+    height: 140px;
+    box-shadow: 0px 2px 35px black;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.logo{
+    width: 400px;
+    height: 100px;
+
+}
+
+/* Lo que seria el body */
+.bodyContainer{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 100%;
+
+}
+
+.welcomeImageContainer{
+    width: 100%;
+    height: fit-content;
+    background-image: url('../../../public/img/welcomeHands2.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.welcomeImage{
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+.formPosition{
+    margin: 20px;
+    width: 270px;
+    position: relative;
+    left: 70%;
+    
+}
+
+.boxIn{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: fit-content;
+    background:rgb(187, 193, 199);
+    box-shadow: 0px 2px 35px black;
+    align-items: center;
+    justify-content: center;
+    padding-top: 100px;
+    padding-bottom: 150px;
+    position: relative;
+}
+
+
+.lorems{
+    width: 60%;
+    height: fit-content;
+    font-family: 'Roboto Condensed', sans-serif;
+    text-align: justify;
+    background-color: black;
+    opacity: 70%;
+    color: aliceblue;
+    font-size: 1rem;
+    padding: 1%;
+    padding-left: 7%;
+    padding-right: 7%;
+    border-radius: 20px;
+
+}
+
+.infoContainer{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 70%;
+    margin-top: 100px;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.boxOne{
+    display: flex;
+    flex-direction: column;
+    width: 15%;
+    align-items: center;
+    justify-content: center;
+    transition: 0.6s;
+    font-family: 'Roboto Condensed', sans-serif;
+
+}
+
+.boxOne:hover{
+    transform: scale(1.2);
+
+}
+
+.theIcons{
+    font-size: 50px;
+    margin-bottom: 2px;
+}
+.aboutUs{
+    justify-content: center;
+}
+
+
+.QandABox{
+    padding-bottom: 20px;
+    width: 100%;
+    height: fit-content;
+    background:rgb(187, 193, 199);
+    box-shadow: 0px 2px 35px black;
+    align-items: center;
+    justify-content: center;
+}
+
+.copyR{
+    display: flex;
+    width: 100%;
+    height: fit-content;
+    background:rgb(187, 193, 199);
+    align-items: center;
+    justify-content: center;
+    font-family: 'Roboto Condensed', sans-serif;
+    padding-bottom: 15px;
+}
