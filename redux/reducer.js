@@ -103,7 +103,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         allProjects: state.allProjects.filter((project) =>
-          project.category.some((c) => c === action.payload)
+          project.categories.find((c) => c.name === action.payload)
         ),
         currentPage: 0,
       };
@@ -112,7 +112,7 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         allProjects: state.allProjects.filter(
-          (project) => project.country === action.payload
+          (project) => project.country.name === action.payload
         ),
         currentPage: 0,
       };
