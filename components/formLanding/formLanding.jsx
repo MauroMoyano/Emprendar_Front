@@ -1,5 +1,5 @@
 import style from "../../src/pages/styles/landing.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import clienteAxios from "config/clienteAxios";
 import { useSelector, useDispatch } from "react-redux";
 import { loginUser, signInUser } from "redux/actions";
@@ -22,7 +22,17 @@ export default function FormLanding() {
 
   const message = useSelector(state => state.message)
 
-  const dispatch =useDispatch()
+  const [messageToShow, setMessageToShow] = useState('')
+
+  useEffect(() => {
+    setMessageToShow(message);
+    
+    return ()=>{
+      setMessageToShow('')
+    }
+  }, [message])
+
+  const dispatch = useDispatch()
 
   //SIGN IN
   const [error, setError] = useState({});
@@ -50,29 +60,29 @@ export default function FormLanding() {
     setError();
   };
   //envio de datos SignIn
-  const sendDataSignIn = async (data ) => {
+  const sendDataSignIn = async (data) => {
     //despachar action
     console.log(data);
 
-      try {
-        dispatch(signInUser(data, () => { 
-            setFormSignIn({
-              name: "",
-              last_name: "",
-              user_name: "",
-              email: "",
-              password: "",
-              profile_img: "",
-            })
-         } )) 
-        
-      } catch (error) {
-          console.log('error')
-      }
-     
+    try {
+      dispatch(signInUser(data, () => {
+        setFormSignIn({
+          name: "",
+          last_name: "",
+          user_name: "",
+          email: "",
+          password: "",
+          profile_img: "",
+        })
+      }))
+
+    } catch (error) {
+      console.log('error')
+    }
+
   };
 
-    
+
 
   //LOG IN
   const [formLogIn, setFormLogIn] = useState({
@@ -89,14 +99,14 @@ export default function FormLanding() {
   //envio de datos SignIn
   const sendDataLogIn = async (data) => {
     //despachar action
-        try {
-          dispatch(loginUser(data, () => {
-            router.push('/home')
-          } ))
-        } catch (error) {
-          console.log('error')
-        }
-        
+    try {
+      dispatch(loginUser(data, () => {
+        router.push('/home')
+      }))
+    } catch (error) {
+      console.log('error')
+    }
+
   };
 
   //funcion que elimina el default que recarga la pagina cuando se envia un formulario
@@ -113,11 +123,14 @@ export default function FormLanding() {
   return (
     <>
 
-    {console.log(message)}
+      {console.log(message)}
 
-      {message && message.includes('éxito')  ? <p className={style.confirmMessage}>{message}</p> :null }
+      {messageToShow === 'Confirmado correctamente' && <p className={style.confirmMessage}>{messageToShow}</p>}
+      {messageToShow === 'Token no valido' && <p className={style.errorMessage}>{messageToShow}</p>}
 
-      {message && !message.includes('éxito') ? <p className={style.errorMessage}>{message}</p>: null}
+      {/*message && message.includes('éxito')  ? <p className={style.confirmMessage}>{message}</p> :null*/}
+
+      {/*message && !message.includes('éxito') ? <p className={style.errorMessage}>{message}</p>: null*/}
 
       <div className={style.main}>
         <input
