@@ -9,24 +9,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 
 export default function Home() {
-
-    const user = useSelector(state => state.user)
-
     const dispatch = useDispatch()
-  
-    useEffect(() => {
-       
-        const token = localStorage.getItem('token')
-
-            if(token) {     
-                dispatch(authedUser( () => { 
-                    // router.push('/home')
-                 } ))                
-            }
-    }, [dispatch])
-
-  
-    
 
     const category = useSelector(state => state.category)
     const country = useSelector(state => state.country)
