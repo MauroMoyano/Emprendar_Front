@@ -119,7 +119,7 @@ export default function FormLanding() {
       {message && !message.includes('éxito') ? <p className={style.errorMessage}>{message}</p>: null}
 
         <button onClick={() => {
-          window.open("http://localhost:3001/user/auth/google", "_blank", `location=none width=620 height=700 toolbar=no status=no menubar=no scrollbars=yes resizable=yes`)
+         const popup = window.open("http://localhost:3001/user/auth/google", "_blank", `location=none width=620 height=700 toolbar=no status=no menubar=no scrollbars=yes resizable=yes`)
         
           window.addEventListener('message', event => {
             if(event.origin === "http://localhost:3001") {
@@ -127,11 +127,11 @@ export default function FormLanding() {
               if(event.data) {
                 
                 localStorage.setItem("token", event.data.token)
-                window.close()       
-                setTimeout(()=>{
-
+                popup.close()  
+          
                   router.push('/home')
-                },5000  )
+             
+                
                 
               }
             }
