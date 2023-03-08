@@ -9,20 +9,6 @@ import { authedUser } from "../../redux/actions";
 export default function Home() {
     const dispatch = useDispatch()
 
-  
-    useEffect(() => {
-       
-        const token = localStorage.getItem('token')
-
-            if(token) {
-              
-                dispatch(authedUser( () => { 
-                    router.push('/home')
-                 } ))
-                  
-            }
-    }, [dispatch])
-
     const category = useSelector(state => state.category)
     const country = useSelector(state => state.country)
 

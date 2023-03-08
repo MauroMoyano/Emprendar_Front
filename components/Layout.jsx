@@ -5,13 +5,25 @@ import Image from 'next/image'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useSelector, useDispatch} from 'react-redux';
 import {logOut, searchProject} from 'redux/actions';
-import {useState} from "react";
+import {useState, useEffect} from "react";
+import { authedUser } from 'redux/actions';
 
 const Layout = ({children}) => {
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+       
+        const token = localStorage.getItem('token')
+            console.log(token)
+            if(token) {
+              
+                dispatch(authedUser())
+                  
+            }
+    }, [dispatch])
 
     const [searchValue, setSearchValue] = useState("")
 
-    const dispatch = useDispatch()
 
     const handleInput = (event) => {
         setSearchValue(event.target.value)
