@@ -6,7 +6,11 @@ import style from "./styles/home.module.css"
 
 export default function Home() {
 
+ 
 
+    const user = useSelector(state => state.user)
+
+    console.log(user)
 
     const dispatch = useDispatch()
     const category = useSelector(state => state.category)
