@@ -24,11 +24,8 @@ export default function FormLanding() {
   const [messageToShow, setMessageToShow] = useState('')
 
   useEffect(() => {
+    console.log(`message en el useEffect: ${message}`)
     setMessageToShow(message);
-    
-    return ()=>{
-      setMessageToShow('')
-    }
   }, [message])
 
   const dispatch = useDispatch()
@@ -61,7 +58,7 @@ export default function FormLanding() {
   //envio de datos SignIn
   const sendDataSignIn = async (data) => {
     //despachar action
-    console.log(data);
+    // console.log(data);
 
     try {
       dispatch(signInUser(data, () => {
@@ -119,37 +116,37 @@ export default function FormLanding() {
     event.target.id === "signIn" ? setChecked(!checked) : setChecked(false);
   };
 
+  console.log(message)
   return (
     <>
 
-      {console.log(message)}
+      {messageToShow === 'Confirmado correctamente' && <p className={style.confirmMessage}>Gracias por confirmar su correo, ya puede iniciar sesión.</p>}
+      {messageToShow === 'Token no valido' && <p className={style.errorMessage}>No pudimos confirmar su correo, vuelva registrarse</p>}
+      {messageToShow === 'Este correo electrónico ya está registrado' && <p className={style.errorMessage}>{messageToShow}</p>}
+      {messageToShow === 'El usuario se creó con éxito, revisa tu casilla de Email para confirmar' &&
+        <p className={style.confirmMessage}>El usuario se creó con éxito, revisa la bandeja de tu correo para confirmarlo.</p>}
 
-      {messageToShow === 'Confirmado correctamente' && <p className={style.confirmMessage}>{messageToShow}</p>}
-      {messageToShow === 'Token no valido' && <p className={style.errorMessage}>{messageToShow}</p>}
 
-      {/*message && message.includes('éxito')  ? <p className={style.confirmMessage}>{message}</p> :null*/}
 
-      {/*message && !message.includes('éxito') ? <p className={style.errorMessage}>{message}</p>: null*/}
+      <button onClick={() => {
+        window.open("http://localhost:3001/user/auth/google", "_blank", `location=none width=620 height=700 toolbar=no status=no menubar=no scrollbars=yes resizable=yes`)
 
-        <button onClick={() => {
-          window.open("http://localhost:3001/user/auth/google", "_blank", `location=none width=620 height=700 toolbar=no status=no menubar=no scrollbars=yes resizable=yes`)
-        
-          window.addEventListener('message', event => {
-            if(event.origin === "http://localhost:3001") {
+        window.addEventListener('message', event => {
+          if (event.origin === "http://localhost:3001") {
 
-              if(event.data) {
-                
-                localStorage.setItem("token", event.data.token)
-                window.close()       
-                setTimeout(()=>{
+            if (event.data) {
 
-                  router.push('/home')
-                },5000  )
-                
-              }
+              localStorage.setItem("token", event.data.token)
+              window.close()
+              setTimeout(() => {
+
+                router.push('/home')
+              }, 5000)
+
             }
-          })
-        }}>Google</button>
+          }
+        })
+      }}>Google</button>
 
       <div className={style.main}>
         <input
