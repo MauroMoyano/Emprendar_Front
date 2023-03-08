@@ -31,9 +31,15 @@ export const USER_AUTHED = "USER_AUTHED"
 export const CONFIRM_EMAIL = "CONFIRM_EMAIL";
 export const CONFIRM_EMAIL_ERROR = "CONFIRM_EMAIL_ERROR";
 // const BACK_APP_URL = process.env.BACK_APP_URL
-
-
 export const CLEAN_MESSAGE = "CLEAN_MESSAGE"
+export const SIMILAR_PROJECTS = "SIMILAR_PROJECTS"
+
+//comments
+export const GET_COMMENTS = "GET_COMMENTS"
+export const CREATE_COMMENT = "CREATE_COMMENT"
+
+
+
 
 
 export const getHomeProjects = () => {
@@ -133,7 +139,7 @@ export const loginUser =  (data,cb) => {
     return async function (dispatch) {
       try {
         const response = await clienteAxios.post("/user/login", data);
-  
+          console.log(response)
         dispatch({
           type: LOGIN_SUCESS,
           payload: response.data,
@@ -165,11 +171,11 @@ export const authedUser = (redirect) => {
       try {
         const response = await clienteAxios.get('/user/login/me')
         console.log(response)
-        if(response.data.user) {
-        
+        if(response.data) {
+            
             dispatch({
                 type: USER_AUTHED,
-                payload: response.data.user
+                payload: response.data
             })
 
           if(redirect) {
@@ -225,4 +231,36 @@ export const cleanMessage = () => {
       type: CLEAN_MESSAGE
     })
   } 
- }
+}
+
+
+//actions for comments 
+
+//get all comments
+export const getComments = (idProject) => {
+  
+  return async function(dispatch) {
+    const {data} = await axios.get(`http://localhost:3001/comment/${idProject} `)
+    dispatch({
+      type: GET_COMMENTS,
+      payload : data
+    })
+  } 
+}
+
+// createComment
+export const createComments = (data) => {
+  return async function(dispatch) {
+    const response = await clienteAxios.post("http://localhost:3001/comment", data);
+    console.log(response);
+    dispatch({
+      type : CREATE_COMMENT,
+      
+    })
+  } 
+}
+
+
+
+
+

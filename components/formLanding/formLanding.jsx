@@ -4,7 +4,6 @@ import clienteAxios from "config/clienteAxios";
 import { useSelector, useDispatch } from "react-redux";
 import { loginUser, signInUser } from "redux/actions";
 import { useRouter } from "next/router";
-
 const validateSignIn = (form, users) => {
   //user va a contener todos los user para ver si ya existe ese usuario
   const error = {};
@@ -137,9 +136,16 @@ export default function FormLanding() {
         
           window.addEventListener('message', event => {
             if(event.origin === "http://localhost:3001") {
+
               if(event.data) {
-                sessionStorage.setItem("user", JSON.stringify(event.data))
-                window.close()         
+                
+                localStorage.setItem("token", event.data.token)
+                window.close()       
+                setTimeout(()=>{
+
+                  router.push('/home')
+                },5000  )
+                
               }
             }
           })

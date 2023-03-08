@@ -1,17 +1,249 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
 
 
-
-.allComponent{
+.allview{
+    width: 100%;
     display: flex;
     justify-content: center;
-    padding: 3rem;
-    
+    padding-top: 100px;
+    padding-bottom: 100px;
 
 }
 
-.ConteinerDetailproject{
+.conteiner {
+    width: 80%;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    background: #e0dee2;
+    border-radius: 30px;
+  box-shadow: 15px 15px 30px #bebebe,
+             -15px -15px 30px #ffffff;
+}
+
+.firstPage{
+    width: 100%;
+    height: 850px;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid rgb(181, 181, 174);
+
+}
+.barra{
+    height: 10%;
+    border-top-right-radius: 30px;
+    border-top-left-radius: 30px;
+
+
+    background: rgb(121,9,103);
+    background: linear-gradient(90deg, rgba(121,9,103,1) 26%, rgba(83,92,215,1) 69%, rgb(103, 136, 235) 100%);
+}
+.cardContainer{
+    display: flex;
+    height: 90%;
+}
+
+.container_detail{
+    width: 74%;
+}
+
+.container_muro{
+    width: 26%;
+}
+
+.info_creator{
+    height: 70%;
+    
+}
+
+.container_buttons{
+    height: 30%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-left: 1px solid rgb(181, 181, 174);
+
+}
+
+.container_buttons > div{
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.container_buttons > div > button{
+    height: 80px;
+    width: 200px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.secondPage{
+    height: 800px;
+    display: flex; 
+}
+
+
+.second_container{
+    width: 26%;
+    border-left: 1px solid rgb(181, 181, 174);
+
+}
+
+
+.first_container{
+    width: 74%;
+    height: 100%;
+}
+
+.sugerencias{
+    width: 100%;
+    height: 40%;
+    border-bottom: 1px solid rgb(181, 181, 174);
+    display: flex;
+    padding: 10px;
+
+}
+
+.sugerencias > div {
+    height: 100%;
+    width: 100%;
+}
+
+.sugerencias > div > h3{
+    padding: 20px;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    color: rgb(174, 66, 228);
+    text-shadow: 2px 2px 2px rgb(177, 165, 165);
+}
+
+.containerSug{
+    height: 90%;
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.containerSug > div{
+   width: 30%;
+   height: 100%;
+   background: #807d7d;
+}
+
+
+
+
+
+.container_comentarios{
+    width: 100%;
+    height: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+}
+
+
+
+.button {
+    position: relative;
+    overflow: hidden;
+    height: 3rem;
+    padding: 0 2rem;
+    border-radius: 1.5rem;
+    background: #29da38;
+    background-size: 400%;
+    cursor: pointer;
+    
+    font-size: 30px;
+    
+  }
+  
+  .button:hover::before {
+    transform: scaleX(1);
+  }
+  
+  .button_content {
+    position: relative;
+    z-index: 1;
+    color: #fff;
+  }
+  
+  .button::before {
+
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: scaleX(0);
+    transform-origin: 0 50%;
+    width: 100%;
+    height: inherit;
+    border-radius: inherit;
+    background: linear-gradient(
+      82.3deg,
+      rgba(150, 93, 233, 1) 10.8%,
+      rgba(99, 88, 238, 1) 94.3%
+    );
+    transition: all 0.475s;
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*estilo de toda la vista*/
+/* .allview{
+    display: flex;
+    justify-content: center;
+
+} 
+
+
+
+/*Componente principal*/
+
+
+
+/* 
+.Conteiner{
     border: .2rem solid #3C1642;
     padding: 1rem;
     width: 70%;
@@ -19,22 +251,20 @@
     background: #eedff4;
 
     display: grid;
-    grid-template-columns: .4fr 1.6fr;
+    grid-template-columns: .4fr 1.2fr .4fr ;
     overflow: hidden;
     position: relative;
-    /* max-height:100vb; */
-    filter: drop-shadow(13px 13px 5px rgb(52, 51, 51));
-    box-shadow: -3px -3px 50px rgb(218, 208, 208);
-
     
+   
 
-}
 
+} */ 
+/* 
 .conteiner{
     width: 60%;
 }
 
-.ConteinerDetailproject  label {
+.Conteiner label {
     background: #3C1642;
     color: #fff;
     font-size: 2rem;
@@ -50,23 +280,23 @@
     border-radius: .5rem .5rem 0 0 ;
 
 
-}
+} */
 
 
 
 /* background:  #CCCCCC; */
-.buttonAll{
+/* .buttonAll{
     background: rgb(231, 231, 209);
     height: 10vb;
     display: flex;
     align-items: center;
     justify-content: center;
     
-}
+} */
 
 /*user*/
 
-
+/* 
 .cardUser {
     margin-right: 1rem;
     
@@ -82,10 +312,10 @@
     background: rgb(192, 184, 184);
     height: 15%;
     border-top-right-radius: 200%;
-}
+} */
 
 /*Perfil es el div del la img*/
-.perfil > img {
+/* .perfil > img {
     padding: 1rem;
     width:  110%;
     height: 110%;
@@ -103,11 +333,11 @@
     flex-direction: column;
     text-align: center;
  
-}
+} */
 
 /*detalles del perfil*/
 
-.detailPerfil > div{
+/* .detailPerfil > div{
     display: flex;
     height: 100%;
 
@@ -118,11 +348,11 @@
 
 
 
-
+ */
 
 /*Card detail project*/
 
-.cardDetailProject{ 
+/* .cardDetailProject{ 
     height: 80vb;
     padding: 2rem;
     background: #d0b2dd;
@@ -155,12 +385,12 @@
 
 }
 
-
+ */
 
 
 /*Card detail project*/
 
-
+/* 
 .tarjetsProjets{
     transition: 1s;
     display: flex;
@@ -190,4 +420,4 @@
 
 .chk:checked ~ .tarjetsProjets label{
     border-radius: .5rem .5rem 0 0 ;
-}
+} */
