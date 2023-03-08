@@ -3,16 +3,12 @@ import {useDispatch, useSelector} from "react-redux"
 import {filterCategory, filterCountry, getHomeProjects, orderTop} from "../../redux/actions";
 import Layout from "../../components/Layout";
 import style from "./styles/home.module.css"
+import { useEffect } from "react";
+import { authedUser } from "../../redux/actions";
 
 export default function Home() {
-
- 
-
-    const user = useSelector(state => state.user)
-
-    console.log(user)
-
     const dispatch = useDispatch()
+
     const category = useSelector(state => state.category)
     const country = useSelector(state => state.country)
 
