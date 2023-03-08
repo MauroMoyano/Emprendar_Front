@@ -16,7 +16,11 @@ import {
   CONFIRM_EMAIL_ERROR,
   CREATE_PROJECT,
   SIGNIN_SUCESS,
-  CLEAN_MESSAGE, SEARCH_VALUE
+  CLEAN_MESSAGE,
+  SEARCH_VALUE,
+  GET_COMMENTS,
+  CREATE_COMMENT
+
 } from "./actions";
 
 const initialState = {
@@ -24,6 +28,7 @@ const initialState = {
   allProjectsCopy: [],
   detailUsuario: {},
   detailProject: {},
+  comments:[],
   userProjects: [],
   category: [],
   country: [],
@@ -34,7 +39,6 @@ const initialState = {
   token: typeof window != "undefined" ? localStorage.getItem("token") : "",
   auth: true,
   user: null,
-
   //estado de mensahes
   message: null,
 };
@@ -168,6 +172,18 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         allProjects: action.payload
+      }
+
+    case GET_COMMENTS:
+      return {
+        ...state,
+        comments : action.payload
+      }
+     
+    case CREATE_COMMENT : 
+      return{
+        ...state,
+        
       }
 
     default:
