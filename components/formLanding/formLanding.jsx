@@ -123,13 +123,16 @@ export default function FormLanding() {
         
           window.addEventListener('message', event => {
             if(event.origin === "http://localhost:3001") {
+
               if(event.data) {
                 
                 localStorage.setItem("token", event.data.token)
-
                 window.close()       
+                setTimeout(()=>{
+
+                  router.push('/home')
+                },5000  )
                 
-                router.push('/home')
               }
             }
           })

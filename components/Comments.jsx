@@ -26,7 +26,9 @@ export default function Comments(props){
     const {projectId } = props; 
     const dispatch = useDispatch()
     const selectorComments = useSelector((state)=>state.comments)
-    const {id} = useSelector((state)=>state.user)
+
+
+    const user = useSelector((state)=>state.user)
 
 
     useEffect(()=>{
@@ -56,7 +58,7 @@ export default function Comments(props){
     //enviar esto {projectId,userId,comment}
     //envio de data 
     const sendData = () =>{
-        const userId = id
+        const userId = user.id
         const comment = text
         const data = {userId,projectId,comment} 
         // userId, projectId, comment }
