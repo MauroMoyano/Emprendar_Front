@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,800');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+
+
+
+.container {
+	display: flex;
+	flex-direction: column;
+     font-family: 'Roboto Condensed', sans-serif;
+	 display: table;
+	 margin: 0 auto;
+	 width: 80%;
+}
+ .column {
+	 display: table-cell;
+	 padding: 0px 10px;
+	 width: 50%;
+}
+
+.column h2{
+        color: #66198a;
+        text-align: center;
+        margin: 20px 0;
+}
+
+ .accordion {
+	 display: block;
+	 font-size: inherit;
+	 margin: 0px;
+	 position: relative;
+}
+ .accordion input {
+	 display: none;
+	 position: absolute;
+	 visibility: hidden;
+	 left: 50%;
+	 top: 50%;
+	 z-index: 1;
+}
+ .accordion__header {
+	 background-color: #2e034b;
+	 border: 1px solid #66198a;
+	 border-bottom-width: 0px;
+	 color: aliceblue;
+	 cursor: pointer;
+	 transition: background 0.2s;
+	 padding: 20px;
+	 position: relative;
+	 z-index: 2;
+}
+ .accordion__header:hover {
+	 background-color: #66198a;
+	 color: white;
+}
+ .accordion__header:hover:before, .accordion__header:hover:after {
+	 background-color: white;
+}
+ .accordion__header:before, .accordion__header:after {
+	 background-color: #66198a;
+	 content: "";
+	 display: block;
+	 position: absolute;
+	 z-index: 3;
+}
+ .accordion__header:before {
+	 height: 2px;
+	 margin-top: -1px;
+	 top: 50%;
+	 right: 20px;
+	 width: 8px;
+}
+ .accordion__header:after {
+	 height: 8px;
+	 margin-top: -4px;
+	 top: 50%;
+	 right: 23px;
+	 width: 2px;
+}
+ .accordion input:checked ~ .accordion__header {
+	 background: #66198a;
+	 border-color: #66198a;
+	 color: white;
+}
+ .accordion input:checked ~ .accordion__header:hover {
+	 background-color: #2e034b;
+	 border-color: #66198a;
+	 color: white;
+}
+ .accordion input:checked ~ .accordion__header:before {
+	 background-color: white;
+}
+ .accordion input:checked ~ .accordion__header:after {
+	 display: none;
+}
+ .accordion:first-child .accordion__header {
+	 border-top-left-radius: 4px;
+	 border-top-right-radius: 4px;
+}
+ .accordion:last-child .accordion__header {
+	 border-bottom-width: 1px;
+	 border-bottom-left-radius: 4px;
+	 border-bottom-right-radius: 4px;
+}
+ .accordion:last-child input:checked ~ .accordion__header {
+	 border-bottom-left-radius: 0px;
+	 border-bottom-right-radius: 0px;
+}
+ .accordion__content {
+	 background-color: white;
+	 border: 1px solid #66198a;
+	 border-width: 0px 1px;
+	 display: none;
+	 padding: 20px;
+}
+ .accordion input:checked ~ .accordion__content {
+	 display: block;
+}
+ .accordion:last-child .accordion__content {
+	 border-bottom-width: 1px;
+	 border-radius: 0px 0px 4px 4px;
+}
+ .accordion__content h6 {
+	 color: #66198a;
+	 font-size: 18px;
+	 margin-bottom: 5px;
+}

@@ -7,6 +7,13 @@ import { useEffect } from "react";
 import { authedUser } from "../../redux/actions";
 
 export default function Home() {
+
+ 
+
+    const user = useSelector(state => state.user)
+
+    console.log(user)
+
     const dispatch = useDispatch()
 
   

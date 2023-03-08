@@ -4,7 +4,6 @@ import clienteAxios from "config/clienteAxios";
 import { useSelector, useDispatch } from "react-redux";
 import { loginUser, signInUser } from "redux/actions";
 import { useRouter } from "next/router";
-
 const validateSignIn = (form, users) => {
   //user va a contener todos los user para ver si ya existe ese usuario
   const error = {};
@@ -118,6 +117,23 @@ export default function FormLanding() {
       {message && message.includes('éxito')  ? <p className={style.confirmMessage}>{message}</p> :null }
 
       {message && !message.includes('éxito') ? <p className={style.errorMessage}>{message}</p>: null}
+
+        <button onClick={() => {
+          window.open("http://localhost:3001/user/auth/google", "_blank", `location=none width=620 height=700 toolbar=no status=no menubar=no scrollbars=yes resizable=yes`)
+        
+          window.addEventListener('message', event => {
+            if(event.origin === "http://localhost:3001") {
+              if(event.data) {
+                
+                localStorage.setItem("token", event.data.token)
+
+                window.close()       
+                
+                router.push('/home')
+              }
+            }
+          })
+        }}>Google</button>
 
       <div className={style.main}>
         <input

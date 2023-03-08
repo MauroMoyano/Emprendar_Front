@@ -139,7 +139,7 @@ export const loginUser =  (data,cb) => {
     return async function (dispatch) {
       try {
         const response = await clienteAxios.post("/user/login", data);
-  
+          console.log(response)
         dispatch({
           type: LOGIN_SUCESS,
           payload: response.data,
@@ -171,11 +171,11 @@ export const authedUser = (redirect) => {
       try {
         const response = await clienteAxios.get('/user/login/me')
         console.log(response)
-        if(response.data.user) {
-        
+        if(response.data) {
+            
             dispatch({
                 type: USER_AUTHED,
-                payload: response.data.user
+                payload: response.data
             })
 
           if(redirect) {
