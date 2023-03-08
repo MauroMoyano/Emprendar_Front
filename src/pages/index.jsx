@@ -25,7 +25,7 @@ export default function Landing(){
     useEffect(() => {
        
         const token = localStorage.getItem('token')
-
+            console.log(token)
             if(token) {
               
                 dispatch(authedUser( () => { 
