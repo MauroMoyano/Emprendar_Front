@@ -21,9 +21,9 @@ export default function Paginated() {
 
         }
         fetchData()
-    },[currentPage])
+    }, [currentPage])
 
-for (let i = 0; i < allProjects.length ; i = i + 6) {
+    for (let i = 0; i < allProjects.length; i = i + 6) {
         page.push(allProjects.slice(i, i + 6 || allProjects.length))
     }
 
@@ -54,17 +54,21 @@ for (let i = 0; i < allProjects.length ; i = i + 6) {
             </div>
 
             <div className={style.cards}>
-                {page[currentPage]?.map(({ id, title, summary,  date, goal, img, userId }) => {
+                {page[currentPage]?.map(project => {
                     return (
                         <CardProject
-                            key={id}
-                            idProject={id}
-                            name={title}
-                            summary={summary}
-                            date={date}
-                            goal={goal}
-                            img={img}
-                            userId={userId}
+                            key={project.id}
+                            idProject={project.id}
+                            name={project.title}
+                            summary={project.summary}
+                            date={project.date}
+                            goal={project.goal}
+                            img={project.img}
+                            userId={project.userId}
+                            user_name={project.user.user_name}
+                            profile_img={project.user.profile_img}
+                            categories={project.categories}
+                            country={project.country.name}
                         />
 
 
