@@ -4,8 +4,6 @@ import style from "./styles/CardProject.module.css"
 import { getDetailProject, getUser } from "redux/actions";
 
 export default function CardProject(props) {
-
-
     return (
         <div  className={style.divGral}>
             <Link href={`/detailUser/${props.userId}/${props.idProject}`}>
