@@ -162,11 +162,11 @@ const rootReducer = (state = initialState, action) => {
         message: action.payload,
       };
 
-    case CREATE_PROJECT:
-      return {
-          ...state,
-          allProjects: [action.payload, ...state.allProjects]
-        }
+    // case CREATE_PROJECT:
+    //   return {
+    //       ...state,
+    //       allProjects: [action.payload, ...state.allProjects]
+    //     }
 
 
     case SEARCH_VALUE:
