@@ -1,60 +1,55 @@
 import CardProject from "./CardProject";
-import { useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { currentPageHandler, getHomeProjects } from "../redux/actions";
+import {useEffect, useState} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {currentPageHandler, getHomeProjects} from "../redux/actions";
 import style from "./styles/Paginated.module.css"
+import axios from "axios";
 
 export default function Paginated() {
     const currentPage = useSelector(state => state.currentPage)
     const allProjects = useSelector(state => state.allProjects)
     const dispatch = useDispatch()
-    const page = []
+    // const page = []
+
+    const [list, setList] = useState([]);
+    const [page, setPage] = useState(1);
+    const [isLoading, setIsLoading] = useState(false)
 
     useEffect(() => {
-        async function fetchData() {
-            if (!allProjects.length) {
-                await dispatch(getHomeProjects())
-                // console.log("get ",allProjects)
-                // console.log("carga de get ")
-                /* setTimeout(()=>{dispatch(Loading())}, 0 )*/
-            }
 
+        loadMore()
+        }, []);
+
+    const loadMore = async () => {
+
+        setIsLoading(true)
+
+        const { data } = await axios.get(`http://localhost:3001/project/${page}`)
+        setList([...list, ...(data)]);
+        setPage(page + 1);
+        setIsLoading(false)
+
+
+    }
+
+    const handleScroll = () => {
+        if (
+            window.innerHeight + document.documentElement.scrollTop ===
+            document.documentElement.offsetHeight
+        ) {
+            loadMore();
         }
-        fetchData()
-    }, [currentPage])
-
-    for (let i = 0; i < allProjects.length; i = i + 6) {
-        page.push(allProjects.slice(i, i + 6 || allProjects.length))
-    }
-
-    const handlePage = (event) => {
-        dispatch(currentPageHandler(parseInt(event.target.value)))
-    }
-
-    const handlePrevClick = () => {
-        currentPage > 0 && dispatch(currentPageHandler(currentPage - 1))
     };
 
-    const handleNextClick = () => {
-        currentPage < page.length - 1 && dispatch(currentPageHandler(currentPage + 1))
+    if(typeof window !== 'undefined'){
+        window.addEventListener('scroll', handleScroll);
     }
 
     return (
         <div className={style.container}>
-            <div className={style.paginatedContainer}>
-
-                <button onClick={handlePrevClick}>&laquo; Anterior</button>
-                {
-                    page?.map((p, index) => <button onClick={handlePage}
-                        value={index}
-                        key={index}>{index + 1}</button>)
-
-                }
-                <button onClick={handleNextClick}>Siguiente &raquo;</button>
-            </div>
 
             <div className={style.cards}>
-                {page[currentPage]?.map(project => {
+                {list?.map(project => {
                     return (
                         <CardProject
                             key={project.id}
@@ -74,7 +69,9 @@ export default function Paginated() {
 
                     )
                 })}
-                {/* <hr /> */}
+                {
+                    isLoading && <li>Loading...</li>
+                }
             </div>
         </div>
     )
