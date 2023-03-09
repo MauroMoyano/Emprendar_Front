@@ -1,6 +1,13 @@
+
+.imgD{
+  width: 70%;
+  height: 70%;
+  border-radius: 50%;  
+}
+
 .card {
     cursor: pointer;
-    width: 200px;
+    width: 250px;
     height: min-content;
     transition: all .3s;
     position: relative;
@@ -18,10 +25,14 @@
     background: -webkit-linear-gradient(to right, #33001b, #0095ff);
     background: linear-gradient(to right, #da48bd, #002aff);
     width: 100%;
+
+    display: flex;
+    justify-content: center;
+    overflow-y: hidden;
   }
   
   .img:hover {
-    transform: scale(1.3);
+    transform: scale(1.1);
   }
   
   .img_container {
@@ -31,7 +42,36 @@
     overflow: hidden;
   }
   
+  #container_information{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+  }
+
+  #container_information > div{
+    height: 60%;
+    display: flex;
+    justify-content: center;
+
+
+  }
+
+  #container_information > p{
+    height: 20%;
+    width: 70%;
+    color: aliceblue;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+
+    
+
+  }
+
   .description {
+    display: none;
     position: absolute;
     bottom: .5rem;
     left: .5rem;
@@ -54,3 +94,53 @@
   .title {
     color: aliceblue;
   }
+
+  .sugerencias{
+    width: 100%;
+    height: 40%;
+    border-bottom: 1px solid rgb(181, 181, 174);
+    display: flex;
+    padding: 10px;
+
+}
+
+.sugerencias > div {
+    height: 100%;
+    width: 100%;
+}
+
+.sugerencias > div > h3{
+    padding: 20px;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 25px;
+    color: rgb(174, 66, 228);
+    text-shadow: 2px 2px 2px rgb(177, 165, 165);
+}
+
+.containerSug{
+    height: 90%;
+    width: 100%;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.containerSug > div{
+   width: 100%;
+   height: 100%;
+   
+}
+
+
+.scroll{
+  height: 100%;
+
+  width: 90%;
+}
+
+.card:hover > .description{
+background: #000;
+}

@@ -3,22 +3,27 @@
 
 .allview{
     width: 100%;
-    display: flex;
     justify-content: center;
     padding-top: 100px;
     padding-bottom: 100px;
-
+    display: flex;
+    background-color: #babafa;
+    justify-content: center;
+    align-items: center;
 }
 
 .conteiner {
-    width: 80%;
-    height: fit-content;
+    
+    border-radius: 30px;
     display: flex;
     flex-direction: column;
-    background: #e0dee2;
-    border-radius: 30px;
-  box-shadow: 15px 15px 30px #bebebe,
-             -15px -15px 30px #ffffff;
+    min-height: 100vh;
+    height: 100%;
+    width: 70%;
+    box-shadow: 0px 2px 15px black;
+    background-color: #cfcff8;
+    position: static;
+           
 }
 
 .firstPage{
@@ -80,7 +85,16 @@
 }
 
 
+.containerSug > div > div > div > div{
+    
+    display: flex;
+    justify-content: center;
+    
+}
 
+.containerSug > div > div > div > div  button{
+}
+    
 
 
 
@@ -108,57 +122,24 @@
     height: 100%;
 }
 
-.sugerencias{
+
+
+
+
+.container_comentarios{ 
     width: 100%;
-    height: 40%;
-    border-bottom: 1px solid rgb(181, 181, 174);
-    display: flex;
-    padding: 10px;
-
-}
-
-.sugerencias > div {
-    height: 100%;
-    width: 100%;
-}
-
-.sugerencias > div > h3{
-    padding: 20px;
-    height: 10%;
+    height: 53%;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 25px;
-    color: rgb(174, 66, 228);
-    text-shadow: 2px 2px 2px rgb(177, 165, 165);
-}
-
-.containerSug{
-    height: 90%;
-    width: 100%;
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-}
-
-.containerSug > div{
-   width: 30%;
-   height: 100%;
-   background: #807d7d;
+    padding: 16px;    
+    background: rgb(157, 104, 255);
+    border-bottom-left-radius: 30px; 
 }
 
 
 
 
-
-.container_comentarios{
-    width: 100%;
-    height: 60%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 16px;
-}
 
 
 
@@ -205,219 +186,3 @@
     transition: all 0.475s;
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*estilo de toda la vista*/
-/* .allview{
-    display: flex;
-    justify-content: center;
-
-} 
-
-
-
-/*Componente principal*/
-
-
-
-/* 
-.Conteiner{
-    border: .2rem solid #3C1642;
-    padding: 1rem;
-    width: 70%;
-    height: 93vb;
-    background: #eedff4;
-
-    display: grid;
-    grid-template-columns: .4fr 1.2fr .4fr ;
-    overflow: hidden;
-    position: relative;
-    
-   
-
-
-} */ 
-/* 
-.conteiner{
-    width: 60%;
-}
-
-.Conteiner label {
-    background: #3C1642;
-    color: #fff;
-    font-size: 2rem;
-    width: 100%;
-    display: flex;
-    text-align: center;
-    
-    font-family: 'Varela'; 
-    border-bottom: #CCCCCC .2rem solid;
-
-    justify-content: center;
-
-    border-radius: .5rem .5rem 0 0 ;
-
-
-} */
-
-
-
-/* background:  #CCCCCC; */
-/* .buttonAll{
-    background: rgb(231, 231, 209);
-    height: 10vb;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-} */
-
-/*user*/
-
-/* 
-.cardUser {
-    margin-right: 1rem;
-    
-}
-
-
-
-.perfil{
-    display: flex;
-    justify-content: center;
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-    background: rgb(192, 184, 184);
-    height: 15%;
-    border-top-right-radius: 200%;
-} */
-
-/*Perfil es el div del la img*/
-/* .perfil > img {
-    padding: 1rem;
-    width:  110%;
-    height: 110%;
-    border-radius: 50%;
-    filter: drop-shadow(10px 10px 10px rgb(66, 64, 64));
-
-}
-
-
-
-.detailPerfil {
-    background: rgb(192, 184, 184);
-    height: 34%;
-    display: flex;
-    flex-direction: column;
-    text-align: center;
- 
-} */
-
-/*detalles del perfil*/
-
-/* .detailPerfil > div{
-    display: flex;
-    height: 100%;
-
-}
-
-
-
-
-
-
- */
-
-/*Card detail project*/
-
-/* .cardDetailProject{ 
-    height: 80vb;
-    padding: 2rem;
-    background: #d0b2dd;
-}
-
-
-
-
-.cardDetailProject >  div{
-    border: 2px solid ;
-    height: 100%;
-    padding: .7rem;
-}
-.cardDetailProject img{
-    width: 400px;
-}
-
-
-.containerInfo{
-    display: flex;
-    border: #3C1642 solid 2px;
-}
-
-
-.InfoLessDescription{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-}
-
- */
-
-
-/*Card detail project*/
-
-/* 
-.tarjetsProjets{
-    transition: 1s;
-    display: flex;
-    flex-direction: column;
-    height: 90vb;
-}
-
-.tarjetsProjets label {
-  border-radius: 0;
-}
-
-.tarjetsProjets div{
-    background: yellowgreen;
-}
-
-
-
-.chk{
-    display: none;
-}
-.chk:checked ~ .tarjetsProjets{
-    transition: 1s;
-    transform: translateY(-89.5%);
-    
-}
-
-
-.chk:checked ~ .tarjetsProjets label{
-    border-radius: .5rem .5rem 0 0 ;
-} */
