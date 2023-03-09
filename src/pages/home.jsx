@@ -6,11 +6,8 @@ import style from "./styles/home.module.css"
 
 export default function Home() {
 
- 
 
     const user = useSelector(state => state.user)
-
-    console.log(user)
 
     const dispatch = useDispatch()
     const category = useSelector(state => state.category)
@@ -35,47 +32,43 @@ export default function Home() {
 
     return (
         <Layout>
-            
-            <div className={style.filtersContainer}>
-                <div>
-                    <select onChange={handleOrderTop}>
-                    <option disabled selected>Highest Donations</option>
-                    <option value="Ascendente">Ascendente</option>
-                    <option value="Descendente">Descendente</option>
-                    </select>
+            <form>
+                <div className={style.filtersContainer}>
+                    <div>
+                        <label>Highest Donations </label>
+                        <select onChange={handleOrderTop}>
+                            <option disabled selected> - </option>
+                            <option value="Ascendente">Ascendente</option>
+                            <option value="Descendente">Descendente</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Country </label>
+                        <select onChange={handleFilterCountry}>
+                            <option disabled selected> - </option>
+                            {
+                                country?.map((c, index) => {
+                                    return <option value={c} key={index}>{c}</option>
+                                })
+                            }
+                        </select>
+                    </div>
+                    <div>
+                        <label>Category </label>
+                        <select onChange={handleFilterCategory}>
+                            <option disabled selected> - </option>
+                            {
+                                category?.map((c, index) => {
+                                    return <option value={c} key={index}>{c}</option>
+                                })
+                            }
+                        </select>
+                    </div>
+                    <div>
+                        <button onClick={handlerDeleteSearch}>Delete Search</button>
+                    </div>
                 </div>
-                <div>
-                    <select onChange={handleFilterCountry}>
-                    <option disabled selected>Country</option>
-                    {
-                        country?.map((c, index) => {
-                            return <option value={c} key={index}>{c}</option>
-                        })
-                    }
-                </select>
-                </div>
-
-                
-
-                {/*en este filtro se buscara todos los proyectos que coincidan con el pais seleccionado. para eso necesitamos cargar un array con todos los paises disponibles y mapearlos en el select*/}
-
-                <div>
-                    <select onChange={handleFilterCategory}>
-                    <option disabled selected>Category</option>
-                    {
-                        category?.map((c, index) => {
-                            return <option value={c} key={index}>{c}</option>
-                        })
-                    }
-                    </select>
-                </div>
-                <div>
-                    <button onClick={handlerDeleteSearch}>Delete Search</button>
-                </div>
-
-                {/*/////////////////////////////filtros/////////////////////////////*/}
-            </div>
-
+            </form>
             <Paginated/>
         </Layout>
     )

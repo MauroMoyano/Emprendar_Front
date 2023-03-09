@@ -5,7 +5,11 @@ import {currentPageHandler, getHomeProjects} from "../redux/actions";
 import style from "./styles/Paginated.module.css"
 import axios from "axios";
 
+let bandera = true
+
 export default function Paginated() {
+
+
     const currentPage = useSelector(state => state.currentPage)
     const allProjects = useSelector(state => state.allProjects)
     const dispatch = useDispatch()
@@ -18,13 +22,15 @@ export default function Paginated() {
     useEffect(() => {
 
         loadMore()
-        }, []);
+    }, []);
 
     const loadMore = async () => {
 
         setIsLoading(true)
-
-        const { data } = await axios.get(`http://localhost:3001/project/${page}`)
+        const {data} = await axios.get(`http://localhost:3001/project?numPage=${page}`)
+        console.log("2222", data)
+        if (data.length === 0) bandera = false
+        console.log(bandera)
         setList([...list, ...(data)]);
         setPage(page + 1);
         setIsLoading(false)
@@ -33,15 +39,15 @@ export default function Paginated() {
     }
 
     const handleScroll = () => {
-        if (
-            window.innerHeight + document.documentElement.scrollTop ===
-            document.documentElement.offsetHeight
-        ) {
-            loadMore();
+        if (bandera) {
+            if (window.innerHeight + document.documentElement.scrollTop > document.documentElement.scrollHeight - 1) {
+                console.log("entra page n°", page)
+                loadMore()
+            }
         }
     };
 
-    if(typeof window !== 'undefined'){
+    if (typeof window !== 'undefined') {
         window.addEventListener('scroll', handleScroll);
     }
 
