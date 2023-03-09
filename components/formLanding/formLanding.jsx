@@ -1,5 +1,5 @@
 import style from "../../src/pages/styles/landing.module.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import clienteAxios from "config/clienteAxios";
 import { useSelector, useDispatch } from "react-redux";
 import { loginUser, signInUser } from "redux/actions";
@@ -21,7 +21,14 @@ export default function FormLanding() {
 
   const message = useSelector(state => state.message)
 
-  const dispatch =useDispatch()
+  const [messageToShow, setMessageToShow] = useState('')
+
+  useEffect(() => {
+    console.log(`message en el useEffect: ${message}`)
+    setMessageToShow(message);
+  }, [message])
+
+  const dispatch = useDispatch()
 
   //SIGN IN
   const [error, setError] = useState({});
@@ -49,29 +56,29 @@ export default function FormLanding() {
     setError();
   };
   //envio de datos SignIn
-  const sendDataSignIn = async (data ) => {
+  const sendDataSignIn = async (data) => {
     //despachar action
-    console.log(data);
+    // console.log(data);
 
-      try {
-        dispatch(signInUser(data, () => { 
-            setFormSignIn({
-              name: "",
-              last_name: "",
-              user_name: "",
-              email: "",
-              password: "",
-              profile_img: "",
-            })
-         } )) 
-        
-      } catch (error) {
-          console.log('error')
-      }
-     
+    try {
+      dispatch(signInUser(data, () => {
+        setFormSignIn({
+          name: "",
+          last_name: "",
+          user_name: "",
+          email: "",
+          password: "",
+          profile_img: "",
+        })
+      }))
+
+    } catch (error) {
+      console.log('error')
+    }
+
   };
 
-    
+
 
   //LOG IN
   const [formLogIn, setFormLogIn] = useState({
@@ -88,14 +95,14 @@ export default function FormLanding() {
   //envio de datos SignIn
   const sendDataLogIn = async (data) => {
     //despachar action
-        try {
-          dispatch(loginUser(data, () => {
-            router.push('/home')
-          } ))
-        } catch (error) {
-          console.log('error')
-        }
-        
+    try {
+      dispatch(loginUser(data, () => {
+        router.push('/home')
+      }))
+    } catch (error) {
+      console.log('error')
+    }
+
   };
 
   //funcion que elimina el default que recarga la pagina cuando se envia un formulario
@@ -109,14 +116,17 @@ export default function FormLanding() {
     event.target.id === "signIn" ? setChecked(!checked) : setChecked(false);
   };
 
+  console.log(message)
   return (
     <>
 
-    {console.log(message)}
+      {messageToShow === 'Confirmado correctamente' && <p className={style.confirmMessage}>Gracias por confirmar su correo, ya puede iniciar sesión.</p>}
+      {messageToShow === 'Token no valido' && <p className={style.errorMessage}>No pudimos confirmar su correo, vuelva registrarse</p>}
+      {messageToShow === 'Este correo electrónico ya está registrado' && <p className={style.errorMessage}>{messageToShow}</p>}
+      {messageToShow === 'El usuario se creó con éxito, revisa tu casilla de Email para confirmar' &&
+        <p className={style.confirmMessage}>El usuario se creó con éxito, revisa la bandeja de tu correo para confirmarlo.</p>}
 
-      {message && message.includes('éxito')  ? <p className={style.confirmMessage}>{message}</p> :null }
 
-      {message && !message.includes('éxito') ? <p className={style.errorMessage}>{message}</p>: null}
 
         <button onClick={() => {
          const popup = window.open("http://localhost:3001/user/auth/google", "_blank", `location=none width=620 height=700 toolbar=no status=no menubar=no scrollbars=yes resizable=yes`)
