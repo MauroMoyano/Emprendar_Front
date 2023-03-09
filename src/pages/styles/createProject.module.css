@@ -154,3 +154,8 @@
     padding: 2rem;
     text-align: center;
 }
+
+.containerDrop ul  {
+   list-style: none;
+   text-align: center;
+}

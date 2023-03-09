@@ -11,6 +11,8 @@ export default function CreateProject() {
   const dispatch = useDispatch();
   const router = useRouter();
 
+  const [urlImage, setUrlImage] = useState(null)
+
   let arrCategory = [
     "Tecnología",
     "Ambiental",
@@ -30,7 +32,7 @@ export default function CreateProject() {
     "Peru",
   ];
 
-  const userId = useSelector((state) => state.user?.id);
+  const userId = useSelector((state) => state.user?.id);  
   const user_name = useSelector((state) => state.user?.user_name);
 
   const [form, setForm] = useState({
@@ -78,9 +80,10 @@ export default function CreateProject() {
         errors.description === "" &&
         errors.goal === ""
       ) {
-        setForm({ ...form, userId: userId, user_name: user_name });
+        setForm({ ...form, userId: userId, user_name: user_name});
+        console.log(form)
         await axios.post("http://localhost:3001/project", form);
-        dispatch(createProject(form));
+        // dispatch(createProject(form));
         await router.push("/home");
       }
     }
@@ -188,9 +191,9 @@ export default function CreateProject() {
     const formData = new FormData();
     formData.append("image", acceptedFiles[0], acceptedFiles[0].name);
 
-    console.log(acceptedFiles);
 
-    // await uploadImage(formData)
+
+     await uploadImage(formData)
   }, []);
   const { getRootProps, getInputProps, isDragActive, acceptedFiles } =
     useDropzone({ onDropRejected, onDropAccepted, accept: {
@@ -199,16 +202,30 @@ export default function CreateProject() {
 
 
     const uploadImage = async(formdata) => {
-        console.log(formdata)
         const response = await clienteAxios.post("images/upload",formdata)
+       
 
-        console.log(response)
+            setForm({...form, img: response.data.imageUrl })
     }
+  
 
+    const files = acceptedFiles.map(file => (
+      <li key={file.lastModified}>
+
+
+        <p>{file.path}</p>
+        <p >
+        {(file.size / Math.pow(1024, 2)).toFixed(2)} MB
+      </p>
+      </li>
+    ))
 
   return (
     <Layout>
       <form onSubmit={submitHandler} className={style.formContainer}>
+
+        <div className={style.containerDrop}>
+          <ul>{files}</ul>
         {alert && <p>{alert}</p>}
         <div {...getRootProps({ className: style.dropzone })}>
           <input {...getInputProps()} />
@@ -218,6 +235,7 @@ export default function CreateProject() {
           ) : (
             <p>Selecciona o arrastra tu imagen</p>
           )}
+        </div>
         </div>
 
         <h1 className={style.title}>Crea tu proyecto:</h1>
@@ -330,13 +348,13 @@ export default function CreateProject() {
           </div>
         </div>
         <button
-          disabled={
-            errors.title === "" &&
-            errors.summary === "" &&
-            errors.description === "" &&
-            errors.goal === "" &&
-            true
-          }
+          // disabled={
+          //   errors.title === "" &&
+          //   errors.summary === "" &&
+          //   errors.description === "" &&
+          //   errors.goal === "" &&
+          //   true
+          // }
           className={
             form.title !== "" &&
             form.summary !== "" &&

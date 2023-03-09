@@ -221,9 +221,9 @@ export const confirmEmail = (token) => {
 }
 
 
-export const createProject = (obj) => {
-  return { type: CREATE_PROJECT, payload: obj }
-}
+// export const createProject = (obj) => {
+//   return { type: CREATE_PROJECT, payload: obj }
+// }
 
 
 export const cleanMessage = () => {
