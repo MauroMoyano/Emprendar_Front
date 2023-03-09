@@ -2,11 +2,14 @@ import style from './styles/Layout.module.css'
 import Link from 'next/link'
 import logo from '../public/assets/logo.png'
 import Image from 'next/image'
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useSelector, useDispatch} from 'react-redux';
 import {logOut, searchProject} from 'redux/actions';
 import {useState, useEffect} from "react";
 import { authedUser } from 'redux/actions';
+//import de iconos
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
+
 
 const Layout = ({children}) => {
     const dispatch = useDispatch()
@@ -44,50 +47,41 @@ const Layout = ({children}) => {
         
     } else {
 
-        return (<div className={style.divGral}>
+        return (  
+        <div className={style.divGral}>
             <nav className={style.nav}>
-    
-                <div>
-                    <Link href="/aboutUs">
-                        <button>Acerca de nosotros</button>
-                    </Link>
+                <div className={style.menuContainer}>
+                    <div className={style.dropdown}>
+                            <button  className={style.userButton}>
+                                <img src={user.profile_img} alt="profile_img" className={style.profileImage}/>
+                                <div className={style.textContainer}>
+                                    <p>Bienvenid@</p>
+                                    <h3>{user.name + " " + user.last_name}</h3>
+                                </div>
+                            </button>
+                            <div className={style.dropdownContent}>
+                                <a href="/createProject"><button className={style.buttonNewProject}><h3>Nuevo Proyecto</h3></button></a>
+                                <a href="/"><button onClick={() => dispatch(logOut())}><h3>Cerrar Sesión</h3></button></a>
+                            </div>
+                    </div>
                 </div>
-    
-                <div>
-                    <Link href="/createProject"><button> Crea tu Proyecto </button></Link>
+                <div className={style.logoContainer}>
+                    <a href='/home'><Image className={style.logo} src={logo} alt="logo"/></a>
                 </div>
-    
-                {/* <p className={style.menu}>Menu &nabla;</p> */}
-    
-                <div className={style.logo}>
-                    <a href='/home'><Image className={style.logo} src={logo} alt="Logo"/></a>
+                <div className={style.searchBarContainer}>
+                    <div className={style.containForm}>
+                        <input type='search' value={searchValue} onChange={handleInput} placeholder="Buscar..."/>
+                        <a href="/home">
+                            <button type='submit' className={style.buttonSearch} onClick={handleClick}><FontAwesomeIcon icon={faSearch} className={style.theIconSearch} /></button>
+                        </a>
+                    </div>
                 </div>
-    
-                {/* <div className={style.links}>
-                        <Link href="/">Iniciar Sesion</Link>
-                        <Link href="/">Registrarse</Link>
-    
-                    </div> */}
-    
-                <div>
-                    <input type='search' value={searchValue} onChange={handleInput}/>
-                </div>
-                <div>
-                    <Link href="/home">
-                        <button type='submit' className={style.nav} onClick={handleClick}> Search</button>
-                    </Link>
-                </div>
-    
-                <div>
-                    <a href="/">
-                        <button onClick={() => dispatch(logOut())}>Cerrar Sesión</button>
-                    </a>
-                </div>
-    
             </nav>
+
             <div>
                 {children}
             </div>
+            
             <footer className={style.footer}>
                 <p> &copy; 2023, Emprendar. All rights reserved</p>
             </footer>
