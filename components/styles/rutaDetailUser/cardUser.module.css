@@ -1,0 +1,49 @@
+
+
+.cardUser{
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    border-left: 1px solid rgb(181, 181, 174);
+    /* rgba(83,92,215,1) */
+} 
+
+.perfil{
+   
+    display: flex;
+    justify-content: center;
+    height: 40%;
+
+}
+
+.img {
+    border-radius: 50%;
+    width: 70%;
+    height: 100%;
+}
+
+.detailPerfil{
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+
+
+}
+
+.detailPerfil > h5{
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    font-size: 40px;
+
+
+
+}
+
+.detailPerfil > p{
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    font-size: 40px;
+}

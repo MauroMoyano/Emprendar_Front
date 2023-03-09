@@ -66,8 +66,8 @@ export default function Paginated() {
                             goal={project.goal}
                             img={project.img}
                             userId={project.userId}
-                            user_name={project.user.user_name}
-                            profile_img={project.user.profile_img}
+                            user_name={project.user?.user_name}
+                            profile_img={project.user?.profile_img}
                             categories={project.categories}
                             country={project.country.name}
                         />

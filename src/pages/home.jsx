@@ -3,10 +3,15 @@ import {useDispatch, useSelector} from "react-redux"
 import {filterCategory, filterCountry, getHomeProjects, orderTop} from "../../redux/actions";
 import Layout from "../../components/Layout";
 import style from "./styles/home.module.css"
+import { useEffect } from "react";
+import { authedUser } from "../../redux/actions";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 export default function Home() {
 
     const dispatch = useDispatch()
+
     const category = useSelector(state => state.category)
     const country = useSelector(state => state.country)
 
@@ -17,7 +22,7 @@ export default function Home() {
     const handleOrderTop = (event) => {
         dispatch(orderTop(event.target.value))
     }
-
+    
     const handleFilterCategory = (event) => {
         dispatch(filterCategory(event.target.value))
     }
@@ -25,7 +30,6 @@ export default function Home() {
     const handlerDeleteSearch = () => {
         dispatch(getHomeProjects())
     }
-    /////////////////////////  // filtros
 
     return (
         <Layout>
@@ -59,6 +63,7 @@ export default function Home() {
                                     return <option value={c} key={index}>{c}</option>
                                 })
                             }
+
                         </select>
                     </div>
                     <div>
@@ -69,4 +74,5 @@ export default function Home() {
             <Paginated/>
         </Layout>
     )
+
 }
