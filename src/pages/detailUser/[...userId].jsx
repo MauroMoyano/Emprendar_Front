@@ -10,6 +10,8 @@ import Comments from "components/Comments";
 import { authedUser,similares } from "redux/actions";
 import Sugerencia from "components/CardSugerencias";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 
 export default function Detail(props) {
     const dispatch = useDispatch()
@@ -17,7 +19,6 @@ export default function Detail(props) {
     let projectId = props.projectId
     const selectorProject = useSelector(state => state.detailProject)
 
-   
 
     
     useEffect(() => {
@@ -71,19 +72,24 @@ export default function Detail(props) {
                                                 <span class={style.button_content}>DONAR </span>
                                             </button>
                                         </div>
-                                       <div> <button>VER COMENTARIOS</button></div>
+                                       <div> </div>
                                     </div>
                                 </div>
                                 </div>
                             </div>
                             <div className={style.secondPage}>
                                 <div className={style.first_container}>
-                                        <div className={style.sugerencias}> 
+                                        <div > 
                                             <div>
                                                 <h3>PROYECTOS SIMILARES</h3>
                                                 <div className={style.containerSug} >
-                                                    {/* card de proyectos similares */}                                             
-                                                    <Sugerencia />                                                                                       
+                                                    {/* card de proyectos similares */}                                           
+                                                    <Sugerencia 
+                                                        key ={selectorProject.id}
+                                                        
+                                                    />
+                                        
+
                                                </div>
                                             </div>
                                         </div>

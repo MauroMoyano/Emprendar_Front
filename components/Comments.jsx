@@ -6,15 +6,17 @@ import { useDispatch, useSelector } from "react-redux";
 
 
 export function Messages(props){
-    const {comment, user } = props;
+    const {comment, user } = props;   
     const {profile_img, name} = user;
     return(
-        <div className={style.message}>
-            
-            <img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__340.png" alt="" />
-            <h3> {name} </h3>
-                <br /> 
-            <p> {comment} </p>
+        <div className={style.container_message}>          
+           <div className={style.perfil}>
+                <img src={profile_img} alt="" />
+                <p> {name} </p>
+           </div>
+           <div className={style.message} >
+                <p> {comment} </p>
+           </div>
         </div>
     )
 }
