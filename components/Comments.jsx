@@ -60,6 +60,7 @@ export default function Comments(props){
     const sendData = () =>{
         const userId = user.id
         const comment = text
+        
         const data = {userId,projectId,comment} 
         // userId, projectId, comment }
         dispatch(createComments(data))
