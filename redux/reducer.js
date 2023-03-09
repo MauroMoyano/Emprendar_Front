@@ -121,8 +121,8 @@ const rootReducer = (state = initialState, action) => {
         currentPage: 0,
       };
     
-      case CONFIRM_EMAIL:
-      case CONFIRM_EMAIL_ERROR:
+      // case CONFIRM_EMAIL:
+      // case CONFIRM_EMAIL_ERROR:
       case SIGNIN_SUCESS:
       case LOGIN_ERROR:
       case SIGNIN_ERROR:
@@ -154,6 +154,7 @@ const rootReducer = (state = initialState, action) => {
         token: null,
         autenticado: null,
       };
+      
     case CONFIRM_EMAIL:
     case CONFIRM_EMAIL_ERROR:
       return{
@@ -161,11 +162,11 @@ const rootReducer = (state = initialState, action) => {
         message: action.payload,
       };
 
-    case CREATE_PROJECT:
-      return {
-          ...state,
-          allProjects: [action.payload, ...state.allProjects]
-        }
+    // case CREATE_PROJECT:
+    //   return {
+    //       ...state,
+    //       allProjects: [action.payload, ...state.allProjects]
+    //     }
 
 
     case SEARCH_VALUE:

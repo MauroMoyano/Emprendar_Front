@@ -1,78 +1,213 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Work+Sans:ital,wght@1,300&display=swap');
+/*  
+font-family: 'Roboto Condensed', sans-serif;
+font-family: 'Work Sans', sans-serif;
+*/
+
+
 .divGral{
     height: 150px;
     font-family: Arial, Helvetica, sans-serif;
 }
 
 .nav {
-    color: #3C1642;
-    background: #fff;
-    border-bottom: .3rem solid #3C1642;
+    font-family: 'Roboto Condensed', sans-serif;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    background: linear-gradient(to bottom, white, rgb(210, 217, 223));
+    width: 100%;
+    height: fit-content;
+    min-height: 140px;
+    box-shadow: 0px 2px 35px black;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+/* ----- Menu de usuario ----- */
+.menuContainer{
+    display: flex;
+    width: 25%;
+    min-width: 300px;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}
+
+.userButton{
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    padding: 1rem;
+    border-radius: 9px;
+    border: 3px solid #2E034B;
+    background-color: transparent;
+    justify-content: left;
     align-items: center;
-    height: 80px;
+    color: #2E034B;
+    max-height: 70px;
+    width: 100%;
+    min-width: 300px;
 }
 
+.userButton:hover{
+    background-color: #66198A;
+    border: 3px solid #2E034B;
+    color: aliceblue;
+}
 
-
-.nav button{
+.profileImage{
+    border: 3px solid #2E034B;
+    border-right: none;
     display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 10px;
-  font-weight: bold;
-  font-size: large;
-  color: black;
-  padding: 8px 16px;
-  background-color: #fff;
-  border: 0px solid #260157;
-  border-radius: 10px;
-  cursor: pointer;
+    position: relative;
+    right: 3px;
+    border-radius: 9px 0px 0px 9px;
+    max-height: 70px;
+}
+
+
+.textContainer{
+    padding-left: 10px;
+    padding-right: 15px;
+}
+
+.textContainer p{
+    font-family: 'Work Sans', sans-serif;
+    font-size: 15px;
+}
+
+.textContainer h3{
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+
+/* ------ Menu flotante ------ */
+.dropdown{
+    width: fit-content;
+    display: inline-block;
+    position: relative;
+    border-radius: 9px;
+}
+
+.dropdownContent{
+    display: none;
+    position: absolute;
+    width: 100%;
+    min-width: 300px;
+    overflow: auto;
 
 }
 
-.nav button:hover{
-    background-color: #c92f5b;
+.dropdown:hover .dropdownContent{
+    display: flex;
+    flex-direction: column;
+    width: 260px;
+   
 }
 
-.nav h1 {
-    color: #3C1642;
-    text-transform: uppercase;
-    margin: 0;
-}
+.dropdownContent button {
+    margin-top: 0.7px;
+    margin-bottom: 0.7px;
+    display: flex;
+    border: none;
+    border-radius: 9px;
+    background-color: #2E034B;
+    font-family: 'Roboto Condensed', sans-serif;
+    justify-content: center;
+    align-items: center;
+    color: aliceblue;
+    height: 40px;
+    width: 100%;
+    min-width: 300px;
+    padding: 5px;
+  }
 
-.nav a {
+  .dropdownContent a{
+    width: fit-content;
     text-decoration: none;
-    font-size: 1.1rem;
-}
+  }
+  .dropdownContent button:hover {
+    color: #FFFFFF;
+    background-color: #66198A;
+    border: 3px solid #2E034B;
+  }
 
-.links {
+
+
+
+
+/* ----- CSS del Logo ----- */
+.logoContainer{
     display: flex;
-    justify-content: flex-end;
-    gap: 2rem;
-    flex: 1;
+    min-width: 50%;
+    justify-content: center;
+}
+
+.logo{
+    width: 400px;
+    height: 100px;
+    align-items: center;
+}
+
+/* ----- SearchBar ----- */
+.containForm{
+    padding-right: 40px;
+
+}
+
+.searchBarContainer{
+    display: flex;
+    flex-direction: row;
+    width: 25%;
+    min-width: fit-content;
+    height: 100%;
+    justify-content: right;
+    align-items: center;
+}
+
+.searchBarContainer button{
+    border: 0px solid red;
+    border-radius: 0px 10px 10px 0px;
+    background-color: #2E034B;
+    height: 35px;
+    width: 35px;
+    position: relative;
+    top: 3px;
+}
+
+.searchBarContainer button:hover{
+    background-color: #66198A;
+    cursor: pointer;
+}
+
+.searchBarContainer input{
+    height: 35px;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 15px;
+    padding-left: 10px;
+}
+
+.searchBarContainer input 
+
+.searchBarContainer a{
+    text-decoration: none;
+}
+
+.theIconSearch{
+    font-size: 20px;
+    color: aliceblue;
 }
 
 
+/* ------- Footer ------- */
 .footer {
     border-top: .3rem solid #3C1642;
     padding: 1rem 0;
     text-align: center;
     color:#3C1642;
-    background: #fff;
+    background: rgb(187, 193, 199);
+    font-family: 'Roboto Condensed', sans-serif;
 }
 
-.logo {
-    display: flex;
-    justify-content: center;
-    /* width: ; */
-}
-
-.logo img {
-    justify-content: center;
-    width:181.33px;
-    height: 42.66px;
-    
-}

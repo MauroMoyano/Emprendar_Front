@@ -147,3 +147,15 @@
     color: #3C1642;
     border: 1px solid #3C1642;
 }
+
+
+.dropzone {
+    border: 2px dashed gray;
+    padding: 2rem;
+    text-align: center;
+}
+
+.containerDrop ul  {
+   list-style: none;
+   text-align: center;
+}
