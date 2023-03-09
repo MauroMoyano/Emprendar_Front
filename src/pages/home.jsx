@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 
 export default function Home() {
+
     const dispatch = useDispatch()
 
     const category = useSelector(state => state.category)
@@ -29,59 +30,49 @@ export default function Home() {
     const handlerDeleteSearch = () => {
         dispatch(getHomeProjects())
     }
-    /////////////////////////  // filtros
 
- 
-        return (
-
-            <Layout>  
+    return (
+        <Layout>
+            <form>
                 <div className={style.filtersContainer}>
                     <div>
+                        <label>Highest Donations </label>
                         <select onChange={handleOrderTop}>
-                        <option disabled selected>Highest Donations</option>
-                        <option value="Ascendente">Ascendente</option>
-                        <option value="Descendente">Descendente</option>
+                            <option disabled selected> - </option>
+                            <option value="Ascendente">Ascendente</option>
+                            <option value="Descendente">Descendente</option>
                         </select>
                     </div>
                     <div>
+                        <label>Country </label>
                         <select onChange={handleFilterCountry}>
-                        <option disabled selected>Country</option>
-                        {
-                            country?.map((c, index) => {
-                                return <option value={c} key={index}>{c}</option>
-                            })
-                        }
-                    </select>
+                            <option disabled selected> - </option>
+                            {
+                                country?.map((c, index) => {
+                                    return <option value={c} key={index}>{c}</option>
+                                })
+                            }
+                        </select>
                     </div>
-    
-                    
-    
-                    {/*en este filtro se buscara todos los proyectos que coincidan con el pais seleccionado. para eso necesitamos cargar un array con todos los paises disponibles y mapearlos en el select*/}
-    
                     <div>
+                        <label>Category </label>
                         <select onChange={handleFilterCategory}>
-                        <option disabled selected>Category</option>
-                        {
-                            category?.map((c, index) => {
-                                return <option value={c} key={index}>{c}</option>
-                            })
-                        }
+                            <option disabled selected> - </option>
+                            {
+                                category?.map((c, index) => {
+                                    return <option value={c} key={index}>{c}</option>
+                                })
+                            }
+
                         </select>
                     </div>
                     <div>
                         <button onClick={handlerDeleteSearch}>Delete Search</button>
                     </div>
-    
-                    {/*/////////////////////////////filtros/////////////////////////////*/}
                 </div>
-    
-                <Paginated/>
-            </Layout>
-        )
+            </form>
+            <Paginated/>
+        </Layout>
+    )
 
-
-    
-
-
-    
 }
