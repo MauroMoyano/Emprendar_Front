@@ -376,7 +376,7 @@ export default function CreateProject() {
                   <input
                     type="checkbox"
                     name={cat}
-                    value={cat.toLocaleLowerCase()}
+                    value={cat.toLowerCase()}
                     onChange={handleCheck}
                   />
                 </div>

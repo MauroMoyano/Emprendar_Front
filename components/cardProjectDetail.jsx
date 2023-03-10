@@ -6,6 +6,8 @@ import style from "./styles/rutaDetailUser/cardProjectDetail.module.css"
 export default function CardProjectDetail(props){ 
 
     const {title,date,description,img,goal,amount_collected} = props.obj
+
+    console.log("=>>>>>>>>",props.obj);
     if(!Object.keys(props.obj).length){
         return <>cargassssndo</>
     } else {
@@ -27,8 +29,8 @@ export default function CardProjectDetail(props){
                                     <p>{date}</p>
                                 </div>
                                 <div>
-                                    <h3>Comentarios</h3>
-                                    <p>56</p>
+                                    {/* <h3>Comentarios</h3>
+                                    <p>56</p> */}
                                 </div>
 
                                 <div className={style.cash}>

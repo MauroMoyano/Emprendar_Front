@@ -1,7 +1,7 @@
 
 
 .cardUser{
-    padding: 16px;
+    padding: 5px;
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -10,7 +10,6 @@
 } 
 
 .perfil{
-   
     display: flex;
     justify-content: center;
     height: 40%;
@@ -27,6 +26,7 @@
     height: 30%;
     display: flex;
     flex-direction: column;
+    max-width: 90%;
 
 
 }
@@ -35,9 +35,8 @@
     height: 50%;
     display: flex;
     justify-content: center;
-    font-size: 40px;
-
-
+    font-size: 15px;
+    width: fit-content;
 
 }
 
