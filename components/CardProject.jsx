@@ -4,6 +4,20 @@ import style from "./styles/CardProject.module.css"
 import { getDetailProject, getUser } from "redux/actions";
 
 export default function CardProject(props) {
+
+    const formatGoal = (num) => {
+        if (!num) {
+            return 'No info';
+        }
+
+        const exp = /(\d)(?=(\d{3})+(?!\d))/g;
+        const rep = '$1,';
+        let arr = num.toString().split('.');
+        arr[0] = arr[0].replace(exp, rep);
+        return arr[1] ? arr.join('.') : arr[0];
+    }
+
+    // console.log(props.categories[0].name)
     return (
         <div  className={style.divGral}>
             <Link href={`/detailUser/${props.userId}/${props.idProject}`}>
@@ -22,7 +36,7 @@ export default function CardProject(props) {
                             </div>
                         </div>
                         <div className={style.theGoal}>
-                            <h3>Objetivo: ${props.goal}.00</h3>
+                            <h3>Objetivo: ${formatGoal(props.goal)}</h3>
                         </div>
                     </div>
                 </div>
