@@ -1,15 +1,14 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import style from "./styles/rutaDetailUser/cardProjectDetail.module.css"
+import style from "./styles/cardProjectDetail.module.css"
 
 
 export default function CardProjectDetail(props){ 
 
     const {title,date,description,img,goal,amount_collected} = props.obj
 
-    console.log("=>>>>>>>>",props.obj);
     if(!Object.keys(props.obj).length){
-        return <>cargassssndo</>
+        return <>cargando</>
     } else {
         return(
             <div className={style.conteiner}>
@@ -59,7 +58,7 @@ export default function CardProjectDetail(props){
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium nihil est veniam harum commodi provident placeat possimus beatae animi eos, molestiae fugiat fuga, sequi earum hic maxime pariatur quo consequuntur.
                             Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia error incidunt maxime laboriosam dolor, labore esse voluptas obcaecati blanditiis mollitia, debitis sed fugiat corrupti quia necessitatibus officiis cupiditate libero laborum? 
                         </p>
-                    </div> 
+                    </div>  
         </div> 
     )
 }

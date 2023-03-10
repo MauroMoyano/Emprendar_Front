@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import style from "./styles/rutaDetailUser/sugerencias.module.css" 
+import style from "./styles/sugerencias.module.css" 
 import axios from "axios";
 import clienteAxios from "config/clienteAxios";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,38 +8,36 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { getDetailProject, getUser, getComments } from "redux/actions";
+import Link from "next/link";
 
 
 export  function CardSugerencia(props){
 
- console.log("estas son las props", props);
     const {img, summary, title, id,userId } = props.data
 
     const dispatch = useDispatch()
  
-    const handlerDetail = () =>{
-        dispatch(getDetailProject(id))
-        dispatch(getUser(userId))
-        dispatch(getComments(id))
+    // <Link href={`/detailUser/${props.userId}/${props.idProject}`}
 
-    }
 
-    return(<div onClick={()=>handlerDetail()} className={style.card}>
-            <div className={style.img_container}>
-                <div className={style.img}>
-                    <div id={style.container_information}>
-                       <div>
-                        <img className={style.imgD } src={img}  alt="" />
-                       </div>
-                        <p> {title} </p>
+    return(<div className={style.card}>
+            <Link href={`/detailUser/${userId}/${id}`}  >
+                <div className={style.img_container}>
+                    <div className={style.img}>
+                        <div id={style.container_information}>
+                        <div>
+                            <img className={style.imgD } src={img}  alt="" />
+                        </div>
+                            <p> {title} </p>
+                        </div>
+                    </div>
+                    <div className={style.description }>
+                        {/* <span className={style.title}>
+                            {title}
+                        </span> */}
                     </div>
                 </div>
-                <div className={style.description }>
-                    {/* <span className={style.title}>
-                        {title}
-                    </span> */}
-                </div>
-            </div>
+            </Link>
         </div>
 )}
 
@@ -91,9 +89,10 @@ export default function Sugerencia(props){
                     {
                         state
                         ? state?.map((obj)=>{
-                            console.log(obj);
+                          
                             return<CardSugerencia
                             data = {obj}
+                            key ={obj.id}
                             />
 
                         })

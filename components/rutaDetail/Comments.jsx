@@ -1,7 +1,8 @@
-import { useEffect, useRef, useState } from "react"
-import style from "./styles/rutaDetailUser/Comments.module.css" 
-import { getComments,createComments } from "../redux/actions"
+import { use, useEffect, useRef, useState } from "react"
+import style from "./styles/Comments.module.css" 
+import { getComments,createComments } from "../../redux/actions"
 import { useDispatch, useSelector } from "react-redux";
+import { Link, animateScroll as scroll } from "react-scroll";
 
 
 
@@ -21,6 +22,19 @@ export function Messages(props){
     )
 }
 
+function useChatScroll(dep) {
+    var ref = React.default.useRef();
+    React.default.useEffect(function () {
+        if (ref.current) {
+            ref.current.scrollTop = ref.current.scrollHeight;
+        }
+    }, [dep]);
+    return ref;
+}
+
+
+
+
 
 
 export default function Comments(props){
@@ -39,32 +53,35 @@ export default function Comments(props){
         : null
     },[projectId,selectorComments ])
    
-    
-    // 1234567489
-    //necesitaria traer del reducer todos los comentarios de esta publicaion y renderizar un <Message /> por cada una
-
-    //necesito sacar del redux mi id como usuario que hace un comentario
-
 
     const hanlderSubmit =(event)=>{
         event.preventDefault()
     }
 
     const [text,setTex] = useState("")
+    const [error,setError] = useState()
+
+
+
 
     const handlerText = ({target}) =>{
-        const {value} = target 
+        const {value} = target
+        if(value.trim()=== ""){
+            setError("No puedes enviar un comentario vacio")
+        } else {
+            setError()
+        }
+
         setTex(value)
+        
     }
     
-    //enviar esto {projectId,userId,comment}
-    //envio de data 
     const sendData = () =>{
         const userId = user.id
         const comment = text
-        
         const data = {userId,projectId,comment} 
-        // userId, projectId, comment }
+
+
         dispatch(createComments(data))
         dispatch(getComments(projectId))
 
@@ -73,10 +90,26 @@ export default function Comments(props){
 
 
 
+    const  divRef = useRef(null)
+    const scrollToBottom = () => {
+     
+    }
+    
+
+    useEffect(()=>{
+
+        scrollToBottom()
+
+    }, [selectorComments])
+
+
+  
+   
+    
 
     return(
-        <div className={style.container}>
-            <div className={style.viewMessage}>
+        <div  className={style.container}>
+            <div  ref={divRef}   id="mensajes" className={style.viewMessage}>
               {Object.keys(selectorComments).length 
                 ? selectorComments.map((commentObj)=>{
                    const {id, comment, user} = commentObj
@@ -92,7 +125,7 @@ export default function Comments(props){
 
             <form onSubmit={hanlderSubmit} className={style.writeComment}>
                 <input onChange={handlerText} name="input" type="text" placeholder="Dejanos tu comentario" value={text} />
-                <button onClick={()=>sendData(text)}>ENVIAR</button>
+                <button onClick={()=>sendData(text) } disabled={error} >ENVIAR</button>
             </form>
         </div>
     )

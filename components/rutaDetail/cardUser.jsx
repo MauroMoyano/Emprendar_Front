@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useSelector } from "react-redux"
-import style from "./styles/rutaDetailUser/cardUser.module.css" 
+import style from "./styles/cardUser.module.css" 
 
 
 export default function CardUser({userId}){ 
