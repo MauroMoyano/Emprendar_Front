@@ -3,7 +3,7 @@ import style from "./styles/aboutUsLanding.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
-
+import Link from "next/link";
 
 export default function AboutUsLanding (){
     return (
@@ -18,8 +18,8 @@ export default function AboutUsLanding (){
                     <h4>Jonathan Hernandez</h4>
                     <p>Desarrollador Web Full Stack</p>
                     <div className={style.socialMedias}>
-                        <a target='_blank' rel="noreferrer" href="https://www.linkedin.com/in/jonnyhz/"><FontAwesomeIcon icon={faLinkedin} className={style.theIcons} /></a>
-                        <a target='_blank' rel="noreferrer" href="https://github.com/arcanium19"><FontAwesomeIcon icon={faGithub} className={style.theIcons} /></a>
+                        <Link target='_blank' rel="noreferrer" href="https://www.linkedin.com/in/jonnyhz/"><FontAwesomeIcon icon={faLinkedin} className={style.theIcons} /></Link>
+                        <Link target='_blank' rel="noreferrer" href="https://github.com/arcanium19"><FontAwesomeIcon icon={faGithub} className={style.theIcons} /></Link>
                     </div>
                 </div>
                 <div className={style.card}>
@@ -27,8 +27,8 @@ export default function AboutUsLanding (){
                     <h4>Juan Arguello</h4>
                     <p>Desarrollador Web Full Stack</p>
                     <div className={style.socialMedias}>
-                        <a target='_blank' rel="noreferrer" href="https://www.linkedin.com/in/juanarguello02/"><FontAwesomeIcon icon={faLinkedin} className={style.theIcons} /></a>
-                        <a target='_blank' rel="noreferrer" href="https://github.com/Nachito02"><FontAwesomeIcon icon={faGithub} className={style.theIcons} /></a>
+                        <Link target='_blank' rel="noreferrer" href="https://www.linkedin.com/in/juanarguello02/"><FontAwesomeIcon icon={faLinkedin} className={style.theIcons} /></Link>
+                        <Link target='_blank' rel="noreferrer" href="https://github.com/Nachito02"><FontAwesomeIcon icon={faGithub} className={style.theIcons} /></Link>
                     </div>
                 </div>
                 <div className={style.card}>
@@ -36,8 +36,8 @@ export default function AboutUsLanding (){
                     <h4>Lautaro Garcia</h4>
                     <p>Desarrollador Web Full Stack</p>
                     <div className={style.socialMedias}>
-                        <a target='_blank' rel="noreferrer" href="https://www.linkedin.com/in/lautaro-garcia-704aa5205/"><FontAwesomeIcon icon={faLinkedin} className={style.theIcons} /></a>
-                        <a target='_blank' rel="noreferrer" href="https://github.com/lechugaxthz"><FontAwesomeIcon icon={faGithub} className={style.theIcons} /></a>
+                        <Link target='_blank' rel="noreferrer" href="https://www.linkedin.com/in/lautaro-garcia-704aa5205/"><FontAwesomeIcon icon={faLinkedin} className={style.theIcons} /></Link>
+                        <Link target='_blank' rel="noreferrer" href="https://github.com/lechugaxthz"><FontAwesomeIcon icon={faGithub} className={style.theIcons} /></Link>
                     </div>
                 </div>
                 <div className={style.card}>
@@ -45,8 +45,8 @@ export default function AboutUsLanding (){
                     <h4>Mauro Moyano</h4>
                     <p>Desarrollador Web Full Stack</p>
                     <div className={style.socialMedias}>
-                        <a target='_blank' rel="noreferrer" href="https://www.linkedin.com/in/mauro-moyano-full-stack-in-progress/"><FontAwesomeIcon icon={faLinkedin} className={style.theIcons} /></a>
-                        <a target='_blank' rel="noreferrer" href="https://github.com/MauroMoyano"><FontAwesomeIcon icon={faGithub} className={style.theIcons} /></a>
+                        <Link target='_blank' rel="noreferrer" href="https://www.linkedin.com/in/mauro-moyano-full-stack-in-progress/"><FontAwesomeIcon icon={faLinkedin} className={style.theIcons} /></Link>
+                        <Link target='_blank' rel="noreferrer" href="https://github.com/MauroMoyano"><FontAwesomeIcon icon={faGithub} className={style.theIcons} /></Link>
                     </div>
                 </div>
                 <div className={style.card}>
@@ -54,8 +54,8 @@ export default function AboutUsLanding (){
                     <h4>Pedro Midueño</h4>
                     <p>Desarrollador Web Full Stack</p>
                     <div className={style.socialMedias}>
-                        <a target='_blank' rel="noreferrer" href="https://www.linkedin.com/in/pedromidueno/"><FontAwesomeIcon icon={faLinkedin} className={style.theIcons} /></a>
-                        <a target='_blank' rel="noreferrer" href="https://github.com/PedroMidueno"><FontAwesomeIcon icon={faGithub} className={style.theIcons} /></a>
+                        <Link target='_blank' rel="noreferrer" href="https://www.linkedin.com/in/pedromidueno/"><FontAwesomeIcon icon={faLinkedin} className={style.theIcons} /></Link>
+                        <Link target='_blank' rel="noreferrer" href="https://github.com/PedroMidueno"><FontAwesomeIcon icon={faGithub} className={style.theIcons} /></Link>
                     </div>
                 </div>
                 <div className={style.card}>
@@ -63,8 +63,8 @@ export default function AboutUsLanding (){
                     <h4>Sandy Pestaña</h4>
                     <p>Desarrollador Web Full Stack</p>
                     <div className={style.socialMedias}>
-                        <a target='_blank' rel="noreferrer" href="https://www.linkedin.com/in/sandy-milena-pesta%C3%B1a-d%C3%ADaz-234887222/"><FontAwesomeIcon icon={faLinkedin} className={style.theIcons} /></a>
-                        <a target='_blank' rel="noreferrer" href="https://github.com/smilena7"><FontAwesomeIcon icon={faGithub} className={style.theIcons} /></a>
+                        <Link target='_blank' rel="noreferrer" href="https://www.linkedin.com/in/sandy-milena-pesta%C3%B1a-d%C3%ADaz-234887222/"><FontAwesomeIcon icon={faLinkedin} className={style.theIcons} /></Link>
+                        <Link target='_blank' rel="noreferrer" href="https://github.com/smilena7"><FontAwesomeIcon icon={faGithub} className={style.theIcons} /></Link>
                     </div>
                 </div>
                 <div className={style.card}>
@@ -72,8 +72,8 @@ export default function AboutUsLanding (){
                     <h4>Santiago Álvarez</h4>
                     <p>Desarrollador Web Full Stack</p>
                     <div className={style.socialMedias}>
-                        <a target='_blank' rel="noreferrer" href="https://www.linkedin.com/in/santiago-allvarez-83a432223/"><FontAwesomeIcon icon={faLinkedin} className={style.theIcons} /></a>
-                        <a target='_blank' rel="noreferrer" href="https://github.com/Santiagoalvarez2022"><FontAwesomeIcon icon={faGithub} className={style.theIcons} /></a>
+                        <Link target='_blank' rel="noreferrer" href="https://www.linkedin.com/in/santiago-allvarez-83a432223/"><FontAwesomeIcon icon={faLinkedin} className={style.theIcons} /></Link>
+                        <Link target='_blank' rel="noreferrer" href="https://github.com/Santiagoalvarez2022"><FontAwesomeIcon icon={faGithub} className={style.theIcons} /></Link>
                     </div>
                 </div>
             </div>

@@ -4,6 +4,7 @@ import Head from "next/head";
 import Layout from "components/Layout";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import Link from "next/link";
 // import fotoLechu from "../../public/assets/foto.jpg";
 
 const aboutUs = () => {
@@ -28,14 +29,14 @@ const aboutUs = () => {
                 <p className={style.carrer}>Desarrollador Web Full Stack</p>
 
                 <div className={style.icons}>
-                  <a target='_blank' rel="noreferrer"
+                  <Link target='_blank' rel="noreferrer"
                     href="https://github.com/Nachito02">
                     <FontAwesomeIcon icon={faGithub} />
-                  </a>
-                  <a target='_blank' rel="noreferrer"
+                  </Link>
+                  <Link target='_blank' rel="noreferrer"
                     href="https://www.linkedin.com/in/juanarguello02/">
                     <FontAwesomeIcon icon={faLinkedin} />
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -48,14 +49,14 @@ const aboutUs = () => {
                 <p className={style.carrer}>Desarrollador Web Full Stack</p>
 
                 <div className={style.icons}>
-                  <a target='_blank' rel="noreferrer"
+                  <Link target='_blank' rel="noreferrer"
                     href="https://github.com/Santiagoalvarez2022">
                     <FontAwesomeIcon icon={faGithub} />
-                  </a>
-                  <a target='_blank' rel="noreferrer"
+                  </Link>
+                  <Link target='_blank' rel="noreferrer"
                     href="##">
                     <FontAwesomeIcon icon={faLinkedin} />
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -68,14 +69,14 @@ const aboutUs = () => {
                 <p className={style.carrer}>Desarrollador Web Full Stack</p>
 
                 <div className={style.icons}>
-                  <a target='_blank' rel="noreferrer"
+                  <Link target='_blank' rel="noreferrer"
                     href="https://github.com/smilena7">
                     <FontAwesomeIcon icon={faGithub} />
-                  </a>
-                  <a target='_blank' rel="noreferrer"
+                  </Link>
+                  <Link target='_blank' rel="noreferrer"
                     href="https://www.linkedin.com/in/sandy-milena-pesta%C3%B1a-diaz-234887222/">
                     <FontAwesomeIcon icon={faLinkedin} />
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -88,14 +89,14 @@ const aboutUs = () => {
                 <p className={style.carrer}>Desarrollador Web Full Stack</p>
 
                 <div className={style.icons}>
-                  <a target='_blank' rel="noreferrer"
+                  <Link target='_blank' rel="noreferrer"
                     href="https://github.com/lechugaxthz">
                     <FontAwesomeIcon icon={faGithub} />
-                  </a>
-                  <a target='_blank' rel="noreferrer"
+                  </Link>
+                  <Link target='_blank' rel="noreferrer"
                     href="https://www.linkedin.com/in/lautaro-garcia-704aa5205/">
                     <FontAwesomeIcon icon={faLinkedin} />
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -108,14 +109,14 @@ const aboutUs = () => {
                 <p className={style.carrer}>Desarrollador Web Full Stack</p>
 
                 <div className={style.icons}>
-                  <a target='_blank' rel="noreferrer"
+                  <Link target='_blank' rel="noreferrer"
                     href="https://github.com/arcanium19">
                     <FontAwesomeIcon icon={faGithub} />
-                  </a>
-                  <a target='_blank' rel="noreferrer"
+                  </Link>
+                  <Link target='_blank' rel="noreferrer"
                     href="https://www.linkedin.com/in/jonnyhz/">
                     <FontAwesomeIcon icon={faLinkedin} />
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -128,14 +129,14 @@ const aboutUs = () => {
                 <p className={style.carrer}>Desarrollador Web Full Stack</p>
 
                 <div className={style.icons}>
-                  <a target='_blank' rel="noreferrer"
+                  <Link target='_blank' rel="noreferrer"
                     href="https://github.com/MauroMoyano">
                     <FontAwesomeIcon icon={faGithub} />
-                  </a>
-                  <a target='_blank' rel="noreferrer"
+                  </Link>
+                  <Link target='_blank' rel="noreferrer"
                     href="https://www.linkedin.com/in/mauro-moyano-full-stack-in-progress/">
                     <FontAwesomeIcon icon={faLinkedin} />
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -148,14 +149,14 @@ const aboutUs = () => {
                 <p className={style.carrer}>Desarrollador Web Full Stack</p>
 
                 <div className={style.icons}>
-                  <a target='_blank' rel="noreferrer"
+                  <Link target='_blank' rel="noreferrer"
                     href="https://github.com/PedroMidueno">
                     <FontAwesomeIcon icon={faGithub} />
-                  </a>
-                  <a target='_blank' rel="noreferrer"
+                  </Link>
+                  <Link target='_blank' rel="noreferrer"
                     href="https://www.linkedin.com/in/pedromidueno/">
                     <FontAwesomeIcon icon={faLinkedin} />
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
