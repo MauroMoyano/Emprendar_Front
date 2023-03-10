@@ -1,5 +1,9 @@
 
-
+.theIcon{
+    font-size: 2.5rem;
+    color: aliceblue;
+    text-decoration: none;
+}
 
 .allview{
     width: 100%;
@@ -107,17 +111,6 @@
     
 }
 
-.containerSug > div > div > div > div  button{
-}
-    
-
-
-
-
-
-
-
-
 
 .secondPage{
     height: 800px;
@@ -136,14 +129,17 @@
     width: 74%;
     height: 100%;
 }
-
+.first_container > div{
+    height: 45%;
+}
 
 
 
 
 .container_comentarios{ 
     width: 100%;
-    height: 53%;
+    height: 60%; 
+    border: #29da38 solid 2px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -201,3 +197,14 @@
     transition: all 0.475s;
   }
 
+.pagos{
+    display: flex;
+    padding: .5rem;
+    justify-content: center;
+
+}
+
+.container_muro{
+    border-left: 1px solid rgb(181, 181, 174);
+
+}

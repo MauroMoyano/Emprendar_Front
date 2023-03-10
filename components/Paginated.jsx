@@ -27,7 +27,7 @@ export default function Paginated() {
     const loadMore = async () => {
 
         setIsLoading(true)
-        const {data} = await axios.get(`http://localhost:3001/project?numPage=${page}`)
+        const {data} = await axios.get(`${process.env.NEXT_PUBLIC_BACK_APP_URL}/project?numPage=${page}`)
         console.log("2222", data)
         if (data.length === 0) bandera = false
         console.log(bandera)
