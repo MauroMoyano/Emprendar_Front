@@ -17,10 +17,8 @@ export default function Detail(props) {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        return async () => {
-            dispatch(confirmEmail(props.token))
-        }
-    }, [dispatch])
+        dispatch(confirmEmail(props.token))
+    }, [])
 
     const goLanding = () => {
         router.push('/')

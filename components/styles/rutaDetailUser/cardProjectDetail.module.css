@@ -1,0 +1,87 @@
+
+.img {
+    width: 100%; 
+}
+.conteiner{
+    height: 100%;
+    width: 100%;
+    padding: 16px;
+    border-radius: 20px ;
+}
+
+/*CONTAINER DE LA INFO*/
+.containerInfo{
+    display: flex;
+    height: 60%; 
+    
+
+}
+
+
+.container_photo{
+    display: flex;
+    align-items: flex-start;
+
+    width: 50%;
+}
+
+.InfoLessDescription{
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    height: 100%;
+    
+
+}
+
+.title{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    height: 35%;
+}
+
+.title h2:first-letter {
+    text-transform: uppercase;
+}
+
+.extra_info{
+    height: 65%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.extra_info > div {
+    padding: 16px;
+}
+
+/*Montos de dinero*/
+
+.cash{
+    display: flex;
+
+}
+.cash > div {
+    width: 50%;
+}
+
+
+/*DESCRIPCION DEL PROYECTO*/
+
+.description{
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+}
+
+.description > h3{
+    height: 20%;
+    padding: 10px;
+}
+
+.description_text{
+    height: 90%;
+    overflow-y: scroll;
+}

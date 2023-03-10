@@ -16,7 +16,15 @@ import {
   CONFIRM_EMAIL_ERROR,
   CREATE_PROJECT,
   SIGNIN_SUCESS,
+<<<<<<< HEAD
   CLEAN_MESSAGE, SEARCH_VALUE, CHARGE_STATE
+=======
+  CLEAN_MESSAGE,
+  SEARCH_VALUE,
+  GET_COMMENTS,
+  CREATE_COMMENT
+
+>>>>>>> 87ebbe108df2e5d44787bac1c88268a925dce344
 } from "./actions";
 
 const initialState = {
@@ -24,6 +32,7 @@ const initialState = {
   allProjectsCopy: [],
   detailUsuario: {},
   detailProject: {},
+  comments:[],
   userProjects: [],
   category: [],
   country: [],
@@ -34,7 +43,6 @@ const initialState = {
   token: typeof window != "undefined" ? localStorage.getItem("token") : "",
   auth: true,
   user: null,
-
   //estado de mensahes
   message: null,
 };
@@ -117,8 +125,8 @@ const rootReducer = (state = initialState, action) => {
         currentPage: 0,
       };
     
-      case CONFIRM_EMAIL:
-      case CONFIRM_EMAIL_ERROR:
+      // case CONFIRM_EMAIL:
+      // case CONFIRM_EMAIL_ERROR:
       case SIGNIN_SUCESS:
       case LOGIN_ERROR:
       case SIGNIN_ERROR:
@@ -150,6 +158,7 @@ const rootReducer = (state = initialState, action) => {
         token: null,
         autenticado: null,
       };
+      
     case CONFIRM_EMAIL:
     case CONFIRM_EMAIL_ERROR:
       return{
@@ -157,11 +166,11 @@ const rootReducer = (state = initialState, action) => {
         message: action.payload,
       };
 
-    case CREATE_PROJECT:
-      return {
-          ...state,
-          allProjects: [action.payload, ...state.allProjects]
-        }
+    // case CREATE_PROJECT:
+    //   return {
+    //       ...state,
+    //       allProjects: [action.payload, ...state.allProjects]
+    //     }
 
 
     case SEARCH_VALUE:
@@ -170,10 +179,23 @@ const rootReducer = (state = initialState, action) => {
         allProjects: action.payload
       }
 
+<<<<<<< HEAD
     case CHARGE_STATE:
       return {
       ...state,
       allProjects: action.payload
+=======
+    case GET_COMMENTS:
+      return {
+        ...state,
+        comments : action.payload
+      }
+     
+    case CREATE_COMMENT : 
+      return{
+        ...state,
+        
+>>>>>>> 87ebbe108df2e5d44787bac1c88268a925dce344
       }
 
     default:
