@@ -1,68 +1,79 @@
-import clienteAxios from "config/clienteAxios";
-import React, { useState, useEffect } from "react";
+import React, {useState} from 'react';
+import { loadStripe } from '@stripe/stripe-js';
+import clienteAxios from 'config/clienteAxios';
+
+// Make sure to call `loadStripe` outside of a component’s render to avoid
+// recreating the `Stripe` object on every render.
+
+export default function PreviewPage() {
+
+  const [form,setForm] = useState({})
 
 
-const ProductDisplay = () =>  {
-  
-  const handleSubmit = async (e) => {
-      e.preventDefault();
+  const handleChange = async (e) =>{
+    e.preventDefault()
 
-      console.log('clickeando')
+    
 
-       const response =  await  clienteAxios.post('/checkout/payment')
-       console.log(response)
+   await clienteAxios.post('/checkout/payment', form)
   }
 
-  return(
-  <section>
-    <div className="product">
-      <img
-        src="https://i.imgur.com/EHyR2nP.png"
-        alt="The cover of Stubborn Attachments"
-      />
-      <div className="description">
-      <h3>Stubborn Attachments</h3>
-      <h5>$20.00</h5>
-      </div>
-    </div>
-    <form  onSubmit={handleSubmit}>
-      <button type="submit">
-        Checkout
-      </button>
-    </form>
-  </section>
-)};
+  const handleSubmit = async (e) =>{
+    e.preventDefault()
 
-const Message = ({ message }) => (
-  <section>
-    <p>{message}</p>
-  </section>
-);
+    
 
-export default function Ckeckout() {
+   await clienteAxios.post('/checkout/payment', form)
+  }
 
 
-
-  const [message, setMessage] = useState("");
-
-  useEffect(() => {
+  React.useEffect(() => {
     // Check to see if this is a redirect back from Checkout
     const query = new URLSearchParams(window.location.search);
-
-    if (query.get("success")) {
-      setMessage("Order placed! You will receive an email confirmation.");
+    if (query.get('success')) {
+      console.log('Order placed! You will receive an email confirmation.');
     }
 
-    if (query.get("canceled")) {
-      setMessage(
-        "Order canceled -- continue to shop around and checkout when you're ready."
-      );
+    if (query.get('canceled')) {
+      console.log('Order canceled -- continue to shop around and checkout when you’re ready.');
     }
   }, []);
 
-  return message ? (
-    <Message message={message} />
-  ) : (
-    <ProductDisplay />
+  return (
+    <form action="http://localhost:3001/checkout/payment" method="POST">
+      <section>
+        <input name= 'amount' value={form.amount} type="number" />
+        <button type="submit" role="link">
+          Checkout
+        </button>
+      </section>
+      <style jsx>
+        {`
+          section {
+            background: #ffffff;
+            display: flex;
+            flex-direction: column;
+            width: 400px;
+            height: 112px;
+            border-radius: 6px;
+            justify-content: space-between;
+          }
+          button {
+            height: 36px;
+            background: #556cd6;
+            border-radius: 4px;
+            color: white;
+            border: 0;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0px 4px 5.5px 0px rgba(0, 0, 0, 0.07);
+          }
+          button:hover {
+            opacity: 0.8;
+          }
+        `}
+      </style>
+    </form>
   );
 }
