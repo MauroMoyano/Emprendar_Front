@@ -45,13 +45,13 @@ export const CREATE_COMMENT = "CREATE_COMMENT"
 export const getHomeProjects = () => {
   return async function (dispatch) {
     //pido todos los proyectos y me devuelve un array con ellos
-    const { data } = await axios.get("http://localhost:3001/project");
+    const { data } = await clienteAxios.get("/project");
 
     //pido todos las categorias al back y me devuelve un array con ellas
-    const category = (await axios.get("http://localhost:3001/category")).data;
+    const category = (await clienteAxios.get("/category")).data;
 
     //pido todos los paises al back y me devuelve un array con ellos
-    const country = (await axios.get("http://localhost:3001/country")).data;
+    const country = (await clienteAxios.get("/country")).data;
 
     dispatch({ type: GET_HOME_PROJECTS, payload: { data, category, country } });
   };
@@ -66,14 +66,14 @@ export const currentPageHandler = (value) => {
 
 export const getDetailProject = (id) => {
   return async function (dispatch) {
-    const { data } = await axios.get(`http://localhost:3001/project/${id} `);
+    const { data } = await clienteAxios.get(`/project/${id} `);
     dispatch({ type: GET_DETAIL_PROJECT, payload: data });
   };
 };
 
 export const getUser = (id) => {
   return async function (dispatch) {
-    const { data } = await axios.get(`http://localhost:3001/user/${id} `);
+    const { data } = await clienteAxios.get(`/user/${id} `);
     dispatch({ type: GET_USER, payload: data });
   };
 };
@@ -101,7 +101,7 @@ export const resetDetailProject = (id) => {
 export const searchProject = (value) => {
 
   return async function (dispatch) {
-    const { data } = await axios.get(`http://localhost:3001/project?name=${value} `)
+    const { data } = await clienteAxios.get(`/project?name=${value} `)
     console.log("data ", data)
     dispatch({ type: SEARCH_VALUE, payload: data })
   }
@@ -241,7 +241,7 @@ export const cleanMessage = () => {
 export const getComments = (idProject) => {
 
   return async function (dispatch) {
-    const { data } = await axios.get(`http://localhost:3001/comment/${idProject} `)
+    const { data } = await clienteAxios.get(`/comment/${idProject} `)
     dispatch({
       type: GET_COMMENTS,
       payload: data
@@ -252,7 +252,7 @@ export const getComments = (idProject) => {
 // createComment
 export const createComments = (data) => {
   return async function (dispatch) {
-    const response = await clienteAxios.post("http://localhost:3001/comment", data);
+    const response = await clienteAxios.post("/comment", data);
     console.log(response);
     dispatch({
       type: CREATE_COMMENT,
