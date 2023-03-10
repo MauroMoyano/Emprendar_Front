@@ -16,7 +16,7 @@ import {
   CONFIRM_EMAIL_ERROR,
   CREATE_PROJECT,
   SIGNIN_SUCESS,
-  CLEAN_MESSAGE, SEARCH_VALUE
+  CLEAN_MESSAGE, SEARCH_VALUE, CHARGE_STATE
 } from "./actions";
 
 const initialState = {
@@ -168,6 +168,12 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         allProjects: action.payload
+      }
+
+    case CHARGE_STATE:
+      return {
+      ...state,
+      allProjects: action.payload
       }
 
     default:

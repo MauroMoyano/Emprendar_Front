@@ -1,7 +1,6 @@
 import axios from "axios";
 import clienteAxios from "config/clienteAxios";
 import tokenAuth from "config/tokenAuth";
-import { useRouter } from "next/router";
 
 export const CURRENT_PAGE = "CURRENT_PAGE";
 export const GET_HOME_PROJECTS = "GET_HOME_PROJECTS";
@@ -13,6 +12,7 @@ export const FILTER_CATEGORY = "FILTER_CATEGORY";
 export const FILTER_COUNTRY = "FILTER_COUNTRY";
 export const CREATE_PROJECT = "CREATE_PROJECT";
 export const SEARCH_VALUE = "SEARCH_VALUE"
+export const CHARGE_STATE = "CHARGE_STATE"
 
 
 //types para el registro
@@ -216,6 +216,10 @@ export const confirmEmail = (token) =>{
 
 export const createProject= (obj) => {
   return {type: CREATE_PROJECT, payload: obj}
+}
+
+export const chargeState = (data) => {
+    return {type: CHARGE_STATE, payload: data}
 }
 
 
