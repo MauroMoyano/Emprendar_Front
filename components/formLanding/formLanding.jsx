@@ -117,10 +117,10 @@ export default function FormLanding() {
   };
 
   const googleLogIn = () => {
-    const popup = window.open("http://localhost:3001/user/auth/google", "_blank", `location=none width=620 height=700 toolbar=no status=no menubar=no scrollbars=yes resizable=yes`)
+    const popup = window.open(`${process.env.NEXT_PUBLIC_BACK_APP_URL}/user/auth/google`, "_blank", `location=none width=620 height=700 toolbar=no status=no menubar=no scrollbars=yes resizable=yes`)
 
     window.addEventListener('message', event => {
-      if (event.origin === "http://localhost:3001") {
+      if (event.origin === `${process.env.NEXT_PUBLIC_BACK_APP_URL}`) {
 
         if (event.data) {
 

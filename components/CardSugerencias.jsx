@@ -62,7 +62,7 @@ export default function Sugerencia(props){
             });
 
             async function  name () {
-                response = await axios.get(`http://localhost:3001/category/similares?${nameCategories}`)
+                response = await clienteAxios.get(`/category/similares?${nameCategories}`)
                 setState(response.data)
             }
             name()

@@ -99,7 +99,7 @@ export default function CreateProject() {
       ) {
         setForm({ ...form, userId: userId, user_name: user_name});
         console.log(form)
-        await axios.post("http://localhost:3001/project", form);
+        await clienteAxios.post("/project", form);
         // dispatch(createProject(form));
         await router.push("/home");
       }
