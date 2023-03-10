@@ -13,14 +13,9 @@ const aboutUs = () => {
         <title>Nosotros</title>
       </Head>
 
-      <div
-        style={{ fontFamily: "Roboto,sans-serif" }}
-        className={style.container}
-      >
-        <h1 className={style.title}>Nuestro team</h1>
-        {/* <h4 className={style.subTitle}>
-          Lorem ipsum dolor sit amet consectetur.
-        </h4> */}
+      <div className={style.allContainer}>
+      <div className={style.container}>
+        <h1 className={style.title}>Nuestro Team:</h1>
         <div>
 
           <div className={style.containerCards}>
@@ -168,6 +163,7 @@ const aboutUs = () => {
           </div>
         </div>
       </div>
+    </div>  
     </Layout>
   );
 };

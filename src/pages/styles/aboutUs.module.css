@@ -1,6 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Work+Sans:ital,wght@1,300&display=swap');
+/*  
+font-family: 'Roboto Condensed', sans-serif;
+font-family: 'Work Sans', sans-serif;
+*/
+
+
+.allContainer{
+    display: flex;
+    background-color: #babafa;
+    justify-content: center;
+    align-items: center;
+}
+
 .container {
-    max-width: 1200px;
-    margin: 2rem auto;
+    padding-top: 30px;
+    padding-left: 20px;
+    padding-right: 20px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    height: 100%;
+    width: 70%;
+    box-shadow: 0px 2px 15px black;
+    background-color: #cfcff8;
+    position: static;
+    flex-wrap: wrap;
+    font-family: 'Roboto Condensed', sans-serif
 }
 
 .title {

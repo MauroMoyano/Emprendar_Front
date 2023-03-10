@@ -33,6 +33,8 @@ export default function Home() {
 
     return (
         <Layout>
+    <div className={style.allContainer}>
+        <div className={style.bodyContainer}>
             <form>
                 <div className={style.filtersContainer}>
                     <div>
@@ -72,6 +74,8 @@ export default function Home() {
                 </div>
             </form>
             <Paginated/>
+        </div>            
+    </div>
         </Layout>
     )
 
