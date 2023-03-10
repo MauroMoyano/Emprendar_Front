@@ -9,7 +9,7 @@ const ProductDisplay = () =>  {
 
       console.log('clickeando')
 
-       const response =  await  clienteAxios.post('/ckeckout/payment')
+       const response =  await  clienteAxios.post('/checkout/payment')
        console.log(response)
   }
 
