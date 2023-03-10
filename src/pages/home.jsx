@@ -37,7 +37,7 @@ export default function Home() {
                 <div className={style.filtersContainer}>
                     <div>
                         <label>Highest Donations </label>
-                        <select onChange={handleOrderTop}>
+                        <select className={style.select} onChange={handleOrderTop}>
                             <option disabled selected> - </option>
                             <option value="Ascendente">Ascendente</option>
                             <option value="Descendente">Descendente</option>
@@ -45,7 +45,7 @@ export default function Home() {
                     </div>
                     <div>
                         <label>Country </label>
-                        <select onChange={handleFilterCountry}>
+                        <select className={style.select} onChange={handleFilterCountry}>
                             <option disabled selected> - </option>
                             {
                                 country?.map((c, index) => {
@@ -56,14 +56,13 @@ export default function Home() {
                     </div>
                     <div>
                         <label>Category </label>
-                        <select onChange={handleFilterCategory}>
+                        <select className={style.select} onChange={handleFilterCategory}>
                             <option disabled selected> - </option>
                             {
                                 category?.map((c, index) => {
                                     return <option value={c} key={index}>{c}</option>
                                 })
                             }
-
                         </select>
                     </div>
                     <div>

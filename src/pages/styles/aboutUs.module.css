@@ -1,6 +1,7 @@
 .container {
     max-width: 1200px;
     margin: 2rem auto;
+    font-family: 'Roboto Condensed', sans-serif;
 }
 
 .title {
@@ -21,6 +22,8 @@
     justify-content: space-around;
     flex-wrap: wrap;
     gap: 1.5rem;
+    width: 70%;
+    margin: 2rem auto 0 auto;
 }
 
 .card {
