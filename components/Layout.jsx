@@ -10,7 +10,6 @@ import { authedUser } from 'redux/actions';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
-
 const Layout = ({children}) => {
     const dispatch = useDispatch()
     const user = useSelector(state => state.user)
@@ -60,20 +59,20 @@ const Layout = ({children}) => {
                                 </div>
                             </button>
                             <div className={style.dropdownContent}>
-                                <a href="/createProject"><button className={style.buttonNewProject}><h3>Nuevo Proyecto</h3></button></a>
-                                <a href="/"><button onClick={() => dispatch(logOut())}><h3>Cerrar Sesión</h3></button></a>
+                                <Link href="/createProject"><button className={style.buttonNewProject}><h3>Nuevo Proyecto</h3></button></Link>
+                                <Link href="/"><button onClick={() => dispatch(logOut())}><h3>Cerrar Sesión</h3></button></Link>
                             </div>
                     </div>
                 </div>
                 <div className={style.logoContainer}>
-                    <a href='/home'><Image className={style.logo} src={logo} alt="logo"/></a>
+                    <Link href='/home'><Image className={style.logo} src={logo} alt="logo"/></Link>
                 </div>
                 <div className={style.searchBarContainer}>
                     <div className={style.containForm}>
                         <input type='search' value={searchValue} onChange={handleInput} placeholder="Buscar..."/>
-                        <a href="/home">
+                        <Link href="/home">
                             <button type='submit' className={style.buttonSearch} onClick={handleClick}><FontAwesomeIcon icon={faSearch} className={style.theIconSearch} /></button>
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </nav>

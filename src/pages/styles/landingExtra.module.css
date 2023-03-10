@@ -32,7 +32,7 @@
 .welcomeImageContainer{
     width: 100%;
     height: fit-content;
-    background-image: url('../../../public/img/welcomeHands2.jpg');
+    background-image: url('https://res.cloudinary.com/nachito02/image/upload/v1678489753/welcomeHands2_dvqwqa.jpg');
     background-repeat: no-repeat;
     background-size: cover;
 }
