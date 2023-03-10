@@ -7,6 +7,7 @@ import { similares } from "redux/actions";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+
 import { getDetailProject, getUser, getComments } from "redux/actions";
 import Link from "next/link";
 
@@ -48,6 +49,9 @@ export default function Sugerencia(props){
     
 
     const selector =  useSelector((state => state.detailProject))
+
+    console.log("selector de ",selector);
+
     const [state,setState] = useState()
     let response
 
@@ -75,6 +79,8 @@ export default function Sugerencia(props){
         infinite: true,
         slidesToShow: 3,
         slidesToScroll: 1,
+        initialSlide: 0,
+
     };
 
 

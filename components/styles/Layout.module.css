@@ -39,6 +39,8 @@ font-family: 'Work Sans', sans-serif;
 }
 
 .userButton{
+    cursor: pointer;
+    transition: .6s;
     display: flex;
     flex-direction: row;
     border-radius: 9px;
@@ -50,9 +52,12 @@ font-family: 'Work Sans', sans-serif;
     max-height: 70px;
     width: 100%;
     min-width: 300px;
+
+
 }
 
-.userButton:hover{
+.userButton:hover  {
+
     background-color: #66198A;
     border: 3px solid #2E034B;
     color: aliceblue;
@@ -102,6 +107,7 @@ font-family: 'Work Sans', sans-serif;
 }
 
 .dropdown:hover .dropdownContent{
+    
     display: flex;
     flex-direction: column;
     width: 260px;

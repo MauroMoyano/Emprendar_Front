@@ -1,5 +1,9 @@
 
-
+.theIcon{
+    font-size: 2.5rem;
+    color: aliceblue;
+    text-decoration: none;
+}
 
 .allview{
     width: 100%;
@@ -193,3 +197,14 @@
     transition: all 0.475s;
   }
 
+.pagos{
+    display: flex;
+    padding: .5rem;
+    justify-content: center;
+
+}
+
+.container_muro{
+    border-left: 1px solid rgb(181, 181, 174);
+
+}

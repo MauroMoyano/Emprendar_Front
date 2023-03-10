@@ -9,9 +9,11 @@ import {getDetailProject, getUser, resetDetailProject,  getComments} from "redux
 import style from "../styles/detail.module.css"
 import Comments from "components/rutaDetail/Comments";
 import { authedUser,similares } from "redux/actions";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Link from "next/link";
 import { scrollBottom } from "components/rutaDetail/logic/scroll";
+import PreviewPage from "components/checkout";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 export default function Detail(props) {
     const dispatch = useDispatch()
@@ -47,7 +49,8 @@ export default function Detail(props) {
               <div className={style.allview}>
                       <div className={style.conteiner}>
                           <div className={style.firstPage}>
-                              <div className={style.barra}> <Link href={"/home"}> <button>atras </button></Link> </div>
+                              <div className={style.barra}> 
+                              <Link href={"/home"}>  <FontAwesomeIcon  className={style.theIcon} icon={faCircleArrowLeft} /> </Link> </div>
                               <div className={style.cardContainer}>
                                    {/* <!-- /aca tiene que estar detailproject, y otro div donde dentro este el user y botones de donar o comentar --> */}
                               <div className={style.container_detail}>
@@ -68,11 +71,9 @@ export default function Detail(props) {
                                       <CardUser />
                                   </div>
 
-                                  <div className={style.container_buttons}>
-                                     <div> 
-                                          <button className={style.button }>
-                                              <span className={style.button_content}>DONAR </span>
-                                          </button>
+                                  <div className={style.pagos}>
+                                     <div>                                     
+                                        <PreviewPage />                      
                                       </div>
                                      <div> </div>
                                   </div>

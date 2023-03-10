@@ -369,7 +369,7 @@ export default function CreateProject() {
           <h2>Categorías: </h2>
           <div className={style.questionCategory}>
             {arrCategory.map((cat, index) => {
-          
+              
               return (
                 <div className={style.divInput} key={index}>
                   <label>{cat}</label>
