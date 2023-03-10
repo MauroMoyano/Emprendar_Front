@@ -39,10 +39,25 @@
     border-top-right-radius: 30px;
     border-top-left-radius: 30px;
 
+    display: flex;
+    align-items: center;
+
+    padding: 1rem;
 
     background: rgb(121,9,103);
     background: linear-gradient(90deg, rgba(121,9,103,1) 26%, rgba(83,92,215,1) 69%, rgb(103, 136, 235) 100%);
 }
+
+.barra > a > button{
+
+    width: 5rem;
+    padding: .5rem;
+    cursor: pointer;
+
+    border-radius: .5rem;
+}
+
+
 .cardContainer{
     display: flex;
     height: 90%;

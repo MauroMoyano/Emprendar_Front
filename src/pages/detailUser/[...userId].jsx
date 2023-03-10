@@ -11,7 +11,7 @@ import { authedUser,similares } from "redux/actions";
 import Sugerencia from "components/CardSugerencias";
 import axios from "axios";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import Link from "next/link";
 
 export default function Detail(props) {
     const dispatch = useDispatch()
@@ -45,7 +45,7 @@ export default function Detail(props) {
                 <div className={style.allview}>
                         <div className={style.conteiner}>
                             <div className={style.firstPage}>
-                                <div className={style.barra}></div>
+                                <div className={style.barra}> <Link href={"/home"}> <button>atras </button></Link> </div>
                                 <div className={style.cardContainer}>
                                      {/* <!-- /aca tiene que estar detailproject, y otro div donde dentro este el user y botones de donar o comentar --> */}
                                 <div className={style.container_detail}>

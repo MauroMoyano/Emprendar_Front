@@ -12,6 +12,7 @@ export default function CardUser({userId}){
             </div>
             <div className={style.detailPerfil}>
                     <h5>{selectorUser.user_name}</h5>
+                    <p>Reputacion</p>
                     <p>{selectorUser.reputation}</p>
                      
             </div>
