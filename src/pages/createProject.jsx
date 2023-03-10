@@ -11,6 +11,8 @@ export default function CreateProject() {
   const dispatch = useDispatch();
   const router = useRouter();
 
+    const [loading, setLoading] = useState(false)
+
   const [urlImage, setUrlImage] = useState(null)
 
   let arrCategory = [
@@ -35,16 +37,19 @@ export default function CreateProject() {
   const userId = useSelector((state) => state.user?.id);  
   const user_name = useSelector((state) => state.user?.user_name);
 
-  const [form, setForm] = useState({
+  const initialFormValues = {
     title: "",
     summary: "",
     description: "",
     goal: "",
     country: "",
     category: [],
-    userId,
-    user_name,
-  });
+    userId: null,
+    user_name: null,
+  };
+
+  const [form, setForm] = useState(initialFormValues);
+
 
   const [errors, setErrors] = useState({
     title: "",
@@ -54,14 +59,26 @@ export default function CreateProject() {
     country: "",
   });
 
+
+  useEffect(() => {
+    if (userId) {
+      setForm({
+        ...form,
+        userId: userId,
+        user_name: user_name,
+        img: urlImage
+      });
+    }
+  }, [userId, user_name, urlImage]);
   const [alert, setAlert] = useState("");
 
   const changeHandler = (event) => {
     const property = event.target.name;
     const value = event.target.value;
-
+    console.log(form)
     setErrors(validate({ ...form, [property]: value }));
     setForm({ ...form, [property]: value });
+    console.log(form)
   };
 
   const submitHandler = async (event) => {
@@ -195,6 +212,8 @@ export default function CreateProject() {
 
      await uploadImage(formData)
   }, []);
+
+  
   const { getRootProps, getInputProps, isDragActive, acceptedFiles } =
     useDropzone({ onDropRejected, onDropAccepted, accept: {
       'image/png': ['.png', '.jpg'],
@@ -202,10 +221,17 @@ export default function CreateProject() {
 
 
     const uploadImage = async(formdata) => {
+      try {
+        setLoading(true)
+
         const response = await clienteAxios.post("images/upload",formdata)
        
-
-            setForm({...form, img: response.data.imageUrl })
+        setUrlImage(response.data.imageUrl )
+        setLoading(false)
+      }
+      catch(error) {
+        console.log(error)
+      }
     }
   
 
@@ -328,6 +354,7 @@ export default function CreateProject() {
           <ul>{files}</ul>
         {alert && <p>{alert}</p>}
         <div {...getRootProps({ className: style.dropzone })}>
+          {loading ? <p>Cargando imagen</p> : null}
           <input {...getInputProps()} />
 
           {isDragActive ? (
@@ -342,13 +369,14 @@ export default function CreateProject() {
           <h2>Categorías: </h2>
           <div className={style.questionCategory}>
             {arrCategory.map((cat, index) => {
+          
               return (
                 <div className={style.divInput} key={index}>
                   <label>{cat}</label>
                   <input
                     type="checkbox"
                     name={cat}
-                    value={cat}
+                    value={cat.toLocaleLowerCase()}
                     onChange={handleCheck}
                   />
                 </div>

@@ -90,7 +90,7 @@ export default function Sugerencia(props){
                     <Slider   arrowColor= "red"  className={style.scroll} {...settings} >
                     {
                         state
-                        ? state.map((obj)=>{
+                        ? state?.map((obj)=>{
                             console.log(obj);
                             return<CardSugerencia
                             data = {obj}
