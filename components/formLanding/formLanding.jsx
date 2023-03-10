@@ -116,7 +116,24 @@ export default function FormLanding() {
     event.target.id === "signIn" ? setChecked(!checked) : setChecked(false);
   };
 
-  console.log(message)
+  const googleLogIn = () => {
+    const popup = window.open("http://localhost:3001/user/auth/google", "_blank", `location=none width=620 height=700 toolbar=no status=no menubar=no scrollbars=yes resizable=yes`)
+
+    window.addEventListener('message', event => {
+      if (event.origin === "http://localhost:3001") {
+
+        if (event.data) {
+
+          localStorage.setItem("token", event.data.token)
+          popup.close()
+
+          router.push('/home')
+        }
+      }
+    })
+  }
+
+  // console.log(message)
   return (
     <>
 
@@ -128,25 +145,7 @@ export default function FormLanding() {
 
 
 
-        <button onClick={() => {
-         const popup = window.open("http://localhost:3001/user/auth/google", "_blank", `location=none width=620 height=700 toolbar=no status=no menubar=no scrollbars=yes resizable=yes`)
-        
-          window.addEventListener('message', event => {
-            if(event.origin === "http://localhost:3001") {
 
-              if(event.data) {
-                
-                localStorage.setItem("token", event.data.token)
-                popup.close()  
-          
-                  router.push('/home')
-             
-                
-                
-              }
-            }
-          })
-        }}>Google</button>
 
       <div className={style.main}>
         <input
@@ -238,14 +237,16 @@ export default function FormLanding() {
               type="password"
               placeholder="Contraseña"
             />
-            <input
+
+            {/* <input
               className={style.input}
               name="profile_img"
               value={formSignIn.profile_img}
               onChange={handlerSignIn}
               type="text"
               placeholder="foto"
-            />
+            /> */}
+
             <p onClick={handlerCheckbox}>Ya tengo cuenta</p>
             <button onClick={() => sendDataSignIn(formSignIn)}>
               Registrarse
@@ -253,6 +254,8 @@ export default function FormLanding() {
           </form>
         </div>
       </div>
+      <button onClick={() => { googleLogIn() }} className={style.buttonGoogle}
+      > <img src="assets/google.png" alt="Iniciar sesión con google" /> <span>Acceder con Google</span> </button>
     </>
   );
 }
