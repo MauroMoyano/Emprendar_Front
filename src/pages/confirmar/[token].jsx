@@ -26,6 +26,7 @@ export default function Detail(props) {
 
     const response = useSelector(state => state.message)
 
+    
     //'Confirmado correctamente'
     // 'Token no valido
     return (

@@ -26,6 +26,7 @@ font-family: 'Work Sans', sans-serif;
     position: static;
     flex-wrap: wrap;
     font-family: 'Roboto Condensed', sans-serif
+    font-family: 'Roboto Condensed', sans-serif;
 }
 
 .title {
@@ -46,6 +47,8 @@ font-family: 'Work Sans', sans-serif;
     justify-content: space-around;
     flex-wrap: wrap;
     gap: 1.5rem;
+    width: 70%;
+    margin: 2rem auto 0 auto;
 }
 
 .card {

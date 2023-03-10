@@ -11,6 +11,8 @@ export default function CreateProject() {
   const dispatch = useDispatch();
   const router = useRouter();
 
+    const [loading, setLoading] = useState(false)
+
   const [urlImage, setUrlImage] = useState(null)
 
   let arrCategory = [
@@ -35,16 +37,19 @@ export default function CreateProject() {
   const userId = useSelector((state) => state.user?.id);  
   const user_name = useSelector((state) => state.user?.user_name);
 
-  const [form, setForm] = useState({
+  const initialFormValues = {
     title: "",
     summary: "",
     description: "",
     goal: "",
     country: "",
     category: [],
-    userId,
-    user_name,
-  });
+    userId: null,
+    user_name: null,
+  };
+
+  const [form, setForm] = useState(initialFormValues);
+
 
   const [errors, setErrors] = useState({
     title: "",
@@ -54,14 +59,26 @@ export default function CreateProject() {
     country: "",
   });
 
+
+  useEffect(() => {
+    if (userId) {
+      setForm({
+        ...form,
+        userId: userId,
+        user_name: user_name,
+        img: urlImage
+      });
+    }
+  }, [userId, user_name, urlImage]);
   const [alert, setAlert] = useState("");
 
   const changeHandler = (event) => {
     const property = event.target.name;
     const value = event.target.value;
-
+    console.log(form)
     setErrors(validate({ ...form, [property]: value }));
     setForm({ ...form, [property]: value });
+    console.log(form)
   };
 
   const submitHandler = async (event) => {
@@ -195,6 +212,8 @@ export default function CreateProject() {
 
      await uploadImage(formData)
   }, []);
+
+  
   const { getRootProps, getInputProps, isDragActive, acceptedFiles } =
     useDropzone({ onDropRejected, onDropAccepted, accept: {
       'image/png': ['.png', '.jpg'],
@@ -202,10 +221,17 @@ export default function CreateProject() {
 
 
     const uploadImage = async(formdata) => {
+      try {
+        setLoading(true)
+
         const response = await clienteAxios.post("images/upload",formdata)
        
-
-            setForm({...form, img: response.data.imageUrl })
+        setUrlImage(response.data.imageUrl )
+        setLoading(false)
+      }
+      catch(error) {
+        console.log(error)
+      }
     }
   
 
@@ -220,24 +246,20 @@ export default function CreateProject() {
       </li>
     ))
 
+    const isValid = form.title !== "" &&
+    form.summary !== "" &&
+    form.description !== "" &&
+    form.goal !== "" &&
+    form.country !== "" &&
+    form.category.length !== 0 &&
+    errors.title === "" &&
+    errors.summary === "" &&
+    errors.description === "" &&
+    errors.goal === "" 
+
   return (
     <Layout>
       <form onSubmit={submitHandler} className={style.formContainer}>
-
-        <div className={style.containerDrop}>
-          <ul>{files}</ul>
-        {alert && <p>{alert}</p>}
-        <div {...getRootProps({ className: style.dropzone })}>
-          <input {...getInputProps()} />
-
-          {isDragActive ? (
-            <p>Solta tu imagen aqui</p>
-          ) : (
-            <p>Selecciona o arrastra tu imagen</p>
-          )}
-        </div>
-        </div>
-
         <h1 className={style.title}>Crea tu proyecto:</h1>
         <div className={style.formInput}>
           <div>
@@ -308,12 +330,11 @@ export default function CreateProject() {
           </div>
           <div className={style.question}>
             {/*<input type="text" value={form.country} onChange={changeHandler} name="country"/>*/}
-
             <div className={style.questionCategory}>
               {
-                <select onChange={handleCountry}>
+                <select className={style.select} onChange={handleCountry}>
                   <option disabled selected>
-                    Country
+                    País
                   </option>
                   {arrCountry.map((c, index) => {
                     return (
@@ -325,21 +346,37 @@ export default function CreateProject() {
                 </select>
               }
             </div>
-
-            <label className={form.country !== "" ? style.fix : ""}>País</label>
+            <label>País</label>
           </div>
         </div>
+
+        <div className={style.containerDrop}>
+          <ul>{files}</ul>
+        {alert && <p>{alert}</p>}
+        <div {...getRootProps({ className: style.dropzone })}>
+          {loading ? <p>Cargando imagen</p> : null}
+          <input {...getInputProps()} />
+
+          {isDragActive ? (
+            <p>Solta tu imagen aqui</p>
+          ) : (
+            <p>Selecciona o arrastra tu imagen</p>
+          )}
+        </div>
+        </div>
+        
         <div className={style.containerQuestionCategory}>
           <h2>Categorías: </h2>
           <div className={style.questionCategory}>
             {arrCategory.map((cat, index) => {
+          
               return (
                 <div className={style.divInput} key={index}>
                   <label>{cat}</label>
                   <input
                     type="checkbox"
                     name={cat}
-                    value={cat}
+                    value={cat.toLocaleLowerCase()}
                     onChange={handleCheck}
                   />
                 </div>
@@ -356,19 +393,12 @@ export default function CreateProject() {
           //   true
           // }
           className={
-            form.title !== "" &&
-            form.summary !== "" &&
-            form.description !== "" &&
-            form.goal !== "" &&
-            form.country !== "" &&
-            form.category.length !== 0 &&
-            errors.title === "" &&
-            errors.summary === "" &&
-            errors.description === "" &&
-            errors.goal === "" &&
-            style.submit
+            isValid ? style.submit : style.disabled
           }
           type="submit"
+          disabled={
+            !isValid 
+          }
         >
           Enviar datos
         </button>
