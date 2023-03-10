@@ -4,12 +4,13 @@ import React, { useState, useEffect } from "react";
 
 const ProductDisplay = () =>  {
   
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
       e.preventDefault();
 
       console.log('clickeando')
 
-      clienteAxios
+       const response =  await  clienteAxios.post('/ckeckout/payment')
+       console.log(response)
   }
 
   return(
