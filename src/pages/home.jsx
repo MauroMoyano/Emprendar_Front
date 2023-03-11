@@ -68,7 +68,7 @@ export default function Home() {
                         </select>
                     </div>
                     <div>
-                        <button onClick={handlerDeleteSearch}>Delete Search</button>
+                        <button onClick={handlerDeleteSearch}>Limpiar</button>
                     </div>
                 </div>
             </form>
