@@ -3,9 +3,16 @@ import Swal from 'sweetalert2';
 // Make sure to call `loadStripe` outside of a component’s render to avoid
 // recreating the `Stripe` object on every render.
 
-export default function PreviewPage() {
+export default function PreviewPage(props) {
 
-  const [form,setForm] = useState({})
+  const {id,name, image, description,userId} = props
+
+  const [form,setForm] = useState({
+    id: id,
+    amount : null,
+    name: name,
+    image : null
+  })
 
 
 
@@ -49,6 +56,13 @@ export default function PreviewPage() {
       <section>
       <span>$</span>
         <input name='amount' onChange={handleChange} min="1" required value={form.amount} type="number" />
+        <input  name='name' hidden onChange={handleChange}   value={name} type="text" />
+        <input hidden name='id' onChange={handleChange}  value={id} type="text" />
+
+        <input hidden name='image' onChange={handleChange}  value={image} type="text" />
+        <input hidden name='description' onChange={handleChange}  value={description} type="text" />
+        <input hidden name='userId' onChange={handleChange}  value={userId} type="text" />
+
 
         <button type="submit" role="link">
           Donar

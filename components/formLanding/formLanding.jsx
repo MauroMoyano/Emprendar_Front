@@ -24,7 +24,6 @@ export default function FormLanding() {
   const [messageToShow, setMessageToShow] = useState('')
 
   useEffect(() => {
-    console.log(`message en el useEffect: ${message}`)
     setMessageToShow(message);
   }, [message])
 
