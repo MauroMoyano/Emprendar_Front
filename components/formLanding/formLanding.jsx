@@ -2,8 +2,9 @@ import style from "../../src/pages/styles/landing.module.css";
 import { useState, useEffect } from "react";
 import clienteAxios from "config/clienteAxios";
 import { useSelector, useDispatch } from "react-redux";
-import { loginUser, signInUser } from "redux/actions";
+import { loginUser, signInUser, cleanMessage } from "redux/actions";
 import { useRouter } from "next/router";
+
 const validateSignIn = (form, users) => {
   //user va a contener todos los user para ver si ya existe ese usuario
   const error = {};
@@ -41,7 +42,7 @@ export default function FormLanding() {
     user_name: "",
     email: "",
     password: "",
-    profile_img: "",
+    profile_img: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png",
   });
 
   //manejo de estado formSignIn
@@ -67,12 +68,12 @@ export default function FormLanding() {
           user_name: "",
           email: "",
           password: "",
-          profile_img: "",
+          profile_img: "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png",
         })
       }))
 
     } catch (error) {
-      console.log('error')
+      console.log('error -->', error)
     }
 
   };
@@ -116,10 +117,10 @@ export default function FormLanding() {
   };
 
   const googleLogIn = () => {
-    const popup = window.open(`${process.env.NEXT_PUBLIC_BACK_APP_URL}/user/auth/google`, "_blank", `location=none width=620 height=700 toolbar=no status=no menubar=no scrollbars=yes resizable=yes`)
+    const popup = window.open("http://localhost:3001/user/auth/google", "_blank", `location=none width=620 height=700 toolbar=no status=no menubar=no scrollbars=yes resizable=yes`)
 
     window.addEventListener('message', event => {
-      if (event.origin === `${process.env.NEXT_PUBLIC_BACK_APP_URL}`) {
+      if (event.origin === "http://localhost:3001") {
 
         if (event.data) {
 
@@ -135,15 +136,19 @@ export default function FormLanding() {
   // console.log(message)
   return (
     <>
-
-      {messageToShow === 'Confirmado correctamente' && <p className={style.confirmMessage}>Gracias por confirmar su correo, ya puede iniciar sesión.</p>}
+      {/*Mensajes de error */}
       {messageToShow === 'Token no valido' && <p className={style.errorMessage}>No pudimos confirmar su correo, vuelva registrarse</p>}
       {messageToShow === 'Este correo electrónico ya está registrado' && <p className={style.errorMessage}>{messageToShow}</p>}
+      {messageToShow === 'Este nombre de usuario ya existe' && <p className={style.errorMessage}>{messageToShow}</p>}
+      {messageToShow === 'No existe ningún usuario con este correo' && <p className={style.errorMessage}>{messageToShow}</p>}
+      {messageToShow === 'Tu cuenta no ha sido confirmada' && <p className={style.errorMessage}>{messageToShow}</p>}
+      {messageToShow === 'Password incorrecto' && <p className={style.errorMessage}>{messageToShow}</p>}
+
+
+      {/*Mensajes de confirmación */}
+      {messageToShow === 'Confirmado correctamente' && <p className={style.confirmMessage}>Gracias por confirmar su correo, ya puede iniciar sesión.</p>}
       {messageToShow === 'El usuario se creó con éxito, revisa tu casilla de Email para confirmar' &&
         <p className={style.confirmMessage}>El usuario se creó con éxito, revisa la bandeja de tu correo para confirmarlo.</p>}
-
-
-
 
 
       <div className={style.main}>
