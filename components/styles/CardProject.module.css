@@ -1,4 +1,138 @@
-.divGral {
+.card {
+    position: relative;
+    width: 250px;
+    height: 250px;
+    color: #2e2d31;
+    background: #f2f2f2;
+    overflow: hidden;
+    border-radius: 20px;
+}
+
+.img {
+    /* border: 1px solid red; */
+    font-weight: bold;
+    font-size: 24px;
+    /* padding: 6px 12px; */
+    color: #f8f8f8;
+}
+
+.img>img{
+    width: 100%;
+    height: auto;
+}
+
+.card_title {
+    font-weight: bold;
+}
+
+.card_content {
+    /* border: 1px solid black; */
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    /* edit the width to fit card */
+    width: 100%;
+    padding: 20px;
+    background: #f2f2f2;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    /* edit here to change the height of the content box */
+    transform: translateY(132px);
+    transition: transform .25s ease;
+}
+
+/* .card_content::before {
+    content: '';
+    position: absolute;
+    top: -47px;
+    right: -45px;
+    width: 100px;
+    height: 100px;
+    transform: rotate(-175deg);
+    border-radius: 50%;
+    box-shadow: inset 48px 48px #f2f2f2;
+} */
+
+.card_title {
+    /* border: 1px solid blue; */
+    color: #131313;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 36px;
+    text-align: center;
+}
+
+.card_user {
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: flex-start;
+    gap: 5px;
+    font-size: 12px;
+    margin-bottom: 1px;
+    margin-top: 1px;
+}
+
+.card_user>img{
+    border: 2px solid #3C1642;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+}
+
+.card_user>p{
+    /* border: 1px solid blue; */
+    font-size: 13px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.categorias{
+    /* border: 1px solid blue; */
+    display: flex;
+    flex-direction: column;
+    min-height: 36px;
+    margin-bottom: 2px;
+}
+
+.categorias>p{
+    /* border: 1px solid red; */
+    font-size: 10px;
+    padding: 0;
+    color: #6c757d;
+}
+
+.card_description {
+    /* border: 1px solid red; */
+    line-height: 14.5px;
+    height: 100px;
+    overflow: hidden;
+    border-bottom: 0;
+    font-size: 12px;
+    opacity: 0;
+    transition: opacity .5s;
+}
+
+.card_content>a{
+    /* border: 1px solid red; */
+    text-decoration: none;
+    color: #6c757d;
+    font-size: 10px;
+}
+
+.card:hover .card_content {
+    transform: translateY(0);
+}
+
+.card:hover .card_description {
+    opacity: 1;
+    transition-delay: .25s;
+}
+
+/* .divGral {
     background: #fff;
     border: 1px solid #3C1642;
     border-radius: 1.25rem;
@@ -26,7 +160,6 @@
 }
 
 .container {
-    /* border: 1px solid blue; */
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -58,7 +191,6 @@
 }
 
 .divInfo {
-    /* border: 1px solid black; */
     width: 204px;
     height: 170px;
     display: flex;
@@ -69,7 +201,6 @@
 }
 
 .divInfo h1 {
-    /* border: 1px solid black; */
     font-size: 20px;
     text-decoration: underline;
     text-align: center;
@@ -78,20 +209,17 @@
 }
 
 .divInfo h4 {
-    /* border: 1px solid black; */
     font-size: 15px;
     font-weight: normal;
 
 }
 
 .description {
-    /* border: 1px solid red; */
     text-align: justify;
     font-size: 12px;
 }
 
 .date {
-    /* border: 1px solid green; */
     font-size: 10px;
     text-align: left;
 }
@@ -106,4 +234,4 @@
 
 .theGoal h3 {
     color: aliceblue;
-}
+} */
