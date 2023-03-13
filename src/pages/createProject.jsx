@@ -75,10 +75,10 @@ export default function CreateProject() {
   const changeHandler = (event) => {
     const property = event.target.name;
     const value = event.target.value;
-    console.log(form)
+    // console.log(form)
     setErrors(validate({ ...form, [property]: value }));
     setForm({ ...form, [property]: value });
-    console.log(form)
+    // console.log(form)
   };
 
   const submitHandler = async (event) => {
@@ -98,7 +98,7 @@ export default function CreateProject() {
         errors.goal === ""
       ) {
         setForm({ ...form, userId: userId, user_name: user_name});
-        console.log(form)
+        // console.log(form)
         await clienteAxios.post("/project", form);
         // dispatch(createProject(form));
         await router.push("/home");
@@ -137,11 +137,19 @@ export default function CreateProject() {
       if (form.title === "") {
         errors = { ...errors, title: "" };
       } else {
-        errors = {
-          ...errors,
-          title:
-            "El título no puede ser mayor de 70 caracteres"
-        };
+        if(/^[^0-9]/.test(form.title)){
+          errors = {
+            ...errors,
+            title:"El título no puede ser mayor de 70 caracteres"
+
+          }
+        }else {
+          errors = {
+            ...errors,
+            title:"El título no puede contener números"
+
+          }
+        }
       }
     }
 

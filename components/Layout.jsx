@@ -17,7 +17,6 @@ const Layout = ({children}) => {
     useEffect(() => {
        
         const token = localStorage.getItem('token')
-            console.log(token)
             if(token) {
               
                 dispatch(authedUser())
@@ -41,7 +40,15 @@ const Layout = ({children}) => {
 
     if (!user) {
         return (
-            <div>le erraste pa logeate  <Link href={"/"} > login  </Link>   </div>
+            <div className={style.loader}>
+                <div>
+                <h3>Aún no has iniciado sesión</h3>
+
+                 <Link href={"/"} > Volver al inicio </Link>   
+                </div>
+
+
+            </div>
         )
         
     } else {
@@ -59,7 +66,9 @@ const Layout = ({children}) => {
                                 </div>
                             </button>
                             <div className={style.dropdownContent}>
+                                <Link href="#"><button className={style.buttonNewProject}><h3>Mi perfil</h3></button></Link>
                                 <Link href="/createProject"><button className={style.buttonNewProject}><h3>Nuevo Proyecto</h3></button></Link>
+                                <Link href="/aboutUs"><button className={style.buttonNewProject}><h3>Acerca de Nosotros</h3></button></Link>
                                 <Link href="/"><button onClick={() => dispatch(logOut())}><h3>Cerrar Sesión</h3></button></Link>
                             </div>
                     </div>
