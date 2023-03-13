@@ -31,9 +31,9 @@ export default function CardProject(props) {
                 </div>
                 <div className={style.categorias}>
                     {
-                        props.categories.map(elem => {
+                        props.categories.map((elem,i) => {
                             return (
-                                <p>- {elem.name}</p>
+                                <p key={i}>- {elem.name}</p>
                             )
                         })
                     }
