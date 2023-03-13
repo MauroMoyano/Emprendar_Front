@@ -58,7 +58,9 @@ const Layout = ({children}) => {
                                 </div>
                             </button>
                             <div className={style.dropdownContent}>
+                                <Link href="#"><button className={style.buttonNewProject}><h3>Mi perfil</h3></button></Link>
                                 <Link href="/createProject"><button className={style.buttonNewProject}><h3>Nuevo Proyecto</h3></button></Link>
+                                <Link href="/aboutUs"><button className={style.buttonNewProject}><h3>Acerca de Nosotros</h3></button></Link>
                                 <Link href="/"><button onClick={() => dispatch(logOut())}><h3>Cerrar Sesión</h3></button></Link>
                             </div>
                     </div>
