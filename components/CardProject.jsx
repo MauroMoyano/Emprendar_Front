@@ -20,30 +20,30 @@ export default function CardProject(props) {
     // console.log(props)
     return (
         <div className={style.card}>
-            <div className={style.img}>
-                <img src={props.img} alt="Imagen del proyecto" />
-            </div>
-            <div className={style.card_content}>
-                <h4 className={style.card_title}>{props.name}</h4>
-                <div className={style.card_user}>
-                    <img src={props.profile_img} alt="Imagen de usuario" />
-                    <p>{props.user_name}</p>
+            <Link href={`/detailUser/${props.userId}/${props.idProject}`}>
+                <div className={style.img}>
+                    <img src={props.img} alt="Imagen del proyecto" />
                 </div>
-                <div className={style.categorias}>
-                    {
-                        props.categories.map((elem,i) => {
-                            return (
-                                <p key={i}>- {elem.name}</p>
-                            )
-                        })
-                    }
-                </div>
-                <p className={style.card_description}>{props.summary} Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque perspiciatis repudiandae molestiae aliquid, quasi corporis soluta sequi quisquam officia, porro quod explicabo sapiente dicta quaerat consequatur doloribus exercitationem, hic sit.</p>
-                <Link href={`/detailUser/${props.userId}/${props.idProject}`}>
-                    Más detalles...
-                </Link>
+                <div className={style.card_content}>
+                    <h4 className={style.card_title}>{props.name}</h4>
+                    <div className={style.card_user}>
+                        <img src={props.profile_img} alt="Imagen de usuario" />
+                        <p>{props.user_name}</p>
+                    </div>
+                    <div className={style.categorias}>
+                        {
+                            props.categories.map((elem,i) => {
+                                return (
+                                    <p key={i}>- {elem.name}</p>
+                                )
+                            })
+                        }
+                    </div>
+                    <p className={style.card_description}>{props.summary} Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque perspiciatis repudiandae molestiae aliquid, quasi corporis soluta sequi quisquam officia, porro quod explicabo sapiente dicta quaerat consequatur doloribus exercitationem, hic sit.</p>
+                        Más detalles...
 
-            </div>
+                </div>
+            </Link>
         </div>
     )
 }

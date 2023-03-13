@@ -39,7 +39,12 @@ export default function Detail(props) {
   //me traigo los projectos similares
 
   if (!Object.keys(selectorProject).length) {
-    return <>cargando</>;
+
+   return(
+     <div className={style.loader}>
+      <img src="https://res.cloudinary.com/df4kwquv8/image/upload/v1678672774/emprendar_sources/kgopxeybexy7gp9kpmxa.gif" alt="" />
+    </div>
+   )
   } else {
     return (
       <Layout>
