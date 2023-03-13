@@ -137,11 +137,19 @@ export default function CreateProject() {
       if (form.title === "") {
         errors = { ...errors, title: "" };
       } else {
-        errors = {
-          ...errors,
-          title:
-            "El título no puede ser mayor de 70 caracteres"
-        };
+        if(/^[^0-9]/.test(form.title)){
+          errors = {
+            ...errors,
+            title:"El título no puede ser mayor de 70 caracteres"
+
+          }
+        }else {
+          errors = {
+            ...errors,
+            title:"El título no puede contener números"
+
+          }
+        }
       }
     }
 
