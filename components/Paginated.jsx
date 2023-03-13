@@ -28,7 +28,6 @@ export default function Paginated() {
 
         setIsLoading(true)
         const {data} = await axios.get(`${process.env.NEXT_PUBLIC_BACK_APP_URL}/project?numPage=${page}`)
-        console.log("2222", data)
         if (data.length === 0) bandera = false
         console.log(bandera)
         setList([...list, ...(data)]);
@@ -41,7 +40,6 @@ export default function Paginated() {
     const handleScroll = () => {
         if (bandera) {
             if (window.innerHeight + document.documentElement.scrollTop > document.documentElement.scrollHeight - 1) {
-                console.log("entra page n°", page)
                 loadMore()
             }
         }

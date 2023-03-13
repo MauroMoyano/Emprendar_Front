@@ -1,0 +1,172 @@
+
+
+.container {
+    display: flex;
+
+}
+
+.main {
+    flex:5;
+        margin-left: 250px;
+}
+.sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 230px;
+        height: 100%;
+    text-align: center;
+    flex: 1;
+    background-color: purple;
+    margin-right: 1rem;
+}
+.sidebar h3 {
+    color: white;
+    margin-top: 1rem;
+}
+.nav {
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.nav a {
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: white;
+    font-weight: 200;
+
+}
+
+.performance, .users, .projects {
+    margin-top: 1rem;
+    background-color: white;
+    border: 1px solid #e1e1e1;
+}
+
+.performanceContainer {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 2rem 0;
+}
+
+.performance h2, .users h2, .projects h2 {
+    border: 1px solid #e1e1e1;
+    padding: 1rem;
+}
+
+.infoConainter {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.iconGreen svg, .iconBlue svg, .iconPurple svg {
+    width: 4rem; /* especifica un valor en porcentaje */
+  height: 4rem;
+}
+
+.iconGreen svg {
+  color: #73A839;
+
+}
+
+.iconBlue svg {
+    color: rgb(49, 49, 221);
+}
+
+
+.iconPurple svg {
+    color: purple;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: .5rem;
+}
+
+
+
+.avatar {
+    max-width: 100%;
+    border-radius: 50%;
+    width: 5rem;
+    height:  4rem;
+}
+
+.table {
+    padding: 1rem 0;
+    width: 100%;
+    text-align: center;
+
+}
+
+
+.delete, .suspension, .accept {
+    padding: .5rem 2rem;
+    font-weight: bold;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.delete, .suspension:hover {
+    cursor: pointer;
+}
+
+.suspension {
+    background-color: #DD5600;
+}
+
+.delete {
+    background-color: #C71C22 ;
+    margin-left: 1rem;
+
+}
+
+.accept {
+    background-color: #73A839;
+}
+
+.validated, .invalidated {
+    border-radius: 1rem;
+    font-weight: bold;
+    color: white;
+}
+
+.validated {
+
+    background-color: #73A839;
+}
+
+.invalidated {
+    background-color: #C71C22;
+
+}
+
+.filter {
+    display: flex;
+    padding: 1rem;
+}
+
+.imageProject {
+    max-width: 100%;
+    width: 6rem;
+}
+
+.progressBar {
+    display: flex;
+    height: 1rem;
+    overflow: hidden;
+    font-size: 0.75rem;
+    background-color: #e9ecef;
+    border-radius: 0.25rem;
+}
+
+.bg_progress {
+    background-color: #73A839;
+}
