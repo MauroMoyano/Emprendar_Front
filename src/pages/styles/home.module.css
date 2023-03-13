@@ -17,11 +17,10 @@
     position: static;
 }
 
-
-
 .filtersContainer{
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-around;
     margin: 30px;
@@ -88,4 +87,10 @@
     background: #222222;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
+}
+
+@media (max-width: 600px) {
+    .bodyContainer{
+        width: 100%;
+    }
 }
