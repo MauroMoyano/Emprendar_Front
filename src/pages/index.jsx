@@ -16,7 +16,7 @@ import { faHandHoldingDollar } from "@fortawesome/free-solid-svg-icons";
 import { faCreditCard } from "@fortawesome/free-solid-svg-icons";
 import { faUsers } from "@fortawesome/free-solid-svg-icons";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
-console.log(process.env.NEXT_PUBLIC_BACK_APP_URL)
+// console.log(process.env.NEXT_PUBLIC_BACK_APP_URL)
 export default function Landing(){
 
 
@@ -27,7 +27,7 @@ export default function Landing(){
     useEffect(() => {
        
         const token = localStorage.getItem('token')
-            console.log(token)
+            // console.log(token)
             if(token) {
               
                 dispatch(authedUser( () => { 

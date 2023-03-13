@@ -1,3 +1,11 @@
+.containerCreateProject {
+    display: flex;
+    background-color: rgba(186, 186, 250, 0.595);
+    justify-content: center;
+    align-items: center;
+
+}
+
 .formContainer{
     width: 500px;
     max-width: 100%;
@@ -5,8 +13,6 @@
     padding: 20px;
     box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.3);
     position: relative;
-    background-color: rgba(226, 169, 250, 0.5);
-    /* background-color: rgb(238, 222, 245); */
     font-family: 'Roboto Condensed', sans-serif;
     font-style: normal; 
     font-weight: 400;
@@ -198,7 +204,7 @@
 }
 
 .submit:hover {
-    background: #ecd0f7;
+    background: rgba(195, 195, 248, 0.595);;
     color: #3C1642;
     border: 1px solid #3C1642;
 }
@@ -212,4 +218,24 @@
 .containerDrop ul  {
    list-style: none;
    text-align: center;
+}
+
+@media(max-width: 1100px) and (min-width:601px){
+    .formContainer{
+        width: 70%;
+    }
+}
+
+@media(max-width:600px){
+    .formContainer{
+        width: 87%;
+    }
+
+    .questionCategory{
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    .danger{
+        padding-bottom: 20px;
+    }
 }

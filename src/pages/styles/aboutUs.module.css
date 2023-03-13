@@ -87,3 +87,9 @@ font-family: 'Work Sans', sans-serif;
 
 }
 
+
+@media(max-width: 600px){
+    .container{
+        width: 95%;
+    }
+}

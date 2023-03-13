@@ -75,10 +75,10 @@ export default function CreateProject() {
   const changeHandler = (event) => {
     const property = event.target.name;
     const value = event.target.value;
-    console.log(form)
+    // console.log(form)
     setErrors(validate({ ...form, [property]: value }));
     setForm({ ...form, [property]: value });
-    console.log(form)
+    // console.log(form)
   };
 
   const submitHandler = async (event) => {
@@ -98,7 +98,7 @@ export default function CreateProject() {
         errors.goal === ""
       ) {
         setForm({ ...form, userId: userId, user_name: user_name});
-        console.log(form)
+        // console.log(form)
         await clienteAxios.post("/project", form);
         // dispatch(createProject(form));
         await router.push("/home");
@@ -140,7 +140,7 @@ export default function CreateProject() {
         errors = {
           ...errors,
           title:
-            "El título no puede contener numeros, simbolos ni superar los 70 caracteres",
+            "El título no puede ser mayor de 70 caracteres"
         };
       }
     }
@@ -158,7 +158,7 @@ export default function CreateProject() {
         !/^[@#$%]*$/.test(form.summary)
           ? (errors = {
               ...errors,
-              summary: "Esta usando simbolos no aceptados",
+              summary: "Estás usando simbolos no aceptados",
             })
           : (errors = { ...errors, summary: "El límite de caracteres es 200" });
       }
@@ -188,7 +188,7 @@ export default function CreateProject() {
       } else {
         errors = {
           ...errors,
-          goal: "El numero ingresado como meta debe ser entre 100 y 1.000.000",
+          goal: "El número ingresado como meta debe ser entre 100 y 1.000.000",
         };
       }
     }
@@ -200,7 +200,7 @@ export default function CreateProject() {
 
   const onDropRejected = () => {
     setAlert(
-      "No se pudo subir la imagen. Asegurate que es una imagen PNG o JPG y que no supere 5MB"
+      "No se pudo subir la imagen. Asegúrate que sea una imagen PNG o JPG y que no supere 5MB"
     );
   };
 
@@ -259,6 +259,7 @@ export default function CreateProject() {
 
   return (
     <Layout>
+      <div className={style.containerCreateProject}>
       <form onSubmit={submitHandler} className={style.formContainer}>
         <h1 className={style.title}>Crea tu proyecto:</h1>
         <div className={style.formInput}>
@@ -403,6 +404,7 @@ export default function CreateProject() {
           Enviar datos
         </button>
       </form>
+      </div>
     </Layout>
   );
 }
