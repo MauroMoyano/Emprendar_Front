@@ -146,7 +146,7 @@ const Dashboard = (props) => {
               </thead>
 
               <tbody>
-                {console.log(projects)}
+                {/* {console.log(projects)} */}
 
                 {projects.map((e) => (
                   <tr key={e.id}>
@@ -166,7 +166,7 @@ const Dashboard = (props) => {
 
                     <td>
                       <p>{parseInt((e.amount_collected / e.goal) * 100)}%</p>
-                      {console.log()}
+                      {/* {console.log()} */}
                       <div className={style.progressBar}>
                         <div
                           className={style.bg_progress}

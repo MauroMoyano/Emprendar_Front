@@ -17,7 +17,7 @@ export default function CardProject(props) {
         return arr[1] ? arr.join('.') : arr[0];
     }
 
-    console.log(props)
+    // console.log(props)
     return (
         <div className={style.card}>
             <div className={style.img}>

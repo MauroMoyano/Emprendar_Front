@@ -73,7 +73,7 @@ export default function Detail(props) {
 
                   <div className={style.pagos}>
                     <div>
-                        {console.log(props)}
+                        {/* {console.log(props)} */}
                       <PreviewPage name={selectorProject.title} id={selectorProject.id} image={selectorProject.img} description={selectorProject.description} userId={props.userId} projectId={props.projectId}/>
                     </div>
                     <div> </div>

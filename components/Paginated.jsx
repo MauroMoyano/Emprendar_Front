@@ -29,7 +29,7 @@ export default function Paginated() {
         setIsLoading(true)
         const {data} = await axios.get(`${process.env.NEXT_PUBLIC_BACK_APP_URL}/project?numPage=${page}`)
         if (data.length === 0) bandera = false
-        console.log(bandera)
+        // console.log(bandera)
         setList([...list, ...(data)]);
         setPage(page + 1);
         setIsLoading(false)
