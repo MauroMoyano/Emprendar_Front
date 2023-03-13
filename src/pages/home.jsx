@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { authedUser } from "../../redux/actions";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import Slider from "components/slider";
 
 export default function Home() {
 
@@ -35,6 +36,7 @@ export default function Home() {
         <Layout>
     <div className={style.allContainer}>
         <div className={style.bodyContainer}>
+            <Slider />
             <form>
                 <div className={style.filtersContainer}>
                     <div>
