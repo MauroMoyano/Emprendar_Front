@@ -1,4 +1,5 @@
 import CardProject from "./CardProject";
+import SyncLoader from "react-spinners/ClipLoader";
 import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {currentPageHandler, getHomeProjects} from "../redux/actions";
@@ -51,7 +52,6 @@ export default function Paginated() {
 
     return (
         <div className={style.container}>
-
             <div className={style.cards}>
                 {list?.map(project => {
                     return (
@@ -69,14 +69,14 @@ export default function Paginated() {
                             categories={project.categories}
                             country={project.country.name}
                         />
-
-
                     )
                 })}
-                {
-                    isLoading && <li>Loading...</li>
-                }
             </div>
+                <div>
+                    {
+                    isLoading && <SyncLoader />
+                    }
+                </div>
         </div>
     )
 }
