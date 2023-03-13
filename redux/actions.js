@@ -14,6 +14,12 @@ export const FILTER_COUNTRY = "FILTER_COUNTRY";
 export const CREATE_PROJECT = "CREATE_PROJECT";
 export const SEARCH_VALUE = "SEARCH_VALUE"
 
+export const DELETE_SEARCH_AND_FILTER = "DELETE_SEARCH_AND_FILTER"
+export const FILTER_OF_ALL_PROJECTS_OR_SEARCH_PROJECTS = "FILTER_OF_ALL_PROJECTS_OR_SEARCH_PROJECTS"
+export const RESET_SCROLL = "RESET_SCROLL"
+
+/* con paginado inf */
+export const GET_PROJECT_INFITITY_SCROLL = "GET_PROJECT_INFITITY_SCROLL"
 
 //types para el registro
 
@@ -57,8 +63,33 @@ export const getHomeProjects = () => {
   };
 };
 
+export const getProjectToScroll = (page) => {
+  return async function (dispatch) {
 
+    const { data } = await clienteAxios.get(`/project?numPage=${page}`)
+    dispatch({ type: GET_PROJECT_INFITITY_SCROLL, payload: data })
+  }
+}
 
+export const deleteSearchAndFilter = () => {
+  return async function (dispatch) {
+    dispatch({ type: DELETE_SEARCH_AND_FILTER, payload: [] })
+  }
+}
+
+export const filterAllProjectos = (data) => {
+  return async function (dispatch) {
+    dispatch({ type: FILTER_OF_ALL_PROJECTS_OR_SEARCH_PROJECTS, payload: data })
+  }
+}
+
+export const resetScroll = () => {
+  return async function (dispatch) {
+    dispatch({ type: RESET_SCROLL, payload: [] })
+  }
+}
+
+/*  */
 
 export const currentPageHandler = (value) => {
   return { type: CURRENT_PAGE, payload: value };
