@@ -40,7 +40,15 @@ const Layout = ({children}) => {
 
     if (!user) {
         return (
-            <div>le erraste pa logeate  <Link href={"/"} > login  </Link>   </div>
+            <div className={style.loader}>
+                <div>
+                <h3>Aún no has iniciado sesión</h3>
+
+                 <Link href={"/"} > Volver al inicio </Link>   
+                </div>
+
+
+            </div>
         )
         
     } else {
