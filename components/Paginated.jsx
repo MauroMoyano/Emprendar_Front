@@ -1,5 +1,5 @@
 import CardProject from "./CardProject";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { currentPageHandler, getHomeProjects, getProjectToScroll, resetScroll } from "../redux/actions";
 import style from "./styles/Paginated.module.css"
@@ -12,7 +12,7 @@ export default function Paginated(/* data */) {
     /* const { toPath } = data */
 
     /* const currentPage = useSelector(state => state.currentPage) */
-    const { allProjects, filterProjects, searchProjects, numPages } = useSelector(state => state)
+    const { allProjects, filterProjects, searchProjects, numPages, pathValue } = useSelector(state => state)
 
     const dispatch = useDispatch()
     // const page = []
@@ -20,19 +20,18 @@ export default function Paginated(/* data */) {
     const [isLoading, setIsLoading] = useState(false)
     const [control, setControl] = useState(true)
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         dispatch(resetScroll())
-        if (!allProjects.length) {
-            console.log('entrooo')
-            dispatch(getProjectToScroll(1))
-        }
+        setPage(1)
+        console.log('entrooo')
+        dispatch(getProjectToScroll(1, pathValue))
         setControl(!control)
-    }, [])
+    }, [pathValue])
 
     const loadMore = () => {
         if (numPages > page) {
             setIsLoading(true)
-            dispatch(getProjectToScroll(page + 1))
+            dispatch(getProjectToScroll(page + 1, pathValue))
             setPage(page + 1)
             setIsLoading(false)
             setControl(false)

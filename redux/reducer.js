@@ -23,13 +23,15 @@ import {
   GET_PROJECT_INFITITY_SCROLL,
   DELETE_SEARCH_AND_FILTER,
   FILTER_OF_ALL_PROJECTS_OR_SEARCH_PROJECTS,
-  RESET_SCROLL
+  RESET_SCROLL,
+  CHANGE_PATH_AND_PAGE
 
 } from "./actions";
 
 const initialState = {
   allProjects: [],
   numPages: '',
+  pathValue: 'orden=&country=&category=&search=',
   allProjectsCopy: [],
   filterProjects: [],
   searchProjects: [],
@@ -58,14 +60,14 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         /* allProjects: action.payload.data, */
-        allProjectsCopy: action.payload.data,
+        /* allProjectsCopy: action.payload.data, */
         currentPage: 0,
         category: action.payload.category,
         country: action.payload.country,
       };
     case GET_PROJECT_INFITITY_SCROLL:
       return {
-        ...state, 
+        ...state,
         allProjects: state.allProjects.concat(action.payload.data),
         numPages: action.payload.pages
       }
@@ -80,11 +82,17 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         filterProjects: action.payload
       }
-      case RESET_SCROLL:
-        return {
-          ...state,
-          allProjects: action.payload
-        }
+    case RESET_SCROLL:
+      return {
+        ...state,
+        allProjects: action.payload
+      }
+    case CHANGE_PATH_AND_PAGE:
+      return {
+        ...state,
+        allProjects: [],
+        pathValue: action.payload
+      }
 
     case CURRENT_PAGE:
       return { ...state, currentPage: action.payload };

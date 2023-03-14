@@ -1,6 +1,6 @@
 import Paginated from "../../components/Paginated";
 import { useDispatch, useSelector } from "react-redux"
-import { deleteSearchAndFilter, filterAllProjectos, filterCategory, filterCountry, getHomeProjects, orderTop } from "../../redux/actions";
+import { changePathToFilterAndSearch, deleteSearchAndFilter, filterAllProjectos, filterCategory, filterCountry, getHomeProjects, orderTop } from "../../redux/actions";
 import Layout from "../../components/Layout";
 import style from "./styles/home.module.css"
 import { useEffect, useState } from "react";
@@ -21,8 +21,96 @@ export default function Home() {
     const [ordenss, setOrden] = useState('')
     const [countriess, setCountry] = useState('')
     const [categoriess, setCategory] = useState('')
+    const [search, setSearch] = useState('')
 
-    const filterProj = () => {
+    useEffect(() => {
+        let path
+        ordenss !== ''
+            ? path = `orden=${ordenss}&`
+            : path = `orden=&`
+        countriess !== ''
+            ? path = path + `country=${countriess}&`
+            : path = path + `country=&`
+        categoriess !== ''
+            ? path = path + `category=${categoriess}&`
+            : path = path + `category=&`
+        search !== ''
+            ? path = path + `search=${search}`
+            : path = path + `search=`
+        dispatch(changePathToFilterAndSearch(path))
+
+    }, [ordenss, countriess, categoriess, search])
+
+    /* let toPath = [ordenss, countriess, categoriess] */
+
+    const handlerDeleteSearch = () => {
+        setOrden(''),
+        setCountry(''),
+        setCategory(''),
+        setSearch('')
+    }
+
+    return (
+        <Layout>
+            <div className={style.allContainer}>
+                <div className={style.bodyContainer}>
+                    <form>
+                        <div className={style.filtersContainer}>
+                            <div>
+                                <label>Highest Donations </label>
+                                <select value={ordenss} className={style.select} onChange={(e) => setOrden(e.target.value)}>
+                                    <option value=''> - </option>
+                                    <option value="ASC">Ascendente</option>
+                                    <option value="DESC">Descendente</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label>Country </label>
+                                <select value={countriess} className={style.select} onChange={(e) => setCountry(e.target.value)}>
+                                    <option value=''> - </option>
+                                    {
+                                        country?.map((c, index) => {
+                                            return <option value={c} key={index}>{c}</option>
+                                        })
+                                    }
+                                </select>
+                            </div>
+                            <div>
+                                <label>Category </label>
+                                <select value={categoriess} className={style.select} onChange={(e) => setCategory(e.target.value)}>
+                                    <option value=''> - </option>
+                                    {
+                                        category?.map((c, index) => {
+                                            return <option value={c} key={index}>{c}</option>
+                                        })
+                                    }
+                                </select>
+                            </div>
+                            <div>
+                                <input value={search} type='search' onChange={(e) => setSearch(e.target.value)} placeholder="Buscar..." ></input>
+                            </div>
+                            {/* <div>
+                                <button type="button" onClick={() => filterProj()}>filter</button>
+                            </div> */}
+                            <div>
+                                <button type="button" onClick={() => handlerDeleteSearch()}>Delete Search</button>
+                            </div>
+                        </div>
+                    </form>
+                    <Paginated />
+                </div>
+            </div>
+        </Layout>
+    )
+
+}
+
+
+
+
+
+
+/* const filterProj = () => {
         let result
 
         if (ordenss !== '' || countriess !== '' || categoriess !== '') {
@@ -58,62 +146,4 @@ export default function Home() {
         } else {
             window.alert('debes poner algo para filtrar antes')
         }
-    }
-
-    /* let toPath = [ordenss, countriess, categoriess] */
-
-    const handlerDeleteSearch = () => {
-        dispatch(deleteSearchAndFilter())
-    }
-
-    return (
-        <Layout>
-            <div className={style.allContainer}>
-                <div className={style.bodyContainer}>
-                    <form>
-                        <div className={style.filtersContainer}>
-                            <div>
-                                <label>Highest Donations </label>
-                                <select className={style.select} onChange={(e) => setOrden(e.target.value)}>
-                                    <option value=''> - </option>
-                                    <option value="ASC">Ascendente</option>
-                                    <option value="DESC">Descendente</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label>Country </label>
-                                <select className={style.select} onChange={(e) => setCountry(e.target.value)}>
-                                    <option value=''> - </option>
-                                    {
-                                        country?.map((c, index) => {
-                                            return <option value={c} key={index}>{c}</option>
-                                        })
-                                    }
-                                </select>
-                            </div>
-                            <div>
-                                <label>Category </label>
-                                <select className={style.select} onChange={(e) => setCategory(e.target.value)}>
-                                    <option value=''> - </option>
-                                    {
-                                        category?.map((c, index) => {
-                                            return <option value={c} key={index}>{c}</option>
-                                        })
-                                    }
-                                </select>
-                            </div>
-                            <div>
-                                <button type="button" onClick={() => filterProj()}>filter</button>
-                            </div>
-                            <div>
-                                <button type="button" onClick={() => handlerDeleteSearch()}>Delete Search</button>
-                            </div>
-                        </div>
-                    </form>
-                    <Paginated /* toPath={toPath} */ />
-                </div>
-            </div>
-        </Layout>
-    )
-
-}
+    } */

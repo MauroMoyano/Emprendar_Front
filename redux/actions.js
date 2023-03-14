@@ -17,6 +17,7 @@ export const SEARCH_VALUE = "SEARCH_VALUE"
 export const DELETE_SEARCH_AND_FILTER = "DELETE_SEARCH_AND_FILTER"
 export const FILTER_OF_ALL_PROJECTS_OR_SEARCH_PROJECTS = "FILTER_OF_ALL_PROJECTS_OR_SEARCH_PROJECTS"
 export const RESET_SCROLL = "RESET_SCROLL"
+export const CHANGE_PATH_AND_PAGE = "CHANGE_PATH_AND_PAGE"
 
 /* con paginado inf */
 export const GET_PROJECT_INFITITY_SCROLL = "GET_PROJECT_INFITITY_SCROLL"
@@ -51,7 +52,7 @@ export const CREATE_COMMENT = "CREATE_COMMENT"
 export const getHomeProjects = () => {
   return async function (dispatch) {
     //pido todos los proyectos y me devuelve un array con ellos
-    const { data } = await clienteAxios.get("/project");
+    /* const { data } = await clienteAxios.get("/project"); */
 
     //pido todos las categorias al back y me devuelve un array con ellas
     const category = (await clienteAxios.get("/category")).data;
@@ -59,17 +60,24 @@ export const getHomeProjects = () => {
     //pido todos los paises al back y me devuelve un array con ellos
     const country = (await clienteAxios.get("/country")).data;
 
-    dispatch({ type: GET_HOME_PROJECTS, payload: { data, category, country } });
+    dispatch({ type: GET_HOME_PROJECTS, payload: {/*  data, */ category, country } });
   };
 };
 
-export const getProjectToScroll = (page) => {
+export const getProjectToScroll = (page, path) => {
   return async function (dispatch) {
 
-    const { data } = await clienteAxios.get(`/project?numPage=${page}`)
+    const { data } = await clienteAxios.get(`/project?page=${page}&${path}`)
     dispatch({ type: GET_PROJECT_INFITITY_SCROLL, payload: data })
   }
 }
+
+export const changePathToFilterAndSearch = (path) => {
+  return async function (dispatch) {
+    dispatch({ type: CHANGE_PATH_AND_PAGE, payload: path })
+  }
+}
+
 
 export const deleteSearchAndFilter = () => {
   return async function (dispatch) {
