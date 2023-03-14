@@ -1,9 +1,9 @@
 import Paginated from "../../components/Paginated";
-import {useDispatch, useSelector} from "react-redux"
-import {filterCategory, filterCountry, getHomeProjects, orderTop} from "../../redux/actions";
+import { useDispatch, useSelector } from "react-redux"
+import { changePathToFilterAndSearch, deleteSearchAndFilter, filterAllProjectos, filterCategory, filterCountry, getHomeProjects, orderTop } from "../../redux/actions";
 import Layout from "../../components/Layout";
 import style from "./styles/home.module.css"
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { authedUser } from "../../redux/actions";
 import { useRouter } from "next/router";
 import Link from "next/link";
@@ -13,71 +13,99 @@ export default function Home() {
 
     const dispatch = useDispatch()
 
-    const category = useSelector(state => state.category)
-    const country = useSelector(state => state.country)
+    const { allProjectsCopy, searchProjects, category, country } = useSelector(state => state)
 
-    const handleFilterCountry = (event) => {
-        dispatch(filterCountry(event.target.value))
-    }
+    useEffect(() => {
+        dispatch(getHomeProjects())
+    }, [])
 
-    const handleOrderTop = (event) => {
-        dispatch(orderTop(event.target.value))
-    }
-    
-    const handleFilterCategory = (event) => {
-        dispatch(filterCategory(event.target.value))
-    }
+    const [ordenss, setOrden] = useState('')
+    const [countriess, setCountry] = useState('')
+    const [categoriess, setCategory] = useState('')
+    const [search, setSearch] = useState('')
+
+    useEffect(() => {
+        let path
+        ordenss !== ''
+            ? path = `orden=${ordenss}&`
+            : path = `orden=&`
+        countriess !== ''
+            ? path = path + `country=${countriess}&`
+            : path = path + `country=&`
+        categoriess !== ''
+            ? path = path + `category=${categoriess}&`
+            : path = path + `category=&`
+        search !== ''
+            ? path = path + `search=${search}`
+            : path = path + `search=`
+        dispatch(changePathToFilterAndSearch(path))
+
+    }, [ordenss, countriess, categoriess, search])
+
+    /* let toPath = [ordenss, countriess, categoriess] */
 
     const handlerDeleteSearch = () => {
-        dispatch(getHomeProjects())
+        setOrden(''),
+        setCountry(''),
+        setCategory(''),
+        setSearch('')
     }
 
     return (
         <Layout>
-    <div className={style.allContainer}>
-        <div className={style.bodyContainer}>
-            <Slider />
-            <form>
-                <div className={style.filtersContainer}>
-                    <div>
-                        <label>Highest Donations </label>
-                        <select className={style.select} onChange={handleOrderTop}>
-                            <option disabled selected> - </option>
-                            <option value="Ascendente">Ascendente</option>
-                            <option value="Descendente">Descendente</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label>Country </label>
-                        <select className={style.select} onChange={handleFilterCountry}>
-                            <option disabled selected> - </option>
-                            {
-                                country?.map((c, index) => {
-                                    return <option value={c} key={index}>{c}</option>
-                                })
-                            }
-                        </select>
-                    </div>
-                    <div>
-                        <label>Category </label>
-                        <select className={style.select} onChange={handleFilterCategory}>
-                            <option disabled selected> - </option>
-                            {
-                                category?.map((c, index) => {
-                                    return <option value={c} key={index}>{c}</option>
-                                })
-                            }
-                        </select>
-                    </div>
-                    <div>
-                        <button onClick={handlerDeleteSearch}>Limpiar</button>
-                    </div>
+            <div className={style.allContainer}>
+                <div className={style.bodyContainer}>
+                <Slider />
+                    <form>
+                        <div className={style.filtersContainer}>
+                            <div>
+                                <label>Highest Donations </label>
+                                <select value={ordenss} className={style.select} onChange={(e) => setOrden(e.target.value)}>
+                                    <option value=''> - </option>
+                                    <option value="ASC">Ascendente</option>
+                                    <option value="DESC">Descendente</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label>Country </label>
+                                <select value={countriess} className={style.select} onChange={(e) => setCountry(e.target.value)}>
+                                    <option value=''> - </option>
+                                    {
+                                        country?.map((c, index) => {
+                                            return <option value={c} key={index}>{c}</option>
+                                        })
+                                    }
+                                </select>
+                            </div>
+                            <div>
+                                <label>Category </label>
+                                <select value={categoriess} className={style.select} onChange={(e) => setCategory(e.target.value)}>
+                                    <option value=''> - </option>
+                                    {
+                                        category?.map((c, index) => {
+                                            return <option value={c} key={index}>{c}</option>
+                                        })
+                                    }
+                                </select>
+                            </div>
+                            <div>
+                                <input value={search} type='search' onChange={(e) => setSearch(e.target.value)} placeholder="Buscar..." ></input>
+                            </div>
+                            <div>
+                                <button type="button" onClick={() => handlerDeleteSearch()}>Limpiar</button>
+                            </div>
+                        </div>
+                    </form>
+                    <Paginated />
                 </div>
-            </form>
-            <Paginated/>
-        </div>            
-    </div>
+            </div>
         </Layout>
     )
 
 }
+
+
+
+
+
+
