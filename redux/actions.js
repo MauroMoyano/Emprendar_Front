@@ -141,7 +141,7 @@ export const searchProject = (value) => {
 
   return async function (dispatch) {
     const { data } = await clienteAxios.get(`/project?name=${value} `)
-    console.log("data ", data)
+    // console.log("data ", data)
     dispatch({ type: SEARCH_VALUE, payload: data })
   }
 
@@ -154,8 +154,8 @@ export const signInUser = (data, cb) => {
 
     try {
       const response = await clienteAxios.post('/user', data)
-      console.log('Entra a la action signInUser try');
-      console.log(`response.data.msg: ${response.data.msg}`);
+      // console.log('Entra a la action signInUser try');
+      // console.log(`response.data.msg: ${response.data.msg}`);
       dispatch({
         type: SIGNIN_SUCESS,
         payload: response.data.message
@@ -179,7 +179,7 @@ export const loginUser = (data, cb) => {
   return async function (dispatch) {
     try {
       const response = await clienteAxios.post("/user/login", data);
-      console.log(response)
+      // console.log(response)
       dispatch({
         type: LOGIN_SUCESS,
         payload: response.data,
@@ -187,7 +187,7 @@ export const loginUser = (data, cb) => {
 
       cb()
     } catch (error) {
-      console.log(error.response.data)
+      // console.log(error.response.data)
       dispatch({
         type: LOGIN_ERROR,
         payload: error.response.data.message,
@@ -210,7 +210,7 @@ export const authedUser = (redirect) => {
 
     try {
       const response = await clienteAxios.get('/user/login/me')
-      console.log(response)
+      // console.log(response)
       if (response.data) {
 
         dispatch({
@@ -292,7 +292,7 @@ export const getComments = (idProject) => {
 export const createComments = (data) => {
   return async function (dispatch) {
     const response = await clienteAxios.post("/comment", data);
-    console.log(response);
+    // console.log(response);
     dispatch({
       type: CREATE_COMMENT,
 

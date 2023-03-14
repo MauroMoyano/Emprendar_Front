@@ -174,8 +174,9 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         user: action.payload,
-        auth: true
-      };
+        auth: true,
+        message: null
+    };
 
     case USER_AUTHED:
       return {
@@ -224,6 +225,13 @@ const rootReducer = (state = initialState, action) => {
         ...state,
 
       }
+
+    case CLEAN_MESSAGE: {
+      return {
+        ...state,
+        message: null
+      }
+    }
 
     default:
       return { ...state };

@@ -11,7 +11,7 @@ import style from '../styles/confirmar.module.css'
 export default function Detail(props) {
     const router = useRouter();
 
-    console.log("estas son las props", props);
+    // console.log("estas son las props", props);
     //props.token tiene el toqken que pasen por url
 
     const dispatch = useDispatch();
@@ -60,7 +60,7 @@ export default function Detail(props) {
 
 
 export async function getServerSideProps({ query }) {
-    console.log("query de la url ", query);
+    // console.log("query de la url ", query);
     return {
         props: {
             token: query.token

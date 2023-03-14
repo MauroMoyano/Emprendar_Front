@@ -50,7 +50,6 @@ export default function Sugerencia(props){
 
     const selector =  useSelector((state => state.detailProject))
 
-    console.log("selector de ",selector);
 
     const [state,setState] = useState()
     let response

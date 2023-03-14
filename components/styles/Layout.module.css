@@ -4,6 +4,39 @@ font-family: 'Roboto Condensed', sans-serif;
 font-family: 'Work Sans', sans-serif;
 */
 
+.loader{
+    width: 100vw;
+    height: 100vh;
+    background: #650498;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.loader > div{
+    width: 25%;
+    height: 25%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #b2b6bb;
+    flex-direction: column;
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: 30px;
+    
+    color: #FFFFFF;
+
+}
+
+.loader>div> a{
+    color: #2E034B;
+    text-decoration: #2E034B;
+}
+
+.loader>div> a:hover{
+    
+    color: #2E034B;
+}
 
 .divGral{
     height: 150px;
@@ -218,3 +251,21 @@ font-family: 'Work Sans', sans-serif;
     font-family: 'Roboto Condensed', sans-serif;
 }
 
+@media (max-width: 600px){
+    .logo{
+        width: 300px;
+        height: auto;
+    }
+
+    .containForm{
+        padding-right: 0px;
+    }
+
+}
+
+@media (max-width:1100px) and (min-width:601px){
+    .logoContainer{
+        padding-left: 300px;
+        padding-right: 300px;
+    }
+}

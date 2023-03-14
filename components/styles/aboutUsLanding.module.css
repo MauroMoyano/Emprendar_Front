@@ -77,3 +77,12 @@
     font-size: 30px;
     color: white;
 }
+
+@media (max-width: 600px){
+    .cardAbout{
+        width: 100%;
+        flex-wrap: wrap;
+        padding: 20px;
+    }
+}
+

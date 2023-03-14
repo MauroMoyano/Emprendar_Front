@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { authedUser } from "../../redux/actions";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import Slider from "components/slider";
 
 export default function Home() {
 
@@ -54,6 +55,7 @@ export default function Home() {
         <Layout>
             <div className={style.allContainer}>
                 <div className={style.bodyContainer}>
+                <Slider />
                     <form>
                         <div className={style.filtersContainer}>
                             <div>
@@ -89,11 +91,8 @@ export default function Home() {
                             <div>
                                 <input value={search} type='search' onChange={(e) => setSearch(e.target.value)} placeholder="Buscar..." ></input>
                             </div>
-                            {/* <div>
-                                <button type="button" onClick={() => filterProj()}>filter</button>
-                            </div> */}
                             <div>
-                                <button type="button" onClick={() => handlerDeleteSearch()}>Delete Search</button>
+                                <button type="button" onClick={() => handlerDeleteSearch()}>Limpiar</button>
                             </div>
                         </div>
                     </form>
@@ -110,40 +109,3 @@ export default function Home() {
 
 
 
-/* const filterProj = () => {
-        let result
-
-        if (ordenss !== '' || countriess !== '' || categoriess !== '') {
-            searchProjects.length
-                ? (
-                    countriess !== ''
-                        ? result = searchProjects.filter(pj => pj.country.name === countriess)
-                        : result = searchProjects,
-                    categoriess !== ''
-                        ? result = result.filter(pj => pj.categories.find(cat => cat.name === categoriess))
-                        : result,
-                    ordenss !== ''
-                        ? ordenss === 'ASC'
-                            ? result.sort((low, max) => low.goal.localeCompare(max.goal))
-                            : result.sort((low, max) => max.goal.localeCompare(low.goal))
-                        : result
-                )
-                : (
-                    countriess !== ''
-                        ? result = allProjectsCopy.filter(pj => pj.country.name === countriess)
-                        : result = allProjectsCopy,
-                    categoriess !== ''
-                        ? result = result.filter(pj => pj.categories.find(cat => cat.name === categoriess))
-                        : result,
-                    ordenss !== ''
-                        ? ordenss === 'ASC'
-                            ? result.sort((low, max) => low.goal.localeCompare(max.goal))
-                            : result.sort((low, max) => max.goal.localeCompare(low.goal))
-                        : result
-                )
-            console.log(result)
-            dispatch(filterAllProjectos(result))
-        } else {
-            window.alert('debes poner algo para filtrar antes')
-        }
-    } */

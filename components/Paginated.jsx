@@ -18,6 +18,7 @@ export default function Paginated(/* data */) {
     // const page = []
     const [page, setPage] = useState(1);
     const [isLoading, setIsLoading] = useState(false)
+
     const [control, setControl] = useState(true)
 
     useLayoutEffect(() => {
@@ -36,6 +37,7 @@ export default function Paginated(/* data */) {
             setIsLoading(false)
             setControl(false)
         }
+
     }
 
     /* console.log('scroll top', window.innerHeight + document.documentElement.scrollTop);
@@ -44,7 +46,6 @@ export default function Paginated(/* data */) {
     const handleScroll = () => {
         if (filterProjects?.length !== 0 && searchProjects?.length !== 0) {
             if (window.innerHeight + document.documentElement.scrollTop > document.documentElement.scrollHeight - 1) {
-                console.log("entra page n°", page)
                 loadMore()
             }
         }

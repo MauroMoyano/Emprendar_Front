@@ -32,7 +32,7 @@
 .welcomeImageContainer{
     width: 100%;
     height: fit-content;
-    background-image: url('https://res.cloudinary.com/nachito02/image/upload/v1678489753/welcomeHands2_dvqwqa.jpg');
+    background-image: url('../../../public/img/welcomeHands2.jpg');
     background-repeat: no-repeat;
     background-size: cover;
 }
@@ -136,4 +136,39 @@
     justify-content: center;
     font-family: 'Roboto Condensed', sans-serif;
     padding-bottom: 15px;
+}
+
+@media (max-width: 600px){
+    .logo{
+        width: 80%;
+        height: auto;
+    }
+
+    .welcomeImageContainer{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        object-fit: cover;
+        height: fit-content;
+    }
+
+    .formPosition{
+    margin: 20px;
+    position: relative;
+    left: 0%;
+    }
+
+    .lorems{
+        width: 90%;
+        padding: 20px;
+    }
+
+    .infoContainer{
+        flex-wrap: wrap;
+        height: auto;
+        width: 95%;
+        gap: 50px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
 }
