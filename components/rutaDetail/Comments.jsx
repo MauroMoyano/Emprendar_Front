@@ -22,15 +22,7 @@ export function Messages(props){
     )
 }
 
-function useChatScroll(dep) {
-    var ref = React.default.useRef();
-    React.default.useEffect(function () {
-        if (ref.current) {
-            ref.current.scrollTop = ref.current.scrollHeight;
-        }
-    }, [dep]);
-    return ref;
-}
+
 
 
 

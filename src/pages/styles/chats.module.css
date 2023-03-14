@@ -1,0 +1,14 @@
+.container{
+    height: 100vb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box{
+    background: #c4c3c3;
+    width: 80%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+}

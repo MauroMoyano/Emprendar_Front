@@ -1,8 +1,20 @@
-import Layout from "components/Layout"
+import Layout from "components/Layout";
+import clienteAxios from "config/clienteAxios";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import style from "./styles/chats.module.css"
+
 
 function Message(props){
+    console.log("estas son las props", props.obj);
     return(
-        <>hola</>
+
+        <div>
+            <h3>usuario que envia {props.obj.userSender}</h3>
+            <h3>usuario que recibe {props.obj.userReceiver}</h3>
+
+            <h2>{props.obj.message}</h2>
+        </div>
     )
 }
 
@@ -12,10 +24,44 @@ function Message(props){
 
 export default function Chats(props){
 
+    const User = useSelector(state => state.user)
+
+    const [messages, setMessages] = useState() 
+
+    let response = null
+
+    useEffect(()=>{
+        if(User){
+            //traer todos los chats
+            async function getChats (){
+                response = await clienteAxios.get("/chats?userSender=2")
+                console.log(response.data);
+                setMessages(response.data)
+            } 
+            getChats()
+        }
+    },[User])
+
+
+
+    console.log("esto e response", response);
     return(
         <Layout>
-            <>hola</>
+            <div className={style.container}>
 
+                <div className={style.box}>
+                {
+                    messages ? messages?.map((obj)=>{
+
+                        return <Message 
+                           obj = {obj}
+                        />
+
+                    }): <>cargando</> 
+                  
+                }
+                </div>
+            </div>   
         </Layout>
     )
 }
