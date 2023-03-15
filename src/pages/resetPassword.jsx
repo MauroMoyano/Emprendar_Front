@@ -1,57 +1,63 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import clienteAxios from "config/clienteAxios";
+import style from "./styles/resetPassword.module.css";
 const ResetPassword = () => {
+  const [email, setEmail] = useState("");
 
-    const [email,setEmail] = useState('')
+  const [alerta, setAlerta] = useState({});
 
-    const [alerta, setAlerta] = useState({})
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-    const handleSubmit = async (e) => {
-        e.preventDefault()
+    if (email === "" || email.length < 6) {
+      setAlerta({
+        msg: "El email es obligatorio",
+        error: true,
+      });
 
-        if(email === "" || email.length < 6) {
-            setAlerta({
-                msg: "El emial es obligatorio",
-                error:true
-            })
-
-            return
-        }
-
-        
-        try {
-            const {data} = await clienteAxios.post('//config/resetpassword/', {email})
-
-            setAlerta({
-                msg: data.msg,
-                error: false
-            })
-        } catch (error) {
-            
-        }
+      return;
     }
 
+    try {
+      const { data } = await clienteAxios.post("/user/config/resetpassword", {
+        email,
+      });
+      setAlerta({
+        msg: data.msg,
+        error: false,
+      });
+
+      setEmail('')
+    } catch (error) {}
+  };
+
   return (
-    <div>
+    <div className={style.container}>
       <h1>Recupera tu cuenta y no pierdas tu acceso</h1>
 
-      <form onSubmit={handleSubmit}>
+      <form className={style.form} onSubmit={handleSubmit}>
         {alerta && alerta.msg}
-        <label htmlFor="emai">Email: </label>
-        <input
-          type="emial"
-          placeholder="Email de registro"
-          id="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
 
-        <input type="submit" value='Enviar instrucciones' />
+        <div className={style.inputBox}>
+          <label htmlFor="emai">Email: </label>
+          <input
+            type="email"
+            placeholder="Email de registro"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+       
+        </div>
+
+        <input className={style.button} type="submit" value="Enviar instrucciones" />
       </form>
 
-      <nav>
-        <Link href="/">Volver al inicio</Link>
+      <nav className=''>
+        <Link className={style.link} href="/">
+          Volver al inicio
+        </Link>
       </nav>
     </div>
   );
