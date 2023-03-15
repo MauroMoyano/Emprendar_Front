@@ -10,24 +10,30 @@ const Dashboard = (props) => {
 
   const [projects, setProjects] = useState(props.projects);
 
+  const handlerProject = (estado)=>{
+
+  }
+
+
+
   return (
     <div className={style.container}>
       <div className={style.sidebar}>
         <h3>Navegacion</h3>
         <nav className={style.nav}>
-          <Link rel="stylesheet" href="#main">
+          <Link href="#main">
             {" "}
             Dashboard{" "}
           </Link>
           <Link href="#users"> Usuarios </Link>
-          <Link rel="stylesheet" href="#projects">
+          <Link href="#projects">
             {" "}
             Proyectos{" "}
           </Link>
         </nav>
       </div>
 
-      <main className={style.main}>
+      <main className={style.main} id="main">
         <div className={style.performance}>
           <h2>Estadisticas generales</h2>
           <div className={style.performanceContainer}>
@@ -99,8 +105,8 @@ const Dashboard = (props) => {
                           e.confirmed ? style.validated : style.invalidated
                         }
                       >
-                        {" "}
-                        {e.confirmed ? "Validado" : "No validado"}{" "}
+
+                        {e.confirmed ? " Validado " : " No validado "}
                       </p>
                     </td>
 
@@ -157,7 +163,7 @@ const Dashboard = (props) => {
                       <p>{e.title}</p>
                     </td>
                     <td>
-                      <p className={style.validated}>{e.validated} </p>
+                      <p className={e.validated === "aceptado" ? style.validated : style.invalidated}>{e.validated} </p>
                     </td>
 
                     <td>
@@ -176,8 +182,8 @@ const Dashboard = (props) => {
                     </td>
 
                     <td>
-                      <button className={style.accept}>Aceptar</button>
-                      <button className={style.delete}>Rechazar</button>
+                      <button className={style.accept} onClick={()=>handlerProject("aceptado")}>Aceptar</button>
+                      <button className={style.delete} onClick={()=>handlerProject("rechazado")}>Rechazar</button>
                     </td>
                   </tr>
                 ))}
