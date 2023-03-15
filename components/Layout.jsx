@@ -56,6 +56,10 @@ const Layout = ({children}) => {
         return (  
         <div className={style.divGral}>
             <nav className={style.nav}>
+                
+                <div className={style.logoContainer}>
+                    <Link href='/home'><Image className={style.logo} src={logo} alt="logo"/></Link>
+                </div>
                 <div className={style.menuContainer}>
                     <div className={style.dropdown}>
                             <button  className={style.userButton}>
@@ -70,17 +74,6 @@ const Layout = ({children}) => {
                                 <Link href="/createProject"><button className={style.buttonNewProject}><h3>Nuevo Proyecto</h3></button></Link>
                                 <Link href="/"><button onClick={() => dispatch(logOut())}><h3>Cerrar Sesión</h3></button></Link>
                             </div>
-                    </div>
-                </div>
-                <div className={style.logoContainer}>
-                    <Link href='/home'><Image className={style.logo} src={logo} alt="logo"/></Link>
-                </div>
-                <div className={style.searchBarContainer}>
-                    <div className={style.containForm}>
-                        <input type='search' value={searchValue} onChange={handleInput} placeholder="Buscar..."/>
-                        <Link href="/home">
-                            <button type='submit' className={style.buttonSearch} onClick={handleClick}><FontAwesomeIcon icon={faSearch} className={style.theIconSearch} /></button>
-                        </Link>
                     </div>
                 </div>
             </nav>

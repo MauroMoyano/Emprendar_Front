@@ -7,6 +7,10 @@ import { currentPageHandler, getHomeProjects, getProjectToScroll, resetScroll } 
 import style from "./styles/Paginated.module.css"
 import axios from "axios";
 
+//importacion de iconos
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
+
 export default function Paginated(/* data */) {
 
     /* const { toPath } = data */
@@ -96,7 +100,9 @@ export default function Paginated(/* data */) {
                     }
                 
             </div>
-            <button type="button" onClick={() => loadMore()}>load More</button>
+            <div className={style.buttonContainer}>
+                <button type="button" onClick={() => loadMore()}><FontAwesomeIcon icon={faCirclePlus} className={style.theIcon}/>Proyectos</button>
+            </div>
         </div>
     )
 }
