@@ -10,15 +10,16 @@ const Dashboard = (props) => {
 
   const [projects, setProjects] = useState(props.projects);
 
-/*
   useEffect(()=>{
+    console.log("useEffect", )
 
   },[projects, users])
-*/
 
   //Funcion que maneja el cambio de estado del proyecto
   const handlerProject = async (validate, id)=>{
     const response = await clienteAxios.put(`/project/validar/${id}`,{validate: validate})
+    const updateProject = await clienteAxios.get("/project/get/all");
+    setProjects(updateProject)
     console.log("validate",validate)
 
   }
