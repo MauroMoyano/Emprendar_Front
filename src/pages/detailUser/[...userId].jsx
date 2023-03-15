@@ -97,13 +97,16 @@ export default function Detail(props) {
                   </div>
                 </div>
 
-                <div className={style.container_comentarios}>
+             
+              </div>
+            </div>
+                
+            <div className={style.container_comentarios}>
+            <h3>Comentarios</h3>
                   <Comments projectId={selectorProject.id} />
                 </div>
-              </div>
-              <div className={style.second_container}></div>
-            </div>
           </div>
+          
         </div>
       </Layout>
     );

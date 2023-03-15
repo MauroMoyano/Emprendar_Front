@@ -23,8 +23,8 @@ export default function CardProjectDetail(props){
                                 <h2>{title}</h2>
                             </div>
                             <div className={style.extra_info}>
-                                <div>
-                                    <h3>Fecha de posteo</h3>
+                                <div className={style.date}>
+                                    <h3 >Fecha de posteo</h3>
                                     <p>{date}</p>
                                 </div>
                                 <div>
@@ -35,11 +35,11 @@ export default function CardProjectDetail(props){
                                 <div className={style.cash}>
                                     <div >
                                         <h3>Meta de Dinero</h3>
-                                        <p>{goal}</p>
+                                        <p>${goal}</p>
                                     </div>
                                     <div>
                                         <h3>Dinero recolectado</h3>
-                                        <p>{amount_collected}</p>
+                                        <p>${amount_collected}</p>
                                     </div>
                                 </div>
 
@@ -51,12 +51,8 @@ export default function CardProjectDetail(props){
                         <h3>Descripción</h3>
                         <p className={style.description_text}>{description}
                         
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium nihil est veniam harum commodi provident placeat possimus beatae animi eos, molestiae fugiat fuga, sequi earum hic maxime pariatur quo consequuntur.
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia error incidunt maxime laboriosam dolor, labore esse voluptas obcaecati blanditiis mollitia, debitis sed fugiat corrupti quia necessitatibus officiis cupiditate libero laborum?
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium nihil est veniam harum commodi provident placeat possimus beatae animi eos, molestiae fugiat fuga, sequi earum hic maxime pariatur quo consequuntur.
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia error incidunt maxime laboriosam dolor, labore esse voluptas obcaecati blanditiis mollitia, debitis sed fugiat corrupti quia necessitatibus officiis cupiditate libero laborum?
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Accusantium nihil est veniam harum commodi provident placeat possimus beatae animi eos, molestiae fugiat fuga, sequi earum hic maxime pariatur quo consequuntur.
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia error incidunt maxime laboriosam dolor, labore esse voluptas obcaecati blanditiis mollitia, debitis sed fugiat corrupti quia necessitatibus officiis cupiditate libero laborum? 
+
+                     
                         </p>
                     </div>  
         </div> 

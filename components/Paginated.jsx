@@ -1,11 +1,11 @@
 import CardProject from "./CardProject";
+
+import SyncLoader from "react-spinners/ClipLoader";
 import { useEffect, useLayoutEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { currentPageHandler, getHomeProjects, getProjectToScroll, resetScroll } from "../redux/actions";
 import style from "./styles/Paginated.module.css"
 import axios from "axios";
-
-/* let bandera = true */
 
 export default function Paginated(/* data */) {
 
@@ -15,7 +15,7 @@ export default function Paginated(/* data */) {
     const { allProjects, filterProjects, searchProjects, numPages, pathValue } = useSelector(state => state)
 
     const dispatch = useDispatch()
-    // const page = []
+
     const [page, setPage] = useState(1);
     const [isLoading, setIsLoading] = useState(false)
 
@@ -90,9 +90,11 @@ export default function Paginated(/* data */) {
                         )
                     })
                 }
-                {
-                    isLoading && <li>Loading...</li>
-                }
+                <div>
+                    {
+                    isLoading && <SyncLoader />
+                    }
+                </div>
             </div>
             <button type="button" onClick={() => loadMore()}>load More</button>
         </div>

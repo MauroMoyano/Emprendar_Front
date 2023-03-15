@@ -109,6 +109,7 @@ export default function Comments(props){
 
     return(
         <div  className={style.container}>
+           
             <div  ref={divRef}   id="mensajes" className={style.viewMessage}>
               {Object.keys(selectorComments).length 
                 ? selectorComments.map((commentObj)=>{
