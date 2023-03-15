@@ -1,40 +1,59 @@
 import { use, useEffect, useRef, useState } from "react"
 import style from "./styles/Comments.module.css" 
-import { getComments,createComments } from "../../redux/actions"
+import { getComments,createComments, deleteComment } from "../../redux/actions"
 import { useDispatch, useSelector } from "react-redux";
-import { Link, animateScroll as scroll } from "react-scroll";
-
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import Swal from "sweetalert2";
+import clienteAxios from "config/clienteAxios";
 
 export function Messages(props){
-    const {comment, user } = props;   
-    const {profile_img, name} = user;
+    const {comment, user, userId } = props;   
+    const {id} = user;
+
+    const dispatch = useDispatch()
+    
+    const handleDelete = async (commentId) => {
+    
+
+        Swal.fire({
+            title: 'Estas seguro de eliminar el comentario?',
+            text: "Esta accion no se puede revertir",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, borrar'
+          }).then( async (result) => {
+            if (result.isConfirmed) {
+            
+
+                   dispatch(deleteComment(commentId))
+               
+
+              Swal.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+              )
+            }
+          })
+          
+
+    }
     return(
         <div className={style.container_message}>          
            <div className={style.perfil}>
-                <img src={profile_img} alt="" />
-                <p> {name} </p>
+                <img src={ props.commentUser.profile_img} alt="" />
+                <p> { props.commentUser.user_name} </p>
            </div>
            <div className={style.message} >
                 <p> {comment} </p>
            </div>
+           {id === userId ? <FontAwesomeIcon className={style.theIcon} onClick={ () => handleDelete(props.commentId)} icon={faTrash} />  : null}
         </div>
     )
 }
-
-function useChatScroll(dep) {
-    var ref = React.default.useRef();
-    React.default.useEffect(function () {
-        if (ref.current) {
-            ref.current.scrollTop = ref.current.scrollHeight;
-        }
-    }, [dep]);
-    return ref;
-}
-
-
-
-
 
 
 export default function Comments(props){
@@ -46,12 +65,12 @@ export default function Comments(props){
 
     const user = useSelector((state)=>state.user)
 
-
     useEffect(()=>{
         projectId 
         ? dispatch(getComments(projectId)) 
         : null
-    },[projectId,selectorComments ])
+        
+    },[projectId, selectorComments])
    
 
     const hanlderSubmit =(event)=>{
@@ -113,11 +132,15 @@ export default function Comments(props){
             <div  ref={divRef}   id="mensajes" className={style.viewMessage}>
               {Object.keys(selectorComments).length 
                 ? selectorComments.map((commentObj)=>{
-                   const {id, comment, user} = commentObj
+                   
+                   const {userId, id, comment} = commentObj
                     return <Messages  
                         key={id}
                         comment = {comment}
                         user = {user}
+                        userId = {userId}
+                        commentId = {id}
+                        commentUser = {commentObj.user}
                    /> 
                     
                 } ) 

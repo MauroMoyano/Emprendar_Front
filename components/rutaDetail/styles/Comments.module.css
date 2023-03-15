@@ -43,7 +43,7 @@
     width: fit-content;
     padding: 8px;
     display: flex;
-
+    align-items: center;
     gap: 1rem;
 }
 
@@ -73,4 +73,14 @@
 
 .container_message img{
     width: 3rem;
+}
+
+
+.theIcon:hover {
+    cursor: pointer;
+}
+
+.theIcon {
+    color: red;
+    font-weight: bold;
 }
