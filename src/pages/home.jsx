@@ -12,6 +12,10 @@ import Slider from "components/slider";
 //imports de iconos
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDownWideShort } from "@fortawesome/free-solid-svg-icons";
+import { faUsers, faDollarSign, faDeleteLeft } from "@fortawesome/free-solid-svg-icons";
+import { faPhone, faAddressCard, faList, faFlag } from "@fortawesome/free-solid-svg-icons";
+
+
 
 export default function Home() {
 
@@ -62,16 +66,16 @@ export default function Home() {
                 <Slider />
                 <div className={style.subMenuContainer}>
                     <ul>
-                        <li><Link href="/aboutUs">Acerca de</Link></li>
-                        <li><Link href="/users">Comunidad</Link></li>
-                        <li><Link href="#">Contáctanos</Link></li>
-                        <li className={style.dropdown}><Link href="#menu">Ordenar por <FontAwesomeIcon icon={faArrowDownWideShort} className={style.theIcon} /></Link>
+                        <li><Link href="/users"><FontAwesomeIcon icon={faUsers} className={style.theIcon} /> Usuarios</Link></li>
+                        <li><Link href="#"><FontAwesomeIcon icon={faPhone} className={style.theIcon} />Contáctanos</Link></li>
+                        <li><Link href="/aboutUs"><FontAwesomeIcon icon={faAddressCard} className={style.theIcon} />Acerca de</Link></li>
+                        <li className={style.dropdown}><Link href="#menu"><FontAwesomeIcon icon={faArrowDownWideShort} className={style.theIcon} />Ordenar Por</Link>
                                 <div id="menu" className={style.dropdownContent}>
                                     <section className={style.column}>
                                         <div>
                                             <label className={style.accordion}>
                                                 <input type='radio' name='radio-accordion' defaultChecked="unChecked" />
-                                                <div className={style.accordion__header}>Donacion</div>
+                                                <div className={style.accordion__header}><FontAwesomeIcon icon={faDollarSign} className={style.theIcon} />Donación</div>
                                                 <div className={style.accordion__content} value={ordenss}>
                                                         <button onClick={(e) => setOrden(e.target.value)} value=''> - </button>
                                                         <button onClick={(e) => setOrden(e.target.value)} value='ASC'>Ascendente</button>
@@ -80,7 +84,7 @@ export default function Home() {
                                             </label>
                                             <label className={style.accordion} >
                                                 <input type='radio' name='radio-accordion' defaultChecked="unChecked" />
-                                                <div className={style.accordion__header}>País</div>
+                                                <div className={style.accordion__header}><FontAwesomeIcon icon={faFlag} className={style.theIcon} />País</div>
                                                 <div className={style.accordion__content} value={countriess}>
                                                     <button onClick={(e) => setCountry(e.target.value)} value=''> - </button>
                                                     {
@@ -92,7 +96,7 @@ export default function Home() {
                                             </label>
                                             <label className={style.accordion}>
                                                 <input type='radio' name='radio-accordion' defaultChecked="unChecked" />
-                                                <div className={style.accordion__header}>Categoria</div>
+                                                <div className={style.accordion__header}><FontAwesomeIcon icon={faList} className={style.theIcon} />Categoria</div>
                                                 <div className={style.accordion__content}>
                                                 <button onClick={(e) => setCountry(e.target.value)} value=''> - </button>
                                                     {
@@ -103,7 +107,12 @@ export default function Home() {
                                                 </div>
                                             </label>
                                             <label className={style.accordion}>
-                                            <button type="button" onClick={() => handlerDeleteSearch()}>Limpiar filtros</button>
+                                                <div className={style.accordion__header}>
+                                                    <button type="button" onClick={() => handlerDeleteSearch()}>
+                                                        <FontAwesomeIcon icon={faDeleteLeft} className={style.theIconInvert} />
+                                                        Borrar filtro
+                                                    </button>   
+                                                </div>
                                             </label>
                                             
                                         </div>

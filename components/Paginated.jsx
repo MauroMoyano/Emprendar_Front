@@ -90,11 +90,11 @@ export default function Paginated(/* data */) {
                         )
                     })
                 }
-                <div>
+                
                     {
                     isLoading && <SyncLoader />
                     }
-                </div>
+                
             </div>
             <button type="button" onClick={() => loadMore()}>load More</button>
         </div>

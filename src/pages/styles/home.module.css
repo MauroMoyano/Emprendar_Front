@@ -140,6 +140,10 @@ font-family: 'Montserrat', sans-serif;
 .subMenuContainer ul{
     display: flex;
     flex-direction: row;
+    max-width: 100%;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
 }
 
 .subMenuContainer ul li{
@@ -159,8 +163,8 @@ font-family: 'Montserrat', sans-serif;
     text-transform: uppercase;
     text-decoration: none;
     color: rgb(195, 200, 219);
-    font-family: 'Roboto Condensed', sans-serif;
-    min-width: fit-content;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
     width: 150px;
     transition: 0.3s;
 }
@@ -245,13 +249,42 @@ font-family: 'Montserrat', sans-serif;
     color: aliceblue;
     cursor: pointer;
     transition: background 0.2s;
-    padding: 5px 10px;
+    padding: 5px auto;
     position: relative;
+    margin: 0 auto;
     height: 60px;
     width: 150px;
     z-index: 2;
     text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
 }
+
+.accordion__header button{
+    width: 100%;
+    height: 100%;
+    border: none;
+    background-color: #2e034b;
+    color: aliceblue;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+}
+
+.accordion__header button:hover{
+    background-color: #09c7ae;
+}
+
+.theIconInvert{
+    font-size: 0.8vw;
+    margin-right: 6px;
+    transform: scale(-1);
+}
+
 .accordion__header:hover {
     background-color: #66198a;
     color: white;
@@ -266,20 +299,7 @@ font-family: 'Montserrat', sans-serif;
     position: absolute;
     z-index: 3;
 }
-.accordion__header:before {
-    height: 2px;
-    margin-top: -1px;
-    top: 50%;
-    right: 20px;
-    width: 8px;
-}
-.accordion__header:after {
-    height: 8px;
-    margin-top: -4px;
-    top: 50%;
-    right: 23px;
-    width: 2px;
-}
+
 .accordion input:checked ~ .accordion__header {
     background: #09c7ae;
     border-color: #09c7ae;
@@ -347,12 +367,67 @@ font-family: 'Montserrat', sans-serif;
 
 .theIcon{
     font-size: 0.8vw;
-    margin-left: 10px;
+    margin-right: 10px;
 }
 
 
 @media (max-width: 600px) {
     .bodyContainer{
-        width: 100%;
+        width: 90%;
     }
+    .subMenuContainer{
+        padding-top: 10px;
+        flex-wrap: wrap;
+        height: fit-content;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .subMenuContainer ul li{
+        width: 90vw;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .subMenuContainer ul li a{
+        width: 90vw;
+        border-bottom: 1px solid rgba(118, 102, 148, 0.5);
+    }
+
+    .theIcon{
+        font-size: 12px;
+    }
+    .theIcon{
+        font-size: 12px;
+    }
+
+    .dropdownContent{
+        width: 90vw;
+    }
+
+    .accordion input {
+        width: 90vw;
+    }
+    .accordion__header {
+        width: 90vw;
+    }
+
+    .accordion__content {
+        width: 260px;
+    }
+    
+    .subMenuContainer ul li:first-child{
+        border-top: 1px solid rgba(118, 102, 148, 0.5);
+    }
+
+}
+
+@media (max-width:1250px) and (min-width:601px){
+    .subMenuContainer{
+        flex-wrap: wrap;
+        height: fit-content;
+        align-items: center;
+        justify-content: center;
+    }
+
 }
