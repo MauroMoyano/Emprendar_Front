@@ -73,21 +73,19 @@ export default function Home() {
                                                 <input type='radio' name='radio-accordion' defaultChecked="unChecked" />
                                                 <div className={style.accordion__header}>Donacion</div>
                                                 <div className={style.accordion__content} value={ordenss}>
-                                                    <form value={ordenss}>
-                                                    <button onClick={(e) => setOrden(e.target.value)} value=''> - </button>
-                                                    <button onClick={(e) => setOrden(e.target.value)} value='ASC'>Ascendente</button>
-                                                    <button onClick={(e) => setOrden(e.target.value)} value='DESC'>Descendente</button></form>
+                                                        <button onClick={(e) => setOrden(e.target.value)} value=''> - </button>
+                                                        <button onClick={(e) => setOrden(e.target.value)} value='ASC'>Ascendente</button>
+                                                        <button onClick={(e) => setOrden(e.target.value)} value='DESC'>Descendente</button>
                                                 </div>
                                             </label>
                                             <label className={style.accordion} >
                                                 <input type='radio' name='radio-accordion' defaultChecked="unChecked" />
                                                 <div className={style.accordion__header}>País</div>
                                                 <div className={style.accordion__content} value={countriess}>
-                                                    <button onClick={(e) => setOrden(e.target.value)} value=''> - </button>
+                                                    <button onClick={(e) => setCountry(e.target.value)} value=''> - </button>
                                                     {
                                                         country?.map((c, index) => {
-                                                            console.log(c, index, 'filtros pais')
-                                                            return (<button value={`${index}`} key={index} onClick={(e) => setOrden(e.target.value)}>{c}</button>)
+                                                            return (<button value={`${c}`} key={index} onClick={(e) => setCountry(e.target.value)}>{c}</button>)
                                                         })
                                                     }
                                                 </div>
@@ -96,12 +94,16 @@ export default function Home() {
                                                 <input type='radio' name='radio-accordion' defaultChecked="unChecked" />
                                                 <div className={style.accordion__header}>Categoria</div>
                                                 <div className={style.accordion__content}>
-                                                    <h6>Categoria 1</h6>
-                                                    <h6>Categoria 2</h6>
-                                                    <h6>Categoria 3</h6>
-                                                    <h6>Categoria 4</h6>
-                                                    <h6>Categoria 5</h6>
+                                                <button onClick={(e) => setCountry(e.target.value)} value=''> - </button>
+                                                    {
+                                                        category?.map((c, index) => {
+                                                            return (<button value={`${c}`} key={index} onClick={(e) => setCategory(e.target.value)}>{c}</button>)
+                                                        })
+                                                    }
                                                 </div>
+                                            </label>
+                                            <label className={style.accordion}>
+                                            <button type="button" onClick={() => handlerDeleteSearch()}>Limpiar filtros</button>
                                             </label>
                                             
                                         </div>
@@ -113,7 +115,7 @@ export default function Home() {
                         </div>
                     </ul>
                 </div>
-                    <form>
+                    {/* <form>
                         <div className={style.filtersContainer}>
                             <div>
                                 <label>Highest Donations </label>
@@ -152,7 +154,7 @@ export default function Home() {
                                 <button type="button" onClick={() => handlerDeleteSearch()}>Limpiar</button>
                             </div>
                         </div>
-                    </form>
+                    </form> */}
                     <Paginated />
                 </div>
             </div>
