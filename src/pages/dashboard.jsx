@@ -1,4 +1,4 @@
-import React, { use, useState } from "react";
+import React, {use, useEffect, useState} from "react";
 import style from "./styles/dashboard.module.css";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,7 +10,16 @@ const Dashboard = (props) => {
 
   const [projects, setProjects] = useState(props.projects);
 
-  const handlerProject = (estado)=>{
+/*
+  useEffect(()=>{
+
+  },[projects, users])
+*/
+
+  //Funcion que maneja el cambio de estado del proyecto
+  const handlerProject = async (validate, id)=>{
+    const response = await clienteAxios.put(`/project/validar/${id}`,{validate: validate})
+    console.log("validate",validate)
 
   }
 
@@ -154,7 +163,7 @@ const Dashboard = (props) => {
               <tbody>
                 {/* {console.log(projects)} */}
 
-                {projects.map((e) => (
+                {projects?.map((e) => (
                   <tr key={e.id}>
                     <td>
                       <img className={style.imageProject} src={e.img} alt="" />
@@ -182,8 +191,8 @@ const Dashboard = (props) => {
                     </td>
 
                     <td>
-                      <button className={style.accept} onClick={()=>handlerProject("aceptado")}>Aceptar</button>
-                      <button className={style.delete} onClick={()=>handlerProject("rechazado")}>Rechazar</button>
+                      <button className={style.accept} onClick={()=>handlerProject("aceptado", e.id)}>Aceptar</button>
+                      <button className={style.delete} onClick={()=>handlerProject("rechazado", e.id)}>Rechazar</button>
                     </td>
                   </tr>
                 ))}
