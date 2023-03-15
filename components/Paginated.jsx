@@ -14,7 +14,6 @@ export default function Paginated() {
     const currentPage = useSelector(state => state.currentPage)
     const allProjects = useSelector(state => state.allProjects)
     const dispatch = useDispatch()
-    // const page = []
 
     const [list, setList] = useState([]);
     const [page, setPage] = useState(1);
