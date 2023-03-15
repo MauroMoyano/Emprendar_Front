@@ -5,8 +5,8 @@ import { useSelector } from "react-redux";
 import style from "./styles/chats.module.css"
 
 
+
 function Message(props){
-    console.log("estas son las props", props.obj);
     return(
 
         <div>
@@ -35,7 +35,6 @@ export default function Chats(props){
             //traer todos los chats
             async function getChats (){
                 response = await clienteAxios.get("/chats?userSender=2")
-                console.log(response.data);
                 setMessages(response.data)
             } 
             getChats()
@@ -44,7 +43,6 @@ export default function Chats(props){
 
 
 
-    console.log("esto e response", response);
     return(
         <Layout>
             <div className={style.container}>
@@ -61,6 +59,7 @@ export default function Chats(props){
                   
                 }
                 </div>
+                
             </div>   
         </Layout>
     )
