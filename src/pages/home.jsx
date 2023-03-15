@@ -9,6 +9,10 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import Slider from "components/slider";
 
+//imports de iconos
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowDownWideShort } from "@fortawesome/free-solid-svg-icons";
+
 export default function Home() {
 
     const dispatch = useDispatch()
@@ -56,6 +60,59 @@ export default function Home() {
             <div className={style.allContainer}>
                 <div className={style.bodyContainer}>
                 <Slider />
+                <div className={style.subMenuContainer}>
+                    <ul>
+                        <li><Link href="/aboutUs">Acerca de</Link></li>
+                        <li><Link href="/users">Comunidad</Link></li>
+                        <li><Link href="#">Contáctanos</Link></li>
+                        <li className={style.dropdown}><Link href="#menu">Ordenar por <FontAwesomeIcon icon={faArrowDownWideShort} className={style.theIcon} /></Link>
+                                <div id="menu" className={style.dropdownContent}>
+                                    <section className={style.column}>
+                                        <div>
+                                            <label className={style.accordion}>
+                                                <input type='radio' name='radio-accordion' defaultChecked="unChecked" />
+                                                <div className={style.accordion__header}>Donacion</div>
+                                                <div className={style.accordion__content} value={ordenss}>
+                                                    <form value={ordenss}>
+                                                    <button onClick={(e) => setOrden(e.target.value)} value=''> - </button>
+                                                    <button onClick={(e) => setOrden(e.target.value)} value='ASC'>Ascendente</button>
+                                                    <button onClick={(e) => setOrden(e.target.value)} value='DESC'>Descendente</button></form>
+                                                </div>
+                                            </label>
+                                            <label className={style.accordion} >
+                                                <input type='radio' name='radio-accordion' defaultChecked="unChecked" />
+                                                <div className={style.accordion__header}>País</div>
+                                                <div className={style.accordion__content} value={countriess}>
+                                                    <button onClick={(e) => setOrden(e.target.value)} value=''> - </button>
+                                                    {
+                                                        country?.map((c, index) => {
+                                                            console.log(c, index, 'filtros pais')
+                                                            return (<button value={`${index}`} key={index} onClick={(e) => setOrden(e.target.value)}>{c}</button>)
+                                                        })
+                                                    }
+                                                </div>
+                                            </label>
+                                            <label className={style.accordion}>
+                                                <input type='radio' name='radio-accordion' defaultChecked="unChecked" />
+                                                <div className={style.accordion__header}>Categoria</div>
+                                                <div className={style.accordion__content}>
+                                                    <h6>Categoria 1</h6>
+                                                    <h6>Categoria 2</h6>
+                                                    <h6>Categoria 3</h6>
+                                                    <h6>Categoria 4</h6>
+                                                    <h6>Categoria 5</h6>
+                                                </div>
+                                            </label>
+                                            
+                                        </div>
+                                    </section>
+                                </div>
+                        </li>
+                        <div className={style.menuSearch}>
+                            <input value={search} type='search' onChange={(e) => setSearch(e.target.value)} placeholder="Buscar proyecto..." ></input>
+                        </div>
+                    </ul>
+                </div>
                     <form>
                         <div className={style.filtersContainer}>
                             <div>
