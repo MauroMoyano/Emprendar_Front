@@ -19,16 +19,26 @@ import {
   CLEAN_MESSAGE,
   SEARCH_VALUE,
   GET_COMMENTS,
-  CREATE_COMMENT
+  CREATE_COMMENT,
+  GET_PROJECT_INFITITY_SCROLL,
+  DELETE_SEARCH_AND_FILTER,
+  FILTER_OF_ALL_PROJECTS_OR_SEARCH_PROJECTS,
+  RESET_SCROLL,
+  CHANGE_PATH_AND_PAGE
 
 } from "./actions";
 
 const initialState = {
   allProjects: [],
+  numPages: '',
+  pathValue: 'orden=&country=&category=&search=',
   allProjectsCopy: [],
+  filterProjects: [],
+  searchProjects: [],
+  /*  */
   detailUsuario: {},
   detailProject: {},
-  comments:[],
+  comments: [],
   userProjects: [],
   category: [],
   country: [],
@@ -49,12 +59,40 @@ const rootReducer = (state = initialState, action) => {
       // console.log("action dentro de get home " + JSON.stringify(action.payload.category))
       return {
         ...state,
-        allProjects: action.payload.data,
-        allProjectsCopy: action.payload.data,
+        /* allProjects: action.payload.data, */
+        /* allProjectsCopy: action.payload.data, */
         currentPage: 0,
         category: action.payload.category,
         country: action.payload.country,
       };
+    case GET_PROJECT_INFITITY_SCROLL:
+      return {
+        ...state,
+        allProjects: state.allProjects.concat(action.payload.data),
+        numPages: action.payload.pages
+      }
+    case DELETE_SEARCH_AND_FILTER:
+      return {
+        ...state,
+        filterProjects: action.payload,
+        searchProjects: action.payload,
+      }
+    case FILTER_OF_ALL_PROJECTS_OR_SEARCH_PROJECTS:
+      return {
+        ...state,
+        filterProjects: action.payload
+      }
+    case RESET_SCROLL:
+      return {
+        ...state,
+        allProjects: action.payload
+      }
+    case CHANGE_PATH_AND_PAGE:
+      return {
+        ...state,
+        allProjects: [],
+        pathValue: action.payload
+      }
 
     case CURRENT_PAGE:
       return { ...state, currentPage: action.payload };
@@ -80,27 +118,27 @@ const rootReducer = (state = initialState, action) => {
         allProjects:
           action.payload === "Ascendente"
             ? [
-                ...state.allProjects.sort(
-                  (a, b) => a.amount_collected - b.amount_collected
-                ),
-              ]
+              ...state.allProjects.sort(
+                (a, b) => a.amount_collected - b.amount_collected
+              ),
+            ]
             : [
-                ...state.allProjects.sort(
-                  (a, b) => b.amount_collected - a.amount_collected
-                ),
-              ],
+              ...state.allProjects.sort(
+                (a, b) => b.amount_collected - a.amount_collected
+              ),
+            ],
         allProjectsCopy:
           action.payload === "Ascendente"
             ? [
-                ...state.allProjects.sort(
-                  (a, b) => a.amount_collected - b.amount_collected
-                ),
-              ]
+              ...state.allProjects.sort(
+                (a, b) => a.amount_collected - b.amount_collected
+              ),
+            ]
             : [
-                ...state.allProjects.sort(
-                  (a, b) => b.amount_collected - a.amount_collected
-                ),
-              ],
+              ...state.allProjects.sort(
+                (a, b) => b.amount_collected - a.amount_collected
+              ),
+            ],
         currentPage: 0,
       };
     case FILTER_CATEGORY:
@@ -120,12 +158,12 @@ const rootReducer = (state = initialState, action) => {
         ),
         currentPage: 0,
       };
-    
-      // case CONFIRM_EMAIL:
-      // case CONFIRM_EMAIL_ERROR:
-      case SIGNIN_SUCESS:
-      case LOGIN_ERROR:
-      case SIGNIN_ERROR:
+
+    // case CONFIRM_EMAIL:
+    // case CONFIRM_EMAIL_ERROR:
+    case SIGNIN_SUCESS:
+    case LOGIN_ERROR:
+    case SIGNIN_ERROR:
       return {
         ...state,
         message: action.payload,
@@ -148,17 +186,17 @@ const rootReducer = (state = initialState, action) => {
       };
 
     case LOGOUT:
-        localStorage.removeItem('token')
+      localStorage.removeItem('token')
       return {
         ...state,
         user: null,
         token: null,
         autenticado: null,
       };
-      
+
     case CONFIRM_EMAIL:
     case CONFIRM_EMAIL_ERROR:
-      return{
+      return {
         ...state,
         message: action.payload,
       };
@@ -173,19 +211,19 @@ const rootReducer = (state = initialState, action) => {
     case SEARCH_VALUE:
       return {
         ...state,
-        allProjects: action.payload
+        searchProjects: action.payload
       }
 
     case GET_COMMENTS:
       return {
         ...state,
-        comments : action.payload
+        comments: action.payload
       }
-     
-    case CREATE_COMMENT : 
-      return{
+
+    case CREATE_COMMENT:
+      return {
         ...state,
-        
+
       }
 
     case CLEAN_MESSAGE: {
