@@ -1,0 +1,35 @@
+.messages{
+    border: 2px solid;
+    padding: .5rem;
+    width: fit-content;
+    background: whitesmoke;
+    border-radius: 1rem 1rem 1rem 0;
+}
+
+.container{
+    height: 100%;
+}
+
+.view{
+    height: 90%;
+    overflow-y: scroll;
+}
+
+
+.form{
+    height: 10%;
+    background: green;
+}
+
+.form > form{
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.form > form> input{
+    width: 80%;
+}
+.form > form> button{
+    width: 20%;
+}
