@@ -5,23 +5,33 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faSackDollar, faE } from "@fortawesome/free-solid-svg-icons";
 import clienteAxios from "config/clienteAxios";
 import formatDate from "utils/formatDate";
+import Modal from "react-modal"
+import CardProjectDetail from "../../components/rutaDetail/cardProjectDetail";
+
 const Dashboard = (props) => {
+
   const [users, setUsers] = useState(props.users);
 
   const [projects, setProjects] = useState(props.projects);
 
-  useEffect(()=>{
-    console.log("useEffect", )
+  const [isOpen, setIsOpen] = useState(false)
+  const [project, setProject] = useState({})
 
-  },[projects, users])
+  const openModal = (project) =>{
+    setIsOpen(true)
+    setProject(project)
+  }
+
+  const closeModal = () =>{
+    setIsOpen(false)
+    setProject({})
+  }
 
   //Funcion que maneja el cambio de estado del proyecto
   const handlerProject = async (validate, id)=>{
     const response = await clienteAxios.put(`/project/validar/${id}`,{validate: validate})
-    const updateProject = await clienteAxios.get("/project/get/all");
-    setProjects(updateProject)
-    console.log("validate",validate)
-
+    const {data} = await clienteAxios.get("/project/get/all")
+    setProjects(data)
   }
 
 
@@ -164,11 +174,26 @@ const Dashboard = (props) => {
               <tbody>
                 {/* {console.log(projects)} */}
 
-                {projects?.map((e) => (
+                {projects.map((e) => (
                   <tr key={e.id}>
                     <td>
-                      <img className={style.imageProject} src={e.img} alt="" />
-                    </td>
+                      <img className={style.imageProject} onClick={()=>openModal(e)} src={e.img} alt="" />
+                      <Modal
+                      isOpen={isOpen}
+                      ariaHideApp={false}
+                      >
+                        <button  onClick={closeModal}> X </button>
+                          <button className={style.accept} onClick={async ()=> {
+                            await handlerProject("aceptado", project.id)
+                            closeModal()
+                          } }>Aceptar</button>
+                          <button className={style.delete} onClick={async ()=> {
+                            await handlerProject("rechazado", project.id)
+                            closeModal()
+                          }}>Rechazar</button>
+                      <CardProjectDetail obj={project}/>
+                      </Modal>
+                      </td>
                     <td>
                       <p>{e.title}</p>
                     </td>
