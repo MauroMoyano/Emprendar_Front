@@ -36,7 +36,7 @@
 }
 
 .viewMessage{
-    background: #9ceab4;
+    background: #054217;
     width: 70%;
     display: flex;
     flex-direction: column;
@@ -52,11 +52,11 @@
 .receptor{
     background: #dedbdb;
     height: 10%;
-    font-size: 3rem
+    font-size: 1rem
 }
 
 
 .view{
-    overflow-y: scroll;
     height: 90%;
+
 }

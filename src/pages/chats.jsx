@@ -11,6 +11,7 @@ export default function Chats(props){
 
     //datos del usurio logeado
     const User = useSelector(state => state.user)
+    
     const [users, setUsers] = useState([]) 
     useEffect(()=>{
         if(User){
@@ -48,6 +49,7 @@ export default function Chats(props){
                         </option>
                         { users.length
                             ? users.map(u =>{
+            
                                 return <option
                                     key={u.id}
                                     value={u.user_name}
@@ -60,18 +62,23 @@ export default function Chats(props){
                         }
                     </select>
                 </div>
+
+
+                           
                 <div className={style.box}>
                     <div className={style.conversaciones}> </div>
 
                     {
-                      Object.keys(receptor).length 
+                      Object.keys(receptor).length
+
                         ?   <div className={style.viewMessage}>
                                 <div className={style.receptor}>
                                     <h3>{receptor.user_name}</h3>   
                                 </div>
                                 <div className={style.view} >
+
                                     <ViewMessage
-                                        
+                                        userLogeado = {User}
                                         userSender = {User}
                                         receptor = {receptor}
                                     />
