@@ -1,3 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Work+Sans:ital,wght@1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+/*  
+font-family: 'Roboto Condensed', sans-serif;
+font-family: 'Work Sans', sans-serif;
+font-family: 'Montserrat', sans-serif;
+*/
+
 .allContainer{
     display: flex;
     background-color: #babafa;
@@ -89,8 +97,337 @@
     border-bottom-right-radius: 0;
 }
 
+
+/* -------- CSS del SubMenú ------- */
+.subMenuContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 60px;
+    background: rgb(46,3,75);
+    background: linear-gradient(0deg, rgba(46,3,75,1) 0%, rgba(36,4,64,1) 87%, rgba(46,3,75,1) 100%);
+    transform: scale(1.05);
+    margin-bottom: 100px;
+    position: relative;
+    z-index: 4;
+}
+
+.subMenuContainer::before{
+    content: '';
+    width: 0;
+    height: 0;
+    position: absolute;
+    left: 0vw;
+    top: -1.0686vw;
+    border-style: solid;
+    border-width: 0 0 1.1vw 1.66vw;
+    border-color: transparent transparent #0d0218;
+}
+
+.subMenuContainer::after{
+    content: '';
+    width: 0;
+    height: 0;
+    position: absolute;
+    right: 0vw;
+    top: -1.0686vw;
+    border-style: solid;
+    border-width: 0 1.66vw 1.1vw 0px;
+    border-color: transparent transparent #0d0218;
+}
+
+.subMenuContainer ul{
+    display: flex;
+    flex-direction: row;
+    max-width: 100%;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.subMenuContainer ul li{
+    list-style: none;
+    
+}
+
+.subMenuContainer ul li a{
+    display: flex;
+    padding-right: 10px;
+    padding-left: 10px;
+    border: none;
+    height: 60px;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid rgba(118, 102, 148, 0.5);
+    text-transform: uppercase;
+    text-decoration: none;
+    color: rgb(195, 200, 219);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    width: 150px;
+    transition: 0.3s;
+}
+
+.subMenuContainer ul li a:hover{
+    background-color: #66198A;
+}
+
+.subMenuContainer ul li:first-child{
+    border-left: 1px solid rgba(118, 102, 148, 0.5);
+    height: 60px;
+}
+
+.menuSearch{
+    display: flex;
+    height: 60px;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+}
+
+.subMenuContainer ul input{
+    display: flex;
+    height: 70%;
+    margin: 10px;
+    border-radius: 6px;
+    padding-left: 10px;
+    width: 200px;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    font-size: 12px;
+}
+
+ /* ----- Filtros Desplegables ----- */
+
+.dropdown{
+    width: 200px;
+    display: inline-block;
+    position: relative;
+    height: 60px;
+    
+}
+
+.dropdownContent{
+    display: none;
+    width: 150px;
+    height: fit-content;
+    background-color: transparent;
+    position: absolute;
+    overflow: hidden;
+    align-items: center;
+}
+
+.dropdown:hover .dropdownContent{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: auto;
+    height: auto;
+    
+}
+
+/* ---- Estilos del Acordeon de filtros ---- */
+.accordion {
+    display: block;
+    font-size: inherit;
+    margin: 0px;
+    position: relative;
+}
+.accordion input {
+    display: none;
+    position: absolute;
+    visibility: hidden;
+    z-index: 10;
+    width: 150px;
+}
+.accordion__header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #2e034b;
+    color: aliceblue;
+    cursor: pointer;
+    transition: background 0.2s;
+    padding: 5px auto;
+    position: relative;
+    margin: 0 auto;
+    height: 60px;
+    width: 150px;
+    z-index: 2;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+}
+
+.accordion__header button{
+    width: 100%;
+    height: 100%;
+    border: none;
+    background-color: #2e034b;
+    color: aliceblue;
+    text-transform: uppercase;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+}
+
+.accordion__header button:hover{
+    background-color: #09c7ae;
+}
+
+.theIconInvert{
+    font-size: 0.8vw;
+    margin-right: 6px;
+    transform: scale(-1);
+}
+
+.accordion__header:hover {
+    background-color: #66198a;
+    color: white;
+}
+.accordion__header:hover:before, .accordion__header:hover:after {
+    background-color: white;
+}
+.accordion__header:before, .accordion__header:after {
+    background-color: #66198a;
+    content: "";
+    display: block;
+    position: absolute;
+    z-index: 3;
+}
+
+.accordion input:checked ~ .accordion__header {
+    background: #09c7ae;
+    border-color: #09c7ae;
+    color: white;
+}
+.accordion input:checked ~ .accordion__header:hover {
+    background-color: #09c7ae;
+    border-color: #09c7ae;
+    color: white;
+}
+.accordion input:checked ~ .accordion__header:before {
+    background-color: white;
+}
+.accordion input:checked ~ .accordion__header:after {
+    display: none;
+}
+
+
+.accordion:last-child input:checked ~ .accordion__header {
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+}
+.accordion__content {
+    background-color: transparent;
+    border: 1px solid #66198a;
+    display: none;
+    padding: 0px;
+    width: 140px;
+    margin: 0 auto;
+    height: auto;
+    max-height: 200px;
+    overflow-y:auto;
+}
+
+.accordion__content button{
+    border: none;
+    height: 30px;
+    text-transform: uppercase;
+    color: #cfcff8;
+    background-color: rgb(87, 33, 122);
+    cursor: pointer;
+    transition: 0.4s;
+    
+}
+
+.accordion__content button:hover{
+    background-color: #09c7ae;
+}
+
+.accordion input:checked ~ .accordion__content {
+    display: flex;
+    flex-direction: column;
+}
+.accordion:last-child .accordion__content {
+    border-bottom-width: 1px;
+    border-radius: 0px 0px 4px 4px;
+}
+.accordion__content h6 {
+    color: #66198a;
+    font-size: 15px;
+    margin-bottom: 5px;
+}
+
+
+
+.theIcon{
+    font-size: 0.8vw;
+    margin-right: 10px;
+}
+
+
 @media (max-width: 600px) {
     .bodyContainer{
-        width: 100%;
+        width: 90%;
     }
+    .subMenuContainer{
+        padding-top: 10px;
+        flex-wrap: wrap;
+        height: fit-content;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .subMenuContainer ul li{
+        width: 90vw;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .subMenuContainer ul li a{
+        width: 90vw;
+        border-bottom: 1px solid rgba(118, 102, 148, 0.5);
+    }
+
+    .theIcon{
+        font-size: 12px;
+    }
+    .theIcon{
+        font-size: 12px;
+    }
+
+    .dropdownContent{
+        width: 90vw;
+    }
+
+    .accordion input {
+        width: 90vw;
+    }
+    .accordion__header {
+        width: 90vw;
+    }
+
+    .accordion__content {
+        width: 260px;
+    }
+    
+    .subMenuContainer ul li:first-child{
+        border-top: 1px solid rgba(118, 102, 148, 0.5);
+    }
+
+}
+
+@media (max-width:1250px) and (min-width:601px){
+    .subMenuContainer{
+        flex-wrap: wrap;
+        height: fit-content;
+        align-items: center;
+        justify-content: center;
+    }
+
 }
