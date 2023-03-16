@@ -1,33 +1,59 @@
-import React, { use, useState } from "react";
+import React, {use, useEffect, useState} from "react";
 import style from "./styles/dashboard.module.css";
 import Link from "next/link";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faSackDollar, faE } from "@fortawesome/free-solid-svg-icons";
 import clienteAxios from "config/clienteAxios";
 import formatDate from "utils/formatDate";
+import Modal from "react-modal"
+import CardProjectDetail from "../../components/rutaDetail/cardProjectDetail";
+
 const Dashboard = (props) => {
+
   const [users, setUsers] = useState(props.users);
 
   const [projects, setProjects] = useState(props.projects);
+
+  const [isOpen, setIsOpen] = useState(false)
+  const [project, setProject] = useState({})
+
+  const openModal = (project) =>{
+    setIsOpen(true)
+    setProject(project)
+  }
+
+  const closeModal = () =>{
+    setIsOpen(false)
+    setProject({})
+  }
+
+  //Funcion que maneja el cambio de estado del proyecto
+  const handlerProject = async (validate, id)=>{
+    const response = await clienteAxios.put(`/project/validar/${id}`,{validate: validate})
+    const {data} = await clienteAxios.get("/project/get/all")
+    setProjects(data)
+  }
+
+
 
   return (
     <div className={style.container}>
       <div className={style.sidebar}>
         <h3>Navegacion</h3>
         <nav className={style.nav}>
-          <Link rel="stylesheet" href="#main">
+          <Link href="#main">
             {" "}
             Dashboard{" "}
           </Link>
           <Link href="#users"> Usuarios </Link>
-          <Link rel="stylesheet" href="#projects">
+          <Link href="#projects">
             {" "}
             Proyectos{" "}
           </Link>
         </nav>
       </div>
 
-      <main className={style.main}>
+      <main className={style.main} id="main">
         <div className={style.performance}>
           <h2>Estadisticas generales</h2>
           <div className={style.performanceContainer}>
@@ -99,8 +125,8 @@ const Dashboard = (props) => {
                           e.confirmed ? style.validated : style.invalidated
                         }
                       >
-                        {" "}
-                        {e.confirmed ? "Validado" : "No validado"}{" "}
+
+                        {e.confirmed ? " Validado " : " No validado "}
                       </p>
                     </td>
 
@@ -151,13 +177,28 @@ const Dashboard = (props) => {
                 {projects.map((e) => (
                   <tr key={e.id}>
                     <td>
-                      <img className={style.imageProject} src={e.img} alt="" />
-                    </td>
+                      <img className={style.imageProject} onClick={()=>openModal(e)} src={e.img} alt="" />
+                      <Modal
+                      isOpen={isOpen}
+                      ariaHideApp={false}
+                      >
+                        <button  onClick={closeModal}> X </button>
+                          <button className={style.accept} onClick={async ()=> {
+                            await handlerProject("aceptado", project.id)
+                            closeModal()
+                          } }>Aceptar</button>
+                          <button className={style.delete} onClick={async ()=> {
+                            await handlerProject("rechazado", project.id)
+                            closeModal()
+                          }}>Rechazar</button>
+                      <CardProjectDetail obj={project}/>
+                      </Modal>
+                      </td>
                     <td>
                       <p>{e.title}</p>
                     </td>
                     <td>
-                      <p className={style.validated}>{e.validated} </p>
+                      <p className={e.validated === "aceptado" ? style.validated : style.invalidated}>{e.validated} </p>
                     </td>
 
                     <td>
@@ -176,8 +217,8 @@ const Dashboard = (props) => {
                     </td>
 
                     <td>
-                      <button className={style.accept}>Aceptar</button>
-                      <button className={style.delete}>Rechazar</button>
+                      <button className={style.accept} onClick={()=>handlerProject("aceptado", e.id)}>Aceptar</button>
+                      <button className={style.delete} onClick={()=>handlerProject("rechazado", e.id)}>Rechazar</button>
                     </td>
                   </tr>
                 ))}
