@@ -1,10 +1,30 @@
-.messages{
+
+#enviados{
+    display: flex;
+    justify-content: end;
+}
+#enviados > div{
+    padding: .5rem;
+    border-radius: 1rem 1rem 0rem 1rem;
+    border: 2px solid;
+    background: #62c537;
+    
+}
+
+.recividos{
+    display: flex;
+    justify-content: start;
+}
+.recividos > div{
+    width: fit-content;
     border: 2px solid;
     padding: .5rem;
-    width: fit-content;
     background: whitesmoke;
     border-radius: 1rem 1rem 1rem 0;
 }
+
+
+
 
 .container{
     height: 100%;
@@ -13,12 +33,12 @@
 .view{
     height: 90%;
     overflow-y: scroll;
+    padding: .5rem;
 }
 
 
 .form{
     height: 10%;
-    background: green;
 }
 
 .form > form{
