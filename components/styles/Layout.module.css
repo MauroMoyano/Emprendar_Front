@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Work+Sans:ital,wght@1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
 /*  
+font-family: 'Montserrat', sans-serif;
+
 font-family: 'Roboto Condensed', sans-serif;
 font-family: 'Work Sans', sans-serif;
 */
@@ -54,7 +58,7 @@ font-family: 'Work Sans', sans-serif;
     height: fit-content;
     min-height: 140px;
     box-shadow: 0px 2px 35px black;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     position: relative;
     padding-top: 20px;
@@ -118,7 +122,9 @@ font-family: 'Work Sans', sans-serif;
 }
 
 .textContainer h3{
-    font-family: 'Roboto Condensed', sans-serif;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    font-size: 15px;
 }
 
 
@@ -154,7 +160,9 @@ font-family: 'Work Sans', sans-serif;
     border: none;
     border-radius: 9px;
     background-color: #2E034B;
-    font-family: 'Roboto Condensed', sans-serif;
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    font-size: 12px;
     justify-content: center;
     align-items: center;
     color: aliceblue;
@@ -181,17 +189,18 @@ font-family: 'Work Sans', sans-serif;
 /* ----- CSS del Logo ----- */
 .logoContainer{
     display: flex;
-    min-width: 50%;
+    min-width: fit-content;
     justify-content: center;
+    padding-left: 20px;
 }
 
 .logo{
-    width: 400px;
+    width: fit-content;
     height: 100px;
     align-items: center;
 }
 
-/* ----- SearchBar ----- */
+/* ----- SearchBar -----
 .containForm{
     padding-right: 40px;
 
@@ -238,7 +247,7 @@ font-family: 'Work Sans', sans-serif;
 .theIconSearch{
     font-size: 20px;
     color: aliceblue;
-}
+} */
 
 
 /* ------- Footer ------- */
