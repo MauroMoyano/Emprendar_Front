@@ -3,9 +3,12 @@ import style from "./styles/aboutUs.module.css";
 import Head from "next/head";
 import Layout from "components/Layout";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import { faGithub, faLinkedin, } from "@fortawesome/free-brands-svg-icons";
+import { faHouse } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
-// import fotoLechu from "../../public/assets/foto.jpg";
+
+
+
 
 const aboutUs = () => {
   return (
@@ -16,6 +19,9 @@ const aboutUs = () => {
 
       <div className={style.allContainer}>
       <div className={style.container}>
+        <div>
+          <Link href="/home"><button className={style.buttonBack}><FontAwesomeIcon icon={faHouse} className={style.theIcon} /> HOME</button></Link>
+        </div>
         <h1 className={style.title}>Nuestro Team:</h1>
         <div>
 
