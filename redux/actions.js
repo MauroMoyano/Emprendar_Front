@@ -292,10 +292,10 @@ export const getComments = (idProject) => {
 export const createComments = (data) => {
   return async function (dispatch) {
     const response = await clienteAxios.post("/comment", data);
-    // console.log(response);
+
     dispatch({
       type: CREATE_COMMENT,
-
+      payload: response.data.toRedux
     })
   }
 }
