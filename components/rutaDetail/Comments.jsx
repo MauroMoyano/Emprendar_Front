@@ -74,7 +74,7 @@ export default function Comments(props) {
         socket.emit('abrir proyecto', props.projectId)
       },[])
 
-      useEffect(() => {
+      useEffect(() => { 
             socket.on('comentario agregado', (comentarioNuevo) => {
                 dispatch(getComments(comentarioNuevo.projectId))
             })
@@ -94,7 +94,7 @@ export default function Comments(props) {
 
   useEffect(() => {
     projectId ? dispatch(getComments(projectId)) : null;
-  }, [projectId]);
+  }, [dispatch]);
 
   const hanlderSubmit = (event) => {
     event.preventDefault();
