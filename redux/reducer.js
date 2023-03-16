@@ -222,8 +222,9 @@ const rootReducer = (state = initialState, action) => {
       }
 
     case CREATE_COMMENT:
+     
       return {
-        ...state,
+        ...state, comments: action.payload
 
       }
 
