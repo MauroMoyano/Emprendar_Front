@@ -1,3 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+/* font-family: 'Montserrat', sans-serif; */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+/* font-family: 'Montserrat', sans-serif; */
+
+
 .container{
     display: flex;
     flex-direction: column;
@@ -41,6 +47,40 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-around;
+}
+
+.theIcon{
+    font-size: 18px;
+    color: aliceblue;
+    padding-right: 8px;
+}
+
+
+.buttonContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+}
+.buttonContainer button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background-color: #2e034b;
+    padding: 10px 15px;
+    font-size: 12px;
+    font-family: 'Montserrat', sans-serif;
+    border-radius: 8px;
+    cursor: pointer;
+    color: aliceblue;
+    height: fit-content;
+    text-transform: uppercase;
+}
+
+.buttonContainer button:hover{
+    background-color: #09c7ae;
 }
 
 /* .cards > div {

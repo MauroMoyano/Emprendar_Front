@@ -40,6 +40,7 @@
 }
 
 .cardAbout p{
+    text-align:center;
     color: aliceblue;
     font-size: 12px;
 }
@@ -48,16 +49,17 @@
     display: flex;
     flex-direction: column;
     border-radius: 15px;
-    width: 150px;
+    width: 170px;
     /* background-color: black; */
     backdrop-filter: blur(5px);
-    height: 200px;
+    height: 220px;
     align-items: center;
     justify-content: center;
     opacity: 50%;
     box-shadow: 0px 2px 35px black;
     transition: 0.4s;
     margin-bottom: 30px;
+    padding: 5px 5px;
 }
 
 .card:hover{

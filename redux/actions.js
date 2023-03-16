@@ -44,7 +44,7 @@ export const SIMILAR_PROJECTS = "SIMILAR_PROJECTS"
 //comments
 export const GET_COMMENTS = "GET_COMMENTS"
 export const CREATE_COMMENT = "CREATE_COMMENT"
-
+export const DELETE_COMMENT = "DELETE_COMMENT"
 
 
 
@@ -301,6 +301,24 @@ export const createComments = (data) => {
 }
 
 
+//delete comment 
 
+export const deleteComment = (commentId) => {
+return async function(dispatch) {
+
+
+  try {
+    const  response = await clienteAxios.delete(`/comment/${commentId}`)
+
+      dispatch({
+        type: DELETE_COMMENT,
+        payload: response.data.toRedux.id
+      })
+  } catch (error) {
+    console.log(error)
+  }
+
+}
+}
 
 

@@ -9,6 +9,7 @@ import { authedUser } from "redux/actions";
 import { useRouter } from "next/router";
 import QandA from "components/QandA";
 import AboutUsLanding from "components/aboutUsLanding";
+import Link from "next/link";
 //imports de iconos
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCommentsDollar } from "@fortawesome/free-solid-svg-icons";
@@ -85,13 +86,17 @@ export default function Landing(){
                                 </div>
  
                     </div>
-                    <div className={style.aboutUs}>
+                    <div id="about" className={style.aboutUs}>
                         <AboutUsLanding />
                     </div>
-                    <div className={style.QandABox}>
+                    <div id="questions" className={style.QandABox}>
                         <QandA />
                     </div>
                     <div className={style.copyR}>
+                        <div className={style.helperButtons}>
+                            <Link href="#about"><button className={style.buttonLevitation}>Acerca de nosotros</button></Link>
+                            <Link href="#questions"><button className={style.buttonLevitation}>Preguntas frecuentes</button></Link>
+                        </div>
                         <p>Copyright Emprendar 2023 &copy;</p>
                     </div>
             </div>            
