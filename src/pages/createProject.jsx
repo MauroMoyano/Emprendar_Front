@@ -3,7 +3,11 @@ import { useEffect, useState, useCallback } from "react";
 import style from "./styles/createProject.module.css";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { authedUser, createProject } from "../../redux/actions";
+import {
+  authedUser,
+  createProject,
+  getHomeProjects,
+} from "../../redux/actions";
 import { useRouter } from "next/router";
 import { useDropzone } from "react-dropzone";
 import clienteAxios from "config/clienteAxios";
@@ -11,30 +15,18 @@ export default function CreateProject() {
   const dispatch = useDispatch();
   const router = useRouter();
 
-    const [loading, setLoading] = useState(false)
+  useEffect(() => {
+    dispatch(getHomeProjects());
+  }, []);
 
-  const [urlImage, setUrlImage] = useState(null)
+  const [loading, setLoading] = useState(false);
 
-  let arrCategory = [
-    "Tecnología",
-    "Ambiental",
-    "Cultural",
-    "Social",
-    "Medicina",
-    "Educación",
-    "Emprendimiento",
-  ];
-  let arrCountry = [
-    "Argentina",
-    "Chile",
-    "Bolivia",
-    "Paraguay",
-    "Uruguay",
-    "Colombia",
-    "Peru",
-  ];
+  const [urlImage, setUrlImage] = useState(null);
 
-  const userId = useSelector((state) => state.user?.id);  
+  let arrCategory = useSelector((state) => state.category);
+  let arrCountry = useSelector((state) => state.country);
+
+  const userId = useSelector((state) => state.user?.id);
   const user_name = useSelector((state) => state.user?.user_name);
 
   const initialFormValues = {
@@ -50,15 +42,14 @@ export default function CreateProject() {
 
   const [form, setForm] = useState(initialFormValues);
 
-
   const [errors, setErrors] = useState({
     title: "",
     summary: "",
     description: "",
     goal: "",
     country: "",
+    category: "",
   });
-
 
   useEffect(() => {
     if (userId) {
@@ -66,7 +57,7 @@ export default function CreateProject() {
         ...form,
         userId: userId,
         user_name: user_name,
-        img: urlImage
+        img: urlImage,
       });
     }
   }, [userId, user_name, urlImage]);
@@ -89,7 +80,8 @@ export default function CreateProject() {
       form.description !== "" &&
       form.goal !== "" &&
       form.country !== "" &&
-      form.category.length !== 0
+      form.category.length !== 0 &&
+      form.category.length <= 5
     ) {
       if (
         errors.title === "" &&
@@ -97,7 +89,7 @@ export default function CreateProject() {
         errors.description === "" &&
         errors.goal === ""
       ) {
-        setForm({ ...form, userId: userId, user_name: user_name});
+        setForm({ ...form, userId: userId, user_name: user_name });
         // console.log(form)
         await clienteAxios.post("/project", form);
         // dispatch(createProject(form));
@@ -117,7 +109,16 @@ export default function CreateProject() {
     } else {
       arrAux.push(check);
     }
-    setForm({ ...form, category: arrAux });
+    if (arrAux.length > 5) {
+      setErrors({
+        ...errors,
+        category: "solo se permiten hasta 5 categorias por proyecto",
+      });
+      setForm({ ...form, category: arrAux });
+    } else {
+      setErrors({ ...errors, category: "" });
+      setForm({ ...form, category: arrAux });
+    }
   };
 
   const handleCountry = (event) => {
@@ -137,18 +138,16 @@ export default function CreateProject() {
       if (form.title === "") {
         errors = { ...errors, title: "" };
       } else {
-        if(/^[^0-9]/.test(form.title)){
+        if (/^[^0-9]/.test(form.title)) {
           errors = {
             ...errors,
-            title:"El título no puede ser mayor de 70 caracteres"
-
-          }
-        }else {
+            title: "El título no puede ser mayor de 70 caracteres",
+          };
+        } else {
           errors = {
             ...errors,
-            title:"El título no puede contener números"
-
-          }
+            title: "El título no puede contener números",
+          };
         }
       }
     }
@@ -216,202 +215,202 @@ export default function CreateProject() {
     const formData = new FormData();
     formData.append("image", acceptedFiles[0], acceptedFiles[0].name);
 
-
-
-     await uploadImage(formData)
+    await uploadImage(formData);
   }, []);
 
-  
   const { getRootProps, getInputProps, isDragActive, acceptedFiles } =
-    useDropzone({ onDropRejected, onDropAccepted, accept: {
-      'image/png': ['.png', '.jpg'],
-    } });
+    useDropzone({
+      onDropRejected,
+      onDropAccepted,
+      accept: {
+        "image/png": [".png", ".jpg"],
+      },
+    });
 
+  const uploadImage = async (formdata) => {
+    try {
+      setLoading(true);
 
-    const uploadImage = async(formdata) => {
-      try {
-        setLoading(true)
+      const response = await clienteAxios.post("images/upload", formdata);
 
-        const response = await clienteAxios.post("images/upload",formdata)
-       
-        setUrlImage(response.data.imageUrl )
-        setLoading(false)
-      }
-      catch(error) {
-        console.log(error)
-      }
+      setUrlImage(response.data.imageUrl);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
     }
-  
+  };
 
-    const files = acceptedFiles.map(file => (
-      <li key={file.lastModified}>
+  const files = acceptedFiles.map((file) => (
+    <li key={file.lastModified}>
+      <p>{file.path}</p>
+      <p>{(file.size / Math.pow(1024, 2)).toFixed(2)} MB</p>
+    </li>
+  ));
 
-
-        <p>{file.path}</p>
-        <p >
-        {(file.size / Math.pow(1024, 2)).toFixed(2)} MB
-      </p>
-      </li>
-    ))
-
-    const isValid = form.title !== "" &&
+  const isValid =
+    form.title !== "" &&
     form.summary !== "" &&
     form.description !== "" &&
     form.goal !== "" &&
     form.country !== "" &&
     form.category.length !== 0 &&
+    form.category.length <= 5 &&
     errors.title === "" &&
     errors.summary === "" &&
     errors.description === "" &&
-    errors.goal === "" 
+    errors.goal === "";
 
   return (
     <Layout>
       <div className={style.containerCreateProject}>
-      <form onSubmit={submitHandler} className={style.formContainer}>
-        <h1 className={style.title}>Crea tu proyecto:</h1>
-        <div className={style.formInput}>
-          <div>
-            {errors.title && (
-              <span className={style.danger}>{errors.title}</span>
-            )}
-          </div>
-          <div className={style.question}>
-            <input
-              type="text"
-              value={form.title}
-              onChange={changeHandler}
-              name="title"
-            />
-            <label className={form.title !== "" ? style.fix : ""}>Título</label>
-          </div>
-
-          <div>
-            {errors.summary && (
-              <span className={style.danger}>{errors.summary}</span>
-            )}
-          </div>
-          <div className={style.question}>
-            <input
-              type="text"
-              value={form.summary.replace(/<[^>]+>/g, "")}
-              onChange={changeHandler}
-              name="summary"
-            />
-            <label className={form.summary !== "" ? style.fix : ""}>
-              Resumen
-            </label>
-          </div>
-
-          <div>
-            {errors.description && (
-              <span className={style.danger}>{errors.description}</span>
-            )}
-          </div>
-          <div className={style.questionText}>
-            <textarea
-              rows="8"
-              cols="30"
-              value={form.description}
-              onChange={changeHandler}
-              name="description"
-            />
-            <label className={form.description !== "" ? style.fixTextarea : ""}>
-              Tu descripción aquí...
-            </label>
-          </div>
-          <div>
-            {errors.goal && <span className={style.danger}>{errors.goal}</span>}
-          </div>
-          <div className={style.question}>
-            <input
-              type="number"
-              value={form.goal}
-              onChange={changeHandler}
-              name="goal"
-            />
-            <label className={form.goal !== "" ? style.fix : ""}>Meta</label>
-          </div>
-          <div>
-            {errors.country && (
-              <span className={style.danger}>{errors.country}</span>
-            )}
-          </div>
-          <div className={style.question}>
-            {/*<input type="text" value={form.country} onChange={changeHandler} name="country"/>*/}
-            <div className={style.questionCategory}>
-              {
-                <select className={style.select} onChange={handleCountry}>
-                  <option disabled selected>
-                    País
-                  </option>
-                  {arrCountry.map((c, index) => {
-                    return (
-                      <option value={c} key={index}>
-                        {c}
-                      </option>
-                    );
-                  })}
-                </select>
-              }
+        <form onSubmit={submitHandler} className={style.formContainer}>
+          <h1 className={style.title}>Crea tu proyecto:</h1>
+          <div className={style.formInput}>
+            <div>
+              {errors.title && (
+                <span className={style.danger}>{errors.title}</span>
+              )}
             </div>
-            <label>País</label>
-          </div>
-        </div>
+            <div className={style.question}>
+              <input
+                type="text"
+                value={form.title}
+                onChange={changeHandler}
+                name="title"
+              />
+              <label className={form.title !== "" ? style.fix : ""}>
+                Título
+              </label>
+            </div>
 
-        <div className={style.containerDrop}>
-          <ul>{files}</ul>
-        {alert && <p>{alert}</p>}
-        <div {...getRootProps({ className: style.dropzone })}>
-          {loading ? <p>Cargando imagen</p> : null}
-          <input {...getInputProps()} />
+            <div>
+              {errors.summary && (
+                <span className={style.danger}>{errors.summary}</span>
+              )}
+            </div>
+            <div className={style.question}>
+              <input
+                type="text"
+                value={form.summary.replace(/<[^>]+>/g, "")}
+                onChange={changeHandler}
+                name="summary"
+              />
+              <label className={form.summary !== "" ? style.fix : ""}>
+                Resumen
+              </label>
+            </div>
 
-          {isDragActive ? (
-            <p>Solta tu imagen aqui</p>
-          ) : (
-            <p>Selecciona o arrastra tu imagen</p>
-          )}
-        </div>
-        </div>
-        
-        <div className={style.containerQuestionCategory}>
-          <h2>Categorías: </h2>
-          <div className={style.questionCategory}>
-            {arrCategory.map((cat, index) => {
-              
-              return (
-                <div className={style.divInput} key={index}>
-                  <label>{cat}</label>
-                  <input
-                    type="checkbox"
-                    name={cat}
-                    value={cat.toLowerCase()}
-                    onChange={handleCheck}
-                  />
-                </div>
-              );
-            })}
+            <div>
+              {errors.description && (
+                <span className={style.danger}>{errors.description}</span>
+              )}
+            </div>
+            <div className={style.questionText}>
+              <textarea
+                rows="8"
+                cols="30"
+                value={form.description}
+                onChange={changeHandler}
+                name="description"
+              />
+              <label
+                className={form.description !== "" ? style.fixTextarea : ""}
+              >
+                Tu descripción aquí...
+              </label>
+            </div>
+            <div>
+              {errors.goal && (
+                <span className={style.danger}>{errors.goal}</span>
+              )}
+            </div>
+            <div className={style.question}>
+              <input
+                type="number"
+                value={form.goal}
+                onChange={changeHandler}
+                name="goal"
+              />
+              <label className={form.goal !== "" ? style.fix : ""}>Meta</label>
+            </div>
+            <div>
+              {errors.country && (
+                <span className={style.danger}>{errors.country}</span>
+              )}
+            </div>
+            <div className={style.question}>
+              {/*<input type="text" value={form.country} onChange={changeHandler} name="country"/>*/}
+              <div className={style.questionCategory}>
+                {
+                  <select className={style.select} onChange={handleCountry}>
+                    <option disabled selected>
+                      País
+                    </option>
+                    {arrCountry.map((c, index) => {
+                      return (
+                        <option value={c} key={index}>
+                          {c}
+                        </option>
+                      );
+                    })}
+                  </select>
+                }
+              </div>
+              <label>País</label>
+            </div>
           </div>
-        </div>
-        <button
-          // disabled={
-          //   errors.title === "" &&
-          //   errors.summary === "" &&
-          //   errors.description === "" &&
-          //   errors.goal === "" &&
-          //   true
-          // }
-          className={
-            isValid ? style.submit : style.disabled
-          }
-          type="submit"
-          disabled={
-            !isValid 
-          }
-        >
-          Enviar datos
-        </button>
-      </form>
+
+          <div className={style.containerDrop}>
+            <ul>{files}</ul>
+            {alert && <p>{alert}</p>}
+            <div {...getRootProps({ className: style.dropzone })}>
+              {loading ? <p>Cargando imagen</p> : null}
+              <input {...getInputProps()} />
+
+              {isDragActive ? (
+                <p>Solta tu imagen aqui</p>
+              ) : (
+                <p>Selecciona o arrastra tu imagen</p>
+              )}
+            </div>
+          </div>
+
+          <div className={style.containerQuestionCategory}>
+            <h2>Categorías: </h2>
+            {errors.category && (
+              <span className={style.danger}>{errors.category}</span>
+            )}
+            <div className={style.questionCategory}>
+              {arrCategory.map((cat, index) => {
+                return (
+                  <div className={style.divInput} key={index}>
+                    <label>{cat}</label>
+                    <input
+                      type="checkbox"
+                      name={cat}
+                      value={cat.toLowerCase()}
+                      onChange={handleCheck}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          <button
+            // disabled={
+            //   errors.title === "" &&
+            //   errors.summary === "" &&
+            //   errors.description === "" &&
+            //   errors.goal === "" &&
+            //   true
+            // }
+            className={isValid ? style.submit : style.disabled}
+            type="submit"
+            disabled={!isValid}
+          >
+            Enviar datos
+          </button>
+        </form>
       </div>
     </Layout>
   );
