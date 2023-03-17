@@ -4,7 +4,7 @@ import clienteAxios from "config/clienteAxios";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import style from "./styles/chats.module.css"
-
+import hiddenImg from "../../components/chats/img/undraw_Online_test_re_kyfx.png"
 
 
 export default function Chats(props){
@@ -13,6 +13,7 @@ export default function Chats(props){
     const User = useSelector(state => state.user)
     
     const [users, setUsers] = useState([]) 
+    console.log(users, 'hola')
     useEffect(()=>{
         if(User){
             //traer todos los chats
@@ -31,43 +32,31 @@ export default function Chats(props){
     const [receptor,setReceptor] = useState({})
 
     //manejasdor del select
-    const handlerSelect = (event) => {
-        let value = event.target.value
-        let user_receptor = users.find((obj)=> obj.user_name === value)
+    const handlerSelect = (value) => {
+        let user_receptor = users.find((obj)=> obj.id === value)
         setReceptor(user_receptor);
       };
-
 
     return(
         <Layout>
             <div className={style.container}>
-                <div className={style.users_containers}>
-                    <h3>Usuarios :</h3>
-                    <select name="" id=""  onChange={handlerSelect} >
-                        <option disabled selected>
-                            ELIGE UN USUARIO PARA CONTACTAR
-                        </option>
+                <div className={style.box}>
+                    <div className={style.conversaciones}>
                         { users.length
-                            ? users.map(u =>{
+                            ? users?.map(u =>{
             
-                                return <option
-                                    key={u.id}
-                                    value={u.user_name}
-                                >
-                                    {u.user_name}
-                                </option>
+                                return (
+                                    <>
+                                       <div className={style.chatUser}  onClick={() => handlerSelect(u.id)} >
+                                           <img src={u.profile_img} alt="user" />
+                                           <p> {u.user_name}</p>
+                                       </div>
+                                    </>
+                                )
                             })  
                             : null 
-
                         }
-                    </select>
-                </div>
-
-
-                           
-                <div className={style.box}>
-                    <div className={style.conversaciones}> </div>
-
+                    </div>
                     {
                       Object.keys(receptor).length
 
@@ -75,7 +64,7 @@ export default function Chats(props){
                                 <div className={style.receptor}>
                                     <h3>{receptor.user_name}</h3>   
                                 </div>
-                                <div className={style.view} >
+                                <div className={style.view}>
 
                                     <ViewMessage
                                         userLogeado = {User}
@@ -84,7 +73,10 @@ export default function Chats(props){
                                     />
                                 </div>
                             </div>
-                        : null    
+                        : <div className={style.hidden}>
+                            <img src={hiddenImg} alt="chatImg" />
+                            <p>Selecciona un usuario para iniciar un chat</p>   
+                        </div>
                     }              
                 </div>        
             </div>   
