@@ -105,7 +105,7 @@ export default function ViewMessage(props){
             </div>
             <div className={style.form}>
                 <form onSubmit={hanlderSubmit} >
-                    <input onChange={handlerText} name="input" type="text" placeholder="..." value={text} />
+                <input onChange={handlerText} name="input" type="text" placeholder="Escribe tu mensaje aquí..." value={text} />
                     <button onClick={()=>{}}>ENVIAR</button>
                 </form>
             </div>
