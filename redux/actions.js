@@ -14,6 +14,13 @@ export const FILTER_COUNTRY = "FILTER_COUNTRY";
 export const CREATE_PROJECT = "CREATE_PROJECT";
 export const SEARCH_VALUE = "SEARCH_VALUE"
 
+export const DELETE_SEARCH_AND_FILTER = "DELETE_SEARCH_AND_FILTER"
+export const FILTER_OF_ALL_PROJECTS_OR_SEARCH_PROJECTS = "FILTER_OF_ALL_PROJECTS_OR_SEARCH_PROJECTS"
+export const RESET_SCROLL = "RESET_SCROLL"
+export const CHANGE_PATH_AND_PAGE = "CHANGE_PATH_AND_PAGE"
+
+/* con paginado inf */
+export const GET_PROJECT_INFITITY_SCROLL = "GET_PROJECT_INFITITY_SCROLL"
 
 //types para el registro
 
@@ -37,7 +44,7 @@ export const SIMILAR_PROJECTS = "SIMILAR_PROJECTS"
 //comments
 export const GET_COMMENTS = "GET_COMMENTS"
 export const CREATE_COMMENT = "CREATE_COMMENT"
-
+export const DELETE_COMMENT = "DELETE_COMMENT"
 
 
 
@@ -45,7 +52,7 @@ export const CREATE_COMMENT = "CREATE_COMMENT"
 export const getHomeProjects = () => {
   return async function (dispatch) {
     //pido todos los proyectos y me devuelve un array con ellos
-    const { data } = await clienteAxios.get("/project");
+    /* const { data } = await clienteAxios.get("/project"); */
 
     //pido todos las categorias al back y me devuelve un array con ellas
     const category = (await clienteAxios.get("/category")).data;
@@ -53,12 +60,44 @@ export const getHomeProjects = () => {
     //pido todos los paises al back y me devuelve un array con ellos
     const country = (await clienteAxios.get("/country")).data;
 
-    dispatch({ type: GET_HOME_PROJECTS, payload: { data, category, country } });
+    dispatch({ type: GET_HOME_PROJECTS, payload: {/*  data, */ category, country } });
   };
 };
 
+export const getProjectToScroll = (page, path) => {
+  return async function (dispatch) {
+
+    const { data } = await clienteAxios.get(`/project?page=${page}&${path}`)
+    dispatch({ type: GET_PROJECT_INFITITY_SCROLL, payload: data })
+  }
+}
+
+export const changePathToFilterAndSearch = (path) => {
+  return async function (dispatch) {
+    dispatch({ type: CHANGE_PATH_AND_PAGE, payload: path })
+  }
+}
 
 
+export const deleteSearchAndFilter = () => {
+  return async function (dispatch) {
+    dispatch({ type: DELETE_SEARCH_AND_FILTER, payload: [] })
+  }
+}
+
+export const filterAllProjectos = (data) => {
+  return async function (dispatch) {
+    dispatch({ type: FILTER_OF_ALL_PROJECTS_OR_SEARCH_PROJECTS, payload: data })
+  }
+}
+
+export const resetScroll = () => {
+  return async function (dispatch) {
+    dispatch({ type: RESET_SCROLL, payload: [] })
+  }
+}
+
+/*  */
 
 export const currentPageHandler = (value) => {
   return { type: CURRENT_PAGE, payload: value };
@@ -262,6 +301,24 @@ export const createComments = (data) => {
 }
 
 
+//delete comment 
 
+export const deleteComment = (commentId) => {
+return async function(dispatch) {
+
+
+  try {
+    const  response = await clienteAxios.delete(`/comment/${commentId}`)
+
+      dispatch({
+        type: DELETE_COMMENT,
+        payload: response.data.toRedux.id
+      })
+  } catch (error) {
+    console.log(error)
+  }
+
+}
+}
 
 

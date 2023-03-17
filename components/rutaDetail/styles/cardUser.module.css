@@ -5,34 +5,31 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-
     align-items: center;
+  
 } 
 
 .perfil{
+    margin-top: 1rem;
     display: flex;
     justify-content: center;
-    height: 40%;
-
+    
+    padding: 0 5rem;
 }
 
 .img {
     border-radius: 50%;
-    width: 70%;
     height: 100%;
+    max-width: 100%;
 }
 
 .detailPerfil{
     display: flex;
 
-    height: 30%;
     display: flex;
     flex-direction: column;
-    max-width: 90%;
 
     align-items: center;
-
-
 }
 
 .detailPerfil  h5{

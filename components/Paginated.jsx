@@ -1,81 +1,107 @@
 import CardProject from "./CardProject";
-import {useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import {currentPageHandler, getHomeProjects} from "../redux/actions";
+
+import SyncLoader from "react-spinners/ClipLoader";
+import { useEffect, useLayoutEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { currentPageHandler, getHomeProjects, getProjectToScroll, resetScroll } from "../redux/actions";
 import style from "./styles/Paginated.module.css"
 import axios from "axios";
 
-let bandera = true
+//importacion de iconos
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
 
-export default function Paginated() {
+export default function Paginated(/* data */) {
 
+    /* const { toPath } = data */
 
-    const currentPage = useSelector(state => state.currentPage)
-    const allProjects = useSelector(state => state.allProjects)
+    /* const currentPage = useSelector(state => state.currentPage) */
+    const { allProjects, filterProjects, searchProjects, numPages, pathValue } = useSelector(state => state)
+
     const dispatch = useDispatch()
-    // const page = []
 
-    const [list, setList] = useState([]);
     const [page, setPage] = useState(1);
     const [isLoading, setIsLoading] = useState(false)
 
-    useEffect(() => {
+    const [control, setControl] = useState(true)
 
-        loadMore()
-    }, []);
+    useLayoutEffect(() => {
+        dispatch(resetScroll())
+        setPage(1)
+        console.log('entrooo')
+        dispatch(getProjectToScroll(1, pathValue))
+        setControl(!control)
+    }, [pathValue])
 
-    const loadMore = async () => {
-
-        setIsLoading(true)
-        const {data} = await axios.get(`${process.env.NEXT_PUBLIC_BACK_APP_URL}/project?numPage=${page}`)
-        if (data.length === 0) bandera = false
-        // console.log(bandera)
-        setList([...list, ...(data)]);
-        setPage(page + 1);
-        setIsLoading(false)
-
+    const loadMore = () => {
+        if (numPages > page) {
+            setIsLoading(true)
+            dispatch(getProjectToScroll(page + 1, pathValue))
+            setPage(page + 1)
+            setIsLoading(false)
+            setControl(false)
+        }
 
     }
 
+    /* console.log('scroll top', window.innerHeight + document.documentElement.scrollTop);
+    console.log('total scroll', document.documentElement.scrollHeight - 1);
+
     const handleScroll = () => {
-        if (bandera) {
+        if (filterProjects?.length !== 0 && searchProjects?.length !== 0) {
             if (window.innerHeight + document.documentElement.scrollTop > document.documentElement.scrollHeight - 1) {
                 loadMore()
             }
         }
+
     };
 
     if (typeof window !== 'undefined') {
         window.addEventListener('scroll', handleScroll);
     }
+ */
+
+
+
+    let toView;
+
+    filterProjects.length
+        ? toView = filterProjects
+        : searchProjects.length
+            ? toView = searchProjects
+            : toView = allProjects
 
     return (
         <div className={style.container}>
-
             <div className={style.cards}>
-                {list?.map(project => {
-                    return (
-                        <CardProject
-                            key={project.id}
-                            idProject={project.id}
-                            name={project.title}
-                            summary={project.summary}
-                            date={project.date}
-                            goal={project.goal}
-                            img={project.img}
-                            userId={project.userId}
-                            user_name={project.user?.user_name}
-                            profile_img={project.user?.profile_img}
-                            categories={project.categories}
-                            country={project.country.name}
-                        />
-
-
-                    )
-                })}
                 {
-                    isLoading && <li>Loading...</li>
+                    toView?.map(project => {
+                        return (
+                            <CardProject
+                                key={project.id}
+                                idProject={project.id}
+                                name={project.title}
+                                summary={project.summary}
+                                date={project.date}
+                                goal={project.goal}
+                                img={project.img}
+                                userId={project.userId}
+                                user_name={project.user?.user_name}
+                                profile_img={project.user?.profile_img}
+                                categories={project?.categories}
+                                country={project.country?.name}
+                            />
+                        )
+                    })
                 }
+                
+                    {
+                    isLoading && <SyncLoader />
+                    }
+                
+            </div>
+            <div className={style.buttonContainer}>
+                <button type="button" onClick={() => loadMore()}><FontAwesomeIcon icon={faCirclePlus} className={style.theIcon}/>Proyectos</button>
             </div>
         </div>
     )

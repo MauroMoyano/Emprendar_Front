@@ -17,7 +17,7 @@ export default function CardUser({userId}){
                     <img className={style.img} src={selectorUser.profile_img} alt="" />
                 </div>
                 <div className={style.detailPerfil}>
-                        <h5>{selectorUser.user_name.substring(0, 5)+"..."}</h5>
+                        <h5>{selectorUser.user_name}</h5>
                         <p>Reputacion</p>
                         <p>{selectorUser.reputation}</p>
                          

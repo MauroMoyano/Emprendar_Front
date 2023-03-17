@@ -213,3 +213,8 @@
      width: 20px;   
  }
 
+.password {
+    color: white;
+    text-decoration: none;
+    text-align: center;
+}
