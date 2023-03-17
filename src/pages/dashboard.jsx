@@ -13,6 +13,7 @@ const Dashboard = (props) => {
   const [users, setUsers] = useState(props.users);
 
   const [projects, setProjects] = useState(props.projects);
+  const [projectFilter, setProjectsFilter] = useState([])
 
   const [isOpen, setIsOpen] = useState(false)
   const [project, setProject] = useState({})
@@ -27,18 +28,27 @@ const Dashboard = (props) => {
     setProject({})
   }
 
-  const handlerSelect = (event) => {
+  const handlerSelect = async (event) => {
     const value = event.target.value
-    const result = projects.filter((proj)=> proj.validated === value)
-    setProjects(result)
+    if(value !== "all") {
+      const aux = [...projects]
+      const result = aux.filter((proj) => proj.validated === value)
+      setProjectsFilter(result)
+    }else{
+      const {data} = await clienteAxios.get("/project/get/all")
+      data.sort((a,b)=> a.title - b.title)
+      setProjects(data)
+    }
   }
 
   //Funcion que maneja el cambio de estado del proyecto
   const handlerProject = async (validate, id)=>{
     const response = await clienteAxios.put(`/project/validar/${id}`,{validate: validate})
     const {data} = await clienteAxios.get("/project/get/all")
-    data.sort((a,b)=> a.title - b.title)
-    setProjects(data)
+    console.log("ordenamiento 1 ", data)
+    const result = data.sort((a,b)=> b.id - a.id)
+    console.log("ordenamiento 2 ", result)
+    setProjects(result)
   }
 
 
@@ -159,10 +169,11 @@ const Dashboard = (props) => {
             <h2>Proyectos</h2>
             <div className={style.filter}>
               <p>Filtrar por</p>
-              <select name="" id="" onSelect={handlerSelect}>
-                <option value="aceptados">Aceptados</option>
-                <option value="en espera">En espera</option>
-                <option value="rechazados">Rechazados</option>
+              <select name="" id="" onChange={handlerSelect}>
+                <option value="all" > Todos </option>
+                <option value="aceptado">Aceptados</option>
+                <option value="espera">En espera</option>
+                <option value="rechazado">Rechazados</option>
               </select>
             </div>
 
