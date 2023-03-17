@@ -13,7 +13,7 @@ const Dashboard = (props) => {
   const [users, setUsers] = useState(props.users);
 
   const [projects, setProjects] = useState(props.projects);
-  const [projectFilter, setProjectsFilter] = useState([])
+  const [projectFilter, setProjectFilter] = useState(props.projects)
 
   const [isOpen, setIsOpen] = useState(false)
   const [project, setProject] = useState({})
@@ -31,9 +31,10 @@ const Dashboard = (props) => {
   const handlerSelect = async (event) => {
     const value = event.target.value
     if(value !== "all") {
-      const aux = [...projects]
-      const result = aux.filter((proj) => proj.validated === value)
-      setProjectsFilter(result)
+      console.log("projects ",projects, " projectFilter", projectFilter)
+      const result = projectFilter.filter((proj) => proj.validated === value)
+      console.log(" Result ", result)
+      setProjects(result)
     }else{
       const {data} = await clienteAxios.get("/project/get/all")
       data.sort((a,b)=> a.title - b.title)
@@ -45,10 +46,7 @@ const Dashboard = (props) => {
   const handlerProject = async (validate, id)=>{
     const response = await clienteAxios.put(`/project/validar/${id}`,{validate: validate})
     const {data} = await clienteAxios.get("/project/get/all")
-    console.log("ordenamiento 1 ", data)
-    const result = data.sort((a,b)=> b.id - a.id)
-    console.log("ordenamiento 2 ", result)
-    setProjects(result)
+    setProjects(data)
   }
 
 
