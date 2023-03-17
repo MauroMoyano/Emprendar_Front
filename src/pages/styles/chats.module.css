@@ -1,0 +1,62 @@
+.container{
+    height: 100vb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+.users_containers{
+    background: #bcb6b6;
+    width: 80%;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+.users_containers> select{
+    height: 3rem;
+    width: 30%;
+}
+
+.box{
+    background: #c4c3c3;
+    width: 80%;
+    height: 70%;
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.conversaciones{
+    background: #d19cea;
+    width: 30%;
+}
+
+.viewMessage{
+    background: #054217;
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+}
+
+.sinReceptor{
+    width: 70%;
+    background: #000;
+}
+
+
+
+.receptor{
+    background: #dedbdb;
+    height: 10%;
+    font-size: 1rem
+}
+
+
+.view{
+    height: 90%;
+
+}
