@@ -4,7 +4,7 @@ import clienteAxios from "config/clienteAxios";
 import { useSelector, useDispatch } from "react-redux";
 import { loginUser, signInUser, cleanMessage } from "redux/actions";
 import { useRouter } from "next/router";
-
+import Link from "next/link";
 const validateSignIn = (form, users) => {
   //user va a contener todos los user para ver si ya existe ese usuario
   const error = {};
@@ -189,6 +189,7 @@ export default function FormLanding() {
               placeholder="Contraseña"
             />
             <button onClick={() => sendDataLogIn(formLogIn)}>Entrar</button>
+            <Link className={style.password} href='/resetPassword'>Olvide mi contraseña</Link>
           </form>
         </div>
         <div className={style.sign_In}>

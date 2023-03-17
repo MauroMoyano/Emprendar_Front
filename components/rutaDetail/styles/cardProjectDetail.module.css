@@ -1,68 +1,75 @@
 
 .img {
-    width: 100%; 
+    width: 20rem; 
 }
 .conteiner{
-    height: 100%;
-    width: 100%;
     padding: 16px;
-    border-radius: 20px ;
 }
 
 /*CONTAINER DE LA INFO*/
 .containerInfo{
     display: flex;
-    height: 60%; 
-    
-
+    flex-direction: column;
 }
-
-
 .container_photo{
-    display: flex;
-    align-items: flex-start;
-
-    width: 50%;
+    width: 100%;
+    text-align: center;
+    }
+@media (min-width: 768px) {
+    .container_photo{
+        flex: 2;
+        }
+    .containerInfo {
+        flex-direction: row;
+    }
 }
+
+
 
 .InfoLessDescription{
-    width: 50%;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    height: 100%;
-    
-
+    flex: 2;
+    margin-top: 1rem;
 }
 
 .title{
+    align-items: center;
     display: flex;
     flex-direction: column;
     padding: 20px;
-    height: 35%;
 }
 
 .title h2:first-letter {
     text-transform: uppercase;
 }
 
-.extra_info{
-    height: 65%;
-    display: flex;
-    flex-direction: column;
+@media (min-width : 768px) {
+    .extra_info > div {
+            margin-top: 1rem;
+    }
 
+   
+.InfoLessDescription{
+    margin:0;
+    text-align: center;
+}
+    
 }
 
-.extra_info > div {
-    padding: 16px;
-}
+
 
 /*Montos de dinero*/
 
 .cash{
     display: flex;
-
+    text-align: center;
 }
+
+.cash p {
+    padding: 1rem 0;
+    color: #028858;
+    font-weight: bold;
+}
+
 .cash > div {
     width: 50%;
 }
@@ -71,9 +78,18 @@
 /*DESCRIPCION DEL PROYECTO*/
 
 .description{
-    height: 40%;
     display: flex;
     flex-direction: column;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+
+@media (min-width:768px) {
+    .description{
+
+        text-align: start;
+    }
 }
 
 .description > h3{
@@ -82,6 +98,14 @@
 }
 
 .description_text{
-    height: 90%;
-    overflow-y: scroll;
+line-height: 1.5;
+font-size: 1.1rem;
+}
+
+.date {
+    text-align: center;
+}
+
+.date p {
+    padding: 1rem 0;
 }

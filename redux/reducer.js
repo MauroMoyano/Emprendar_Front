@@ -24,7 +24,8 @@ import {
   DELETE_SEARCH_AND_FILTER,
   FILTER_OF_ALL_PROJECTS_OR_SEARCH_PROJECTS,
   RESET_SCROLL,
-  CHANGE_PATH_AND_PAGE
+  CHANGE_PATH_AND_PAGE,
+  DELETE_COMMENT
 
 } from "./actions";
 
@@ -221,9 +222,16 @@ const rootReducer = (state = initialState, action) => {
       }
 
     case CREATE_COMMENT:
+     
       return {
-        ...state,
+        ...state, comments: action.payload
 
+      }
+
+      case DELETE_COMMENT: {
+        return {
+          ...state, comments : state.comments.filter(comment => comment.id !== action.payload )
+        }
       }
 
     case CLEAN_MESSAGE: {
