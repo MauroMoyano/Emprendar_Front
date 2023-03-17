@@ -21,6 +21,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 export default function Detail(props) {
+  console.log("props del detail",props);
   const dispatch = useDispatch();
   let userId = props.userId;
   let projectId = props.projectId;
@@ -81,7 +82,7 @@ export default function Detail(props) {
                         {/* {console.log(props)} */}
                       <PreviewPage name={selectorProject.title} id={selectorProject.id} image={selectorProject.img} description={selectorProject.description} userId={props.userId} projectId={props.projectId}/>
                     </div>
-                    <div> </div>
+                    <div><Link href={`/chats?IduserReceiver=${props.userId}`}> ENVIAR MENSAJE</Link></div>
                   </div>
                 </div>
               </div>

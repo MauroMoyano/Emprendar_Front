@@ -22,10 +22,9 @@ function Message(props){
 
 export default function ViewMessage(props){
     const [messages, setMessages] = useState([])
-    const [receptor, setReceptor] = useState({})
+    // const [receptor, setReceptor] = useState({})
     const [text,setTex] = useState("")
     //
-    console.log("props de viewM", props.userLogeado);
 
     // console.log( "Props de viewMessage", props);
     async function getMessages (){
@@ -113,7 +112,6 @@ export default function ViewMessage(props){
     </div>
     )
 }
-
 
  {/* 
                             const [flag, set flag] = useState(true)

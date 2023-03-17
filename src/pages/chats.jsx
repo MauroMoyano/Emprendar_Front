@@ -9,34 +9,66 @@ import style from "./styles/chats.module.css"
 
 export default function Chats(props){
 
+
     //datos del usurio logeado
     const User = useSelector(state => state.user)
-    
-    const [users, setUsers] = useState([]) 
-    useEffect(()=>{
-        if(User){
-            //traer todos los chats
-            async function getChats (){
-                
-                //traigo todos los mensajes que envio este usuario                
-                let users = await clienteAxios.get(`/chats/users`)
-                
-                setUsers(users.data)
-            } 
-            getChats()
-        }
-    },[User])
-
     //funcion que cambia el usuario al que se envia un msj
     const [receptor,setReceptor] = useState({})
+    const [users, setUsers] = useState([]) 
+         //function que se ejecuta desde el detail de project
+
+ function getDataReceptor (){
+    console.log("este es el id",props.querys.IduserReceiver);
+    console.log("este es users", users);
+    let searchUser = users.find((u)=> u.id === props.querys.IduserReceiver)
+    console.log("no encuetro al usuario de ese id", searchUser);
+    setReceptor(searchUser)
+    
+    }
+    console.log("esta es la query",props.querys.IduserReceiver);
+    let flag = props.querys.IduserReceiver
+    useEffect(()=>{
+        if(User){
+            async function getChats (){
+                
+                //traigo todos los users                
+                let result = await clienteAxios.get(`/chats/users`)
+                setUsers(result.data)
+                
+            } 
+            getChats()
+            
+        }
+        return ()=>{
+            props.querys.IduserReceiver = flag
+        }
+      
+    },[User])
+
+
+    useEffect(()=>{
+
+        if (props.querys.IduserReceiver) {
+            getDataReceptor()
+               
+             } else{
+                 console.log("nop entro");
+             }
+
+    },[users])
+
+   
+  
 
     //manejasdor del select
     const handlerSelect = (event) => {
+        props.querys.IduserReceiver = null
         let value = event.target.value
         let user_receptor = users.find((obj)=> obj.user_name === value)
         setReceptor(user_receptor);
-      };
+    };
 
+    
 
     return(
         <Layout>
@@ -68,8 +100,17 @@ export default function Chats(props){
                 <div className={style.box}>
                     <div className={style.conversaciones}> </div>
 
-                    {
-                      Object.keys(receptor).length
+                    {/* /*{selectorProject ? (
+                    Object.keys(selectorProject).length ? (
+                      <CardProjectDetail obj={selectorProject} />
+                    ) : (
+                      <>cargando en el detail</>
+                    )
+                  ) : null} */ }
+
+
+                    { receptor  ?
+                       (Object.keys(receptor).length
 
                         ?   <div className={style.viewMessage}>
                                 <div className={style.receptor}>
@@ -84,7 +125,8 @@ export default function Chats(props){
                                     />
                                 </div>
                             </div>
-                        : null    
+                        : null    )
+                        :<>cargando</>
                     }              
                 </div>        
             </div>   
@@ -92,4 +134,12 @@ export default function Chats(props){
     )
 }
 
+export async function getServerSideProps({ query }) {
+    
+   return{
+    props:{
+        querys :query
+    }
+   }
+}
 // <div className={style.sinReceptor} ></div>
