@@ -27,10 +27,17 @@ const Dashboard = (props) => {
     setProject({})
   }
 
+  const handlerSelect = (event) => {
+    const value = event.target.value
+    const result = projects.filter((proj)=> proj.validated === value)
+    setProjects(result)
+  }
+
   //Funcion que maneja el cambio de estado del proyecto
   const handlerProject = async (validate, id)=>{
     const response = await clienteAxios.put(`/project/validar/${id}`,{validate: validate})
     const {data} = await clienteAxios.get("/project/get/all")
+    data.sort((a,b)=> a.title - b.title)
     setProjects(data)
   }
 
@@ -152,10 +159,10 @@ const Dashboard = (props) => {
             <h2>Proyectos</h2>
             <div className={style.filter}>
               <p>Filtrar por</p>
-              <select name="" id="">
-                <option value="">Aceptados</option>
-                <option value="">En espera</option>
-                <option value="">Rechazados</option>
+              <select name="" id="" onSelect={handlerSelect}>
+                <option value="aceptados">Aceptados</option>
+                <option value="en espera">En espera</option>
+                <option value="rechazados">Rechazados</option>
               </select>
             </div>
 
@@ -231,12 +238,17 @@ const Dashboard = (props) => {
   );
 };
 
+
+
 export default Dashboard;
 
 export async function getServerSideProps() {
   const users = await clienteAxios.get("/user/admin/users");
 
   const project = await clienteAxios.get("/project/get/all");
+
+  project.data.sort((a,b)=> a.title - b.title)
+
   return {
     props: { users: users.data, projects: project.data },
   };
