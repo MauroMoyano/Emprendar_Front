@@ -51,12 +51,6 @@ export default function ViewMessage(props){
     },[props.receptor.id])
 
     
-
-
-    
-    
-    
-    
     //menejo del input 
     const handlerText = ({target}) =>{
         const {value} = target 
@@ -81,6 +75,7 @@ export default function ViewMessage(props){
     return(
         <div className={style.container} >
             <div className={style.view}>
+                
                 {
                     messages ? messages.map((m)=>{
                         // UserLog = { props.userLogeado}
@@ -100,13 +95,12 @@ export default function ViewMessage(props){
                                 obj={m}
                                 />
                         }
-                      
                     })   :null
                 }
             </div>
             <div className={style.form}>
                 <form onSubmit={hanlderSubmit} >
-                    <input onChange={handlerText} name="input" type="text" placeholder="..." value={text} />
+                    <input onChange={handlerText} name="input" type="text" placeholder="Escribe tu mensaje aquí..." value={text} />
                     <button onClick={()=>{}}>ENVIAR</button>
                 </form>
             </div>
