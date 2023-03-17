@@ -18,14 +18,13 @@ export default function Chats(props){
          //function que se ejecuta desde el detail de project
 
  function getDataReceptor (){
-    console.log("este es el id",props.querys.IduserReceiver);
-    console.log("este es users", users);
+    
     let searchUser = users.find((u)=> u.id === props.querys.IduserReceiver)
-    console.log("no encuetro al usuario de ese id", searchUser);
+   
     setReceptor(searchUser)
     
     }
-    console.log("esta es la query",props.querys.IduserReceiver);
+    
     let flag = props.querys.IduserReceiver
     useEffect(()=>{
         if(User){
