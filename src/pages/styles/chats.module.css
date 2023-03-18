@@ -26,20 +26,65 @@
     width: 80%;
     height: 90%;
     display: flex;
-    gap: 1rem;
+    
     padding: 1rem;
     border-radius: 8px;
 }
+.firstBox{
+    width: 40%;
 
+}
+
+.secondBox{
+  
+    width: 70%;
+    display: flex;
+}
+
+.switchBotton{
+    height: 10%;
+    background: #cfcff8;
+    display: flex;
+    align-items: center;
+    padding: .1rem;
+}
+.buttom{
+    transition: .5s;
+    border-radius: 50%;
+    background: #a124b4;
+
+    height: 100%;
+    width: 15%;
+    cursor: pointer;
+
+}
+.switchBotton > div:hover{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0%;
+    padding: auto auto;
+    transition: .5s;
+    border-radius: 5rem 5rem 5rem 5rem;  
+    width: 30%;
+    
+}
+
+.switchBotton > div:hover::before{
+    color: aliceblue;
+    content: "Usuarios";
+
+}
 .conversaciones{
     background: #cfcff8;
-    width: 30%;
+    width: 100%;
     overflow-y: scroll;
     overflow-x: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
- 
+    height: 90%;
+
       
 }
 
@@ -70,7 +115,7 @@
 
 .viewMessage{
     background: #054217;
-    width: 70%;
+    width: 100%;
     display: flex;
     flex-direction: column;
 }
@@ -91,7 +136,7 @@
 
 
 .view{
-    height: 90%;
+    height: 100%;
 
 }
 
