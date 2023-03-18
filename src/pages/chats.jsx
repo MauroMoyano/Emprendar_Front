@@ -8,17 +8,22 @@ import style from "./styles/chats.module.css"
 
 
 export default function Chats(props){
-
-
+    
+    
     //datos del usurio logeado
     const User = useSelector(state => state.user)
+
     //funcion que cambia el usuario al que se envia un msj
     const [receptor,setReceptor] = useState({})
-    const [users, setUsers] = useState([]) 
-        
-    const [allUsers,setAllUsers] = useState([])
+    const [switchBo, setSwitch ] = useState(true)
     
-    //function que se ejecuta desde el detail de project
+    //estado de todos los usuarios y copia para manejar los filtros
+    const [users, setUsers] = useState([]) 
+    const [allUsers,setAllUsers] = useState([])
+   
+    //estado de mis conversaciones y copia para manejar los filtros
+    const [conversations, setConversations] = useState([])
+    const [allConversations, setAllConversations]= useState([])
 
  function getDataReceptor (){
     
@@ -37,6 +42,11 @@ export default function Chats(props){
                 let result = await clienteAxios.get(`/chats/users`)
                 setUsers(result.data)
                 setAllUsers(result.data)
+
+                //traer los usuarios con los que converse
+                let conversations = await clienteAxios.get(`/chats/getownchats?user=${User.user_name}`)
+                setConversations(conversations.data)
+                setAllConversations(conversations.data)
             } 
             getChats()
             
@@ -44,18 +54,16 @@ export default function Chats(props){
         return ()=>{
             props.querys.IduserReceiver = flag
         }
+        
       
     },[User])
 
 
     useEffect(()=>{
-
         if (props.querys.IduserReceiver) {
             getDataReceptor()
                
-             } else{
-                 console.log("nop entro");
-             }
+        } 
 
     },[users])
 
@@ -71,80 +79,133 @@ export default function Chats(props){
         setReceptor(user_receptor);
     };
 
-    //input para filtrado de users
+    //input para filtrado de todos los users
     const [search,setSearch] = useState("")
-    console.log(search);
-
-    //copia de todos los users
     
-
     const handlerSearch = (event)=>{
         const {value} = event.target;
-        setSearch(value)
-        
-        let filtro = allUsers.filter((u)=> u.user_name.includes(value) )
-        console.log("este es el filro",filtro);
-        console.log("este es el fallUsers", allUsers);
-
-    
-        setUsers(filtro)
-        
-
+        setSearch(value);
+        let filtro = allUsers.filter((u)=> u.user_name.includes(value) );
+        setUsers(filtro);
     }
 
     const handlerSubmit = (event) =>{
         event.preventDefault();
-
         setSearch("")
     }
-    
+
+
+    //input para filtrado de todas mis conversaciones
+    const [search_conversation,set_search_conversation] = useState("")
+
+
+    const handlerSearch_conversation = (event)=>{
+        const {value} = event.target;
+        set_search_conversation(value);
+
+        let filtro = allConversations.filter((u)=> u.user_name.includes(value) );
+        setConversations(filtro);
+    }
+
+    const handlerSubmit_conversation = (event) =>{
+        event.preventDefault();
+        search_conversation("")
+    }
+
+
+
+
+
+
+
+    //cambios de estado para las busquedas entre mis conversaciones y todos los usuarios
+
+    const handlerSwich = () =>{
+        setSwitch(!switchBo)  
+    }
 
     return(
         <Layout>
             <div className={style.container}>               
                 <div className={style.box}>
-                    <div className={style.conversaciones}>
-                        <form onSubmit={handlerSubmit}>
-                            <input type="text" onChange={handlerSearch} value={search}/>
-                        </form>
-                        { users.length
-                            ? users?.map(u =>{
-            
-                                return (
-                                    <>
-                                        <div className={style.chatUser}  onClick={() => handlerSelect(u.id)} >
-                                            <img src={u.profile_img} alt="user" />
-                                            <p> {u.user_name}</p>
-                                        </div>
-                                    </>
-                                )
-                            })  
-                            : null 
-                        }
-                    </div>
+                   <div className={style.firstBox}>
+                        {
+                            switchBo 
+                            ? <div className={style.conversaciones} >
+                                <form onSubmit={handlerSubmit_conversation}>
+                                    <input type="text" onChange={handlerSearch_conversation} value={search_conversation}/>
+                                </form>
+                                <h3>Mis chats</h3>
+                   
+                                { conversations.length
+                                    ? conversations.map((u)=>{
+                                        return (
+                                            <>
+                                                <div className={style.chatUser}  onClick={() => handlerSelect(u.id)} >
+                                                    <img src={u.profile_img} alt="user" />
+                                                    <p> {u.user_name}</p>
+                                                </div>
+                                            </>
+                                        )
+                                    }) 
+                                    : null
+                                    
 
-                    { receptor  ?
-                       (Object.keys(receptor).length
-
-                        ?   <div className={style.viewMessage}>
-                                <div className={style.receptor}>
-                                    <h3>{receptor.user_name}</h3>   
-                                </div>
-                                <div className={style.view} >
-
-                                    <ViewMessage
-                                        userLogeado = {User}
-                                        userSender = {User}
-                                        receptor = {receptor}
-                                    />
-                                </div>
+                                }
                             </div>
-                        : <div className={style.hidden}>
-                            {/* <img src={hiddenImg} alt="chatImg" /> */}
-                            <p>Selecciona un usuario para iniciar un chat</p>   
-                        </div>   )
-                        :<>cargando</>
-                    }              
+
+                            
+                            : <div className={style.conversaciones}>
+                                <form onSubmit={handlerSubmit}>
+                                    <input type="text" onChange={handlerSearch} value={search}/>
+                                </form>
+                                <h3>Todos los users</h3>
+
+                            { users.length
+                                ? users?.map(u =>{
+                
+                                    return (
+                                        <>
+                                            <div className={style.chatUser}  onClick={() => handlerSelect(u.id)} >
+                                                <img src={u.profile_img} alt="user" />
+                                                <p> {u.user_name}</p>
+                                            </div>
+                                        </>
+                                    )
+                                })  
+                                : null 
+                            }
+                        </div>
+                        }
+                        <div className={style.switchBotton}>
+                            <div  className={style.buttom} onClick={()=>handlerSwich()}></div>
+                        </div>
+                   </div>
+                    
+                    <div className={style.secondBox}>
+                        { receptor  ?
+                        (Object.keys(receptor).length
+
+                            ?   <div className={style.viewMessage}>
+                                    <div className={style.receptor}>
+                                        <h3>{receptor.user_name}</h3>   
+                                    </div>
+                                    <div className={style.view} >
+
+                                        <ViewMessage
+                                            userLogeado = {User}
+                                            userSender = {User}
+                                            receptor = {receptor}
+                                        />
+                                    </div>
+                                </div>
+                            : <div className={style.hidden}>
+                                {/* <img src={hiddenImg} alt="chatImg" /> */}
+                                <p>Selecciona un usuario para iniciar un chat</p>   
+                            </div>   )
+                            :<>cargando</>
+                        }              
+                    </div>
                 </div>        
             </div>   
         </Layout>
