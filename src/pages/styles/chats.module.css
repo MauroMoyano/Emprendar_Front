@@ -1,0 +1,194 @@
+.container{
+    height: 100vb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+.users_containers{
+    background: #bcb6b6;
+    width: 80%;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 3rem;
+}
+
+.users_containers> select{
+    height: 3rem;
+    width: 30%;
+}
+
+.box{
+    background: #3C1642;
+    width: 80%;
+    height: 90%;
+    display: flex;
+    
+    padding: 1rem;
+    border-radius: 8px;
+}
+.firstBox{
+    width: 40%;
+
+}
+
+.secondBox{
+  
+    width: 70%;
+    display: flex;
+}
+
+.switchBotton{
+    height: 10%;
+    background: #cfcff8;
+    display: flex;
+    align-items: center;
+    padding: .1rem;
+}
+.buttom{
+    transition: .5s;
+    border-radius: 50%;
+    background: #a124b4;
+
+    height: 100%;
+    width: 15%;
+    cursor: pointer;
+
+}
+.switchBotton > div:hover{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0%;
+    padding: auto auto;
+    transition: .5s;
+    border-radius: 5rem 5rem 5rem 5rem;  
+    width: 30%;
+    
+}
+
+.switchBotton > div:hover::before{
+    color: aliceblue;
+    content: "Usuarios";
+
+}
+.conversaciones{
+    background: #cfcff8;
+    width: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 90%;
+
+      
+}
+
+.conversaciones::-webkit-scrollbar {
+    display: none;
+                  /* width of the entire scrollbar */
+  }
+
+.conversaciones> form {
+    background: #a496df;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 1.5rem;
+    align-items: center;
+
+}
+
+.conversaciones> form > input{
+    width: 80%;
+    height: 150%;
+    border-radius: .5rem;
+    padding-inline-start: 1rem;
+    font-size: 15px;
+    
+}
+
+
+.viewMessage{
+    background: #054217;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.sinReceptor{
+    width: 70%;
+    background: #000;
+}
+
+.receptor{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #cfcff8;
+    height: 10%;
+    font-size: 1rem;
+}
+
+
+.view{
+    height: 100%;
+
+}
+
+.chatUser {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    border-bottom: 2px solid #3C1642;
+    width: 80%;
+    height: auto;
+    margin:  10px auto;
+    gap: 1em;
+    cursor: pointer;
+    -webkit-transition: all .15s ease-in-out;
+    transition: all .15s ease-in-out;
+    background-color: transparent;
+}
+
+.chatUser:hover {
+    animation: pulse 1s step-start;
+    transition: .3s;
+}
+
+@keyframes pulse {
+    0% {
+      transform: scale(1);
+    }
+    70% {
+      transform: scale(.9);
+    }
+      100% {
+      transform: scale(1);
+    }
+  }
+
+.chatUser img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+
+.hidden {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-left: 0 auto;
+    margin: 0 auto;
+}
+.hidden p {
+    color: white;
+    font-size: 1.5rem;
+    margin-top: 1em;
+}
+
