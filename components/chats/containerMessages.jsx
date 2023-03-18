@@ -22,10 +22,9 @@ function Message(props){
 
 export default function ViewMessage(props){
     const [messages, setMessages] = useState([])
-    const [receptor, setReceptor] = useState({})
+    // const [receptor, setReceptor] = useState({})
     const [text,setTex] = useState("")
     //
-    console.log("props de viewM", props.userLogeado);
 
     // console.log( "Props de viewMessage", props);
     async function getMessages (){
@@ -100,14 +99,13 @@ export default function ViewMessage(props){
             </div>
             <div className={style.form}>
                 <form onSubmit={hanlderSubmit} >
-                    <input onChange={handlerText} name="input" type="text" placeholder="Escribe tu mensaje aquí..." value={text} />
+                <input onChange={handlerText} name="input" type="text" placeholder="Escribe tu mensaje aquí..." value={text} />
                     <button onClick={()=>{}}>ENVIAR</button>
                 </form>
             </div>
     </div>
     )
 }
-
 
  {/* 
                             const [flag, set flag] = useState(true)

@@ -201,7 +201,7 @@ font-family: 'Montserrat', sans-serif;
  /* ----- Filtros Desplegables ----- */
 
 .dropdown{
-    width: 200px;
+    width: 150px;
     display: inline-block;
     position: relative;
     height: 60px;
@@ -222,7 +222,7 @@ font-family: 'Montserrat', sans-serif;
     display: flex;
     flex-direction: column;
     position: absolute;
-    width: auto;
+    width: 150px;
     height: auto;
     
 }

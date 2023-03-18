@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import CardProjectDetail from "../../../components/rutaDetail/cardProjectDetail";
 import CardUser from "components/rutaDetail/cardUser";
@@ -21,10 +21,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleArrowLeft } from "@fortawesome/free-solid-svg-icons";
 
 export default function Detail(props) {
+
   const dispatch = useDispatch();
   let userId = props.userId;
   let projectId = props.projectId;
   const selectorProject = useSelector((state) => state.detailProject);
+
+
 
   useEffect(() => {
     dispatch(getDetailProject(projectId));
@@ -81,7 +84,7 @@ export default function Detail(props) {
                         {/* {console.log(props)} */}
                       <PreviewPage name={selectorProject.title} id={selectorProject.id} image={selectorProject.img} description={selectorProject.description} userId={props.userId} projectId={props.projectId}/>
                     </div>
-                    <div> </div>
+                    <div><Link href={`/chats?IduserReceiver=${props.userId}`}> ENVIAR MENSAJE</Link></div>
                   </div>
                 </div>
               </div>
