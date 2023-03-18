@@ -1,0 +1,105 @@
+.card {
+    width: 190px;
+    height: 254px;
+    background: #f0f0f0;
+    border-radius: 10px;
+    text-align: center;
+    transition: all 0.5s;
+}
+
+.card:hover {
+    box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.623);
+    background-color: #9d33ad;
+}
+
+.card .blob {
+    height: 10px;
+    width: 75%;
+    border-radius: 0 0 30px 30px;
+    margin: 0 auto;
+    background-color: #3C1642;
+    visibility: visible;
+    transition: all 0.3s;
+}
+
+.card:hover .blob {
+    height: 0;
+}
+
+.card .img {
+    display: flex;
+    margin: 30px auto 10px auto;
+    width: 70px;
+    height: 70px;
+    background-color: #3C1642; 
+    border-radius: 50%;
+    font-size: 11px;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.5s;
+}
+
+.card:hover .img {
+    width: 100%;
+    height: 70%;
+    border-radius: 10px;
+    margin: 0 auto;
+    background-color: #f0f0f0;
+    z-index: 99999;
+}
+
+.card h2 {
+    padding: 15px 10px;
+    font-size: 25px;
+    transition: all 0.1s;
+    z-index: -99;
+    line-height: 17px;
+    border: solid springgreen 2px;
+}
+
+.card>h2>p {
+    padding-bottom: 0.1vh;
+}
+
+.card span {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    text-align: center;
+    font-size: 18px;
+}
+
+.card>span>p {
+    padding: 20%;
+}
+
+.card:hover h2 {
+    opacity: 0;
+    width: 100%;
+    position: absolute;
+    transition: all 0.5s;
+}
+
+.card>p {
+    opacity: 0;
+    transition: all 0.50s;
+}
+
+.card>p>span {
+    border: solid springgreen 2px;
+}
+
+.card>p>span>p {
+    padding: 10%;
+    font-size: 15px;
+}
+
+.card:hover>p {
+    padding: 5px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    text-align: center;
+    justify-content: center;
+    position: absolute;
+    opacity: 1;
+    transition: all 0.1s;
+}

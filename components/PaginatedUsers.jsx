@@ -4,7 +4,7 @@ import { getUsersToScroll, resetScroll } from "redux/actions";
 import { CardsUsers } from "./CardsUsers"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus } from "@fortawesome/free-solid-svg-icons";
-
+import style from './styles/PaginatedUsers.module.css'
 
 
 
@@ -45,29 +45,29 @@ export const PaginatedUsers = () => {
 
 
     return (
-        <>
-            paginado de usuarios
-            <br />
-            {
-                allUsers?.map(user => {
-                    return (
-                        <CardsUsers
-                            key={user.id}
-                            user_name={user.user_name}
-                            name={user.name}
-                            last_name={user.last_name}
-                            reputation={user.reputation}
-                            profile_img={user.profile_img}
-                            projects={user.projects}
+        <div className={style.boxCard}>
+            <div className={style.cards}>
+                {
+                    allUsers?.map(user => {
+                        return (
+                            <CardsUsers
+                                key={user.id}
+                                user_name={user.user_name}
+                                name={user.name}
+                                last_name={user.last_name}
+                                reputation={user.reputation}
+                                profile_img={user.profile_img}
+                                projects={user.projects}
 
-                        />
-                    )
-                })
-            }
-            <div>
-                <button type="button" onClick={() => loadMore()}><FontAwesomeIcon icon={faCirclePlus} /* className={style.theIcon} */ />Mas Usuarios</button>
+                            />
+                        )
+                    })
+                }
+                <div className={style.buttonContainer}>
+                    <button type="button" onClick={() => loadMore()}><FontAwesomeIcon icon={faCirclePlus} /* className={style.theIcon} */ />Mas Usuarios</button>
+                </div>
             </div>
-        </>
+        </div>
     )
 
 
