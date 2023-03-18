@@ -4,7 +4,7 @@ import clienteAxios from "config/clienteAxios";
 import { use, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import style from "./styles/chats.module.css"
-import hiddenImg from "../../components/chats/img/undraw_Online_test_re_kyfx.png"
+
 
 
 export default function Chats(props){
@@ -126,29 +126,33 @@ export default function Chats(props){
 
     return(
         <Layout>
-            <div className={style.container}>
-                <div className={style.users_containers}>
-                    <h3>Usuarios :</h3>
-                    <select name="" id=""  onChange={handlerSelect} >
-                        <option disabled selected>
-                            ELIGE UN USUARIO PARA CONTACTAR
-                        </option>
-                        { users.length
-                            ? users?.map(u =>{
-            
-                                return (
-                                    <>
-                                       <div className={style.chatUser}  onClick={() => handlerSelect(u.id)} >
-                                           <img src={u.profile_img} alt="user" />
-                                           <p> {u.user_name}</p>
-                                       </div>
-                                    </>
-                                )
-                            })  
-                            : null 
-                        }
-                    </select>
-                </div>
+            <div className={style.container}>               
+                <div className={style.box}>
+                   <div className={style.firstBox}>
+                        {
+                            switchBo 
+                            ? <div className={style.conversaciones} >
+                                <form onSubmit={handlerSubmit_conversation}>
+                                    <input type="text" onChange={handlerSearch_conversation} value={search_conversation}/>
+                                </form>
+                                <h3>Mis chats</h3>
+                   
+                                { conversations.length
+                                    ? conversations.map((u)=>{
+                                        return (
+                                            <>
+                                                <div className={style.chatUser}  onClick={() => handlerSelect(u.id)} >
+                                                    <img src={u.profile_img} alt="user" />
+                                                    <p> {u.user_name}</p>
+                                                </div>
+                                            </>
+                                        )
+                                    }) 
+                                    : null
+                                    
+
+                                }
+                            </div>
 
                             
                             : <div className={style.conversaciones}>
@@ -225,16 +229,14 @@ export async function getServerSideProps({ query }) {
                             ELIGE UN USUARIO PARA CONTACTAR
                         </option>
                         { users.length
-                            ? users?.map(u =>{
+                            ? users.map(u =>{
             
-                                return (
-                                    <>
-                                       <div className={style.chatUser}  onClick={() => handlerSelect(u.id)} >
-                                           <img src={u.profile_img} alt="user" />
-                                           <p> {u.user_name}</p>
-                                       </div>
-                                    </>
-                                )
+                                return <option
+                                    key={u.id}
+                                    value={u.user_name}
+                                >
+                                    {u.user_name}
+                                </option>
                             })  
                             : null 
                         }
