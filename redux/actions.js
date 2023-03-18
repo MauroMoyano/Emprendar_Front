@@ -14,6 +14,7 @@ export const FILTER_COUNTRY = "FILTER_COUNTRY";
 export const CREATE_PROJECT = "CREATE_PROJECT";
 export const SEARCH_VALUE = "SEARCH_VALUE"
 
+/* para proyectos */
 export const DELETE_SEARCH_AND_FILTER = "DELETE_SEARCH_AND_FILTER"
 export const FILTER_OF_ALL_PROJECTS_OR_SEARCH_PROJECTS = "FILTER_OF_ALL_PROJECTS_OR_SEARCH_PROJECTS"
 export const RESET_SCROLL = "RESET_SCROLL"
@@ -21,6 +22,10 @@ export const CHANGE_PATH_AND_PAGE = "CHANGE_PATH_AND_PAGE"
 
 /* con paginado inf */
 export const GET_PROJECT_INFITITY_SCROLL = "GET_PROJECT_INFITITY_SCROLL"
+
+/* para users */
+export const CHANGE_PATH_AND_PAGE_USERS = "CHANGE_PATH_AND_PAGE_USERS"
+export const GET_USERS_INFITITY_SCROLL = "GET_USERS_INFITITY_SCROLL"
 
 //types para el registro
 
@@ -96,6 +101,20 @@ export const resetScroll = () => {
     dispatch({ type: RESET_SCROLL, payload: [] })
   }
 }
+
+export const getUsersToScroll = (page, path) => {
+  return async function (dispatch) {
+    const { data } = await clienteAxios.get(`/user?page=${page}&${path}`)
+    dispatch({ type: GET_USERS_INFITITY_SCROLL, payload: data })
+  }
+}
+
+export const changePathToFilterAndSearchUsers = (path) => {
+  return async function (dispatch) {
+    dispatch({ type: CHANGE_PATH_AND_PAGE_USERS, payload: path })
+  }
+}
+
 
 /*  */
 
@@ -304,21 +323,21 @@ export const createComments = (data) => {
 //delete comment 
 
 export const deleteComment = (commentId) => {
-return async function(dispatch) {
+  return async function (dispatch) {
 
 
-  try {
-    const  response = await clienteAxios.delete(`/comment/${commentId}`)
+    try {
+      const response = await clienteAxios.delete(`/comment/${commentId}`)
 
       dispatch({
         type: DELETE_COMMENT,
         payload: response.data.toRedux.id
       })
-  } catch (error) {
-    console.log(error)
-  }
+    } catch (error) {
+      console.log(error)
+    }
 
-}
+  }
 }
 
 
