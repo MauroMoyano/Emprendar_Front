@@ -1,0 +1,295 @@
+.div_gral {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #babafa;
+}
+
+.container {
+    /* border: 1px solid red; */
+    background: #cfcff8;
+    min-height: 100vh;
+    max-width: 70vw;
+    box-shadow: 0px 2px 15px #000;
+    display: flex;
+    flex-direction: row;
+     
+}
+
+.div_datos {
+    border: 1px solid blue;
+    margin-top: 20px;
+    width: 70%;
+    padding: 1rem;
+}
+
+.div_userInfo {
+    border: 1px solid violet;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+}
+
+.div_img {
+    /* border: 1px solid blueviolet; */
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+}
+
+.div_edit_image {
+    position: relative
+}
+
+.fa {
+    /* border: 1px solid green; */
+    position: absolute;
+    width: 100%;
+    height: 96%;
+    border-radius: 20px;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background: rgba(60, 22, 66, .5);
+    cursor: pointer;
+}
+
+.fa.visible {
+    display: flex;
+}
+
+.edit_icon {
+    /* border: 1px solid red; */
+    width: 30px;
+    height: 30px;
+    color: #FFF;
+}
+
+.div_edit_image>img {
+    width: 100%;
+    max-width: 190px;
+    height: auto;
+    border: 5px solid #3C1642;
+    border-radius: 20px;
+}
+
+.img_loading {
+    color: #008000;
+    height: 23px;
+    font-style: italic;
+    font-size: 15px;
+    font-weight: bold;
+    margin: 2px auto;
+    display: none;
+}
+
+.img_loading.visible {
+    display: block;
+}
+
+.photo_buttons {
+    margin: 3px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.photo_buttons>button:nth-child(1) {
+    height: 23px;
+    padding: 2px;
+    background: #007200;
+    border: 1px solid #007200;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 11px;
+}
+
+.photo_buttons>button:nth-child(1):hover {
+    background: #008000;
+    border: 2px solid #008000;
+    box-shadow: 0px 2px 8px black;
+    text-shadow: 0px 2px 8px black;
+}
+
+.photo_buttons>button:nth-child(2) {
+    height: 23px;
+    padding: 2px;
+    background: #9d0208;
+    border: 1px solid #9d0208;
+    border-radius: 5px;
+    color: #fff;
+    font-weight: bold;
+    font-size: 11px;
+}
+
+.photo_buttons>button:nth-child(2):hover {
+    background: #d00000;
+    border: 2px solid #d00000;
+    box-shadow: 0px 2px 8px black;
+    text-shadow: 0px 2px 8px black;
+}
+
+.main_user_info {
+    /* border: 1px solid red; */
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    gap:20px;
+
+}
+
+.div_nombres {
+    /* border: 1px solid green; */
+    display: flex;
+    width: 50%;
+    height: 80px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+
+}
+
+.div_apellidos {
+    /* border: 1px solid blue; */
+    display: flex;
+    width: 50%;
+    height: 80px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+}
+
+.div_nombres>h4,
+.div_apellidos>h4 {
+    /* border: 1px solid green; */
+    border-bottom: 1.5px solid black;
+    padding-bottom: 1px;
+    font-weight: normal;
+    font-style: italic;
+    font-size: 15px;
+}
+
+.input_name,
+.input_apellido {
+    width: 100%;
+    height: 35px;
+    font-size: 25px;
+    font-weight: bold;
+    background-color: transparent;
+    border: none;
+    cursor: default;
+}
+
+.input_name.edit,
+.input_apellido.edit {
+    background-color: #fff;
+    border: 1px solid #3C1642;
+    border-radius: 5px;
+    cursor: text;
+}
+
+.input_name:focus,
+.input_apellido:focus {
+    outline: none;
+}
+
+.errorInputs {
+    color: red;
+    font-size: 12px;
+    font-style: italic;
+}
+
+.userInfo_buttons {
+    /* border: 1px solid black; */
+    width: 70%;
+    
+}
+
+.edit_info {
+    height: 30px;
+    padding: 3px;
+    border: 2px solid #2e034b;
+    border-radius: 5px;
+    font-weight: bold;
+    background: #2e034b;
+    color: #fff;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.save_info {
+    height: 30px;
+    padding: 3px;
+    border: 2px solid #007200;
+    border-radius: 5px;
+    font-weight: bold;
+    background: #007200;
+    color: #fff;
+    margin-left: 20px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    display: none;
+}
+
+.cancel_info {
+    height: 30px;
+    padding: 3px;
+    border: 2px solid #9d0208;
+    border-radius: 5px;
+    font-weight: bold;
+    background: #9d0208;
+    color: #fff;
+    margin-left: 20px;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    display: none;
+
+}
+
+.save_info.visible,
+.cancel_info.visible {
+    display: inline-block;
+}
+
+.save_info:hover {
+    background: #008000;
+    border: 2px solid #008000;
+    box-shadow: 0px 2px 8px black;
+    text-shadow: 0px 2px 8px black;
+}
+
+.edit_info:hover {
+    background: #09c7ae;
+    border: 2px solid #09c7ae;
+    box-shadow: 0px 2px 8px black;
+    text-shadow: 0px 2px 8px black;
+
+}
+
+.cancel_info:hover {
+    background: #d00000;
+    border: 2px solid #d00000;
+    box-shadow: 0px 2px 8px black;
+    text-shadow: 0px 2px 8px black;
+}
+
+.div_extra_info {
+    border: 1px solid darkmagenta;
+}
+
+.div_password {
+    border: 1px solid green;
+}
+
+.div_projects{
+    border: 1px solid red;
+    margin-top: 20px;
+    width: 30%;
+    padding: 1rem;
+}
+
+.projects_container{
+    border: 1px solid green;
+}
