@@ -9,11 +9,36 @@ import Modal from "react-modal"
 import CardProjectDetail from "../../components/rutaDetail/cardProjectDetail";
 
 const Dashboard = (props) => {
-
+  const pageP = []
   const [users, setUsers] = useState(props.users);
 
   const [projects, setProjects] = useState(props.projects);
+  const [pageProjects, setPageProjects] = useState(0)
+
+  for (let i = 0; i < projects.length; i = i + 6) {
+    pageP.push(projects.slice(i, i + 6 || projects.length))
+  }
+  console.log("pageP --------------------------->",pageP)
+  const handlePrevClick = ()=>{
+    pageProjects > 0 && setPageProjects(pageProjects - 1)
+  }
+  const handleNextClick = ()=>{
+    pageProjects < pageP.length - 1 && setPageProjects(pageProjects + 1)
+
+  }
+  const handlePage = (event)=> {
+    setPageProjects(parseInt(event.target.value))
+  }
+
+
+
   const [projectFilter, setProjectFilter] = useState(props.projects)
+
+
+
+
+
+
 
   const [isOpen, setIsOpen] = useState(false)
   const [project, setProject] = useState({})
@@ -173,6 +198,17 @@ const Dashboard = (props) => {
                 <option value="espera">En espera</option>
                 <option value="rechazado">Rechazados</option>
               </select>
+              <button onClick={handlePrevClick}> Atrás</button>
+              {
+                pageP.map((p,index)=> <button
+                  key={index}
+                  value={index}
+                  onClick={handlePage}
+                  > {index + 1} </button>
+                )
+              }
+              <button onClick={handleNextClick}> Siguiente</button>
+
             </div>
 
             <table className={style.table}>
@@ -181,16 +217,15 @@ const Dashboard = (props) => {
                   <th>Imagen</th>
                   <th>Nombre</th>
                   <th>Estado</th>
-                  <th>Fecha de creacion</th>
+                  <th>Fecha de creación</th>
                   <th>Monto donado</th>
                   <th>Acciones</th>
                 </tr>
               </thead>
 
               <tbody>
-                {/* {console.log(projects)} */}
 
-                {projects.map((e) => (
+                {pageP[pageProjects].map((e) => (
                   <tr key={e.id}>
                     <td>
                       <img className={style.imageProject} onClick={()=>openModal(e)} src={e.img} alt="" />
