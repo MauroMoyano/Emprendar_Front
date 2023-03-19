@@ -13,6 +13,7 @@ const Dashboard = (props) => {
   const [users, setUsers] = useState(props.users);
 
   const [projects, setProjects] = useState(props.projects);
+  const [projectFilter, setProjectFilter] = useState(props.projects)
 
   const [isOpen, setIsOpen] = useState(false)
   const [project, setProject] = useState({})
@@ -25,6 +26,20 @@ const Dashboard = (props) => {
   const closeModal = () =>{
     setIsOpen(false)
     setProject({})
+  }
+
+  const handlerSelect = async (event) => {
+    const value = event.target.value
+    if(value !== "all") {
+      console.log("projects ",projects, " projectFilter", projectFilter)
+      const result = projectFilter.filter((proj) => proj.validated === value)
+      console.log(" Result ", result)
+      setProjects(result)
+    }else{
+      const {data} = await clienteAxios.get("/project/get/all")
+      data.sort((a,b)=> a.title - b.title)
+      setProjects(data)
+    }
   }
 
   //Funcion que maneja el cambio de estado del proyecto
@@ -152,10 +167,11 @@ const Dashboard = (props) => {
             <h2>Proyectos</h2>
             <div className={style.filter}>
               <p>Filtrar por</p>
-              <select name="" id="">
-                <option value="">Aceptados</option>
-                <option value="">En espera</option>
-                <option value="">Rechazados</option>
+              <select name="" id="" onChange={handlerSelect}>
+                <option value="all" > Todos </option>
+                <option value="aceptado">Aceptados</option>
+                <option value="espera">En espera</option>
+                <option value="rechazado">Rechazados</option>
               </select>
             </div>
 
@@ -231,12 +247,17 @@ const Dashboard = (props) => {
   );
 };
 
+
+
 export default Dashboard;
 
 export async function getServerSideProps() {
   const users = await clienteAxios.get("/user/admin/users");
 
   const project = await clienteAxios.get("/project/get/all");
+
+  project.data.sort((a,b)=> a.title - b.title)
+
   return {
     props: { users: users.data, projects: project.data },
   };

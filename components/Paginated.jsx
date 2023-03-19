@@ -16,7 +16,7 @@ export default function Paginated(/* data */) {
     /* const { toPath } = data */
 
     /* const currentPage = useSelector(state => state.currentPage) */
-    const { allProjects, filterProjects, searchProjects, numPages, pathValue } = useSelector(state => state)
+    const { allProjects, numPages, pathValue } = useSelector(state => state)
 
     const dispatch = useDispatch()
 
@@ -61,21 +61,11 @@ export default function Paginated(/* data */) {
     }
  */
 
-
-
-    let toView;
-
-    filterProjects.length
-        ? toView = filterProjects
-        : searchProjects.length
-            ? toView = searchProjects
-            : toView = allProjects
-
     return (
         <div className={style.container}>
             <div className={style.cards}>
                 {
-                    toView?.map(project => {
+                    allProjects?.map(project => {
                         return (
                             <CardProject
                                 key={project.id}
@@ -94,14 +84,14 @@ export default function Paginated(/* data */) {
                         )
                     })
                 }
-                
-                    {
+
+                {
                     isLoading && <SyncLoader />
-                    }
-                
+                }
+
             </div>
             <div className={style.buttonContainer}>
-                <button type="button" onClick={() => loadMore()}><FontAwesomeIcon icon={faCirclePlus} className={style.theIcon}/>Proyectos</button>
+                <button type="button" onClick={() => loadMore()}><FontAwesomeIcon icon={faCirclePlus} className={style.theIcon} />Proyectos</button>
             </div>
         </div>
     )

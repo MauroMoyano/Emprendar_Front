@@ -25,7 +25,9 @@ import {
   FILTER_OF_ALL_PROJECTS_OR_SEARCH_PROJECTS,
   RESET_SCROLL,
   CHANGE_PATH_AND_PAGE,
-  DELETE_COMMENT
+  DELETE_COMMENT,
+  GET_USERS_INFITITY_SCROLL,
+  CHANGE_PATH_AND_PAGE_USERS
 
 } from "./actions";
 
@@ -33,9 +35,9 @@ const initialState = {
   allProjects: [],
   numPages: '',
   pathValue: 'orden=&country=&category=&search=',
-  allProjectsCopy: [],
-  filterProjects: [],
-  searchProjects: [],
+  /* solo para usuarios */
+  pathUserValue: 'orden=&search=',
+  allUsers: [],
   /*  */
   detailUsuario: {},
   detailProject: {},
@@ -44,7 +46,6 @@ const initialState = {
   category: [],
   country: [],
   dashAdmin: { projects: [], users: [] },
-  currentPage: 0,
 
   //estados para el autenticado
   token: typeof window != "undefined" ? localStorage.getItem("token") : "",
@@ -62,7 +63,6 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         /* allProjects: action.payload.data, */
         /* allProjectsCopy: action.payload.data, */
-        currentPage: 0,
         category: action.payload.category,
         country: action.payload.country,
       };
@@ -72,21 +72,34 @@ const rootReducer = (state = initialState, action) => {
         allProjects: state.allProjects.concat(action.payload.data),
         numPages: action.payload.pages
       }
-    case DELETE_SEARCH_AND_FILTER:
+    case GET_USERS_INFITITY_SCROLL:
+      return {
+        ...state,
+        allUsers: state.allUsers.concat(action.payload.data),
+        numPages: action.payload.pages
+      }
+    case CHANGE_PATH_AND_PAGE_USERS:
+      return {
+        ...state,
+        allUsers: [],
+        pathUserValue: action.payload
+      }
+    /* case DELETE_SEARCH_AND_FILTER:
       return {
         ...state,
         filterProjects: action.payload,
         searchProjects: action.payload,
-      }
-    case FILTER_OF_ALL_PROJECTS_OR_SEARCH_PROJECTS:
+      } */
+    /* case FILTER_OF_ALL_PROJECTS_OR_SEARCH_PROJECTS:
       return {
         ...state,
         filterProjects: action.payload
-      }
+      } */
     case RESET_SCROLL:
       return {
         ...state,
-        allProjects: action.payload
+        allProjects: action.payload,
+        allUsers: action.payload
       }
     case CHANGE_PATH_AND_PAGE:
       return {
@@ -95,8 +108,8 @@ const rootReducer = (state = initialState, action) => {
         pathValue: action.payload
       }
 
-    case CURRENT_PAGE:
-      return { ...state, currentPage: action.payload };
+    /* case CURRENT_PAGE:
+      return { ...state, currentPage: action.payload }; */
 
     case GET_DETAIL_PROJECT:
       return {
@@ -113,7 +126,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         detailUsuario: action.payload,
       };
-    case ORDER_TOP:
+    /* case ORDER_TOP:
       return {
         ...state,
         allProjects:
@@ -158,7 +171,7 @@ const rootReducer = (state = initialState, action) => {
           (project) => project.country.name === action.payload
         ),
         currentPage: 0,
-      };
+      }; */
 
     // case CONFIRM_EMAIL:
     // case CONFIRM_EMAIL_ERROR:
@@ -177,7 +190,7 @@ const rootReducer = (state = initialState, action) => {
         user: action.payload,
         auth: true,
         message: null
-    };
+      };
 
     case USER_AUTHED:
       return {
@@ -222,16 +235,17 @@ const rootReducer = (state = initialState, action) => {
       }
 
     case CREATE_COMMENT:
+
       return {
-        ...state,
+        ...state, comments: action.payload
 
       }
 
-      case DELETE_COMMENT: {
-        return {
-          ...state, comments : state.comments.filter(comment => comment.id !== action.payload )
-        }
+    case DELETE_COMMENT: {
+      return {
+        ...state, comments: state.comments.filter(comment => comment.id !== action.payload)
       }
+    }
 
     case CLEAN_MESSAGE: {
       return {
