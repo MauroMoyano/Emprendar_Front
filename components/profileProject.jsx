@@ -3,6 +3,7 @@ import { useModal } from "./ModalProject/hooks/useModal"
 import modalStyle from './styles/modalProject.module.css'
 import style from './styles/profileProject.module.css'
 
+
 export default function ProfileProject(props) {
 
     // console.log('props en profileProject ->', props)
@@ -10,7 +11,7 @@ export default function ProfileProject(props) {
     const [isOpen, openModal, closeModal] = useModal(false)
 
     return (
-        <div>
+        <div>  
             <div>Titulo: {props.projectData.title}</div>
             <button onClick={openModal}>Abrir Modal</button>
             <ModalProject isOpen={isOpen} closeModal={closeModal}>
