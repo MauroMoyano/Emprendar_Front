@@ -10,16 +10,19 @@ import CardProjectDetail from "../../components/rutaDetail/cardProjectDetail";
 
 const Dashboard = (props) => {
     const pageP = []
+    const pageU = []
     const [users, setUsers] = useState(props.users);
+    const [pageUsers, setPageUsers] = useState(0)
 
     const [projects, setProjects] = useState(props.projects);
     const [pageProjects, setPageProjects] = useState(0)
     const [valueSelect, setValueSelect] = useState("all")
 
+    //Paginado projects
     for (let i = 0; i < projects.length; i = i + 6) {
         pageP.push(projects.slice(i, i + 6 || projects.length))
     }
-    console.log("pageP --------------------------->", pageP)
+
     const handlePrevClick = () => {
         pageProjects > 0 && setPageProjects(pageProjects - 1)
     }
@@ -31,6 +34,21 @@ const Dashboard = (props) => {
         setPageProjects(parseInt(event.target.value))
     }
 
+    //Paginado Users
+    for (let i = 0; i < users.length; i = i + 3) {
+        pageU.push(users.slice(i, i + 3 || users.length))
+    }
+
+    const handlePrevClickUsers = () => {
+        pageUsers > 0 && setPageUsers(pageUsers - 1)
+    }
+    const handleNextClickUsers = () => {
+        pageUsers < pageU.length - 1 && setPageUsers(pageUsers + 1)
+
+    }
+    const handlePageUsers = (event) => {
+        setPageUsers(parseInt(event.target.value))
+    }
 
     const [projectFilter, setProjectFilter] = useState(props.projects)
 
@@ -48,6 +66,7 @@ const Dashboard = (props) => {
         setProject({})
     }
 
+    //Funcion que maneja el filtro
     const handlerSelect = async (event) => {
         const value = event.target.value
         setValueSelect(value)
@@ -66,10 +85,20 @@ const Dashboard = (props) => {
         const response = await clienteAxios.put(`/project/validar/${id}`, {validate: validate})
         const {data} = await clienteAxios.get("/project/get/all")
         let result = data
-        if(valueSelect !== "all"){
-            result = data.filter((proj)=> proj.validated === valueSelect)
+        if (valueSelect !== "all") {
+            result = data.filter((proj) => proj.validated === valueSelect)
         }
         setProjects(result)
+    }
+    // Manejadores y funciones de usuarios
+    const handlerDisabled = async (id) => {
+        const response  = await clienteAxios.put(`/user/admin/deleteUser/${id}`)
+        const { data } = await clienteAxios.get("/user/admin/users")
+        setUsers(data)
+    }
+    //Funciones que obtienen info para el Dashboard
+    const getAllMoney = () => {
+
     }
 
 
@@ -92,7 +121,7 @@ const Dashboard = (props) => {
 
             <main className={style.main} id="main">
                 <div className={style.performance}>
-                    <h2>Estadisticas generales</h2>
+                    <h2>Estadísticas generales</h2>
                     <div className={style.performanceContainer}>
                         <div className={style.infoConainter}>
                             <div className={style.iconGreen}>
@@ -129,8 +158,20 @@ const Dashboard = (props) => {
                 <div>
                     <div className={style.users} id="users">
                         <h2>Usuarios</h2>
-
+                        <div>
+                            <button onClick={handlePrevClickUsers}> Atrás</button>
+                            {
+                                pageU.map((p, index) => <button
+                                        key={index}
+                                        value={index}
+                                        onClick={handlePageUsers}
+                                    > {index + 1} </button>
+                                )
+                            }
+                            <button onClick={handleNextClickUsers}> Siguiente</button>
+                        </div>
                         <table className={style.table}>
+
                             <thead>
                             <tr>
                                 <th>Perfil</th>
@@ -138,13 +179,12 @@ const Dashboard = (props) => {
                                 <th>Estado</th>
                                 <th>Fecha de registro</th>
                                 <th>Email</th>
-
                                 <th>Acciones</th>
                             </tr>
                             </thead>
 
                             <tbody>
-                            {users.map((e) => (
+                            {pageU[pageUsers].map((e) => (
                                 <tr key={e.id}>
                                     <td>
                                         <img
@@ -176,7 +216,8 @@ const Dashboard = (props) => {
                                     </td>
 
                                     <td>
-                                        <button className={style.suspension}>Suspender</button>
+                                        <button className={style.suspension} onClick={()=>handlerDisabled(e.id)}>Deshabilitar
+                                        </button>
                                         <button className={style.delete}>Eliminar</button>
                                     </td>
                                 </tr>
