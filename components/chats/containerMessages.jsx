@@ -58,21 +58,27 @@ export default function ViewMessage(props){
     
     
     
+   
     //menejo del input 
     const handlerText = ({target}) =>{
+        
         const {value} = target 
         setTex(value)
     }
     //quito el default del form
     const hanlderSubmit = async (event)=>{
+        event.preventDefault()
         let data = {
              userSender : props.userSender.user_name,
              userReceiver : props.receptor.user_name,
              message : text
         }
-        socket.emit("messages",data )
 
-        event.preventDefault()
+        if (text.trim() === "" ) {
+            
+            return
+        }
+        socket.emit("messages", data)
         //creo el mensaje  
         let newMessage = await clienteAxios.post("/chats",data) 
         setMessages([...messages,newMessage.data])        
@@ -110,12 +116,13 @@ export default function ViewMessage(props){
                                 />
                         }
                       
-                    })   :null
+                    })  
+                    :null
                 }
             </div>
             <div className={style.form}>
                 <form onSubmit={hanlderSubmit} >
-                <input onChange={handlerText} name="input" type="text" placeholder="Escribe tu mensaje aquí..." value={text} />
+                <input autoComplete="off" onChange={handlerText} name="input" type="text" placeholder="Escribe tu mensaje" value={text} />
                     <button onClick={()=>{}}>ENVIAR</button>
                 </form>
             </div>
