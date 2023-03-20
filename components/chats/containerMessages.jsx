@@ -46,7 +46,7 @@ export default function ViewMessage(props){
 
   
         return ()=>{
-            socket.off("messages", text)
+            socket.off("messages", console.log(text))
         }
         //si cambia el receptor cambia el historial
     },[props.receptor.id])
