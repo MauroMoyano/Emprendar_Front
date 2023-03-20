@@ -6,6 +6,8 @@ import logo from '../../../public/assets/logo.png'
 // import { Button } from "bootstrap";
 import { useRouter } from "next/router";
 import style from '../styles/confirmar.module.css'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleCheck, faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 
 
 export default function Detail(props) {
@@ -31,30 +33,35 @@ export default function Detail(props) {
     // 'Token no valido
     return (
         <div className={style.divGral}>
-            <div className={style.divNav}>
-                <Image src={logo} />
+            <div className={style.header}>
+                <Image className={style.logo} src={logo} alt="logo" />
             </div>
+
             {/* <h1>Este es el token: {props.token}</h1> */}
+            <div className={style.containerInfo}>
 
-            <div className={style.divInfo}>
-                {response === 'Confirmado correctamente' &&
-                    <>
-                        <h1>Gracias por confirmar su correo electrónico</h1>
-                        <button onClick={goLanding} className={style.button}>Iniciar sesión</button>
-                    </>
-                }
 
-                {response === 'Token no valido' &&
-                    <>
-                        <h1>Disculpe, no pudimos confirmar <br /> su correo electrónico</h1>
-                        <button onClick={goLanding} className={style.button}>Volver a registrarse</button>
-                    </>
+                <div className={style.divInfo}>
+                    {response === 'Confirmado correctamente' &&
+                        <>
+                            <FontAwesomeIcon icon={faCircleCheck} className={style.theIconSuccess} />
+                            <h1>Gracias por confirmar su correo electrónico</h1>
+                            <button onClick={goLanding} className={style.button}>Iniciar sesión</button>
+                        </>
+                    }
 
-                }
+                    {response === 'Token no valido' &&
+                        <>
+                            <FontAwesomeIcon icon={faCircleXmark} className={style.theIconFail} />   
+                            <h1>Disculpe, no pudimos confirmar <br /> su correo electrónico</h1>
+                            <button onClick={goLanding} className={style.button}>Volver a registrarse</button>
+                        </>
 
+                    }
+
+                </div>
             </div>
-
-        </div>
+    </div>
     )
 }
 
