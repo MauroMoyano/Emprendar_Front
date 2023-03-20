@@ -158,7 +158,7 @@ export default function FormLanding() {
           className={style.chk}
           id="chk"
           aria-hidden="true"
-          checked={checked}
+          defaultChecked={checked}
         />
 
         <div className={style.logIn}>
