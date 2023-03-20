@@ -17,6 +17,8 @@ const Dashboard = (props) => {
     const [projects, setProjects] = useState(props.projects);
     const [pageProjects, setPageProjects] = useState(0)
     const [valueSelect, setValueSelect] = useState("all")
+    const [stats, setStats] = useState({})
+
 
     //Paginado projects
     for (let i = 0; i < projects.length; i = i + 6) {
@@ -97,9 +99,16 @@ const Dashboard = (props) => {
         setUsers(data)
     }
     //Funciones que obtienen info para el Dashboard
-    const getAllMoney = () => {
+    useEffect(()=>{
+        async function mauro ()  {
+            const { data } = await clienteAxios.get("/stats")
+            console.log("datassssssssssss," , data)
+            setStats(data)
+        }
+        mauro()
+    },[projects, users])
+    console.log("csssssssssssssssssssssssssssssssssssssss",stats)
 
-    }
 
 
     return (
@@ -129,7 +138,7 @@ const Dashboard = (props) => {
                             </div>
                             <div className={style.info}>
                                 <p>Dinero depositado</p>
-                                <h3>1,7M</h3>
+                                <h3>{stats.totalGoal}</h3>
                             </div>
                         </div>
 
@@ -139,7 +148,7 @@ const Dashboard = (props) => {
                             </div>
                             <div className={style.info}>
                                 <p>Usuarios registrados</p>
-                                <h3>1,7M</h3>
+                                <h3>{stats.totalUsers}</h3>
                             </div>
                         </div>
 
@@ -149,7 +158,7 @@ const Dashboard = (props) => {
                             </div>
                             <div className={style.info}>
                                 <p>Proyectos</p>
-                                <h3>1,7M</h3>
+                                <h3>{stats.totalProject}</h3>
                             </div>
                         </div>
                     </div>
@@ -184,7 +193,7 @@ const Dashboard = (props) => {
                             </thead>
 
                             <tbody>
-                            {pageU[pageUsers].map((e) => (
+                            {pageU[pageUsers]?.map((e) => (
                                 <tr key={e.id}>
                                     <td>
                                         <img
