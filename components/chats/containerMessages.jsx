@@ -6,7 +6,6 @@ import io from "socket.io-client"
 let socket
 
 function Message(props){
-   console.log("esta es la flag", props.flag);
    let {flag} = props;
     return(
         <div id={  flag || style.enviados} className={style.recividos}>
@@ -28,7 +27,6 @@ export default function ViewMessage(props){
 
     // console.log( "Props de viewMessage", props);
     async function getMessages (){
-        console.log("se hizo una peticion");
                 let result = await clienteAxios(`/chats?userSender=${props.userSender.user_name}&&userReceiver=${props.receptor.user_name}`)
                 setMessages(result.data)
     }
@@ -38,11 +36,15 @@ export default function ViewMessage(props){
         //monto el historial de mensajes
         getMessages()
 
-        console.log("se monto el components")
         socket = io(process.env.NEXT_PUBLIC_BACK_APP_URL)
-        socket.on("messages", (text)=>{
+        socket.on("messages", ()=>{
             getMessages()
+
         })
+
+    
+
+  
         return ()=>{
             socket.off("messages", console.log("me desconecto", text))
         }
@@ -63,20 +65,28 @@ export default function ViewMessage(props){
     }
     //quito el default del form
     const hanlderSubmit = async (event)=>{
-        socket.emit("messages", text)
-        event.preventDefault()
         let data = {
              userSender : props.userSender.user_name,
              userReceiver : props.receptor.user_name,
              message : text
         }
+        socket.emit("messages",data )
+
+        event.preventDefault()
         //creo el mensaje  
         let newMessage = await clienteAxios.post("/chats",data) 
         setMessages([...messages,newMessage.data])        
         setTex("")
     }
 
+    // const prueba = (event) =>{
+    //     event.preventDefault()
+    //     // let arr = [ props.userSender.user_name,props.receptor.user_name ]
+    //     // let id_room = arr.sort().join("").trim()
+        
 
+    //     socket.emit("refresh_chats", props.userSender.user_name)
+    // }
     return(
         <div className={style.container} >
             <div className={style.view}>
@@ -109,25 +119,12 @@ export default function ViewMessage(props){
                     <button onClick={()=>{}}>ENVIAR</button>
                 </form>
             </div>
+            {/* <form onSubmit={prueba}>
+                <input type="text" />
+                <button>enviar id</button>
+            </form> */}
+
     </div>
     )
 }
 
- {/* 
-                            const [flag, set flag] = useState(true)
-                            handlerFalg = () =>{
-                                setFlag(!flag)
-                            }
-                            button => onClick = handlerFalg
-                            
-                            flag = true => {
-
-                                muiestro todas mis conversaciones
-                           
-                            }
-
-                            false => {
-                                todos los users 
-                            }
-                            
-                            */}
