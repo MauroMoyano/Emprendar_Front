@@ -4,11 +4,13 @@ import clienteAxios from "config/clienteAxios";
 import { use, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import style from "./styles/chats.module.css"
+import io from "socket.io-client"
+let socket
 
 
 
 export default function Chats(props){
-    
+   
     
     //datos del usurio logeado
     const User = useSelector(state => state.user)
@@ -37,7 +39,7 @@ export default function Chats(props){
     useEffect(()=>{
         if(User){
             async function getChats (){
-                
+               
                 //traigo todos los users                
                 let result = await clienteAxios.get(`/chats/users`)
                 setUsers(result.data)
@@ -47,9 +49,20 @@ export default function Chats(props){
                 let conversations = await clienteAxios.get(`/chats/getownchats?user=${User.user_name}`)
                 setConversations(conversations.data)
                 setAllConversations(conversations.data)
+
+                
             } 
             getChats()
-            
+            socket = io(process.env.NEXT_PUBLIC_BACK_APP_URL)
+                socket.on("messages", (data)=>{
+                    //evaluo si en el mensaje nuevo que envio aparexco como el qe recibo o envio, si la respuesta es si redenrizo mis chats 
+
+                    let {userSender,userReceiver } = data;
+
+                    userSender === User.user_name || userReceiver ===  User.user_name 
+                        ? getChats()
+                        : null
+                })
         }
         return ()=>{
             props.querys.IduserReceiver = flag

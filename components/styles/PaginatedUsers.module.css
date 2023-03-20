@@ -1,0 +1,44 @@
+.boxCard {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+}
+
+.cards {
+    padding: 20px;
+    gap: 30px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100px;
+}
+
+.buttonContainer button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background-color: #2e034b;
+    padding: 10px 15px;
+    font-size: 12px;
+    font-family: 'Montserrat', sans-serif;
+    border-radius: 8px;
+    cursor: pointer;
+    color: aliceblue;
+    height: fit-content;
+    text-transform: uppercase;
+}
+
+.buttonContainer button:hover {
+    background-color: #09c7ae;
+}

@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Work+Sans:ital,wght@1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+/*  
+font-family: 'Montserrat', sans-serif;
+
+font-family: 'Roboto Condensed', sans-serif;
+font-family: 'Work Sans', sans-serif;
+*/
+
+.cardContainer {
+    height: 125px;
+    width: 250px;
+    border-radius: 15px;
+    background: #f0f0f0;
+    text-align: center;
+    margin-bottom: 20px;
+    box-shadow: 0 0 14px black;
+    transition: 0.15s linear;
+}
+
+.cardContainer:hover {
+    border-radius: 15px;
+    box-shadow: 0 0 14px #6a2697de;
+    transform: scale(1.1);
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    column-count: 2;
+
+}
+
+.dataUser {
+    display: grid;
+    grid-template-columns: 1fr 40%;
+}
+
+.dataUser div {
+    display: flex;
+    flex-direction: column;
+}
+
+.textContainer {
+    height: 60%;
+}
+
+.title {
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: aliceblue;
+    border-radius: 15px 0 0 0;
+    background-color: #2E034B;
+    font-family: 'Montserrat', sans-serif;
+
+
+}
+
+.subTitle {
+    height: 20px;
+    width: 100%;
+    display: flex;
+    padding-left: 5px;
+    text-align: left;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 13px;
+    color: black;
+    font-weight: bold;
+}
+
+
+
+.dataUser img {
+    object-fit: cover;
+    max-width: 100px;
+    height: 125px;
+    border-radius: 0 15px 15px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttonContainer {
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.button1 {
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+    height: 25px;
+    border: none;
+    background-color: #2e034bde;
+    color: aliceblue;
+    text-transform: uppercase;
+    font-size: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s linear;
+}
+
+.button1:hover {
+    background-color: #09c7ae;
+
+}
+
+.button2 {
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+    height: 25px;
+    border: none;
+    background-color: #2e034bde;
+    color: aliceblue;
+    border-radius: 0 0 0 15px;
+    text-transform: uppercase;
+    font-size: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s linear;
+}
+
+.button2:hover {
+    background-color: #09c7ae;
+
+}
