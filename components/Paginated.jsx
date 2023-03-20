@@ -28,7 +28,7 @@ export default function Paginated(/* data */) {
     useLayoutEffect(() => {
         dispatch(resetScroll())
         setPage(1)
-        console.log('entrooo')
+        //console.log('entrooo')
         dispatch(getProjectToScroll(1, pathValue))
         setControl(!control)
     }, [pathValue])

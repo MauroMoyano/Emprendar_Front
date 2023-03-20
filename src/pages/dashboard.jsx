@@ -102,12 +102,12 @@ const Dashboard = (props) => {
     useEffect(()=>{
         async function mauro ()  {
             const { data } = await clienteAxios.get("/stats")
-            console.log("datassssssssssss," , data)
+            //console.log("datassssssssssss," , data)
             setStats(data)
         }
         mauro()
     },[projects, users])
-    console.log("csssssssssssssssssssssssssssssssssssssss",stats)
+    //console.log("csssssssssssssssssssssssssssssssssssssss",stats)
 
 
 
