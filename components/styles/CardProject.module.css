@@ -1,3 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Work+Sans:ital,wght@1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+/*  
+font-family: 'Montserrat', sans-serif;
+
+font-family: 'Roboto Condensed', sans-serif;
+font-family: 'Work Sans', sans-serif;
+*/
 
 
 .card {
@@ -30,6 +39,8 @@
 
 .card_title {
     font-weight: bold;
+    text-transform: uppercase;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .card_content {
@@ -94,6 +105,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: 'Montserrat', sans-serif;
 
 }
 
@@ -121,6 +133,7 @@
     font-size: 12px;
     opacity: 0;
     transition: opacity .5s;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .card_content>a{
@@ -128,6 +141,7 @@
     text-decoration: none;
     color: #6c757d;
     font-size: 10px;
+    
 }
 
 .card:hover .card_content {

@@ -25,7 +25,7 @@ export const PaginatedUsers = () => {
     useLayoutEffect(() => {
         dispatch(resetScroll())
         setPage(1)
-        console.log('entrooo')
+        //console.log('entrooo')
         dispatch(getUsersToScroll(1, pathUserValue))
         setControl(!control)
     }, [pathUserValue])
