@@ -7,6 +7,9 @@
 
 }
 
+  
+
+
 .users_containers{
     background: #bcb6b6;
     width: 80%;
@@ -27,16 +30,14 @@
     height: 90%;
     display: flex;
     
-    padding: 1rem;
+
     border-radius: 8px;
 }
 .firstBox{
     width: 40%;
-
 }
 
 .secondBox{
-  
     width: 70%;
     display: flex;
 }
@@ -47,6 +48,8 @@
     display: flex;
     align-items: center;
     padding: .1rem;
+    padding-inline-start: 1rem;
+    padding-bottom: .3rem;
 }
 .buttom{
     transition: .5s;
@@ -75,6 +78,26 @@
     content: "Usuarios";
 
 }
+
+/*BOX DE CHATS*/
+.MyChats{
+    background: #cfcff8;
+    width: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 90%;
+
+}
+.MyChats::-webkit-scrollbar {
+    display: none;
+                  /* width of the entire scrollbar */
+}
+
+
+
 .conversaciones{
     background: #cfcff8;
     width: 100%;
@@ -93,28 +116,45 @@
                   /* width of the entire scrollbar */
   }
 
-.conversaciones> form {
+.form {
     background: #a496df;
     width: 100%;
     display: flex;
-    justify-content: center;
-    padding: 1.5rem;
     align-items: center;
-
+    height: 10%;
+    padding-inline-start: 1rem;
 }
 
-.conversaciones> form > input{
-    width: 80%;
-    height: 150%;
+.title{
+    width: 100%;
+    padding-inline-start: 1rem;
+    padding: .5rem;    
+}
+
+
+/*animacion para el despliegue de la barra de busqueda*/
+.searchBar{
+    transition: .7s;
+    width: 10%;
+    height: 70%;
     border-radius: .5rem;
     padding-inline-start: 1rem;
     font-size: 15px;
-    
+    border: none;
+    border-radius: 50%;
+
+    background: rgba(255, 255, 255, 0.664);
+}
+
+.searchBar:hover{
+    transition: .7s;
+    width: 50%;
+    border-radius: 45px;
+
 }
 
 
 .viewMessage{
-    background: #054217;
     width: 100%;
     display: flex;
     flex-direction: column;

@@ -144,12 +144,13 @@ export default function Chats(props){
                    <div className={style.firstBox}>
                         {
                             switchBo 
-                            ? <div className={style.conversaciones} >
-                                <form onSubmit={handlerSubmit_conversation}>
-                                    <input type="text" onChange={handlerSearch_conversation} value={search_conversation}/>
+
+                            ? <div className={style.MyChats} >
+                                <form className={style.form} onSubmit={handlerSubmit_conversation}>
+                                    <input className={style.searchBar} type="text" onChange={handlerSearch_conversation} value={search_conversation}/>
                                 </form>
-                                <h3>Mis chats</h3>
-                   
+                                <h3 className={style.title}>Mis chats</h3>
+                
                                 { conversations.length
                                     ? conversations.map((u)=>{
                                         return (
@@ -172,7 +173,7 @@ export default function Chats(props){
                                 <form onSubmit={handlerSubmit}>
                                     <input type="text" onChange={handlerSearch} value={search}/>
                                 </form>
-                                <h3>Todos los users</h3>
+                               <div> <h3 className={style.title}>Todos los users</h3></div>
 
                             { users.length
                                 ? users?.map(u =>{
