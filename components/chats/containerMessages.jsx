@@ -46,7 +46,7 @@ export default function ViewMessage(props){
 
   
         return ()=>{
-            socket.off("messages", console.log("me desconecto", text))
+            socket.off("messages", text)
         }
         //si cambia el receptor cambia el historial
     },[props.receptor.id])

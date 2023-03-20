@@ -37,7 +37,7 @@ const NewPassword = (props) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("enviando");
+    //console.log("enviando");
     if (password !== verifyPassword) {
       setAlerta({
         msg: "La contraseña deben ser iguales",
