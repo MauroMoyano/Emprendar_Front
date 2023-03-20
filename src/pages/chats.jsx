@@ -4,10 +4,13 @@ import clienteAxios from "config/clienteAxios";
 import { use, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import style from "./styles/chats.module.css"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass, faUserPlus} from "@fortawesome/free-solid-svg-icons";
 import io from "socket.io-client"
 let socket
 
 
+/*<FontAwesomeIcon icon={faMagnifyingGlass} style={{color: "#1c3787",}} /> */
 
 export default function Chats(props){
    
@@ -126,11 +129,6 @@ export default function Chats(props){
     }
 
 
-
-
-
-
-
     //cambios de estado para las busquedas entre mis conversaciones y todos los usuarios
 
     const handlerSwich = () =>{
@@ -147,18 +145,23 @@ export default function Chats(props){
 
                             ? <div className={style.MyChats} >
                                 <form className={style.form} onSubmit={handlerSubmit_conversation}>
-                                    <input className={style.searchBar} type="text" onChange={handlerSearch_conversation} value={search_conversation}/>
+                                    <label className={style.lupa} htmlFor="1"> 
+                                        <FontAwesomeIcon icon={faMagnifyingGlass} style={{color: "#1c3787",display:"flex"}} /> 
+                                    </label>
+                                    <input id="1" className={style.searchBar} type="text" onChange={handlerSearch_conversation} value={search_conversation}/>
                                 </form>
-                                <h3 className={style.title}>Mis chats</h3>
-                
-                                { conversations.length
+                                <div>  <h3 className={style.title}>Mis chats</h3></div>
+
+                                <div className={style.MyChats_container} >
+                                      { conversations.length
                                     ? conversations.map((u)=>{
                                         return (
                                             <>
-                                                <div className={style.chatUser}  onClick={() => handlerSelect(u.id)} >
+                                                <div className={style.chat}  onClick={() => handlerSelect(u.id)} >
                                                     <img src={u.profile_img} alt="user" />
                                                     <p> {u.user_name}</p>
                                                 </div>
+                                        
                                             </>
                                         )
                                     }) 
@@ -166,33 +169,52 @@ export default function Chats(props){
                                     
 
                                 }
+                                </div>
+                              
                             </div>
 
                             
                             : <div className={style.conversaciones}>
-                                <form onSubmit={handlerSubmit}>
-                                    <input type="text" onChange={handlerSearch} value={search}/>
-                                </form>
-                               <div> <h3 className={style.title}>Todos los users</h3></div>
+                              
+                                    <form  className={style.form} onSubmit={handlerSubmit}>
+                                            <label className={style.lupa} htmlFor="2"> 
+                                                <FontAwesomeIcon icon={faMagnifyingGlass} style={{color: "#1c3787",display:"flex"}} /> 
+                                            </label>
+                                            <input  id="2" className={style.searchBar} type="text" onChange={handlerSearch} value={search}/>
+                                        </form>
 
-                            { users.length
-                                ? users?.map(u =>{
-                
-                                    return (
-                                        <>
-                                            <div className={style.chatUser}  onClick={() => handlerSelect(u.id)} >
-                                                <img src={u.profile_img} alt="user" />
-                                                <p> {u.user_name}</p>
-                                            </div>
-                                        </>
-                                    )
-                                })  
-                                : null 
-                            }
+                                    <div> <h3 className={style.title}>Todos los usuarios</h3></div>
+                          
+
+
+                                <div className={style.cards}>
+                                    { users.length
+                                        ? users?.map(u =>{
+                        
+                                            return (
+                                                <>
+                                                    <div className={style.chatUser}  onClick={() => handlerSelect(u.id)} >
+                                                        <img src={u.profile_img} alt="user" />
+                                                        <p> {u.user_name}</p>
+                                                    </div>
+                                                 
+                                                </>
+                                            )
+                                        }) 
+                                        : null 
+                                    }
+                                </div>
+                           
                         </div>
                         }
                         <div className={style.switchBotton}>
-                            <div  className={style.buttom} onClick={()=>handlerSwich()}></div>
+                            <div  className={style.iconUser}   onClick={()=>handlerSwich()}>
+                                <FontAwesomeIcon                      
+                                        icon={faUserPlus}
+                                        style={{color:"white"}}
+                                        />
+                            </div>
+                                
                         </div>
                    </div>
                     
@@ -234,26 +256,3 @@ export async function getServerSideProps({ query }) {
     }
    }
 }
-// <div className={style.sinReceptor} ></div>
-
-/**            <div className={style.users_containers}>
-                    <h3>Usuarios :</h3>
-                    <select name="" id=""  onChange={handlerSelect} >
-                        <option disabled selected>
-                            ELIGE UN USUARIO PARA CONTACTAR
-                        </option>
-                        { users.length
-                            ? users.map(u =>{
-            
-                                return <option
-                                    key={u.id}
-                                    value={u.user_name}
-                                >
-                                    {u.user_name}
-                                </option>
-                            })  
-                            : null 
-
-                        }
-                    </select>
-                </div> */

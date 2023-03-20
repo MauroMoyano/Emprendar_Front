@@ -1,40 +1,29 @@
+
+/*Toda la pantalla*/
 .container{
     height: 100vb;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-
+   
 }
 
-  
 
 
-.users_containers{
-    background: #bcb6b6;
-    width: 80%;
-    height: 3rem;
-    display: flex;
-    align-items: center;
-    gap: 3rem;
-}
-
-.users_containers> select{
-    height: 3rem;
-    width: 30%;
-}
-
+/*Contenedor padre*/
 .box{
     background: #3C1642;
     width: 80%;
     height: 90%;
     display: flex;
-    
-
-    border-radius: 8px;
+    border-radius: 1rem;
 }
+
+/*los dos container */
 .firstBox{
     width: 40%;
+
 }
 
 .secondBox{
@@ -42,80 +31,65 @@
     display: flex;
 }
 
-.switchBotton{
-    height: 10%;
-    background: #cfcff8;
-    display: flex;
-    align-items: center;
-    padding: .1rem;
-    padding-inline-start: 1rem;
-    padding-bottom: .3rem;
-}
-.buttom{
-    transition: .5s;
-    border-radius: 50%;
-    background: #a124b4;
 
-    height: 100%;
-    width: 15%;
-    cursor: pointer;
-
-}
-.switchBotton > div:hover{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 0%;
-    padding: auto auto;
-    transition: .5s;
-    border-radius: 5rem 5rem 5rem 5rem;  
-    width: 30%;
-    
-}
-
-.switchBotton > div:hover::before{
-    color: aliceblue;
-    content: "Usuarios";
-
-}
-
-/*BOX DE CHATS*/
+/*container de chats de los usuarios */
 .MyChats{
     background: #cfcff8;
     width: 100%;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    display: flex;
-    flex-direction: column;
     align-items: center;
     height: 90%;
+    border-top-left-radius: 1rem;
 
 }
-.MyChats::-webkit-scrollbar {
+
+.MyChats_container{
+    width: 100%;
+    height: 83%;
+    overflow-y: scroll;
+}
+
+.MyChats_container::-webkit-scrollbar {
     display: none;
-                  /* width of the entire scrollbar */
 }
 
 
 
+/*container de todos los usuarios*/
 .conversaciones{
     background: #cfcff8;
     width: 100%;
-    overflow-y: scroll;
-    overflow-x: hidden;
+    height: 90%;
+    border-top-left-radius: 1rem;
+}
+
+
+/*container de las cards*/
+.cards{
+
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 90%;
+    overflow-y: scroll;
+    height: 83%;
 
-      
+}
+.cards::-webkit-scrollbar {
+    display: none;
+    /* width of the entire scrollbar */
 }
 
-.conversaciones::-webkit-scrollbar {
-    display: none;
-                  /* width of the entire scrollbar */
-  }
 
+
+  
+.title{
+    width: 100%;
+    padding-inline-start: 1rem;
+    padding: .5rem;    
+}
+    
+    
+/*animacion para el despliegue de la barra de busqueda*/
 .form {
     background: #a496df;
     width: 100%;
@@ -125,35 +99,38 @@
     padding-inline-start: 1rem;
 }
 
-.title{
-    width: 100%;
-    padding-inline-start: 1rem;
-    padding: .5rem;    
-}
-
-
-/*animacion para el despliegue de la barra de busqueda*/
 .searchBar{
-    transition: .7s;
-    width: 10%;
+   
+    display: block;
     height: 70%;
-    border-radius: .5rem;
     padding-inline-start: 1rem;
     font-size: 15px;
-    border: none;
-    border-radius: 50%;
-
     background: rgba(255, 255, 255, 0.664);
-}
-
-.searchBar:hover{
-    transition: .7s;
-    width: 50%;
-    border-radius: 45px;
+    outline: none;
+    border:none;
+    border-top-right-radius:    .5rem ;
+    border-bottom-right-radius: .5rem ;
 
 }
 
+.lupa{
+    height: 70%;
+    background:  rgba(255, 255, 255, 0.664);
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding:.5rem ;
 
+    border-top-left-radius:    .5rem ;
+    border-bottom-left-radius: .5rem ;
+
+}
+
+
+
+
+/*****/
 .viewMessage{
     width: 100%;
     display: flex;
@@ -172,6 +149,7 @@
     background: #cfcff8;
     height: 10%;
     font-size: 1rem;
+    border-top-right-radius: 1rem;
 }
 
 
@@ -180,19 +158,45 @@
 
 }
 
+/*tarjeta de los chats*/
+.chat{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    width: 100%;
+    height: auto;
+    gap: 1rem;
+    cursor: pointer;
+    /* -webkit-transition: all .15s ease-in-out;
+    transition: all .15s ease-in-out; */
+   border-bottom: #c0bbe1 1px solid;
+}
+.chat:hover{
+    background: #c0bbe1;
+}
+
+
+/*boton para atras*/
+.chat img {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+
+
+/*tarjetas de los usuarios*/
 .chatUser {
     display: flex;
     align-items: center;
     padding: 10px;
-    border-bottom: 2px solid #3C1642;
-    width: 80%;
+    width: 90%;
     height: auto;
-    margin:  10px auto;
-    gap: 1em;
+    margin:  2px ;
+    gap: 1rem;
     cursor: pointer;
     -webkit-transition: all .15s ease-in-out;
     transition: all .15s ease-in-out;
-    background-color: transparent;
+    background:#cfb1eb ;
 }
 
 .chatUser:hover {
@@ -218,6 +222,7 @@
     border-radius: 50%;
 }
 
+/***/
 .hidden {
     display: flex;
     flex-direction: column;
@@ -231,4 +236,25 @@
     font-size: 1.5rem;
     margin-top: 1em;
 }
+
+/*switch botton*/
+.switchBotton{
+    height: 10%;
+    background: #cfcff8;
+    display: flex;
+    align-items: center;
+    padding: .1rem;
+    padding-inline-start: 1rem;
+    padding-bottom: .3rem;
+    border-bottom-left-radius: 1rem;
+
+}
+
+.iconUser{
+    cursor: pointer;
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: #3C1642;
+}
+
 
