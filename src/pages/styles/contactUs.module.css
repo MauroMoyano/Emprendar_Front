@@ -1,3 +1,10 @@
+
+.fatherContainer {
+    height: 110vh;
+    display: flex; 
+    align-items: center;
+    background-color: #babafa;
+}
 .container {
     background-color: #66198a;
     color: white;
@@ -5,6 +12,10 @@
     padding: 2rem;
     text-align: center;
     align-items: center;
+
+    width: 70%;
+    margin:0 auto;
+    height: 100vh;
 }
 
 .contact img {
