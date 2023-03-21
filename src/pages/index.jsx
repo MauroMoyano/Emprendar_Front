@@ -18,14 +18,24 @@ import { faCreditCard } from "@fortawesome/free-solid-svg-icons";
 import { faUsers } from "@fortawesome/free-solid-svg-icons";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 // console.log(process.env.NEXT_PUBLIC_BACK_APP_URL)
-export default function Landing(){
+import clienteAxios from "config/clienteAxios";
+import StatsCircle from "components/statsCircle";
+import StatsRadar from "components/statsRadar";
 
 
+export default function Landing(props){
 
+
+    console.log(props.data)
     const router = useRouter()
     const dispatch = useDispatch()
 
     useEffect(() => {
+        // async function mauro ()  {
+        //     const theStats = (await clienteAxios.get("/stats")).data
+        //     setStats(theStats);
+        // }
+        // mauro();
        
         const token = localStorage.getItem('token')
             // console.log(token)
@@ -38,10 +48,15 @@ export default function Landing(){
             }
     }, [dispatch])
 
+
+
     return(
         <>
             <Head>
                 <title>Emprendar</title>
+                <Link rel="preconnect" href="https://fonts.googleapis.com"></Link>
+                <Link rel="preconnect" href="https://fonts.gstatic.com" crossorigin></Link>
+                <Link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Roboto+Condensed&family=Work+Sans:ital,wght@1,300&display=swap" rel="stylesheet"></Link>
             </Head>
 
             <div className={style.header}>
@@ -84,6 +99,12 @@ export default function Landing(){
                                         <p>Proyectos por país</p>
                                     </div>
                                 </div>
+                                <div className={style.statsContainer}>
+                                    <h1>Paises con proyectos</h1>
+                                    <StatsCircle id="countries" data={props.data.countries}/>
+                                    <h1>Categorias con proyectos</h1>
+                                    <StatsRadar data={props.data.categories}/>
+                                </div>
  
                     </div>
                     <div id="about" className={style.aboutUs}>
@@ -106,3 +127,10 @@ export default function Landing(){
 }
 
 
+export async function getServerSideProps() {
+    const stats = await clienteAxios.get("/stats");
+  
+    return {
+        props: {data: stats.data},
+    };
+  }
