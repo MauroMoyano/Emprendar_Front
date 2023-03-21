@@ -1,105 +1,130 @@
-.card {
-    width: 190px;
-    height: 254px;
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&family=Work+Sans:ital,wght@1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+/*  
+font-family: 'Montserrat', sans-serif;
+
+font-family: 'Roboto Condensed', sans-serif;
+font-family: 'Work Sans', sans-serif;
+*/
+
+.cardContainer {
+    height: 125px;
+    width: 250px;
+    border-radius: 15px;
     background: #f0f0f0;
-    border-radius: 10px;
     text-align: center;
-    transition: all 0.5s;
+    margin-bottom: 20px;
+    box-shadow: 0 0 14px black;
+    transition: 0.15s linear;
 }
 
-.card:hover {
-    box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.623);
-    background-color: #9d33ad;
+.cardContainer:hover {
+    border-radius: 15px;
+    box-shadow: 0 0 14px #6a2697de;
+    transform: scale(1.1);
 }
 
-.card .blob {
-    height: 10px;
-    width: 75%;
-    border-radius: 0 0 30px 30px;
-    margin: 0 auto;
-    background-color: #3C1642;
-    visibility: visible;
-    transition: all 0.3s;
-}
-
-.card:hover .blob {
-    height: 0;
-}
-
-.card .img {
+.card {
     display: flex;
-    margin: 30px auto 10px auto;
-    width: 70px;
-    height: 70px;
-    background-color: #3C1642; 
-    border-radius: 50%;
-    font-size: 11px;
-    justify-content: center;
+    flex-direction: column;
+    column-count: 2;
+
+}
+
+.dataUser {
+    display: grid;
+    grid-template-columns: 1fr 40%;
+}
+
+.dataUser div {
+    display: flex;
+    flex-direction: column;
+}
+
+.textContainer {
+    height: 60%;
+}
+
+.title {
+    height: 30px;
+    display: flex;
     align-items: center;
-    transition: all 0.5s;
-}
-
-.card:hover .img {
-    width: 100%;
-    height: 70%;
-    border-radius: 10px;
-    margin: 0 auto;
-    background-color: #f0f0f0;
-    z-index: 99999;
-}
-
-.card h2 {
-    padding: 15px 10px;
-    font-size: 25px;
-    transition: all 0.1s;
-    z-index: -99;
-    line-height: 17px;
-    border: solid springgreen 2px;
-}
-
-.card>h2>p {
-    padding-bottom: 0.1vh;
-}
-
-.card span {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    text-align: center;
-    font-size: 18px;
-}
-
-.card>span>p {
-    padding: 20%;
-}
-
-.card:hover h2 {
-    opacity: 0;
-    width: 100%;
-    position: absolute;
-    transition: all 0.5s;
-}
-
-.card>p {
-    opacity: 0;
-    transition: all 0.50s;
-}
-
-.card>p>span {
-    border: solid springgreen 2px;
-}
-
-.card>p>span>p {
-    padding: 10%;
-    font-size: 15px;
-}
-
-.card:hover>p {
-    padding: 5px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    text-align: center;
     justify-content: center;
-    position: absolute;
-    opacity: 1;
-    transition: all 0.1s;
+    color: aliceblue;
+    border-radius: 15px 0 0 0;
+    background-color: #2E034B;
+    font-family: 'Montserrat', sans-serif;
+
+
+}
+
+.subTitle {
+    height: 20px;
+    width: 100%;
+    display: flex;
+    padding-left: 5px;
+    text-align: left;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 13px;
+    color: black;
+    font-weight: bold;
+}
+
+
+
+.dataUser img {
+    object-fit: cover;
+    max-width: 100px;
+    height: 125px;
+    border-radius: 0 15px 15px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttonContainer {
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.button1 {
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+    height: 25px;
+    border: none;
+    background-color: #2e034bde;
+    color: aliceblue;
+    text-transform: uppercase;
+    font-size: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s linear;
+}
+
+.button1:hover {
+    background-color: #09c7ae;
+
+}
+
+.button2 {
+    font-family: 'Montserrat', sans-serif;
+    width: 100%;
+    height: 25px;
+    border: none;
+    background-color: #2e034bde;
+    color: aliceblue;
+    border-radius: 0 0 0 15px;
+    text-transform: uppercase;
+    font-size: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s linear;
+}
+
+.button2:hover {
+    background-color: #09c7ae;
+
 }

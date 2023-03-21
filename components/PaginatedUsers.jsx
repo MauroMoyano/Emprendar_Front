@@ -25,7 +25,7 @@ export const PaginatedUsers = () => {
     useLayoutEffect(() => {
         dispatch(resetScroll())
         setPage(1)
-        console.log('entrooo')
+        //console.log('entrooo')
         dispatch(getUsersToScroll(1, pathUserValue))
         setControl(!control)
     }, [pathUserValue])
@@ -52,6 +52,7 @@ export const PaginatedUsers = () => {
                         return (
                             <CardsUsers
                                 key={user.id}
+                                userId={user.id}
                                 user_name={user.user_name}
                                 name={user.name}
                                 last_name={user.last_name}
