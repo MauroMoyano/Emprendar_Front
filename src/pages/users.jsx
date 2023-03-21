@@ -13,7 +13,9 @@ export default function Users() {
     const dispatch = useDispatch()
 
     const [search, setSearch] = useState('')
+    const [searchs, setSearchs] = useState('')
     const [orden, setOrden] = useState('')
+    const [timer, setTimer] = useState(null)
 
     useEffect(() => {
         let path
@@ -30,7 +32,22 @@ export default function Users() {
     const handlerDeleteSearch = () => {
         setOrden('')
         setSearch('')
+        setSearchs('')
     }
+
+
+    const handleInputChange = (event) => {
+
+        if (timer) {
+            clearTimeout(timer);
+        }
+
+        setTimer(setTimeout(() => {
+            let newValue = event.target.value;
+            setSearch(newValue)
+        }, 2000));
+    };
+
 
     return (
         <Layout>
@@ -38,7 +55,7 @@ export default function Users() {
                 <div className={style.bodyContainer}>
                     <div className={style.subMenuContainer}>
                         <ul>
-                            <li><Link href="/home"><FontAwesomeIcon icon={''} className={style.theIcon} /> Proyectos</Link></li>
+                            <li><Link href="/home"><FontAwesomeIcon icon={''} className={style.theIcon} />Proyectos</Link></li>
                             <li><Link href="#"><FontAwesomeIcon icon={faPhone} className={style.theIcon} />Contáctanos</Link></li>
                             <li><Link href="/aboutUs"><FontAwesomeIcon icon={faAddressCard} className={style.theIcon} />Acerca de</Link></li>
                             <li className={style.dropdown}><Link href="#menu"><FontAwesomeIcon icon={faArrowDownWideShort} className={style.theIcon} />Ordenar Por</Link>
@@ -47,11 +64,11 @@ export default function Users() {
                                         <div>
                                             <label className={style.accordion}>
                                                 <input type='radio' name='radio-accordion' defaultChecked="unChecked" />
-                                                <div className={style.accordion__header}><FontAwesomeIcon icon={faDollarSign} className={style.theIcon} />Donación</div>
+                                                <div className={style.accordion__header}><FontAwesomeIcon icon={faDollarSign} className={style.theIcon} />Usuario</div>
                                                 <div className={style.accordion__content} value={orden}>
                                                     <button onClick={(e) => setOrden(e.target.value)} value=''> - </button>
-                                                    <button onClick={(e) => setOrden(e.target.value)} value='ASC'>Ascendente</button>
-                                                    <button onClick={(e) => setOrden(e.target.value)} value='DESC'>Descendente</button>
+                                                    <button onClick={(e) => setOrden(e.target.value)} value='ASC'>A-Z</button>
+                                                    <button onClick={(e) => setOrden(e.target.value)} value='DESC'>Z-A</button>
                                                 </div>
                                             </label>
                                             <label className={style.accordion}>
@@ -67,7 +84,7 @@ export default function Users() {
                                 </div>
                             </li>
                             <div className={style.menuSearch}>
-                                <input value={search} type='search' onChange={(e) => setSearch(e.target.value)} placeholder="Buscar proyecto..." ></input>
+                                <input value={searchs} type='search' onChange={(e) => {handleInputChange(e), setSearchs(e.target.value)}} placeholder="Buscar Usiarios..." ></input>
                             </div>
                         </ul>
                     </div>
