@@ -5,7 +5,7 @@ import style from './styles/CardUsers.module.css'
 
 export const CardsUsers = (user) => {
 
-    console.log(user);
+    //console.log(user);
 
 
     return (

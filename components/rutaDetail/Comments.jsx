@@ -39,7 +39,7 @@ export function Messages(props) {
 
         dispatch(deleteComment(commentId));
 
-        console.log(props.projectId)
+        //console.log(props.projectId)
         socket.emit('eliminar comentario',props.projectId)
 
         Swal.fire("Deleted!", "Your file has been deleted.", "success");
@@ -80,7 +80,7 @@ export default function Comments(props) {
             })
 
             socket.on('comentario eliminado', (comentarioNuevo) => {
-                console.log(comentarioNuevo)
+                //console.log(comentarioNuevo)
                 dispatch(getComments(comentarioNuevo))
             })
       }) 
