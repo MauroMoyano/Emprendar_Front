@@ -5,7 +5,7 @@ import Head from 'next/head'
 import style from './styles/contactUs.module.css'
 import clienteAxios from 'config/clienteAxios'
 
-const ContactUs = () => {
+export default function ContactUs() {
 
     const [alert,setAlert] = useState(null)
 
@@ -65,5 +65,3 @@ const ContactUs = () => {
         </div>
     )
 }
-
-export default ContactUs
