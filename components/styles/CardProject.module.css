@@ -136,6 +136,23 @@ font-family: 'Work Sans', sans-serif;
     font-family: 'Montserrat', sans-serif;
 }
 
+.moreDetail{
+    border: none;
+    background-color: #2e034b;
+    color: aliceblue;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    text-transform: uppercase;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-family: 'Montserrat', sans-serif;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
 .card_content>a{
     /* border: 1px solid red; */
     text-decoration: none;
