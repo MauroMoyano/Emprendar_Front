@@ -145,17 +145,17 @@ export default function StatsCircle(props) {
     },
     [setActiveIndex]
   );
-  const COLORS = ["#FFBB28", "#00C49F", "#FFBB28", "#FF8042"];
+  const COLORS = ["#FFBB28", "#00C49F", "#f23e02", "#FF8042", "#942222", "#5bcebf" , "#fc370c", "#a3d95b" , "#00988d", "#b80090", "#2c6b74", "#013750", "#2f2bad" , "#f0d890" , "#4d002b", "#750e49", "#342220", "#613c4c", "#ff1457"];
 
   return (
-    <PieChart id="donaron" width={300} height={300}>
+    <PieChart id="donaron" width={300} height={280}>
       <Pie
         isAnimationActive={false}
         activeIndex={activeIndex}
         activeShape={renderActiveShape}
         data={props.data}
         cx={150}
-        cy={150}
+        cy={120}
         innerRadius={50}
         outerRadius={70}
         fill="#8884d8"
@@ -163,7 +163,7 @@ export default function StatsCircle(props) {
         onMouseEnter={onPieEnter}
       >
       {
-        props.data.map((_, index)=> (
+        (props.data ?? []).map((_, index)=> (
           <Cell key={`cell-${index}`} fill={COLORS[index]} />
         ))
       }
@@ -171,3 +171,4 @@ export default function StatsCircle(props) {
     </PieChart>
   );
 }
+
