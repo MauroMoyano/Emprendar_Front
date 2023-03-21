@@ -12,7 +12,10 @@ import { useDropzone } from "react-dropzone";
 import clienteAxios from "config/clienteAxios";
 
 
-export default function EditProject() {
+export default function EditProject({ projectData }) {
+
+    console.log('projectData en edit ->', projectData)
+
     const dispatch = useDispatch();
     const router = useRouter();
 
@@ -30,18 +33,27 @@ export default function EditProject() {
     const userId = useSelector((state) => state.user?.id);
     const user_name = useSelector((state) => state.user?.user_name);
 
-    const initialFormValues = {
-        title: "",
-        summary: "",
-        description: "",
-        goal: "",
-        country: "",
+    // const initialFormValues = {
+    //     title: projectData.title,
+    //     summary: projectData.summary,
+    //     description: projectData.description,
+    //     goal: projectData.goal,
+    //     country: projectData.country.name,
+    //     category: [],
+    //     userId: null,
+    //     user_name: null,
+    // };
+
+    const [form, setForm] = useState({
+        title: projectData.title,
+        summary: projectData.summary,
+        description: projectData.description,
+        goal: projectData.goal,
+        country: projectData.country.name,
         category: [],
         userId: null,
         user_name: null,
-    };
-
-    const [form, setForm] = useState(initialFormValues);
+    });
 
     const [errors, setErrors] = useState({
         title: "",
@@ -263,155 +275,147 @@ export default function EditProject() {
 
     return (
         <>
-            
-                <form onSubmit={submitHandler} className={style.formContainer}>
-                    <h1 className={style.title}>Crea tu proyecto:</h1>
-                    <div className={style.formInput}>
-                        <div>
-                            {errors.title && (
-                                <span className={style.danger}>{errors.title}</span>
-                            )}
-                        </div>
-                        <div className={style.question}>
-                            <input
-                                type="text"
-                                value={form.title}
-                                onChange={changeHandler}
-                                name="title"
-                            />
-                            <label className={form.title !== "" ? style.fix : ""}>
-                                Título
-                            </label>
-                        </div>
 
-                        <div>
-                            {errors.summary && (
-                                <span className={style.danger}>{errors.summary}</span>
-                            )}
-                        </div>
-                        <div className={style.question}>
-                            <input
-                                type="text"
-                                value={form.summary.replace(/<[^>]+>/g, "")}
-                                onChange={changeHandler}
-                                name="summary"
-                            />
-                            <label className={form.summary !== "" ? style.fix : ""}>
-                                Resumen
-                            </label>
-                        </div>
-
-                        <div>
-                            {errors.description && (
-                                <span className={style.danger}>{errors.description}</span>
-                            )}
-                        </div>
-                        <div className={style.questionText}>
-                            <textarea
-                                rows="8"
-                                cols="30"
-                                value={form.description}
-                                onChange={changeHandler}
-                                name="description"
-                            />
-                            <label
-                                className={form.description !== "" ? style.fixTextarea : ""}
-                            >
-                                Tu descripción aquí...
-                            </label>
-                        </div>
-                        <div>
-                            {errors.goal && (
-                                <span className={style.danger}>{errors.goal}</span>
-                            )}
-                        </div>
-                        <div className={style.question}>
-                            <input
-                                type="number"
-                                value={form.goal}
-                                onChange={changeHandler}
-                                name="goal"
-                            />
-                            <label className={form.goal !== "" ? style.fix : ""}>Meta</label>
-                        </div>
-                        <div>
-                            {errors.country && (
-                                <span className={style.danger}>{errors.country}</span>
-                            )}
-                        </div>
-                        <div className={style.question}>
-                            {/*<input type="text" value={form.country} onChange={changeHandler} name="country"/>*/}
-                            <div className={style.questionCategory}>
-                                {
-                                    <select className={style.select} onChange={handleCountry}>
-                                        <option disabled selected>
-                                            País
-                                        </option>
-                                        {arrCountry.map((c, index) => {
-                                            return (
-                                                <option value={c} key={index}>
-                                                    {c}
-                                                </option>
-                                            );
-                                        })}
-                                    </select>
-                                }
-                            </div>
-                            <label>País</label>
-                        </div>
-                    </div>
-
-                    <div className={style.containerDrop}>
-                        <ul>{files}</ul>
-                        {alert && <p>{alert}</p>}
-                        <div {...getRootProps({ className: style.dropzone })}>
-                            {loading ? <p>Cargando imagen</p> : null}
-                            <input {...getInputProps()} />
-
-                            {isDragActive ? (
-                                <p>Solta tu imagen aqui</p>
-                            ) : (
-                                <p>Selecciona o arrastra tu imagen</p>
-                            )}
-                        </div>
-                    </div>
-
-                    <div className={style.containerQuestionCategory}>
-                        <h2>Categorías: </h2>
-                        {errors.category && (
-                            <span className={style.danger}>{errors.category}</span>
+            <form onSubmit={submitHandler} className={style.formContainer}>
+                <h1 className={style.title}>Crea tu proyecto:</h1>
+                <div className={style.formInput}>
+                    <div>
+                        {errors.title && (
+                            <span className={style.danger}>{errors.title}</span>
                         )}
-                        <div className={style.questionCategory}>
-                            {arrCategory.map((cat, index) => {
-                                return (
-                                    <div className={style.divInput} key={index}>
-                                        <label>{cat}</label>
-                                        <input
-                                            type="checkbox"
-                                            name={cat}
-                                            value={cat.toLowerCase()}
-                                            onChange={handleCheck}
-                                        />
-                                    </div>
-                                );
-                            })}
-                        </div>
                     </div>
-                    <button
-                        // disabled={
-                        //   errors.title === "" &&
-                        //   errors.summary === "" &&
-                        //   errors.description === "" &&
-                        //   errors.goal === "" &&
-                        //   true
-                        // }
-                        className={isValid ? style.submit : style.disabled}
-                        type="submit"
-                        disabled={!isValid}
-                    >
-                        Enviar datos
-                    </button>
-                </form>
+                    <div className={style.question}>
+                        <input
+                            type="text"
+                            value={form.title}
+                            onChange={changeHandler}
+                            name="title"
+                        />
+                        <label >
+                            Título
+                        </label>
+                    </div>
+
+                    <div>
+                        {errors.summary && (
+                            <span className={style.danger}>{errors.summary}</span>
+                        )}
+                    </div>
+                    <div className={style.question}>
+                        <input
+                            type="text"
+                            value={form.summary.replace(/<[^>]+>/g, "")}
+                            onChange={changeHandler}
+                            name="summary"
+                        />
+                        <label>
+                            Resumen
+                        </label>
+                    </div>
+
+                    <div>
+                        {errors.description && (
+                            <span className={style.danger}>{errors.description}</span>
+                        )}
+                    </div>
+                    <div className={style.questionText}>
+                        <textarea
+                            rows="8"
+                            cols="30"
+                            value={form.description}
+                            onChange={changeHandler}
+                            name="description"
+                        />
+                        <label>
+                            Tu descripción aquí...
+                        </label>
+                    </div>
+                    <div>
+                        {errors.goal && (
+                            <span className={style.danger}>{errors.goal}</span>
+                        )}
+                    </div>
+                    <div className={style.question}>
+                        <input
+                            type="number"
+                            value={form.goal}
+                            onChange={changeHandler}
+                            name="goal"
+                        />
+                        <label className={form.goal !== "" ? style.fix : ""}>Meta</label>
+                    </div>
+                    <div>
+                        {errors.country && (
+                            <span className={style.danger}>{errors.country}</span>
+                        )}
+                    </div>
+                    <div className={style.question}>
+                        {/*<input type="text" value={form.country} onChange={changeHandler} name="country"/>*/}
+                        <div className={style.questionCategory}>
+                            {
+                                <select className={style.select} onChange={handleCountry}>
+                                    <option disabled selected>
+                                        País
+                                    </option>
+                                    {arrCountry.map((c, index) => {
+                                        return (
+                                            <option value={c} key={index}>
+                                                {c}
+                                            </option>
+                                        );
+                                    })}
+                                </select>
+                            }
+                        </div>
+                        <label>País</label>
+                    </div>
+                </div>
+
+                <div className={style.containerDrop}>
+                    <ul>{files}</ul>
+                    {alert && <p>{alert}</p>}
+                    <div {...getRootProps({ className: style.dropzone })}>
+                        {loading ? <p>Cargando imagen</p> : null}
+                        <input {...getInputProps()} />
+
+                        {isDragActive ? (
+                            <p>Solta tu imagen aqui</p>
+                        ) : (
+                            <p>Selecciona o arrastra tu imagen</p>
+                        )}
+                    </div>
+                </div>
+
+                <div className={style.containerQuestionCategory}>
+                    <h2>Categorías: </h2>
+                    {errors.category && (
+                        <span className={style.danger}>{errors.category}</span>
+                    )}
+                    <div className={style.questionCategory}>
+                        {arrCategory.map((cat, index) => {
+                            return (
+                                <div className={style.divInput} key={index}>
+                                    <label>{cat}</label>
+                                    <input
+                                        type="checkbox"
+                                        name={cat}
+                                        value={cat.toLowerCase()}
+                                        onChange={handleCheck}
+                                    />
+                                </div>
+                            );
+                        })}
+                    </div>
+                </div>
+                <button
+
+                    className={isValid ? style.submit : style.disabled}
+                    type="submit"
+                    disabled={!isValid}
+                >
+                    Enviar datos
+                </button>
+            </form>
         </>
     );
 }

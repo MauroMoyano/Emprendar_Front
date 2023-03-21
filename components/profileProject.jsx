@@ -8,21 +8,21 @@ import EditProject from '../components/EditProject'
 
 export default function ProfileProject({ projectData }) {
 
-    console.log('projectData ->', projectData)
+    // console.log('projectData ->', projectData)
 
     const [isOpen, openModal, closeModal] = useModal(false)
 
     return (
-        <div>
-            <button onClick={openModal}><FontAwesomeIcon icon={faPenToSquare} /></button>
-            <div>
+        <div className={style.card_project}>
+            <button onClick={openModal}><FontAwesomeIcon icon={faPenToSquare} title='Editar proyecto' /></button>
+            <div className={style.div_img}>
                 <img src={projectData.img} alt="" />
             </div>
-            <h4>{projectData.title}</h4>
-            <h5>{projectData.summary}</h5>
+            <h4 className={style.title}>{projectData.title}</h4>
+            <h5 className={style.summary} >{projectData.summary}</h5>
             <ModalProject isOpen={isOpen} closeModal={closeModal}>
                 <div>
-                    <EditProject />
+                    <EditProject projectData={projectData} />
 
                 </div>
             </ModalProject>
