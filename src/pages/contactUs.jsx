@@ -5,7 +5,9 @@ import Head from 'next/head'
 import style from './styles/contactUs.module.css'
 import clienteAxios from 'config/clienteAxios'
 
-const ContactUs = () => {
+
+export default function ContactUs() {
+
 
     const [alert,setAlert] = useState(null)
 
@@ -54,7 +56,9 @@ const ContactUs = () => {
                  <input type="text" className={style.input} value={input.name} onChange={((e) => { setInput({ ...input, name: e.target.value }) })} placeholder='Tu nombre' />
                  <input type="text" className={style.input} placeholder='Tu mail' value={input.email} onChange={((e) => { setInput({ ...input, email: e.target.value }) })} />
 
+
                  <textarea name="" id="" value={input.message}  onChange={((e) => {setInput({...input,message:e.target.value})}) } className={style.textarea} placeholder="Mensaje" cols="30" rows="10"></textarea>
+
 
                  <button type="submit">Enviar</button>
              </form>
@@ -66,4 +70,3 @@ const ContactUs = () => {
     )
 }
 
-export default ContactUs
