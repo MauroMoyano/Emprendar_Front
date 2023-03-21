@@ -10,7 +10,10 @@ import { useDropzone } from "react-dropzone"
 
 // import de iconos
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen } from "@fortawesome/free-solid-svg-icons";
+import { faPen, faCircleInfo, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+
+
+
 
 
 export default function Profile({ userData, error }) {
@@ -34,11 +37,13 @@ export default function Profile({ userData, error }) {
                 Swal.fire({
                     icon: 'error',
                     title: 'Acceso denegado',
-                    text: 'Serás redirigido al inicio'
-                }).then(() => {
-                    goHome()
+                    text: 'Serás redirigido al inicio',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    willClose: ()=>{
+                        goHome()
+                    }
                 })
-
             }
         }
     }, [user, userData])
@@ -68,6 +73,14 @@ export default function Profile({ userData, error }) {
         })
     }
 
+    const [passwords, setPasswords] = useState({
+        password: '',
+        newPassword: '',
+        confirmPassword: '',
+        passwordHelper: '0',
+        newPasswordHelper: '0'
+    })
+
 
 
     //------------------------------------------------------------------------------------------------------------------------
@@ -84,7 +97,9 @@ export default function Profile({ userData, error }) {
 
         const saveInfo = document.getElementById('saveInfo')
         const cancelInfo = document.getElementById('cancelInfo')
+        const editInfo = document.getElementById('editInfo')
 
+        editInfo.classList.add(style.hidden)
         saveInfo.classList.add(style.visible)
         cancelInfo.classList.add(style.visible)
 
@@ -102,20 +117,16 @@ export default function Profile({ userData, error }) {
 
         const saveInfo = document.getElementById('saveInfo')
         const cancelInfo = document.getElementById('cancelInfo')
+        const editInfo = document.getElementById('editInfo')
 
+        editInfo.classList.remove(style.hidden)
         saveInfo.classList.remove(style.visible)
         cancelInfo.classList.remove(style.visible)
     }
 
-    const enableInputsPassword = () => {
-        const inputPassword = document.getElementById('input_password')
-        inputPassword.removeAttribute('readOnly')
-    }
+    //------------------------------------------------------------------------------------------------
 
-    const disableInputsPassword = () => {
-        const inputPassword = document.getElementById('input_password')
-        inputPassword.setAttribute('readOnly', "")
-    }
+
 
     //------------------------------------------------------------------------------------------------------------------------
 
@@ -172,6 +183,103 @@ export default function Profile({ userData, error }) {
         editImg.classList.remove(style.visible)
     }
 
+    //-------------------------------------------------------------------------------------------
+    const seePassword = () => {
+        const inputPassword = document.getElementById('inputPassword')
+        const newPassword = document.getElementById('newPassword')
+        const confirmPassword = document.getElementById('confirmPassword')
+        const seePassword = document.getElementById('seePassword')
+        const hidePassword = document.getElementById('hidePassword')
+
+        inputPassword.setAttribute('type', 'text')
+        newPassword.setAttribute('type', 'text')
+        confirmPassword.setAttribute('type', 'text')
+
+        seePassword.classList.add(style.hidden)
+        hidePassword.classList.add(style.visible)
+    }
+
+    const hidePassword = () => {
+        const inputPassword = document.getElementById('inputPassword')
+        const newPassword = document.getElementById('newPassword')
+        const confirmPassword = document.getElementById('confirmPassword')
+        const seePassword = document.getElementById('seePassword')
+        const hidePassword = document.getElementById('hidePassword')
+
+        inputPassword.setAttribute('type', 'password')
+        newPassword.setAttribute('type', 'password')
+        confirmPassword.setAttribute('type', 'password')
+
+        seePassword.classList.remove(style.hidden)
+        hidePassword.classList.remove(style.visible)
+    }
+
+    //-----------------------------------------------------------------------------------------------
+
+    const enableInputsPassword = () => {
+        const changePassword = document.getElementById('changePassword')
+        const updatePassword = document.getElementById('updatePassword')
+        const cancelPassword = document.getElementById('cancelPassword')
+        const divPassword = document.getElementById('divPassword')
+
+        changePassword.classList.add(style.hidden)
+        updatePassword.classList.add(style.visible)
+        cancelPassword.classList.add(style.visible)
+        divPassword.classList.add(style.visible)
+
+    }
+
+    const disableInputsPassword = () => {
+        const changePassword = document.getElementById('changePassword')
+        const updatePassword = document.getElementById('updatePassword')
+        const cancelPassword = document.getElementById('cancelPassword')
+        const divPassword = document.getElementById('divPassword')
+
+        changePassword.classList.remove(style.hidden)
+        updatePassword.classList.remove(style.visible)
+        cancelPassword.classList.remove(style.visible)
+        divPassword.classList.remove(style.visible)
+
+        setPasswords({
+            password: '',
+            newPassword: '',
+            confirmPassword: '',
+            passwordHelper: '0',
+            newPasswordHelper: '0'
+        })
+
+        hidePassword()
+
+    }
+    //-------------------------------------------------------------------------------------------
+    const handleInputsPassword = (event) => {
+        const name = event.target.name
+        const value = event.target.value
+
+        if (name === 'password') {
+            setPasswords({
+                ...passwords,
+                password: value,
+                passwordHelper: value
+            })
+            return
+        }
+
+        if (name === 'newPassword') {
+            setPasswords({
+                ...passwords,
+                newPassword: value,
+                newPasswordHelper: value
+            })
+            return
+        }
+
+        setPasswords({
+            ...passwords,
+            confirmPassword: value
+        })
+    }
+    //-------------------------------------------------------------------------------------------
     const changeImage = async () => {
         try {
             await clienteAxios.put(`${process.env.NEXT_PUBLIC_BACK_APP_URL}/user/${userData.id}`, { profile_img: imageToSend })
@@ -242,7 +350,7 @@ export default function Profile({ userData, error }) {
     return (
 
         <Layout>
-            {!!userData &&
+            {!!userData && !!user && userData.id === user.id &&
                 <div className={style.div_gral}>
                     <div className={style.container}>
                         <div className={style.div_datos}>
@@ -295,28 +403,52 @@ export default function Profile({ userData, error }) {
                                 </div>
 
                                 <div className={style.div_extra_info}>
-                                    <h4>Valoración:</h4>
-                                    <h4>{reputation} estrellas</h4>
-                                    <h4>Correo electrónico:</h4>
-                                    <h5>{email}</h5>
+                                    <div className={style.div_valoracion}>
+                                        <h4>Valoración:</h4>
+                                        <p>{reputation} estrellas</p>
+                                    </div>
+
+                                    <div className={style.div_email}>
+                                        <h4>Correo electrónico:</h4>
+                                        <FontAwesomeIcon icon={faCircleInfo} className={style.circle_info} />
+                                        <span id="emailInfo" className={style.email_info}>El correo electrónico no se puede cambiar</span>
+                                        <p>{email}</p>
+                                    </div>
                                 </div>
 
                             </div>
-
+                            <hr />
                             {/* Contraseña */}
                             <h1>Contraseña</h1>
-                            <div className={style.div_password}>
-                                <label htmlFor="input_password" id="label_password">Contraseña:</label>
-                                <input type="password" name="password" readOnly id='input_password' />
-                                <label htmlFor="input_password" id="label_password">Escriba su nueva contraseña:</label>
-                                <input type="new_password" readOnly id='input_password' />
-                                <label htmlFor="input_password" id="label_password">Confirme la nueva contraseña:</label>
-                                <input type="confirm_password" readOnly id='input_password' />
+                            <div className={style.div_password} id='divPassword'>
+                                <div className={style.password}>
+                                    <h4>Escriba su contraseña actual:</h4>
+                                    <div className={style.curr_password}>
+                                        <input type="password" name="password" id='inputPassword' value={passwords.password} onChange={handleInputsPassword} />
+                                        <FontAwesomeIcon icon={faEye} className={style.see_password} id='seePassword'
+                                            onClick={seePassword} title='Mostrar contraseña' />
+                                        <FontAwesomeIcon icon={faEyeSlash} className={style.hide_password} id='hidePassword'
+                                            onClick={hidePassword} title='Ocultar contraseña' />
+                                    </div>
+                                    {!passwords.passwordHelper && <p>Campo obligatorio</p>}
+                                </div>
+
+                                <div className={style.new_password}>
+                                    <h4>Escriba su nueva contraseña:</h4>
+                                    <input type="password" id='newPassword' name="newPassword" value={passwords.newPassword} onChange={handleInputsPassword} />
+                                    {!passwords.newPasswordHelper && <p>Campo obligatorio</p>}
+                                </div>
+
+                                <div className={style.confirm_password}>
+                                    <h4>Confirme la nueva contraseña:</h4>
+                                    <input type="password" id='confirmPassword' name="confirmPassword" value={passwords.confirmPassword} onChange={handleInputsPassword} />
+                                    {passwords.newPassword && passwords.confirmPassword && passwords.newPassword !== passwords.confirmPassword && <p>Las contraseñas no coinciden</p>}
+                                </div>
                             </div>
-                            <div>
-                                <button onClick={enableInputsPassword}>Cambiar contraseña</button>
-                                <button onClick={disableInputsPassword}>Actualizar contraseña</button>
-                                <button onClick={disableInputsPassword}>Cancelar</button>
+                            <div className={style.password_buttons}>
+                                <button onClick={enableInputsPassword} id='changePassword' className={style.change_password}>Cambiar contraseña</button>
+                                <button onClick={null} id='updatePassword' className={style.update_password}>Actualizar contraseña</button>
+                                <button onClick={disableInputsPassword} id='cancelPassword' className={style.cancel_password}>Cancelar</button>
                             </div>
 
                         </div>
@@ -343,7 +475,7 @@ export default function Profile({ userData, error }) {
             }
 
             {!!error &&
-                <div>
+                <div className={style.divError}>
                     <h1>No se encontró el usuario</h1>
                     <button onClick={goHome}>Regresar a inicio</button>
                 </div>}
@@ -351,6 +483,8 @@ export default function Profile({ userData, error }) {
         </Layout>
     )
 }
+
+
 
 export async function getServerSideProps({ query }) {
     try {
