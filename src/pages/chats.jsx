@@ -101,7 +101,7 @@ export default function Chats(props){
     const handlerSearch = (event)=>{
         const {value} = event.target;
         setSearch(value);
-        let filtro = allUsers.filter((u)=> u.user_name.includes(value) );
+        let filtro = allUsers.filter((u)=> u.user_name.toLowerCase().includes(value.toLowerCase()) );
         setUsers(filtro);
     }
 
@@ -119,7 +119,7 @@ export default function Chats(props){
         const {value} = event.target;
         set_search_conversation(value);
 
-        let filtro = allConversations.filter((u)=> u.user_name.includes(value) );
+        let filtro = allConversations.filter((u)=> u.user_name.toLowerCase().includes(value.toLowerCase()) );
         setConversations(filtro);
     }
 
@@ -176,30 +176,35 @@ export default function Chats(props){
                             
                             : <div className={style.conversaciones}>
                               
-                                    <form  className={style.form} onSubmit={handlerSubmit}>
-                                            <label className={style.lupa} htmlFor="2"> 
-                                                <FontAwesomeIcon icon={faMagnifyingGlass} style={{color: "#1c3787",display:"flex"}} /> 
-                                            </label>
-                                            <input  id="2" className={style.searchBar} type="text" onChange={handlerSearch} value={search}/>
-                                        </form>
-
-                                    <div> <h3 className={style.title}>Todos los usuarios</h3></div>
+                                <form  className={style.form} onSubmit={handlerSubmit}>
+                                        <label className={style.lupa} htmlFor="2"> 
+                                            <FontAwesomeIcon icon={faMagnifyingGlass} style={{color: "#1c3787",display:"flex"}} /> 
+                                        </label>
+                                        <input  id="2" className={style.searchBar} type="text" onChange={handlerSearch} value={search}/>
+                                </form>
+                                
+                                <div> <h3 className={style.title}>Todos los usuarios</h3></div>
                           
-
-
                                 <div className={style.cards}>
                                     { users.length
                                         ? users?.map(u =>{
-                        
-                                            return (
-                                                <>
-                                                    <div className={style.chatUser}  onClick={() => handlerSelect(u.id)} >
-                                                        <img src={u.profile_img} alt="user" />
-                                                        <p> {u.user_name}</p>
-                                                    </div>
-                                                 
-                                                </>
-                                            )
+                                            console.log("User", User);
+                                            console.log("chat_u", u);
+                                            if (u.id === User.id) {
+                                                
+                                            } else {
+                                                
+                                                return (
+                                                    <>
+                                                        <div className={style.chatUser}  onClick={() => handlerSelect(u.id)} >
+                                                            <img src={u.profile_img} alt="user" />
+                                                            <p> {u.user_name}</p>
+                                                        </div>
+                                                    
+                                                    </>
+                                                )
+                                            }
+
                                         }) 
                                         : null 
                                     }
@@ -207,6 +212,8 @@ export default function Chats(props){
                            
                         </div>
                         }
+
+                        
                         <div className={style.switchBotton}>
                             <div  className={style.iconUser}   onClick={()=>handlerSwich()}>
                                 <FontAwesomeIcon                      
