@@ -11,6 +11,7 @@ import {
 import { useRouter } from "next/router";
 import { useDropzone } from "react-dropzone";
 import clienteAxios from "config/clienteAxios";
+import { ClipLoader } from "react-spinners";
 export default function CreateProject() {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -282,6 +283,7 @@ export default function CreateProject() {
                 Título
               </label>
             </div>
+       
 
             <div>
               {errors.summary && (
@@ -362,9 +364,12 @@ export default function CreateProject() {
 
           <div className={style.containerDrop}>
             <ul>{files}</ul>
+            <ul>
+              <img className={style.img} src={urlImage} alt="" />
+            </ul>
             {alert && <p>{alert}</p>}
             <div {...getRootProps({ className: style.dropzone })}>
-              {loading ? <p>Cargando imagen</p> : null}
+              {loading ?     <ClipLoader /> : null}
               <input {...getInputProps()} />
 
               {isDragActive ? (

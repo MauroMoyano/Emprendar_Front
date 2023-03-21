@@ -239,3 +239,8 @@
         padding-bottom: 20px;
     }
 }
+
+
+.img {
+    max-width: 100%;
+}
