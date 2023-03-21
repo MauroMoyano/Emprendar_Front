@@ -23,11 +23,16 @@ export const PaginatedUsers = () => {
     const [control, setControl] = useState(true)
 
     useLayoutEffect(() => {
-        dispatch(resetScroll())
-        setPage(1)
-        console.log('entrooo')
-        dispatch(getUsersToScroll(1, pathUserValue))
-        setControl(!control)
+        let fetchData = async () => {
+            await Promise.all([])
+                .then(() => dispatch(resetScroll()))
+                .then(() => setPage(1),)
+                .then(() => dispatch(getUsersToScroll(1, pathUserValue)),)
+                .then(() => setControl(!control))
+            console.log('entrooo')
+        }
+
+        fetchData()
     }, [pathUserValue])
 
     const loadMore = () => {
@@ -39,9 +44,6 @@ export const PaginatedUsers = () => {
             setControl(false)
         }
     }
-
-
-
 
 
     return (

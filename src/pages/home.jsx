@@ -31,6 +31,7 @@ export default function Home() {
     const [countriess, setCountry] = useState('')
     const [categoriess, setCategory] = useState('')
     const [search, setSearch] = useState('')
+    const [searchs, setSearchs] = useState('')
 
     useEffect(() => {
         let path
@@ -58,6 +59,18 @@ export default function Home() {
         setCategory('')
         setSearch('')
     }
+
+    const handleInputChange = (event) => {
+
+        if (timer) {
+            clearTimeout(timer);
+        }
+
+        setTimer(setTimeout(() => {
+            let newValue = event.target.value;
+            setSearch(newValue)
+        }, 2000));
+    };
 
     return (
         <Layout>
@@ -120,7 +133,7 @@ export default function Home() {
                                 </div>
                             </li>
                             <div className={style.menuSearch}>
-                                <input value={search} type='search' onChange={(e) => setSearch(e.target.value)} placeholder="Buscar proyecto..." ></input>
+                                <input value={search} type='search' onChange={(e) => { handleInputChange(e), setSearchs(e.target.value) }} placeholder="Buscar proyecto..." ></input>
                             </div>
                         </ul>
                     </div>
