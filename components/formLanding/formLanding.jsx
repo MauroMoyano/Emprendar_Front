@@ -170,7 +170,7 @@ export default function FormLanding() {
               htmlFor="chk"
               aria-hidden="true"
             >
-              Iniciar Sesion
+              Iniciar Sesión
             </label>
             <input
               className={style.input}
@@ -189,7 +189,7 @@ export default function FormLanding() {
               placeholder="Contraseña"
             />
             <button onClick={() => sendDataLogIn(formLogIn)}>Entrar</button>
-            <Link className={style.password} href='/resetPassword'>Olvide mi contraseña</Link>
+            <Link className={style.password} href='/resetPassword'>Olvidé mi contraseña</Link>
           </form>
         </div>
         <div className={style.sign_In}>
@@ -225,7 +225,7 @@ export default function FormLanding() {
               value={formSignIn.user_name}
               onChange={handlerSignIn}
               type="text"
-              placeholder="Nombre de Usuario"
+              placeholder="Nombre de usuario"
             />
             <input
               className={style.input}

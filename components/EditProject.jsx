@@ -1,4 +1,3 @@
-import Layout from "./Layout";
 import { useEffect, useState, useCallback } from "react";
 import style from "./styles/editProject.module.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,8 +7,12 @@ import {
     getHomeProjects,
 } from '../redux/actions'
 import { useRouter } from "next/router";
-import { useDropzone } from "react-dropzone";
 import clienteAxios from "config/clienteAxios";
+import Swal from "sweetalert2";
+
+// import de iconos
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 
 
 export default function EditProject({ projectData }) {
@@ -23,58 +26,17 @@ export default function EditProject({ projectData }) {
         dispatch(getHomeProjects());
     }, []);
 
-    const [loading, setLoading] = useState(false);
-
-    const [urlImage, setUrlImage] = useState(null);
-
-    let arrCategory = useSelector((state) => state.category);
-    let arrCountry = useSelector((state) => state.country);
-
-    const userId = useSelector((state) => state.user?.id);
-    const user_name = useSelector((state) => state.user?.user_name);
-
-    // const initialFormValues = {
-    //     title: projectData.title,
-    //     summary: projectData.summary,
-    //     description: projectData.description,
-    //     goal: projectData.goal,
-    //     country: projectData.country.name,
-    //     category: [],
-    //     userId: null,
-    //     user_name: null,
-    // };
-
     const [form, setForm] = useState({
         title: projectData.title,
         summary: projectData.summary,
-        description: projectData.description,
-        goal: projectData.goal,
-        country: projectData.country.name,
-        category: [],
-        userId: null,
-        user_name: null,
+        description: projectData.description
     });
 
     const [errors, setErrors] = useState({
         title: "",
         summary: "",
-        description: "",
-        goal: "",
-        country: "",
-        category: "",
+        description: ""
     });
-
-    useEffect(() => {
-        if (userId) {
-            setForm({
-                ...form,
-                userId: userId,
-                user_name: user_name,
-                img: urlImage,
-            });
-        }
-    }, [userId, user_name, urlImage]);
-    const [alert, setAlert] = useState("");
 
     const changeHandler = (event) => {
         const property = event.target.name;
@@ -90,52 +52,31 @@ export default function EditProject({ projectData }) {
         if (
             form.title !== "" &&
             form.summary !== "" &&
-            form.description !== "" &&
-            form.goal !== "" &&
-            form.country !== "" &&
-            form.category.length !== 0 &&
-            form.category.length <= 5
+            form.description !== ""
         ) {
             if (
                 errors.title === "" &&
                 errors.summary === "" &&
-                errors.description === "" &&
-                errors.goal === ""
+                errors.description === ""
             ) {
-                setForm({ ...form, userId: userId, user_name: user_name });
-                // console.log(form)
-                await clienteAxios.post("/project", form);
-                // dispatch(createProject(form));
-                await router.push("/home");
+                await clienteAxios.put(`${process.env.NEXT_PUBLIC_BACK_APP_URL}/project/${projectData.id}`, form)
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Cambios realizados correctamente',
+                    text: 'Recargaremos la página con tus nuevos datos',
+                    timer: 2000,
+                    showConfirmButton: false,
+                    willClose: () => {
+                        window.location.reload()
+                    }
+                })
             }
-        }
-    };
-
-    const handleCheck = (event) => {
-        const check = event.target.value;
-        let arrAux = [...form.category];
-        if (arrAux.length) {
-            const aux = arrAux.filter((cat) => cat !== check);
-            aux.length === arrAux.length //si da verdadera significa que no estaba check dentro de arrCategory, por lo tanto lo pusheamos
-                ? arrAux.push(check)
-                : (arrAux = [...aux]); // si estaba adentro devolvemos el array filtrado
         } else {
-            arrAux.push(check);
+            Swal.fire({
+                icon: 'error',
+                title: 'Faltan campos por completar',
+            })
         }
-        if (arrAux.length > 5) {
-            setErrors({
-                ...errors,
-                category: "solo se permiten hasta 5 categorias por proyecto",
-            });
-            setForm({ ...form, category: arrAux });
-        } else {
-            setErrors({ ...errors, category: "" });
-            setForm({ ...form, category: arrAux });
-        }
-    };
-
-    const handleCountry = (event) => {
-        setForm({ ...form, country: event.target.value });
     };
 
     const validate = (form) => {
@@ -200,84 +141,69 @@ export default function EditProject({ projectData }) {
             }
         }
 
-        if (form.goal < 1000001 && form.goal > 99) {
-            errors = { ...errors, goal: "" };
-        } else {
-            if (form.goal === "") {
-                errors = { ...errors, goal: "" };
-            } else {
-                errors = {
-                    ...errors,
-                    goal: "El número ingresado como meta debe ser entre 100 y 1.000.000",
-                };
-            }
-        }
-
         return errors;
     };
 
-    //dropzone configuraciones
+    const deleteProject = async () => {
+        Swal.fire({
+            title: '¿Está seguro(a) de eliminar este proyecto?',
+            text: "Esta acción no se puede revertir",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#007200',
+            cancelButtonColor: '#9d0208',
+            confirmButtonText: 'Confirmar'
+        }).then(async (result) => {
+            if (result.isConfirmed) {
 
-    const onDropRejected = () => {
-        setAlert(
-            "No se pudo subir la imagen. Asegúrate que sea una imagen PNG o JPG y que no supere 5MB"
-        );
-    };
+                try {
+                    await clienteAxios.delete(`${process.env.NEXT_PUBLIC_BACK_APP_URL}/project/${projectData.id}`)
 
-    const onDropAccepted = useCallback(async (acceptedFiles) => {
-        const formData = new FormData();
-        formData.append("image", acceptedFiles[0], acceptedFiles[0].name);
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Cambios realizados correctamente',
+                        text: 'Recargaremos la página con tus nuevos datos',
+                        timer: 2000,
+                        showConfirmButton: false,
+                        willClose: () => {
+                            window.location.reload()
+                        }
+                    })
+                } catch (error) {
+                    console.log(error.message)
+                }
+            }
+        })
+    }
 
-        await uploadImage(formData);
-    }, []);
+    const toMayus = (str) => {
+        return str[0].toUpperCase() + str.slice(1)
+    }
 
-    const { getRootProps, getInputProps, isDragActive, acceptedFiles } =
-        useDropzone({
-            onDropRejected,
-            onDropAccepted,
-            accept: {
-                "image/png": [".png", ".jpg"],
-            },
-        });
-
-    const uploadImage = async (formdata) => {
-        try {
-            setLoading(true);
-
-            const response = await clienteAxios.post("images/upload", formdata);
-
-            setUrlImage(response.data.imageUrl);
-            setLoading(false);
-        } catch (error) {
-            console.log(error);
+    const formatGoal = (num) => {
+        if (!num) {
+            return 'No info';
         }
-    };
 
-    const files = acceptedFiles.map((file) => (
-        <li key={file.lastModified}>
-            <p>{file.path}</p>
-            <p>{(file.size / Math.pow(1024, 2)).toFixed(2)} MB</p>
-        </li>
-    ));
+        const exp = /(\d)(?=(\d{3})+(?!\d))/g;
+        const rep = '$1,';
+        let arr = num.toString().split('.');
+        arr[0] = arr[0].replace(exp, rep);
+        return arr[1] ? arr.join('.') : arr[0];
+    }
 
     const isValid =
         form.title !== "" &&
         form.summary !== "" &&
         form.description !== "" &&
-        form.goal !== "" &&
-        form.country !== "" &&
-        form.category.length !== 0 &&
-        form.category.length <= 5 &&
         errors.title === "" &&
         errors.summary === "" &&
-        errors.description === "" &&
-        errors.goal === "";
+        errors.description === ""
 
     return (
         <>
-
             <form onSubmit={submitHandler} className={style.formContainer}>
-                <h1 className={style.title}>Crea tu proyecto:</h1>
+                <h1 className={style.title}>Edita tu proyecto:</h1>
                 <div className={style.formInput}>
                     <div>
                         {errors.title && (
@@ -285,15 +211,14 @@ export default function EditProject({ projectData }) {
                         )}
                     </div>
                     <div className={style.question}>
+                        <label>Título</label>
                         <input
                             type="text"
                             value={form.title}
                             onChange={changeHandler}
                             name="title"
                         />
-                        <label >
-                            Título
-                        </label>
+
                     </div>
 
                     <div>
@@ -302,15 +227,14 @@ export default function EditProject({ projectData }) {
                         )}
                     </div>
                     <div className={style.question}>
+                        <label>Resumen</label>
                         <input
                             type="text"
                             value={form.summary.replace(/<[^>]+>/g, "")}
                             onChange={changeHandler}
                             name="summary"
                         />
-                        <label>
-                            Resumen
-                        </label>
+
                     </div>
 
                     <div>
@@ -319,6 +243,7 @@ export default function EditProject({ projectData }) {
                         )}
                     </div>
                     <div className={style.questionText}>
+                        <label>Tu descripción aquí...</label>
                         <textarea
                             rows="8"
                             cols="30"
@@ -326,96 +251,79 @@ export default function EditProject({ projectData }) {
                             onChange={changeHandler}
                             name="description"
                         />
-                        <label>
-                            Tu descripción aquí...
-                        </label>
+
                     </div>
                     <div>
                         {errors.goal && (
                             <span className={style.danger}>{errors.goal}</span>
                         )}
                     </div>
-                    <div className={style.question}>
-                        <input
-                            type="number"
-                            value={form.goal}
-                            onChange={changeHandler}
-                            name="goal"
-                        />
-                        <label className={form.goal !== "" ? style.fix : ""}>Meta</label>
+                </div>
+
+                <div className={style.div_extrainfo}>
+                    <div className={style.div_info}>
+                        <FontAwesomeIcon icon={faCircleInfo} /> La siguiente información no puede ser editada
                     </div>
-                    <div>
-                        {errors.country && (
-                            <span className={style.danger}>{errors.country}</span>
-                        )}
+
+                    <div className={style.div_status}>
+                        <label>Estado del proyecto:</label>
+                        <h3>{toMayus(projectData.validated)}</h3>
                     </div>
-                    <div className={style.question}>
-                        {/*<input type="text" value={form.country} onChange={changeHandler} name="country"/>*/}
-                        <div className={style.questionCategory}>
-                            {
-                                <select className={style.select} onChange={handleCountry}>
-                                    <option disabled selected>
-                                        País
-                                    </option>
-                                    {arrCountry.map((c, index) => {
-                                        return (
-                                            <option value={c} key={index}>
-                                                {c}
-                                            </option>
-                                        );
-                                    })}
-                                </select>
-                            }
-                        </div>
-                        <label>País</label>
+
+                    <div className={style.div_goal}>
+                        <label>Meta:</label>
+                        <h3>${formatGoal(projectData.goal)}</h3>
+                    </div>
+
+                    <div className={style.div_date}>
+                        <label>Fecha de creación:</label>
+                        <h3>{projectData.date}</h3>
+                    </div>
+
+                    <div className={style.div_country}>
+                        <label>País:</label>
+                        <h3>{projectData.country.name}</h3>
+                    </div>
+
+                    <div className={style.div_categories}>
+                        <label>Categorías</label>
+                        {
+                            projectData.categories.map((elem, index) => {
+                                if (elem.name.includes('null')) {
+                                    return null
+                                } else {
+                                    return (
+                                        <h3>{`${index + 1}) ${toMayus(elem.name)}`}</h3>
+                                    )
+                                }
+                            })
+                        }
+                    </div>
+
+                    <div className={style.div_img}>
+                        <label>Imagen del proyecto</label>
+                        <img src={projectData.img} alt="Imagen del proyecto" />
                     </div>
                 </div>
 
-                <div className={style.containerDrop}>
-                    <ul>{files}</ul>
-                    {alert && <p>{alert}</p>}
-                    <div {...getRootProps({ className: style.dropzone })}>
-                        {loading ? <p>Cargando imagen</p> : null}
-                        <input {...getInputProps()} />
-
-                        {isDragActive ? (
-                            <p>Solta tu imagen aqui</p>
-                        ) : (
-                            <p>Selecciona o arrastra tu imagen</p>
-                        )}
-                    </div>
-                </div>
-
-                <div className={style.containerQuestionCategory}>
-                    <h2>Categorías: </h2>
-                    {errors.category && (
-                        <span className={style.danger}>{errors.category}</span>
-                    )}
-                    <div className={style.questionCategory}>
-                        {arrCategory.map((cat, index) => {
-                            return (
-                                <div className={style.divInput} key={index}>
-                                    <label>{cat}</label>
-                                    <input
-                                        type="checkbox"
-                                        name={cat}
-                                        value={cat.toLowerCase()}
-                                        onChange={handleCheck}
-                                    />
-                                </div>
-                            );
-                        })}
-                    </div>
-                </div>
                 <button
 
                     className={isValid ? style.submit : style.disabled}
                     type="submit"
                     disabled={!isValid}
                 >
-                    Enviar datos
+                    Actualizar proyecto
+                </button>
+
+                <button className={style.delete_project} onClick={deleteProject} type='button'>
+                    Eliminar proyecto
                 </button>
             </form>
         </>
     );
 }
+
+
+/*
+Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui architecto fuga omnis Ipsum perferendis temporibus excepturi esse ipsam necessitatibus consequatur quidem molestias architecto doloribus mollitia eligendi quae, voluptate adipisci nemo.
+*/
