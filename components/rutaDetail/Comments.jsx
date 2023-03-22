@@ -168,9 +168,7 @@ export default function Comments(props) {
           placeholder="Dejanos tu comentario"
           value={text}
         />
-        <button onClick={() => sendData(text)} disabled={error}>
-          ENVIAR
-        </button>
+        <button className={style.buttonSendMsg} onClick={() => sendData(text)} disabled={error}>OK</button>
       </form>
     </div>
   );

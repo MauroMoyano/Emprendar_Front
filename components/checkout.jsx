@@ -65,7 +65,7 @@ export default function PreviewPage(props) {
 
 
         <button type="submit" role="link">
-          Donar
+          DONAR
         </button>
       </section>
       <style jsx>
