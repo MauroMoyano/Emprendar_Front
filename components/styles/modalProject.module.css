@@ -16,19 +16,32 @@
 }
 
 .modal_container{
+    border: 3px solid#3C1642;
     position: relative;
     min-width: 320px;
     min-height: 200px;
+    max-height: 95vh;
     background-color: #fff;
     padding: 1rem;
+    overflow-y: scroll;
 }
 
 .modal_close{
     position: absolute;
     top: 1rem;
     right: 1rem;
+    background: #9d0208;
+    border: 1px solid #9d0208;
+    border-radius: 5px;
+    width: 30px;
+    color: #fff;
+    font-weight: bold;
+    padding: 3px;
+    transition: all .1s ease;
 }
 
-.prueba{
-    color: red;
+.modal_close:hover{
+    background: #d00000;
+    border: 1px solid #d00000;
+    box-shadow: 0px 2px 4px black;
 }

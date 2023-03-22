@@ -1,7 +1,6 @@
 import Layout from "../../components/Layout";
 import { useEffect, useState, useCallback } from "react";
 import style from "./styles/createProject.module.css";
-import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import {
   authedUser,
@@ -127,7 +126,7 @@ export default function CreateProject() {
   };
 
   const validate = (form) => {
-    const regTitle = /^[^0-9]{1,70}$/;
+    const regTitle = /^[^0-9]{1,40}$/;
     // console.log("pasando por validate")
     let errors = {};
 
@@ -139,15 +138,15 @@ export default function CreateProject() {
       if (form.title === "") {
         errors = { ...errors, title: "" };
       } else {
-        if (/^[^0-9]/.test(form.title)) {
+        if (/[0-9]/.test(form.title)) {
           errors = {
             ...errors,
-            title: "El título no puede ser mayor de 70 caracteres",
+            title: "El título no puede contener números",
           };
         } else {
           errors = {
             ...errors,
-            title: "El título no puede contener números",
+            title: "El título no puede contener más de 30 caracteres",
           };
         }
       }
@@ -155,7 +154,7 @@ export default function CreateProject() {
 
     form.summary?.trim();
     form.summary?.replaceAll("\\s{2,}", " ");
-    const regSummary = /^[a-zA-Z0-9 .,]{1,200}$/;
+    const regSummary = /^[a-zA-Z0-9ñáéíóúÁÉÍÓÚÜü .,]{1,200}$/;
 
     if (regSummary.test(form.summary)) {
       errors = { ...errors, summary: "" };
@@ -165,16 +164,16 @@ export default function CreateProject() {
       } else {
         !/^[@#$%]*$/.test(form.summary)
           ? (errors = {
-              ...errors,
-              summary: "Estás usando simbolos no aceptados",
-            })
+            ...errors,
+            summary: "Estás usando simbolos no aceptados",
+          })
           : (errors = { ...errors, summary: "El límite de caracteres es 200" });
       }
     }
 
     form.description?.trim();
     form.description?.replaceAll("\\s{2,}", " ");
-    const regDescription = /^[a-zA-Z0-9 .,]{1,2000}$/;
+    const regDescription = /^[a-zA-Z0-9ñáéíóúÁÉÍÓÚÜü .,]{1,2000}$/;
     if (regDescription.test(form.description)) {
       errors = { ...errors, description: "" };
     } else {
@@ -208,7 +207,7 @@ export default function CreateProject() {
 
   const onDropRejected = () => {
     setAlert(
-      "No se pudo subir la imagen. Asegúrate que sea una imagen PNG o JPG y que no supere 5MB"
+      "No se pudo subir la imagen. Asegúrate que sea una imagen PNG, JPG, JPEG o WEBP y que no supere 5MB"
     );
   };
 
@@ -224,7 +223,7 @@ export default function CreateProject() {
       onDropRejected,
       onDropAccepted,
       accept: {
-        "image/png": [".png", ".jpg"],
+        "image/png": [".png", ".jpg", ".jpeg", ".webp"],
       },
     });
 
@@ -278,12 +277,13 @@ export default function CreateProject() {
                 value={form.title}
                 onChange={changeHandler}
                 name="title"
+                maxLength='40'
               />
               <label className={form.title !== "" ? style.fix : ""}>
                 Título
               </label>
             </div>
-       
+
 
             <div>
               {errors.summary && (
@@ -296,6 +296,7 @@ export default function CreateProject() {
                 value={form.summary.replace(/<[^>]+>/g, "")}
                 onChange={changeHandler}
                 name="summary"
+                maxLength='200'
               />
               <label className={form.summary !== "" ? style.fix : ""}>
                 Resumen
@@ -314,6 +315,7 @@ export default function CreateProject() {
                 value={form.description}
                 onChange={changeHandler}
                 name="description"
+                maxLength='2000'
               />
               <label
                 className={form.description !== "" ? style.fixTextarea : ""}
@@ -332,6 +334,8 @@ export default function CreateProject() {
                 value={form.goal}
                 onChange={changeHandler}
                 name="goal"
+                min='100'
+                max='1000000'
               />
               <label className={form.goal !== "" ? style.fix : ""}>Meta</label>
             </div>
@@ -369,7 +373,7 @@ export default function CreateProject() {
             </ul>
             {alert && <p>{alert}</p>}
             <div {...getRootProps({ className: style.dropzone })}>
-              {loading ?     <ClipLoader /> : null}
+              {loading ? <ClipLoader /> : null}
               <input {...getInputProps()} />
 
               {isDragActive ? (

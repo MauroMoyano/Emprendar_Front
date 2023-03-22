@@ -10,7 +10,7 @@ import { useDropzone } from "react-dropzone"
 
 // import de iconos
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen, faCircleInfo, faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { faPen, faCircleInfo, faEye, faEyeSlash, faCircleCheck, faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 
 
 
@@ -33,6 +33,7 @@ export default function Profile({ userData, error }) {
     useEffect(() => {
         if (user && userData) {
             if (user.id != userData.id) {
+                if (router.pathname.includes('dashboard')) return;
 
                 Swal.fire({
                     icon: 'error',
@@ -40,7 +41,7 @@ export default function Profile({ userData, error }) {
                     text: 'Serás redirigido al inicio',
                     showConfirmButton: false,
                     timer: 1500,
-                    willClose: ()=>{
+                    willClose: () => {
                         goHome()
                     }
                 })
@@ -64,6 +65,8 @@ export default function Profile({ userData, error }) {
     })
 
     const [imageToSend, setImageToSend] = useState(profile_img)
+
+    const [truePassword, setTruePassword] = useState(false)
 
 
     const handleDataInputsChange = (event) => {
@@ -143,7 +146,7 @@ export default function Profile({ userData, error }) {
             await clienteAxios.put(`${process.env.NEXT_PUBLIC_BACK_APP_URL}/user/${userData.id}`, userInfo)
             Swal.fire({
                 icon: 'success',
-                title: 'Cambiós realizados correctamente',
+                title: 'Cambios realizados correctamente',
                 text: 'Recargaremos la página con tus nuevos datos',
                 timer: 2000,
                 showConfirmButton: false,
@@ -252,6 +255,33 @@ export default function Profile({ userData, error }) {
 
     }
     //-------------------------------------------------------------------------------------------
+
+    const verifyPasswords = async () => {
+        if (passwords.password === '') {
+            setTruePassword(null)
+            return
+        } else {
+            let pass = {
+                id: userData.id,
+                password: passwords.password
+            }
+
+            // console.log('Antes de enviar', pass)
+            try {
+                const response = await clienteAxios.post(`${process.env.NEXT_PUBLIC_BACK_APP_URL}/user/config/verifyPassword`, pass)
+                // console.log('Verificando password ->', response.data)
+                setTruePassword(response.data)
+
+            } catch (error) {
+                console.log(error.message)
+            }
+        }
+    }
+
+    useEffect(() => {
+        verifyPasswords()
+    }, [passwords.password])
+
     const handleInputsPassword = (event) => {
         const name = event.target.name
         const value = event.target.value
@@ -278,6 +308,68 @@ export default function Profile({ userData, error }) {
             ...passwords,
             confirmPassword: value
         })
+    }
+
+    const sendPassword = async () => {
+
+        if (!truePassword) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Contraseña incorrecta',
+                text: 'La contraseña no coincide con su contraseña actual'
+            })
+            return
+        }
+
+        if (passwords.newPassword === "" || passwords.confirmPassword === "") {
+            Swal.fire({
+                icon: 'error',
+                title: 'Faltan campos por completar',
+            })
+            setPasswords({
+                ...passwords,
+                newPasswordHelper: ""
+            })
+            return
+        }
+
+        if (passwords.newPassword !== passwords.confirmPassword) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Verifique sus datos',
+                text: 'Las contraseñas no coinciden'
+            })
+            return
+        }
+
+
+
+        const body = {
+            id: userData.id,
+            newPassword: passwords.newPassword
+        }
+
+        
+
+        try {
+            const response = await clienteAxios.post(`${process.env.NEXT_PUBLIC_BACK_APP_URL}/user/config/changepassword`, body)
+            
+            Swal.fire({
+                icon: 'success',
+                title: response.data?.msg,
+                text: 'Recargaremos la página con tus nuevos datos',
+                timer: 2000,
+                showConfirmButton: false,
+                willClose: () => {
+                    window.location.reload()
+                }
+            })
+        } catch (error) {
+            console.log(error.message)
+        }
+
+
+
     }
     //-------------------------------------------------------------------------------------------
     const changeImage = async () => {
@@ -346,6 +438,8 @@ export default function Profile({ userData, error }) {
             })
         }
     }
+
+
 
     return (
 
@@ -429,6 +523,8 @@ export default function Profile({ userData, error }) {
                                             onClick={seePassword} title='Mostrar contraseña' />
                                         <FontAwesomeIcon icon={faEyeSlash} className={style.hide_password} id='hidePassword'
                                             onClick={hidePassword} title='Ocultar contraseña' />
+                                        <FontAwesomeIcon icon={faCircleCheck} className={`${style.correct_password} ${truePassword && style.visible}`} title='Contraseña correcta' />
+                                        <FontAwesomeIcon icon={faCircleXmark} className={`${style.wrong_password} ${truePassword && style.hidden}`} title='Contraseña incorrecta' />
                                     </div>
                                     {!passwords.passwordHelper && <p>Campo obligatorio</p>}
                                 </div>
@@ -447,7 +543,7 @@ export default function Profile({ userData, error }) {
                             </div>
                             <div className={style.password_buttons}>
                                 <button onClick={enableInputsPassword} id='changePassword' className={style.change_password}>Cambiar contraseña</button>
-                                <button onClick={null} id='updatePassword' className={style.update_password}>Actualizar contraseña</button>
+                                <button onClick={sendPassword} id='updatePassword' className={style.update_password}>Actualizar contraseña</button>
                                 <button onClick={disableInputsPassword} id='cancelPassword' className={style.cancel_password}>Cancelar</button>
                             </div>
 
