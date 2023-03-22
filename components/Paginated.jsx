@@ -48,12 +48,16 @@ export default function Paginated(/* data */) {
         }
 
     }
+    let  renderizados = []
+
 
     return (
         <div className={style.container}>
             <div className={style.cards}>
                 {
                     allProjects?.map(project => {
+                        let result = renderizados.findIndex(data => data === project.id )
+                        if (result === -1) {
                         return (
                             <CardProject
                                 key={project.id}
@@ -69,7 +73,10 @@ export default function Paginated(/* data */) {
                                 categories={project?.categories}
                                 country={project.country?.name}
                             />
-                        )
+                        )  } else {
+                          
+                        }
+                      
                     })
                 }
 

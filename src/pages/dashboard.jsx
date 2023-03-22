@@ -2,7 +2,7 @@ import React, {use, useEffect, useState} from "react";
 import style from "./styles/dashboard.module.css";
 import Link from "next/link";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faUser, faSackDollar, faE} from "@fortawesome/free-solid-svg-icons";
+import {faUser, faSackDollar, faE, faCircleXmark} from "@fortawesome/free-solid-svg-icons";
 import clienteAxios from "config/clienteAxios";
 import formatDate from "utils/formatDate";
 import Modal from "react-modal"
@@ -143,17 +143,11 @@ const Dashboard = (props) => {
             {isAdmin
                 ? (<div className={style.container}>
                     <div className={style.sidebar}>
-                        <h3>Navegacion</h3>
+                        <h3>M E N U</h3><hr />
                         <nav className={style.nav}>
-                            <Link href="#main">
-                                {" "}
-                                Dashboard{" "}
-                            </Link>
-                            <Link href="#users"> Usuarios </Link>
-                            <Link href="#projects">
-                                {" "}
-                                Proyectos{" "}
-                            </Link>
+                            <Link href="#main">Dashboard</Link>
+                            <Link href="#users">Usuarios</Link>
+                            <Link href="#projects">Proyectos</Link>
                         </nav>
                     </div>
 
@@ -384,7 +378,7 @@ const Dashboard = (props) => {
                         </div>
                     </main>
                 </div>)
-                : <p>No sos admin</p>
+                : <div className={style.containerRejected}><div className={style.bubbleError}> <FontAwesomeIcon icon={faCircleXmark} className={style.theIconX}/><p>No eres admin</p><Link href="/home"><button className={style.backHome}>Volver al Home</button></Link></div></div>
             }
         </Layout>
     );
