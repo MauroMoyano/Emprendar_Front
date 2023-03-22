@@ -5,6 +5,8 @@ import { getDetailProject, getUser } from "redux/actions";
 
 export default function CardProject(props) {
 
+    const dispatch = useDispatch()
+
     const formatGoal = (num) => {
         if (!num) {
             return 'No info';
@@ -20,32 +22,34 @@ export default function CardProject(props) {
     // console.log(props)
     return (
         <div className={style.card}>
-            
-                <div className={style.img}>
-                    <img src={props.img} alt="Imagen del proyecto" />
-                </div>
-                <div className={style.card_content}>
-                    <h4 className={style.card_title}>{props.name}</h4>
-                    <div className={style.card_user}>
-                        <img src={props.profile_img} alt="Imagen de usuario" />
-                        <p>{props.user_name}</p>
-                    </div>
-                    <div className={style.categorias}>
-                        {
-                            props.categories.map((elem,i) => {
-                                return (
-                                    <p key={i}>- {elem.name}</p>
-                                )
-                            })
-                        }
-                    </div>
-                    <p className={style.card_description}>{props.summary}</p>
-                    <Link href={`/detailUser/${props.userId}/${props.idProject}`}>
-                        <button className={style.moreDetail}>Mas detalles</button>
-                    </Link>
 
+            <div className={style.img}>
+                <img src={props.img} alt="Imagen del proyecto" />
+            </div>
+            <div className={style.card_content}>
+                <h4 className={style.card_title}>{props.name}</h4>
+                <div className={style.card_user}>
+                    <img src={props.profile_img} alt="Imagen de usuario" />
+                    <p>{props.user_name}</p>
                 </div>
-        </div>
+                <div className={style.categorias}>
+                    {
+                        props.categories.map((elem, i) => {
+                            return (
+                                <p key={i}>- {elem.name}</p>
+                            )
+                        })
+                    }
+                </div>
+                <p className={style.card_description}>{props.summary}</p>
+                <Link href={`/detailUser/${props.userId}/${props.idProject}`}>
+                    <button className={style.moreDetail} onClick={() =>
+                        dispatch(getUser(props.userId))
+                    }>Mas detalles</button>
+                </Link>
+
+            </div>
+        </div >
     )
 }
 
