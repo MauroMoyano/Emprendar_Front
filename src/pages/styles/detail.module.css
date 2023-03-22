@@ -20,28 +20,24 @@
 
 
 
-@media (min-width: 768px) {
-    .allview{
-        width: 100%;
-        justify-content: center;
-        padding-top: 100px;
-        padding-bottom: 100px;
-        display: flex;
-        background-color: #babafa;
-        justify-content: center;
-        align-items: center;
-       
-    }
-    
+.allview{
+    width: 100%;
+    justify-content: center;
+    display: flex;
+    background-color: #babafa;
+    justify-content: center;
+    align-items: center;
+   
 }
 
+
 .conteiner {
-    border-radius: 30px;
+    /* border-radius: 30px; */
     display: flex;
     flex-direction: column;
-
-   max-width: 1200px;
-   margin: 0 auto;
+    padding-top: 30px;
+    width: 70%;
+    margin: 0 auto;
     box-shadow: 0px 2px 15px black;
     background-color: #cfcff8;
            
@@ -54,14 +50,43 @@
     
 }
 .barra{
-    height: 10%;
-    border-top-right-radius: 30px;
-    border-top-left-radius: 30px;
+    height: 60px;
     display: flex;
     align-items: center;
     padding: 1rem;
-    background: rgb(121,9,103);
-    background: linear-gradient(90deg, rgba(121,9,103,1) 26%, rgba(83,92,215,1) 69%, rgb(103, 136, 235) 100%);
+    padding-left: 50px;
+    /* background: rgb(121,9,103); */
+    /* background: linear-gradient(90deg, rgba(121,9,103,1) 26%, rgba(83,92,215,1) 69%, rgb(103, 136, 235) 100%); */
+    background: rgb(46,3,75);
+    background: linear-gradient(0deg, rgba(46,3,75,1) 0%, rgba(36,4,64,1) 87%, rgba(46,3,75,1) 100%);
+    transform: scale(1.05);
+    margin-bottom: 100px;
+    position: relative;
+    z-index: 4;
+}
+
+.barra::before{
+    content: '';
+    width: 0;
+    height: 0;
+    position: absolute;
+    left: 0vw;
+    top: -1.0686vw;
+    border-style: solid;
+    border-width: 0 0 1.1vw 1.66vw;
+    border-color: transparent transparent #0d0218;
+}
+
+.barra::after{
+    content: '';
+    width: 0;
+    height: 0;
+    position: absolute;
+    right: 0vw;
+    top: -1.0686vw;
+    border-style: solid;
+    border-width: 0 1.66vw 1.1vw 0px;
+    border-color: transparent transparent #0d0218;
 }
 
 
@@ -71,10 +96,14 @@
     flex-direction: column;
 }
 
-@media (min-width:768px) {
-   .cardContainer {
+@media (max-width: 900px){
+    .cardContainer{
+        flex-wrap: wrap-reverse;
+    }
+}
+
+.cardContainer {
     flex-direction: row;
-   }
 }
 
 .container_detail{
@@ -82,14 +111,31 @@
 }
 
 .container_muro{
-    border-radius: 0 0 0 20px;
+    border-radius: 20px 0 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
     flex: 1;
-
+    padding: 50px 10px;
+    height: 100%;
+    background-color: #e1e1e1;
 }
 
-.info_creator{
-    
+.container_muro h2{
+    background-color: #2e034b;
+    color: aliceblue;
+    width: 100%;
+    padding: 10px 0;
 }
+
+@media (max-width: 575px){
+    .container_muro{
+        border-radius: 0px;
+    }
+}
+
 
 .container_buttons{
     height: 30%;
@@ -125,13 +171,6 @@
 }
 
 
-.secondPage{
-    
-}
-
-
-
-
 .first_container{
     width: 100%;
     height: 100%;
@@ -154,9 +193,21 @@
     justify-content: center;
     align-items: center;
     padding: 16px;    
-    background: rgb(157, 104, 255);
+    background: #cfcff8;
 }
 
+.container_comentarios h3{
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    color: aliceblue;
+    background-color: #2e034b;
+    width: 100%;
+    margin-bottom: 20px;
+    text-align: center;
+}
 
 
 .button {
@@ -209,7 +260,36 @@
 
 }
 
-.container_muro{
-    background-color: #e1e1e1;
+
+
+
+/* Boton enviar mensaje privado */
+.buttonSendMsg{
+    border: none;
+    background-color: #2e034b;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: aliceblue;
+    height: 36px;
+    width: 200px;
+    border-radius: 5px;
+    margin-top: 5px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
+.buttonSendMsg:hover{
+    background-color: #2e034bce;
+}
+
+@media (max-width: 900px){
+    .conteiner{
+        width: 90%;
+    }
+
+    .barra{
+        margin-bottom: 30px;
+    }
+}
