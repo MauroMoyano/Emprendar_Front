@@ -33,6 +33,8 @@ export default function Home() {
     const [categoriess, setCategory] = useState('')
     const [search, setSearch] = useState('')
     const [searchs, setSearchs] = useState('')
+    const [timer, setTimer] = useState(null)
+
 
     useEffect(() => {
         let path
