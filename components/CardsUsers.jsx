@@ -1,11 +1,15 @@
 import Link from 'next/link'
+import { useModal } from './ModalProject/hooks/useModal'
+import ModalProject from './ModalProject/ModalProject'
 import style from './styles/CardUsers.module.css'
 
 
 
 export const CardsUsers = (user) => {
 
-    //console.log(user);
+    const [isOpen, openModal, closeModal] = useModal(false)
+
+    console.log(user);
 
 
     return (
@@ -30,7 +34,21 @@ export const CardsUsers = (user) => {
                                     Contactar
                                 </button>
                             </Link>
-                            <button type='button' className={style.button2}>Sus proyectos</button>
+                            <button type='button' onClick={openModal} className={style.button2}>Sus proyectos</button>
+                            <ModalProject isOpen={isOpen} closeModal={closeModal}>
+                                <div>
+                                    {
+                                        user.projects?.map(pj => {
+                                            <div>
+                                                {pj?.title}
+                                                <Link href={`/detailUser/${user.userId}/${pj.id}`}>
+                                                    <button type='button' >Ver detalles</button>
+                                                </Link>
+                                            </div>
+                                        })
+                                    }
+                                </div>
+                            </ModalProject>
                         </div>
                     </div>
                     <img src={user?.profile_img} alt='imagen de perfil' />
