@@ -64,7 +64,8 @@ export default function Landing(){
 
                     <div className={style.boxIn}>
                                 <div className={style.lorems}>
-                                    <p>¡Bienvenido a Emprendar! Somos una plataforma de crowdfunding que se enfoca en apoyar y financiar emprendimientos innovadores y prometedores.</p><br/>
+                                    <h2>¡Bienvenido a Emprendar!</h2>
+                                    <p>Somos una plataforma de crowdfunding que se enfoca en apoyar y financiar emprendimientos innovadores y prometedores.</p><br/>
                                     <p>En Emprendar, creemos en la creatividad, la pasión y el talento de los emprendedores. Sabemos que empezar un negocio puede ser difícil y costoso, pero también sabemos que las grandes ideas merecen una oportunidad. Por eso, hemos creado una comunidad de personas comprometidas en ayudar a que estas ideas se conviertan en realidad.</p>
                                 </div>
                                 <div className={style.infoContainer}>

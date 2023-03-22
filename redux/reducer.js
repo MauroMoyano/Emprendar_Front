@@ -65,6 +65,7 @@ const rootReducer = (state = initialState, action) => {
         /* allProjectsCopy: action.payload.data, */
         category: action.payload.category,
         country: action.payload.country,
+        detailUsuario: {}
       };
     case GET_PROJECT_INFITITY_SCROLL:
       return {
