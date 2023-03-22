@@ -41,7 +41,7 @@ export default function CardProject(props) {
                     </div>
                     <p className={style.card_description}>{props.summary}</p>
                     <Link href={`/detailUser/${props.userId}/${props.idProject}`}>
-                        Más detalles...
+                        <button className={style.moreDetail}>Mas detalles</button>
                     </Link>
 
                 </div>

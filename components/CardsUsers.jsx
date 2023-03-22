@@ -20,6 +20,9 @@ export const CardsUsers = (user) => {
                             <div className={style.subTitle}>
                                 <p>{user?.name} {user?.last_name}</p>
                             </div>
+                            <div className={style.subTitle}>
+                                <p>Reputacion: {user.reputation?.reputation} [{user.reputation?.count}]</p>
+                            </div>
                         </div>
                         <div className={style.buttonContainer}>
                             <Link href={`/chats?IduserReceiver=${user?.userId}`}>

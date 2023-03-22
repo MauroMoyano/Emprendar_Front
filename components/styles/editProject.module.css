@@ -1,8 +1,10 @@
 .containerCreateProject {
     display: flex;
     background-color: rgba(186, 186, 250, 0.595);
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-start;
+    align-items: flex-start;
+    overflow-y: scroll;
+    max-height: 90vh;
 
 }
 
@@ -16,6 +18,9 @@
     font-family: 'Roboto Condensed', sans-serif;
     font-style: normal; 
     font-weight: 400;
+    max-height: 90vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .title {
@@ -238,9 +243,4 @@
     .danger{
         padding-bottom: 20px;
     }
-}
-
-
-.img {
-    max-width: 100%;
 }

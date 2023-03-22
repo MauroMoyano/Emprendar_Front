@@ -1,22 +1,30 @@
 import ModalProject from "./ModalProject/ModalProject"
 import { useModal } from "./ModalProject/hooks/useModal"
-import modalStyle from './styles/modalProject.module.css'
 import style from './styles/profileProject.module.css'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faPenToSquare } from "@fortawesome/free-solid-svg-icons"
+import EditProject from '../components/EditProject'
 
 
-export default function ProfileProject(props) {
+export default function ProfileProject({ projectData }) {
 
-    // console.log('props en profileProject ->', props)
+    // console.log('projectData ->', projectData)
 
     const [isOpen, openModal, closeModal] = useModal(false)
 
     return (
-        <div>  
-            <div>Titulo: {props.projectData.title}</div>
-            <button onClick={openModal}>Abrir Modal</button>
+        <div className={style.card_project}>
+            <button onClick={openModal}><FontAwesomeIcon icon={faPenToSquare} title='Editar proyecto' /></button>
+            <div className={style.div_img}>
+                <img src={projectData.img} alt="" />
+            </div>
+            <h4 className={style.title}>{projectData.title}</h4>
+            <h5 className={style.summary} >{projectData.summary}</h5>
             <ModalProject isOpen={isOpen} closeModal={closeModal}>
-                <h3 className={modalStyle.prueba}>Este es el modal</h3>
-                <h5 className={style.prueba2}>Titulo del proyecto: {props.projectData.title}</h5>
+                <div>
+                    <EditProject projectData={projectData} />
+
+                </div>
             </ModalProject>
         </div>
     )

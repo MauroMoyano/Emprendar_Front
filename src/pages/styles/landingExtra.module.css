@@ -64,7 +64,7 @@
     align-items: center;
     justify-content: center;
     padding-top: 100px;
-    padding-bottom: 150px;
+    padding-bottom: 10px;
     position: relative;
 }
 
@@ -111,6 +111,22 @@
 .boxOne:hover{
     transform: scale(1.2);
 
+}
+
+.statsContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 50px;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.statsContainer h1{
+    font-family: 'Montserrat', sans-serif;
+    text-transform: uppercase;
+    font-size: 30px;
 }
 
 .theIcons{

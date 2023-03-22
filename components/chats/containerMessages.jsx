@@ -122,8 +122,8 @@ export default function ViewMessage(props){
             </div>
             <div className={style.form}>
                 <form onSubmit={hanlderSubmit} >
-                <input autoComplete="off" onChange={handlerText} name="input" type="text" placeholder="Escribe tu mensaje" value={text} />
-                    <button onClick={()=>{}}>ENVIAR</button>
+                    <input autoComplete="off" onChange={handlerText} name="input" type="text" placeholder="Escribe tu mensaje" value={text} />
+                    <button onClick={()=>{}}>  </button>
                 </form>
             </div>
             {/* <form onSubmit={prueba}>
