@@ -405,7 +405,7 @@ export default function Profile({ userData, error }) {
                                 <div className={style.div_extra_info}>
                                     <div className={style.div_valoracion}>
                                         <h4>Valoración:</h4>
-                                        <p>{reputation} estrellas</p>
+                                        <p>{reputation.reputation} estrellas</p>
                                     </div>
 
                                     <div className={style.div_email}>
