@@ -110,27 +110,30 @@ const Dashboard = (props) => {
     const handlerDisabled = async (id) => {
         const response = await clienteAxios.put(`/user/admin/deleteUser/${id}`)
         const {data} = await clienteAxios.get("/user/admin/users")
+        const project = await clienteAxios.get("/project/get/all");
+        setProjects(project.data)
         setUsers(data)
+
     }
 
     const handlerEnable = async (id) => {
         const response = await clienteAxios.put(`/user/admin/enableUser/${id}`)
         const {data} = await clienteAxios.get("/user/admin/users")
+        const project = await clienteAxios.get("/project/get/all");
+        setProjects(project.data)
         setUsers(data)
     }
 
     //Funciones que obtienen info para el Dashboard
     useEffect(() => {
-        async function mauro() {
+        async function getStats() {
             const {data} = await clienteAxios.get("/stats")
-            console.log("ssssssssssssssssssssssssssssssssssssssssssssssssss", data)
+
             setStats(data)
         }
 
-        mauro()
+        getStats()
     }, [projects, users])
-    //console.log("csssssssssssssssssssssssssssssssssssssss",stats)
-
 
     return (
         <Layout>
@@ -354,12 +357,22 @@ const Dashboard = (props) => {
                                         </td>
 
                                         <td>
-                                            <button className={style.accept}
-                                                    onClick={() => handlerProject("aceptado", e.id)}>Aceptar
-                                            </button>
-                                            <button className={style.delete}
-                                                    onClick={() => handlerProject("rechazado", e.id)}>Rechazar
-                                            </button>
+                                            {e.validated === "espera"
+                                                ? (<div><button className={style.accept}
+                                                           onClick={() => handlerProject("aceptado", e.id)}>Aceptar
+                                                    </button>
+                                                    <button className={style.delete}
+                                                            onClick={() => handlerProject("rechazado", e.id)}>Rechazar
+                                                    </button>
+                                                </div>)
+                                                : e.validated === "aceptado"
+                                                    ? <button className={style.delete}
+                                                              onClick={() => handlerProject("rechazado", e.id)}>Rechazar
+                                                    </button>
+                                                    : (<button className={style.accept}
+                                                               onClick={() => handlerProject("aceptado", e.id)}>Aceptar
+                                                    </button>)
+                                            }
                                         </td>
                                     </tr>
                                 ))}
