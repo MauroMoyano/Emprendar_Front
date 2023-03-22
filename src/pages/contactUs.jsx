@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout from 'components/Layout'
 import Head from 'next/head'
 import Link from 'next/link'
@@ -7,34 +7,36 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDownWideShort , faHouse} from "@fortawesome/free-solid-svg-icons";
 import style from './styles/contactUs.module.css'
 import clienteAxios from 'config/clienteAxios'
+import { useSelector } from 'react-redux';
 
 
 export default function ContactUs() {
 
+    const User = useSelector(state => state.user )
+    useEffect(()=>{
+
+    }, [User])
 
     const [alert,setAlert] = useState(null)
 
-    const [input, setInput] = useState({
+    let [input, setInput] = useState({
         name: "",
-        email: "",
         message: ""
     })
 
     const handleSumbit = async (e) => {
         e.preventDefault()
-
         try {
-          const response = await clienteAxios.post('/user/contactUs/sendmessage',input)
+            input.email = User.email
+            const response = await clienteAxios.post('/user/contactUs/sendmessage',input)
+            setAlert(response.data.msg)
 
-          setAlert(response.data.msg)
+            setInput({
+                name: "",
+                message: ""
+            })
 
-          setInput({
-            name: "",
-            email: "",
-            message: ""
-          })
         } catch (error) {
-            console.log(error)
         }
     }
 
@@ -59,7 +61,7 @@ export default function ContactUs() {
                         <form onSubmit={handleSumbit} className={style.form}>
                             {alert && <p>{alert}</p>}
                                 <input type="text" className={style.input} value={input.name} onChange={((e) => { setInput({ ...input, name: e.target.value }) })} placeholder='Tu nombre' />
-                                <input type="text" className={style.input} placeholder='Tu mail' value={input.email} onChange={((e) => { setInput({ ...input, email: e.target.value }) })} />
+                                <input type="text" className={style.input} placeholder='Tu mail' value={User?User.email:null} readOnly  />
 
                                 <textarea name="" id="" value={input.message}  onChange={((e) => {setInput({...input,message:e.target.value})}) } className={style.textarea} placeholder="Mensaje" cols="30" rows="10"></textarea>
 
