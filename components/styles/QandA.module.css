@@ -18,9 +18,9 @@
 }
 
 .column h2{
-        color: #66198a;
         text-align: center;
         margin: 20px 0;
+		font-size: 2em;
 }
 
  .accordion {
