@@ -22,6 +22,7 @@ export default function Home() {
     const dispatch = useDispatch()
 
     const { category, country } = useSelector(state => state)
+    const [color, setColor] = useState(false)
 
     useEffect(() => {
         dispatch(getHomeProjects())
@@ -72,6 +73,8 @@ export default function Home() {
         }, 2000));
     };
 
+
+
     return (
         <Layout>
             <div className={style.allContainer}>
@@ -88,21 +91,23 @@ export default function Home() {
                                         <div>
                                             <label className={style.accordion}>
                                                 <input type='radio' name='radio-accordion' defaultChecked="unChecked" />
-                                                <div className={style.accordion__header}><FontAwesomeIcon icon={faDollarSign} className={style.theIcon} />Donación</div>
+                                                <div className={style.accordion__header}><FontAwesomeIcon icon={faDollarSign} className={style.theIcon} />
+                                                
+                                                Meta Economicas</div>
                                                 <div className={style.accordion__content} value={ordenss}>
-                                                    <button onClick={(e) => setOrden(e.target.value)} value=''> - </button>
-                                                    <button onClick={(e) => setOrden(e.target.value)} value='ASC'>Ascendente</button>
-                                                    <button onClick={(e) => setOrden(e.target.value)} value='DESC'>Descendente</button>
+                                                    <button  className={style.accordion__content_selected} onClick={(e) => setOrden(e.target.value)} value=''>-</button>
+                                                    <button  className={style.accordion__content_selected} onClick={(e) => setOrden(e.target.value)} value='ASC'>menor a mayor</button>
+                                                    <button  className={style.accordion__content_selected} onClick={(e) => setOrden(e.target.value)} value='DESC'>mayor a menor</button>
                                                 </div>
                                             </label>
                                             <label className={style.accordion} >
                                                 <input type='radio' name='radio-accordion' defaultChecked="unChecked" />
                                                 <div className={style.accordion__header}><FontAwesomeIcon icon={faFlag} className={style.theIcon} />País</div>
                                                 <div className={style.accordion__content} value={countriess}>
-                                                    <button onClick={(e) => setCountry(e.target.value)} value=''> - </button>
+                                                    <button className={style.accordion__content_selected} onClick={(e) => setCountry(e.target.value)} value=''> - </button>
                                                     {
                                                         country?.map((c, index) => {
-                                                            return (<button value={`${c}`} key={index} onClick={(e) => setCountry(e.target.value)}>{c}</button>)
+                                                            return (<button className={style.accordion__content_selected} value={`${c}`} key={index} onClick={(e) => {setCountry(e.target.value) }}>{c}</button>)
                                                         })
                                                     }
                                                 </div>
@@ -111,10 +116,13 @@ export default function Home() {
                                                 <input type='radio' name='radio-accordion' defaultChecked="unChecked" />
                                                 <div className={style.accordion__header}><FontAwesomeIcon icon={faList} className={style.theIcon} />Categoria</div>
                                                 <div className={style.accordion__content}>
-                                                    <button onClick={(e) => setCountry(e.target.value)} value=''> - </button>
+                                                    <button className={style.accordion__content_selected} onClick={(e) => setCategory(e.target.value)} value=''> - </button>
                                                     {
                                                         category?.map((c, index) => {
-                                                            return (<button value={`${c}`} key={index} onClick={(e) => setCategory(e.target.value)}>{c}</button>)
+                                                            return (<button  className={style.accordion__content_selected} value={`${c}`} key={index} onClick={(e) =>{ 
+                                                                setCategory(e.target.value)
+                                                               
+                                                            }}>{c}</button>)
                                                         })
                                                     }
                                                 </div>
@@ -137,6 +145,21 @@ export default function Home() {
                             </div>
                         </ul>
                     </div>
+                    { countriess || categoriess 
+                        ?  <div className={style.mensaje_filtros}> 
+                                 Estas buscando en el país = "{countriess || "seleciona un pais" }" 
+                                proyectos de la categoria = "{categoriess || "seleciona una categoria"}" 
+                            </div>
+                        : <div className={style.mensaje_filtros} > Puedes mejorar tu busqueda usando los filtros</div>
+
+                    }
+                   
+                    {/* const [ordenss, setOrden] = useState('')
+                        const [countriess, setCountry] = useState('')
+                        const [categoriess, setCategory] = useState('')
+                        const [search, setSearch] = useState('')
+                        const [searchs, setSearchs] = useState('') */}
+                    
                     {/* <form>
                         <div className={style.filtersContainer}>
                             <div>

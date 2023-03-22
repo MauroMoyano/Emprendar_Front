@@ -135,7 +135,7 @@ const Dashboard = (props) => {
 
         getStats()
     }, [projects, users])
-
+    
     const isAdmin = useSelector(state => state.user?.isAdmin)
 
     return (
@@ -295,15 +295,84 @@ const Dashboard = (props) => {
 
                                 </div>
 
-                                <table className={style.table}>
-                                    <thead>
-                                    <tr>
-                                        <th>Imagen</th>
-                                        <th>Nombre</th>
-                                        <th>Estado</th>
-                                        <th>Fecha de creación</th>
-                                        <th>Monto donado</th>
-                                        <th>Acciones</th>
+
+                            <table className={style.table}>
+                                <thead>
+                                <tr>
+                                    <th>Imagen</th>
+                                    <th>Nombre</th>
+                                    <th>Estado</th>
+                                    <th>Fecha de creación</th>
+                                    <th>Monto donado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                                </thead>
+
+                                <tbody>
+
+                                {pageP[pageProjects]?.map((e) => (
+                                    <tr key={e.id}>
+                                        <td>
+                                            <img className={style.imageProject} onClick={() => openModal(e)} src={e.img}
+                                                 alt=""/>
+                                            <Modal
+                                                isOpen={isOpen}
+                                                ariaHideApp={false}
+                                            >
+                                                <button onClick={closeModal}> X</button>
+                                                <button className={style.accept} onClick={async () => {
+                                                    await handlerProject("aceptado", project.id)
+                                                    closeModal()
+                                                }}>Aceptar
+                                                </button>
+                                                <button className={style.delete} onClick={async () => {
+                                                    await handlerProject("rechazado", project.id)
+                                                    closeModal()
+                                                }}>Rechazar
+                                                </button>
+                                                <CardProjectDetail obj={project}/>
+                                            </Modal>
+                                        </td>
+                                        <td>
+                                            <p>{e.title}</p>
+                                        </td>
+                                        <td>
+                                            <p className={e.validated === "aceptado" ? style.validated : style.invalidated}>{e.validated} </p>
+                                        </td>
+
+                                        <td>
+                                            <p>{formatDate(e.createdAt).toLocaleLowerCase()}</p>
+                                        </td>
+
+                                        <td>
+                                            <p>{parseInt((e.amount_collected / e.goal) * 100)}%</p>
+                                            {/* {console.log()} */}
+                                            <div className={style.progressBar}>
+                                                <div
+                                                    className={style.bg_progress}
+                                                    style={{width: `${(e.amount_collected / e.goal) * 100}%`}}>
+                                                </div>
+                                            </div>
+                                        </td>
+
+                                        <td>
+                                            {e.validated === "espera"
+                                                ? (<div><button className={style.accept}
+                                                           onClick={() => handlerProject("aceptado", e.id)}>Aceptar
+                                                    </button>
+                                                    <button className={style.delete}
+                                                            onClick={() => handlerProject("rechazado", e.id)}>Rechazar
+                                                    </button>
+                                                </div>)
+                                                : e.validated === "aceptado"
+                                                    ? <button className={style.delete}
+                                                              onClick={() => handlerProject("rechazado", e.id)}>Rechazar
+                                                    </button>
+                                                    : (<button className={style.accept}
+                                                               onClick={() => handlerProject("aceptado", e.id)}>Aceptar
+                                                    </button>)
+                                            }
+                                        </td>
                                     </tr>
                                     </thead>
 
