@@ -121,7 +121,6 @@ export default function ViewMessage(props){
                       
                     })  
                     :null
-                    })   :null
                 }
             </div>
             <div className={style.form}>
