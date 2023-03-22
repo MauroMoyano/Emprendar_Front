@@ -1,6 +1,8 @@
 
 .img {
     width: 20rem; 
+    border-radius: 10px;
+    
 }
 .conteiner{
     padding: 16px;
@@ -10,10 +12,16 @@
 .containerInfo{
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
 }
+
+
 .container_photo{
     width: 100%;
     text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     }
 @media (min-width: 768px) {
     .container_photo{
@@ -21,6 +29,12 @@
         }
     .containerInfo {
         flex-direction: row;
+    }
+}
+
+@media (max-width: 900px){
+    .img{
+        max-width: 250px;
     }
 }
 
@@ -36,6 +50,8 @@
     display: flex;
     flex-direction: column;
     padding: 20px;
+    text-transform: uppercase;
+    text-align: center;
 }
 
 .title h2:first-letter {

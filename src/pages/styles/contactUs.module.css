@@ -1,0 +1,117 @@
+
+.fatherContainer {
+    height: 110vh;
+    display: flex; 
+    align-items: center;
+    background-color: #babafa;
+}
+
+.container {
+    background-color: #66198a;
+    color: white;
+    display:flex;
+    padding: 2rem;
+    text-align: center;
+    align-items: center;
+
+    width: 70%;
+    margin:0 auto;
+    height: 100vh;
+    flex-direction: column;
+}
+
+
+.card{
+    display: flex;
+    height: 80%;
+}
+.contact img {
+    border-radius: 30%;
+    margin-top: 1rem;
+    max-width: 100%;
+}
+
+.contact {
+    padding: 1rem;
+    flex :1;
+}
+
+.form {
+    flex: 1;
+    display:flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 5rem;
+}
+
+.form button:hover {
+    background-color: #6d44b8;
+}
+.form button {
+    width: 50%;
+    height: 40px;
+    margin: 12px auto 10%;
+    color: #fff;
+    background: #573b8a;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: .2s ease-in;
+}
+
+.input {
+    width: 100%;
+    height: 30px;
+    background: #e0dede;
+    padding: 10px;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+}
+
+.textarea {
+    width: 100%;
+    height: 100px;
+    background: #e0dede;
+    padding: 10px;
+    border: none;
+    outline: none;
+    border-radius: 4px;
+}
+
+/*buton */
+.button{
+    width: 100%;
+    height: 20%;
+    display: flex;
+    align-items: start;
+}
+.button > a{
+    text-decoration: none;
+}
+.buttonBack{
+    gap: .2rem;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #2e034b;
+    color: aliceblue;
+    font-size: 15px;
+    font-family: 'Montserrat', sans-serif;
+    box-shadow: 0px 2px 8px black;
+    margin-bottom: 10px;
+    margin-left: 5%;
+    display: flex;
+}
+
+.buttonBack:hover{
+    background-color: #09c7ae;
+}
+
+.theIcon{
+    font-size: 17px;
+    color: aliceblue;
+}

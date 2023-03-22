@@ -26,11 +26,16 @@ export default function Paginated(/* data */) {
     const [control, setControl] = useState(true)
 
     useLayoutEffect(() => {
-        dispatch(resetScroll())
-        setPage(1)
-        console.log('entrooo')
-        dispatch(getProjectToScroll(1, pathValue))
-        setControl(!control)
+        let fetchData = async () => {
+            await Promise.all([
+                dispatch(resetScroll()),
+                setPage(1),
+                console.log('entrooo'),
+                dispatch(getProjectToScroll(1, pathValue)),
+                setControl(!control)
+            ])
+        }
+        fetchData()
     }, [pathValue])
 
     const loadMore = () => {
@@ -43,23 +48,6 @@ export default function Paginated(/* data */) {
         }
 
     }
-
-    /* console.log('scroll top', window.innerHeight + document.documentElement.scrollTop);
-    console.log('total scroll', document.documentElement.scrollHeight - 1);
-
-    const handleScroll = () => {
-        if (filterProjects?.length !== 0 && searchProjects?.length !== 0) {
-            if (window.innerHeight + document.documentElement.scrollTop > document.documentElement.scrollHeight - 1) {
-                loadMore()
-            }
-        }
-
-    };
-
-    if (typeof window !== 'undefined') {
-        window.addEventListener('scroll', handleScroll);
-    }
- */
 
     return (
         <div className={style.container}>

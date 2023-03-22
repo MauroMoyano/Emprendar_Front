@@ -109,14 +109,17 @@
 }
 
 .sugerencias > div > h3{
-    padding: 20px;
+    padding: 10px;
     height: 10%;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 25px;
-    color: rgb(174, 66, 228);
-    text-shadow: 2px 2px 2px rgb(177, 165, 165);
+    font-size: 20px;
+    color: aliceblue;
+    background-color: #2e034b;
+    width: 100%;
+    margin-bottom: 20px;
+    text-align: center;
 }
 
 .containerSug{

@@ -53,7 +53,8 @@
 
     align-items: center;
     gap: 5px;
-    color: azure;
+    color: #000000;
+    font-weight: bold;
 }
 
 
@@ -68,6 +69,25 @@
     align-items: center;
 
     border-radius: 0 1rem 1rem 1rem ;
+}
+
+
+.buttonSendMsg{
+    border: none;
+    background-color: #2e034b;
+    font-size: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: aliceblue;
+    height: 42px;
+    border-radius: 0 10px 10px 0;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.buttonSendMsg:hover{
+    background-color: #2e034bce;
 }
 
 

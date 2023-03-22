@@ -12,6 +12,12 @@
 
     filter: drop-shadow(5px 5px 5px rgb(108, 107, 107));
 }
+.container{
+    height: 100%;
+}
+
+
+
 
 .recividos{
     display: flex;
@@ -30,9 +36,6 @@
 
 }
 
-.container{
-    height: 100%;
-}
 
 .view{
     height: 90%;
@@ -58,12 +61,73 @@
     display: flex;
     height: 100%;
     width: 100%;
+    background: #dad4d4;
+    background-color: #DFDBE5;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='%239C92AC' fill-opacity='0.18'%3E%3Cpath fill-rule='evenodd' d='M11 0l5 20H6l5-20zm42 31a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM0 72h40v4H0v-4zm0-8h31v4H0v-4zm20-16h20v4H20v-4zM0 56h40v4H0v-4zm63-25a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm10 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM53 41a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm10 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm10 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-30 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-28-8a5 5 0 0 0-10 0h10zm10 0a5 5 0 0 1-10 0h10zM56 5a5 5 0 0 0-10 0h10zm10 0a5 5 0 0 1-10 0h10zm-3 46a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm10 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM21 0l5 20H16l5-20zm43 64v-4h-4v4h-4v4h4v4h4v-4h4v-4h-4zM36 13h4v4h-4v-4zm4 4h4v4h-4v-4zm-4 4h4v4h-4v-4zm8-8h4v4h-4v-4z'/%3E%3C/g%3E%3C/svg%3E");
+    padding: .3rem;
+    
+    border-bottom-right-radius: 1rem;
 }
 
 .form > form> input{
     width: 80%;
     padding: 15px;
+    background-color: rgba(255, 255, 255, 0.45)  ;
+    border: none;
+    border-radius: 45px;
+    outline: none;
 }
+
+
+
 .form > form> button{
-    width: 20%;
+        width: 20%;
+      
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 2.5px;
+        font-weight: 500;
+        color: #000;
+        background-color:rgba(255, 255, 255, 0.45)   ;
+        border-radius: 40px;
+        border: none;
+        box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease 0s;
+        cursor: pointer;
+        outline: none;
+        
+}
+.form > form> button::before{
+    content: "Enviar";
+    max-width: max-content;
+}
+
+      
+.form > form>  button:hover {
+        background-color: #23c483;
+        box-shadow: 0px 15px 20px rgba(46, 229, 157, 0.4);
+        color: #fff;
+        transform: translateY(-2px);
+}
+
+.form > form>       button:active {
+        transform: translateY(-1px);
+}
+
+
+
+@media (max-width: 600px) {
+
+
+    .form > form{
+        border-bottom-left-radius: 1rem;
+    }
+    
+    .form > form> button::before{
+        font-size: 8px;
+        max-width: max-content;
+    }
+
+    
+    
 }

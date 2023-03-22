@@ -20,7 +20,7 @@ export default function CardProject(props) {
     // console.log(props)
     return (
         <div className={style.card}>
-            <Link href={`/detailUser/${props.userId}/${props.idProject}`}>
+            
                 <div className={style.img}>
                     <img src={props.img} alt="Imagen del proyecto" />
                 </div>
@@ -39,11 +39,12 @@ export default function CardProject(props) {
                             })
                         }
                     </div>
-                    <p className={style.card_description}>{props.summary} Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque perspiciatis repudiandae molestiae aliquid, quasi corporis soluta sequi quisquam officia, porro quod explicabo sapiente dicta quaerat consequatur doloribus exercitationem, hic sit.</p>
-                        Más detalles...
+                    <p className={style.card_description}>{props.summary}</p>
+                    <Link href={`/detailUser/${props.userId}/${props.idProject}`}>
+                        <button className={style.moreDetail}>Mas detalles</button>
+                    </Link>
 
                 </div>
-            </Link>
         </div>
     )
 }
