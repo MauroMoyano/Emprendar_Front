@@ -30,7 +30,7 @@ export const CardsUsers = (user) => {
                                     Contactar
                                 </button>
                             </Link>
-                            <button type='button' className={style.button2}>Mis Proyectos</button>
+                            <button type='button' className={style.button2}>Sus proyectos</button>
                         </div>
                     </div>
                     <img src={user?.profile_img} alt='imagen de perfil' />
