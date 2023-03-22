@@ -108,7 +108,7 @@ font-family: 'Montserrat', sans-serif;
     background: rgb(46,3,75);
     background: linear-gradient(0deg, rgba(46,3,75,1) 0%, rgba(36,4,64,1) 87%, rgba(46,3,75,1) 100%);
     transform: scale(1.05);
-    margin-bottom: 100px;
+    margin-bottom: 50px;
     position: relative;
     z-index: 4;
 }
@@ -234,7 +234,8 @@ font-family: 'Montserrat', sans-serif;
     margin: 0px;
     position: relative;
 }
-.accordion input {
+
+.accordion> input {
     display: none;
     position: absolute;
     visibility: hidden;
@@ -332,22 +333,38 @@ font-family: 'Montserrat', sans-serif;
     height: auto;
     max-height: 200px;
     overflow-y:auto;
+}   
+/*check input del los filtros*/
+
+
+.accordion__content::-webkit-scrollbar {
+    display: none;
 }
 
-.accordion__content button{
+.accordion__content_selected{
     border: none;
-    height: 30px;
+    height: 35px;
     text-transform: uppercase;
     color: #cfcff8;
     background-color: rgb(87, 33, 122);
     cursor: pointer;
-    transition: 0.4s;
-    
+    transition: 0.4s; 
+    font-size: 12px;
+    text-align: center;
 }
 
-.accordion__content button:hover{
+.accordion__content_selected:hover{
     background-color: #09c7ae;
 }
+
+
+
+/*filtros que seleciono*/
+
+.accordion__content_selected:checked{
+    background: #000;
+}
+
 
 .accordion input:checked ~ .accordion__content {
     display: flex;
@@ -370,6 +387,9 @@ font-family: 'Montserrat', sans-serif;
     margin-right: 10px;
 }
 
+.mensaje_filtros{
+    padding-inline-start: 1rem;
+}
 
 @media (max-width: 600px) {
     .bodyContainer{
