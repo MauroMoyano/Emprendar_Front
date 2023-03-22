@@ -51,7 +51,7 @@ export default function Profile({ userData, error }) {
     const user_name = userData?.user_name || null
     const name = userData?.name || null
     const last_name = userData?.last_name || null
-    const reputation = userData?.reputation || null
+    const reputation = userData?.reputation || 0
     const profile_img = userData?.profile_img || null
     const userProjects = userData?.userProjects || null
     const email = userData?.email || null
