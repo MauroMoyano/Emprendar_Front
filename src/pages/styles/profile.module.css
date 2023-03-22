@@ -33,7 +33,7 @@
     padding: 10px 0;
     background: #2e034b;
     color: #fff;
-    font-size: 20px;    
+    font-size: 20px;
     text-transform: uppercase;
     text-align: center;
     font-family: 'Montserrat', sans-serif;
@@ -51,7 +51,7 @@
     padding: 10px 0;
     background: #2e034b;
     color: #fff;
-    font-size: 20px;    
+    font-size: 20px;
     text-transform: uppercase;
     text-align: center;
     width: 100%;
@@ -181,7 +181,7 @@
     align-items: center;
     gap: 5px;
     margin-top: -10px;
-    
+
 }
 
 .div_nombres>h4,
@@ -328,6 +328,15 @@
     position: relative;
 }
 
+.div_valoracion{
+    text-align: center;
+}
+
+.star {
+    color: #ff8000;
+}
+
+
 .div_email>h4 {
     display: inline-block;
     margin-right: 3px;
@@ -410,8 +419,8 @@
     padding-bottom: 1px;
     font-weight: normal;
     font-style: italic;
-    font-size: 15px;    
-    margin-bottom: 5px;    
+    font-size: 15px;
+    margin-bottom: 5px;
     align-self: flex-start;
 }
 
@@ -443,7 +452,7 @@
     display: inline-block;
 }
 
-.correct_password{
+.correct_password {
     color: green;
     position: absolute;
     top: 4px;
@@ -451,18 +460,18 @@
     display: none;
 }
 
-.correct_password.visible{
+.correct_password.visible {
     display: block;
 }
 
-.wrong_password{
+.wrong_password {
     color: red;
     position: absolute;
     top: 4px;
     left: 102%;
 }
 
-.wrong_password.hidden{
+.wrong_password.hidden {
     display: none;
 }
 

@@ -10,7 +10,7 @@ import { useDropzone } from "react-dropzone"
 
 // import de iconos
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPen, faCircleInfo, faEye, faEyeSlash, faCircleCheck, faCircleXmark } from "@fortawesome/free-solid-svg-icons";
+import { faPen, faCircleInfo, faEye, faEyeSlash, faCircleCheck, faCircleXmark, faStar } from "@fortawesome/free-solid-svg-icons";
 
 
 
@@ -21,7 +21,7 @@ export default function Profile({ userData, error }) {
     const { user } = useSelector(state => state)
     const router = useRouter()
 
-    // console.log('userData ->', userData)
+    console.log('userData ->', userData)
     // console.log('userData.id ->', userData?.id)
     // console.log('user.id ->', user?.id)
 
@@ -498,7 +498,7 @@ export default function Profile({ userData, error }) {
                                 <div className={style.div_extra_info}>
                                     <div className={style.div_valoracion}>
                                         <h4>Valoración:</h4>
-                                        <p>{reputation.reputation} estrellas</p>
+                                        <p>{reputation} <FontAwesomeIcon icon={faStar} className={style.star} /></p>
                                     </div>
 
                                     <div className={style.div_email}>
