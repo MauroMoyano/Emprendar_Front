@@ -2,27 +2,31 @@
 
 .container {
     display: flex;
-
+    min-height: 100vh;
 }
 
 .main {
     flex:5;
-        margin-left: 250px;
+    margin-left: 250px;
 }
+
 .sidebar {
-        position: fixed;
-        top: 0;
+        position: absolute;
+        top: 81px;
         left: 0;
         width: 230px;
         height: 100%;
-    text-align: center;
-    flex: 1;
-    background-color: purple;
-    margin-right: 1rem;
+        text-align: center;
+        flex: 1;
+        background-color: #260157;
+        margin-right: 1rem;
+        z-index: 0;
 }
 .sidebar h3 {
     color: white;
     margin-top: 1rem;
+    font-weight: bold;
+    margin-bottom: 15px;
 }
 .nav {
     padding-top: 1rem;
@@ -31,18 +35,27 @@
     gap: 1rem;
 }
 
+
 .nav a {
-    font-size: 1.2rem;
+    font-size: 0.9rem;
+    height: 50px;
     text-decoration: none;
     color: white;
-    font-weight: 200;
+    font-weight: 100;
+    padding: 15px 0;
+    margin: 0;
+    text-transform: uppercase;
+}
 
+.nav a:hover{
+    background-color: #09c7ae;
 }
 
 .performance, .users, .projects {
     margin-top: 1rem;
     background-color: white;
     border: 1px solid #e1e1e1;
+    border-radius: 15px 15px 0 0;
 }
 
 .performanceContainer {
@@ -53,7 +66,10 @@
 
 .performance h2, .users h2, .projects h2 {
     border: 1px solid #e1e1e1;
+    border-radius: 15px 15px 0 0;
+    background-color: #260157;
     padding: 1rem;
+    color: aliceblue;
 }
 
 .infoConainter {
@@ -169,4 +185,55 @@
 
 .bg_progress {
     background-color: #73A839;
+}
+
+
+ /* CSS en caso de que el usuario no sea ADMIN */
+.containerRejected{
+    min-height: 100vh;
+    background-color: #babafa;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.bubbleError{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 200px;
+    background-color: #cfcff8;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 2px 15px black;
+}
+
+.bubbleError p{
+    font-weight: bold;
+}
+
+.backHome{
+    border: none;
+    border-radius: 5px;
+    background-color: #260157;
+    height: 40px;
+    width: 200px;
+    color: aliceblue;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+.theIconX{
+    font-size: 75px;
+    color: crimson;
+    margin-bottom: 15px;
+}
+
+.backHome:hover{
+    background-color: #09c7ae;
 }
