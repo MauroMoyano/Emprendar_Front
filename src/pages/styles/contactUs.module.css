@@ -5,6 +5,7 @@
     align-items: center;
     background-color: #babafa;
 }
+
 .container {
     background-color: #66198a;
     color: white;
@@ -16,8 +17,14 @@
     width: 70%;
     margin:0 auto;
     height: 100vh;
+    flex-direction: column;
 }
 
+
+.card{
+    display: flex;
+    height: 80%;
+}
 .contact img {
     border-radius: 30%;
     margin-top: 1rem;
@@ -72,4 +79,39 @@
     border: none;
     outline: none;
     border-radius: 4px;
+}
+
+/*buton */
+.button{
+    width: 100%;
+    height: 20%;
+    display: flex;
+    align-items: start;
+}
+.button > a{
+    text-decoration: none;
+}
+.buttonBack{
+    gap: .2rem;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #2e034b;
+    color: aliceblue;
+    font-size: 15px;
+    font-family: 'Montserrat', sans-serif;
+    box-shadow: 0px 2px 8px black;
+    margin-bottom: 10px;
+    margin-left: 5%;
+    display: flex;
+}
+
+.buttonBack:hover{
+    background-color: #09c7ae;
+}
+
+.theIcon{
+    font-size: 17px;
+    color: aliceblue;
 }

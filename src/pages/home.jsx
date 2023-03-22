@@ -83,7 +83,7 @@ export default function Home() {
                     <div className={style.subMenuContainer}>
                         <ul>
                             <li><Link href="/users"><FontAwesomeIcon icon={faUsers} className={style.theIcon} /> Usuarios</Link></li>
-                            <li><Link href="#"><FontAwesomeIcon icon={faPhone} className={style.theIcon} />Contáctanos</Link></li>
+                            <li><Link href="/contactUs"><FontAwesomeIcon icon={faPhone} className={style.theIcon} />Contáctanos</Link></li>
                             <li><Link href="/aboutUs"><FontAwesomeIcon icon={faAddressCard} className={style.theIcon} />Acerca de</Link></li>
                             <li className={style.dropdown}><Link href="#menu"><FontAwesomeIcon icon={faArrowDownWideShort} className={style.theIcon} />Ordenar Por</Link>
                                 <div id="menu" className={style.dropdownContent}>
@@ -154,52 +154,6 @@ export default function Home() {
 
                     }
                    
-                    {/* const [ordenss, setOrden] = useState('')
-                        const [countriess, setCountry] = useState('')
-                        const [categoriess, setCategory] = useState('')
-                        const [search, setSearch] = useState('')
-                        const [searchs, setSearchs] = useState('') */}
-                    
-                    {/* <form>
-                        <div className={style.filtersContainer}>
-                            <div>
-                                <label>Highest Donations </label>
-                                <select value={ordenss} className={style.select} onChange={(e) => setOrden(e.target.value)}>
-                                    <option value=''> - </option>
-                                    <option value="ASC">Ascendente</option>
-                                    <option value="DESC">Descendente</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label>Country </label>
-                                <select value={countriess} className={style.select} onChange={(e) => setCountry(e.target.value)}>
-                                    <option value=''> - </option>
-                                    {
-                                        country?.map((c, index) => {
-                                            return <option value={c} key={index}>{c}</option>
-                                        })
-                                    }
-                                </select>
-                            </div>
-                            <div>
-                                <label>Category </label>
-                                <select value={categoriess} className={style.select} onChange={(e) => setCategory(e.target.value)}>
-                                    <option value=''> - </option>
-                                    {
-                                        category?.map((c, index) => {
-                                            return <option value={c} key={index}>{c}</option>
-                                        })
-                                    }
-                                </select>
-                            </div>
-                            <div>
-                                <input value={search} type='search' onChange={(e) => setSearch(e.target.value)} placeholder="Buscar..." ></input>
-                            </div>
-                            <div>
-                                <button type="button" onClick={() => handlerDeleteSearch()}>Limpiar</button>
-                            </div>
-                        </div>
-                    </form> */}
                     <Paginated />
                 </div>
             </div>
