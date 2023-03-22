@@ -8,6 +8,7 @@ import formatDate from "utils/formatDate";
 import Modal from "react-modal"
 import CardProjectDetail from "../../components/rutaDetail/cardProjectDetail";
 import Layout from "../../components/Layout";
+import {useSelector} from "react-redux";
 
 const Dashboard = (props) => {
     const pageP = []
@@ -110,265 +111,281 @@ const Dashboard = (props) => {
     const handlerDisabled = async (id) => {
         const response = await clienteAxios.put(`/user/admin/deleteUser/${id}`)
         const {data} = await clienteAxios.get("/user/admin/users")
+        const project = await clienteAxios.get("/project/get/all");
+        setProjects(project.data)
         setUsers(data)
+
     }
 
     const handlerEnable = async (id) => {
         const response = await clienteAxios.put(`/user/admin/enableUser/${id}`)
         const {data} = await clienteAxios.get("/user/admin/users")
+        const project = await clienteAxios.get("/project/get/all");
+        setProjects(project.data)
         setUsers(data)
     }
 
     //Funciones que obtienen info para el Dashboard
     useEffect(() => {
-        async function mauro() {
+        async function getStats() {
             const {data} = await clienteAxios.get("/stats")
-            console.log("ssssssssssssssssssssssssssssssssssssssssssssssssss", data)
+
             setStats(data)
         }
 
-        mauro()
+        getStats()
     }, [projects, users])
-    //console.log("csssssssssssssssssssssssssssssssssssssss",stats)
 
+    const isAdmin = useSelector(state => state.user?.isAdmin)
 
     return (
         <Layout>
+            {isAdmin
+                ? (<div className={style.container}>
+                    <div className={style.sidebar}>
+                        <h3>Navegacion</h3>
+                        <nav className={style.nav}>
+                            <Link href="#main">
+                                {" "}
+                                Dashboard{" "}
+                            </Link>
+                            <Link href="#users"> Usuarios </Link>
+                            <Link href="#projects">
+                                {" "}
+                                Proyectos{" "}
+                            </Link>
+                        </nav>
+                    </div>
 
-            <div className={style.container}>
-                <div className={style.sidebar}>
-                    <h3>Navegacion</h3>
-                    <nav className={style.nav}>
-                        <Link href="#main">
-                            {" "}
-                            Dashboard{" "}
-                        </Link>
-                        <Link href="#users"> Usuarios </Link>
-                        <Link href="#projects">
-                            {" "}
-                            Proyectos{" "}
-                        </Link>
-                    </nav>
-                </div>
+                    <main className={style.main} id="main">
+                        <div className={style.performance}>
+                            <h2>Estadísticas generales</h2>
+                            <div className={style.performanceContainer}>
+                                <div className={style.infoConainter}>
+                                    <div className={style.iconGreen}>
+                                        <FontAwesomeIcon icon={faSackDollar}/>
+                                    </div>
+                                    <div className={style.info}>
+                                        <p>Dinero depositado</p>
+                                        <h3>{stats.totalGoal}</h3>
+                                    </div>
+                                </div>
 
-                <main className={style.main} id="main">
-                    <div className={style.performance}>
-                        <h2>Estadísticas generales</h2>
-                        <div className={style.performanceContainer}>
-                            <div className={style.infoConainter}>
-                                <div className={style.iconGreen}>
-                                    <FontAwesomeIcon icon={faSackDollar}/>
+                                <div className={style.infoConainter}>
+                                    <div className={style.iconBlue}>
+                                        <FontAwesomeIcon icon={faUser}/>
+                                    </div>
+                                    <div className={style.info}>
+                                        <p>Usuarios registrados</p>
+                                        <h3>{stats.totalUsers}</h3>
+                                    </div>
                                 </div>
-                                <div className={style.info}>
-                                    <p>Dinero depositado</p>
-                                    <h3>{stats.totalGoal}</h3>
-                                </div>
-                            </div>
 
-                            <div className={style.infoConainter}>
-                                <div className={style.iconBlue}>
-                                    <FontAwesomeIcon icon={faUser}/>
-                                </div>
-                                <div className={style.info}>
-                                    <p>Usuarios registrados</p>
-                                    <h3>{stats.totalUsers}</h3>
-                                </div>
-                            </div>
-
-                            <div className={style.infoConainter}>
-                                <div className={style.iconPurple}>
-                                    <FontAwesomeIcon icon={faE}/>
-                                </div>
-                                <div className={style.info}>
-                                    <p>Proyectos</p>
-                                    <h3>{stats.totalProject}</h3>
+                                <div className={style.infoConainter}>
+                                    <div className={style.iconPurple}>
+                                        <FontAwesomeIcon icon={faE}/>
+                                    </div>
+                                    <div className={style.info}>
+                                        <p>Proyectos</p>
+                                        <h3>{stats.totalProject}</h3>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div>
-                        <div className={style.users} id="users">
-                            <h2>Usuarios</h2>
-                            <div>
-                                <button onClick={handlePrevClickUsers}> Atrás</button>
-                                {
-                                    pageU.map((p, index) => <button
-                                            key={index}
-                                            value={index}
-                                            onClick={handlePageUsers}
-                                        > {index + 1} </button>
-                                    )
-                                }
-                                <button onClick={handleNextClickUsers}> Siguiente</button>
-                            </div>
-                            <table className={style.table}>
+                        <div>
+                            <div className={style.users} id="users">
+                                <h2>Usuarios</h2>
+                                <div>
+                                    <button onClick={handlePrevClickUsers}> Atrás</button>
+                                    {
+                                        pageU.map((p, index) => <button
+                                                key={index}
+                                                value={index}
+                                                onClick={handlePageUsers}
+                                            > {index + 1} </button>
+                                        )
+                                    }
+                                    <button onClick={handleNextClickUsers}> Siguiente</button>
+                                </div>
+                                <table className={style.table}>
 
-                                <thead>
-                                <tr>
-                                    <th>Perfil</th>
-                                    <th>Nombre</th>
-                                    <th>Estado</th>
-                                    <th>Fecha de registro</th>
-                                    <th>Email</th>
-                                    <th>Acciones</th>
-                                </tr>
-                                </thead>
+                                    <thead>
+                                    <tr>
+                                        <th>Perfil</th>
+                                        <th>Nombre</th>
+                                        <th>Estado</th>
+                                        <th>Fecha de registro</th>
+                                        <th>Email</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                    </thead>
 
-                                <tbody>
-                                {pageU[pageUsers]?.map((e) => (
-                                    <tr key={e.id}>
-                                        <td>
-                                            <img
-                                                className={style.avatar}
-                                                onClick={() => openModalUser(e)}
-                                                src={e.profile_img}
-                                                alt=""
-                                            />
-                                            <Modal
-                                                isOpen={isOpenU}
-                                                ariaHideApp={false}
-                                            >
-                                                <button onClick={closeModalUser}> X</button>
-                                                <p>Modal de Usuario</p>
-                                            </Modal>
-                                        </td>
-                                        <td>
-                                            <p>{e.name + " " + e.last_name}</p>
-                                        </td>
-                                        <td>
-                                            <p
-                                                className={
-                                                    e.confirmed ? style.validated : style.invalidated
+                                    <tbody>
+                                    {pageU[pageUsers]?.map((e) => (
+                                        <tr key={e.id}>
+                                            <td>
+                                                <Link href={`/profile/${e.id}`}>
+                                                    <img
+                                                        className={style.avatar}
+                                                        onClick={() => openModalUser(e)}
+                                                        src={e.profile_img}
+                                                        alt=""
+                                                    />
+                                                </Link>
+                                            </td>
+                                            <td>
+                                                <p>{e.name + " " + e.last_name}</p>
+                                            </td>
+                                            <td>
+                                                <p
+                                                    className={
+                                                        e.confirmed ? style.validated : style.invalidated
+                                                    }
+                                                >
+
+                                                    {e.confirmed ? " Validado " : " No validado "}
+                                                </p>
+                                            </td>
+
+                                            <td>
+                                                <p>{formatDate(e.createdAt)}</p>
+                                            </td>
+
+                                            <td>
+                                                <p>{e.email}</p>
+                                            </td>
+
+                                            <td>
+                                                {
+                                                    e.deletedAt
+                                                        ? <button className={style.suspension}
+                                                                  onClick={() => handlerEnable(e.id)}>Habilitar</button>
+                                                        : <button className={style.suspension}
+                                                                  onClick={() => handlerDisabled(e.id)}>Deshabilitar</button>
                                                 }
-                                            >
-
-                                                {e.confirmed ? " Validado " : " No validado "}
-                                            </p>
-                                        </td>
-
-                                        <td>
-                                            <p>{formatDate(e.createdAt)}</p>
-                                        </td>
-
-                                        <td>
-                                            <p>{e.email}</p>
-                                        </td>
-
-                                        <td>
-                                            {
-                                                e.deletedAt
-                                                    ? <button className={style.suspension}
-                                                              onClick={() => handlerEnable(e.id)}>Habilitar</button>
-                                                    : <button className={style.suspension}
-                                                              onClick={() => handlerDisabled(e.id)}>Deshabilitar</button>
-                                            }
-                                            {/*<button className={style.delete}>Eliminar</button>*/}
-                                        </td>
-                                    </tr>
-                                ))}
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div className={style.projects} id="projects">
-                            <h2>Proyectos</h2>
-                            <div className={style.filter}>
-                                <p>Filtrar por</p>
-                                <select name="" id="" onChange={handlerSelect}>
-                                    <option value="all"> Todos</option>
-                                    <option value="aceptado">Aceptados</option>
-                                    <option value="espera">En espera</option>
-                                    <option value="rechazado">Rechazados</option>
-                                </select>
-                                <button onClick={handlePrevClick}> Atrás</button>
-                                {
-                                    pageP.map((p, index) => <button
-                                            key={index}
-                                            value={index}
-                                            onClick={handlePage}
-                                        > {index + 1} </button>
-                                    )
-                                }
-                                <button onClick={handleNextClick}> Siguiente</button>
-
+                                                {/*<button className={style.delete}>Eliminar</button>*/}
+                                            </td>
+                                        </tr>
+                                    ))}
+                                    </tbody>
+                                </table>
                             </div>
 
-                            <table className={style.table}>
-                                <thead>
-                                <tr>
-                                    <th>Imagen</th>
-                                    <th>Nombre</th>
-                                    <th>Estado</th>
-                                    <th>Fecha de creación</th>
-                                    <th>Monto donado</th>
-                                    <th>Acciones</th>
-                                </tr>
-                                </thead>
+                            <div className={style.projects} id="projects">
+                                <h2>Proyectos</h2>
+                                <div className={style.filter}>
+                                    <p>Filtrar por</p>
+                                    <select name="" id="" onChange={handlerSelect}>
+                                        <option value="all"> Todos</option>
+                                        <option value="aceptado">Aceptados</option>
+                                        <option value="espera">En espera</option>
+                                        <option value="rechazado">Rechazados</option>
+                                    </select>
+                                    <button onClick={handlePrevClick}> Atrás</button>
+                                    {
+                                        pageP.map((p, index) => <button
+                                                key={index}
+                                                value={index}
+                                                onClick={handlePage}
+                                            > {index + 1} </button>
+                                        )
+                                    }
+                                    <button onClick={handleNextClick}> Siguiente</button>
 
-                                <tbody>
+                                </div>
 
-                                {pageP[pageProjects]?.map((e) => (
-                                    <tr key={e.id}>
-                                        <td>
-                                            <img className={style.imageProject} onClick={() => openModal(e)} src={e.img}
-                                                 alt=""/>
-                                            <Modal
-                                                isOpen={isOpen}
-                                                ariaHideApp={false}
-                                            >
-                                                <button onClick={closeModal}> X</button>
-                                                <button className={style.accept} onClick={async () => {
-                                                    await handlerProject("aceptado", project.id)
-                                                    closeModal()
-                                                }}>Aceptar
-                                                </button>
-                                                <button className={style.delete} onClick={async () => {
-                                                    await handlerProject("rechazado", project.id)
-                                                    closeModal()
-                                                }}>Rechazar
-                                                </button>
-                                                <CardProjectDetail obj={project}/>
-                                            </Modal>
-                                        </td>
-                                        <td>
-                                            <p>{e.title}</p>
-                                        </td>
-                                        <td>
-                                            <p className={e.validated === "aceptado" ? style.validated : style.invalidated}>{e.validated} </p>
-                                        </td>
 
-                                        <td>
-                                            <p>{formatDate(e.createdAt).toLocaleLowerCase()}</p>
-                                        </td>
-
-                                        <td>
-                                            <p>{parseInt((e.amount_collected / e.goal) * 100)}%</p>
-                                            {/* {console.log()} */}
-                                            <div className={style.progressBar}>
-                                                <div
-                                                    className={style.bg_progress}
-                                                    style={{width: `${(e.amount_collected / e.goal) * 100}%`}}>
-                                                </div>
-                                            </div>
-                                        </td>
-
-                                        <td>
-                                            <button className={style.accept}
-                                                    onClick={() => handlerProject("aceptado", e.id)}>Aceptar
-                                            </button>
-                                            <button className={style.delete}
-                                                    onClick={() => handlerProject("rechazado", e.id)}>Rechazar
-                                            </button>
-                                        </td>
+                                <table className={style.table}>
+                                    <thead>
+                                    <tr>
+                                        <th>Imagen</th>
+                                        <th>Nombre</th>
+                                        <th>Estado</th>
+                                        <th>Fecha de creación</th>
+                                        <th>Monto donado</th>
+                                        <th>Acciones</th>
                                     </tr>
-                                ))}
-                                </tbody>
-                            </table>
+                                    </thead>
+
+                                    <tbody>
+
+                                    {pageP[pageProjects]?.map((e) => (
+                                        <tr key={e.id}>
+                                            <td>
+                                                <img className={style.imageProject} onClick={() => openModal(e)}
+                                                     src={e.img}
+                                                     alt=""/>
+                                                <Modal
+                                                    isOpen={isOpen}
+                                                    ariaHideApp={false}
+                                                >
+                                                    <button onClick={closeModal}> X</button>
+                                                    <button className={style.accept} onClick={async () => {
+                                                        await handlerProject("aceptado", project.id)
+                                                        closeModal()
+                                                    }}>Aceptar
+                                                    </button>
+                                                    <button className={style.delete} onClick={async () => {
+                                                        await handlerProject("rechazado", project.id)
+                                                        closeModal()
+                                                    }}>Rechazar
+                                                    </button>
+                                                    <CardProjectDetail obj={project}/>
+                                                </Modal>
+                                            </td>
+                                            <td>
+                                                <p>{e.title}</p>
+                                            </td>
+                                            <td>
+                                                <p className={e.validated === "aceptado" ? style.validated : style.invalidated}>{e.validated} </p>
+                                            </td>
+
+                                            <td>
+                                                <p>{formatDate(e.createdAt).toLocaleLowerCase()}</p>
+                                            </td>
+
+                                            <td>
+                                                <p>{parseInt((e.amount_collected / e.goal) * 100)}%</p>
+                                                {/* {console.log()} */}
+                                                <div className={style.progressBar}>
+                                                    <div
+                                                        className={style.bg_progress}
+                                                        style={{width: `${(e.amount_collected / e.goal) * 100}%`}}>
+                                                    </div>
+                                                </div>
+                                            </td>
+
+                                            <td>
+                                                {e.validated === "espera"
+                                                    ? (<div>
+                                                        <button className={style.accept}
+                                                                onClick={() => handlerProject("aceptado", e.id)}>Aceptar
+                                                        </button>
+                                                        <button className={style.delete}
+                                                                onClick={() => handlerProject("rechazado", e.id)}>Rechazar
+                                                        </button>
+                                                    </div>)
+                                                    : e.validated === "aceptado"
+                                                        ? <button className={style.delete}
+                                                                  onClick={() => handlerProject("rechazado", e.id)}>Rechazar
+                                                        </button>
+                                                        : (<button className={style.accept}
+                                                                   onClick={() => handlerProject("aceptado", e.id)}>Aceptar
+                                                        </button>)
+                                                }
+
+                                            </td>
+                                        </tr>
+                                    ))}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                    </div>
-                </main>
-            </div>
+                    </main>
+                </div>)
+                : <p>No sos admin</p>
+            }
         </Layout>
     );
 };

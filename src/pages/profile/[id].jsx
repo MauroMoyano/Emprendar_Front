@@ -32,8 +32,7 @@ export default function Profile({ userData, error }) {
 
     useEffect(() => {
         if (user && userData) {
-            if (user.id != userData.id) {
-                if (router.pathname.includes('dashboard')) return;
+            if (user.id !== userData.id && user.isAdmin === false) {
 
                 Swal.fire({
                     icon: 'error',
@@ -444,7 +443,7 @@ export default function Profile({ userData, error }) {
     return (
 
         <Layout>
-            {!!userData && !!user && userData.id === user.id &&
+            {!!userData && !!user && (userData.id === user.id || user.isAdmin === true) &&
                 <div className={style.div_gral}>
                     <div className={style.container}>
                         <div className={style.div_datos}>
@@ -499,7 +498,7 @@ export default function Profile({ userData, error }) {
                                 <div className={style.div_extra_info}>
                                     <div className={style.div_valoracion}>
                                         <h4>Valoración:</h4>
-                                        <p>{reputation} estrellas</p>
+                                        <p>{reputation.reputation} estrellas</p>
                                     </div>
 
                                     <div className={style.div_email}>

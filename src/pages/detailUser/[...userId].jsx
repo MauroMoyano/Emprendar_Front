@@ -75,6 +75,7 @@ export default function Detail(props) {
                   ) : null}
                 </div>
                 <div className={style.container_muro}>
+                  <h2>USUARIO</h2>
                   <div className={style.info_creator}>
                     <CardUser />
                   </div>
@@ -84,7 +85,7 @@ export default function Detail(props) {
                         {/* {console.log(props)} */}
                       <PreviewPage name={selectorProject.title} id={selectorProject.id} image={selectorProject.img} description={selectorProject.description} userId={props.userId} projectId={props.projectId}/>
                     </div>
-                    <div><Link href={`/chats?IduserReceiver=${props.userId}`}> ENVIAR MENSAJE</Link></div>
+                    <div><Link href={`/chats?IduserReceiver=${props.userId}`}><button className={style.buttonSendMsg}>ENVIAR MENSAJE</button></Link></div>
                   </div>
                 </div>
               </div>
@@ -105,7 +106,7 @@ export default function Detail(props) {
             </div>
                 
             <div className={style.container_comentarios}>
-            <h3>Comentarios</h3>
+            <h3>COMENTARIOS</h3>
                   <Comments projectId={selectorProject.id} />
                 </div>
           </div>

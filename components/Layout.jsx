@@ -73,6 +73,7 @@ const Layout = ({children}) => {
                                 <Link href={`/profile/${user.id}`}><button className={style.buttonNewProject}><h3>Mi perfil</h3></button></Link>
                                 <Link href={`/chats`}><button className={style.buttonNewProject}><h3>Mensajes</h3></button></Link>
                                 <Link href="/createProject"><button className={style.buttonNewProject}><h3>Nuevo Proyecto</h3></button></Link>
+                                {user.isAdmin && <Link href={`/dashboard`}><button className={style.buttonNewProject}><h3>Dashboard</h3></button></Link>}
                                 <Link href="/"><button onClick={() => dispatch(logOut())}><h3>Cerrar Sesión</h3></button></Link>
                             </div>
                     </div>

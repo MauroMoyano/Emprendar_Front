@@ -22,6 +22,7 @@ export default function Home() {
     const dispatch = useDispatch()
 
     const { category, country } = useSelector(state => state)
+    const [color, setColor] = useState(false)
 
     useEffect(() => {
         dispatch(getHomeProjects())
@@ -31,6 +32,7 @@ export default function Home() {
     const [countriess, setCountry] = useState('')
     const [categoriess, setCategory] = useState('')
     const [search, setSearch] = useState('')
+    const [searchs, setSearchs] = useState('')
 
     useEffect(() => {
         let path
@@ -59,6 +61,20 @@ export default function Home() {
         setSearch('')
     }
 
+    const handleInputChange = (event) => {
+
+        if (timer) {
+            clearTimeout(timer);
+        }
+
+        setTimer(setTimeout(() => {
+            let newValue = event.target.value;
+            setSearch(newValue)
+        }, 2000));
+    };
+
+
+
     return (
         <Layout>
             <div className={style.allContainer}>
@@ -67,7 +83,7 @@ export default function Home() {
                     <div className={style.subMenuContainer}>
                         <ul>
                             <li><Link href="/users"><FontAwesomeIcon icon={faUsers} className={style.theIcon} /> Usuarios</Link></li>
-                            <li><Link href="#"><FontAwesomeIcon icon={faPhone} className={style.theIcon} />Contáctanos</Link></li>
+                            <li><Link href="/contactUs"><FontAwesomeIcon icon={faPhone} className={style.theIcon} />Contáctanos</Link></li>
                             <li><Link href="/aboutUs"><FontAwesomeIcon icon={faAddressCard} className={style.theIcon} />Acerca de</Link></li>
                             <li className={style.dropdown}><Link href="#menu"><FontAwesomeIcon icon={faArrowDownWideShort} className={style.theIcon} />Ordenar Por</Link>
                                 <div id="menu" className={style.dropdownContent}>
@@ -75,21 +91,23 @@ export default function Home() {
                                         <div>
                                             <label className={style.accordion}>
                                                 <input type='radio' name='radio-accordion' defaultChecked="unChecked" />
-                                                <div className={style.accordion__header}><FontAwesomeIcon icon={faDollarSign} className={style.theIcon} />Donación</div>
+                                                <div className={style.accordion__header}><FontAwesomeIcon icon={faDollarSign} className={style.theIcon} />
+                                                
+                                                Meta Economicas</div>
                                                 <div className={style.accordion__content} value={ordenss}>
-                                                    <button onClick={(e) => setOrden(e.target.value)} value=''> - </button>
-                                                    <button onClick={(e) => setOrden(e.target.value)} value='ASC'>Ascendente</button>
-                                                    <button onClick={(e) => setOrden(e.target.value)} value='DESC'>Descendente</button>
+                                                    <button  className={style.accordion__content_selected} onClick={(e) => setOrden(e.target.value)} value=''>-</button>
+                                                    <button  className={style.accordion__content_selected} onClick={(e) => setOrden(e.target.value)} value='ASC'>menor a mayor</button>
+                                                    <button  className={style.accordion__content_selected} onClick={(e) => setOrden(e.target.value)} value='DESC'>mayor a menor</button>
                                                 </div>
                                             </label>
                                             <label className={style.accordion} >
                                                 <input type='radio' name='radio-accordion' defaultChecked="unChecked" />
                                                 <div className={style.accordion__header}><FontAwesomeIcon icon={faFlag} className={style.theIcon} />País</div>
                                                 <div className={style.accordion__content} value={countriess}>
-                                                    <button onClick={(e) => setCountry(e.target.value)} value=''> - </button>
+                                                    <button className={style.accordion__content_selected} onClick={(e) => setCountry(e.target.value)} value=''> - </button>
                                                     {
                                                         country?.map((c, index) => {
-                                                            return (<button value={`${c}`} key={index} onClick={(e) => setCountry(e.target.value)}>{c}</button>)
+                                                            return (<button className={style.accordion__content_selected} value={`${c}`} key={index} onClick={(e) => {setCountry(e.target.value) }}>{c}</button>)
                                                         })
                                                     }
                                                 </div>
@@ -98,10 +116,13 @@ export default function Home() {
                                                 <input type='radio' name='radio-accordion' defaultChecked="unChecked" />
                                                 <div className={style.accordion__header}><FontAwesomeIcon icon={faList} className={style.theIcon} />Categoria</div>
                                                 <div className={style.accordion__content}>
-                                                    <button onClick={(e) => setCountry(e.target.value)} value=''> - </button>
+                                                    <button className={style.accordion__content_selected} onClick={(e) => setCategory(e.target.value)} value=''> - </button>
                                                     {
                                                         category?.map((c, index) => {
-                                                            return (<button value={`${c}`} key={index} onClick={(e) => setCategory(e.target.value)}>{c}</button>)
+                                                            return (<button  className={style.accordion__content_selected} value={`${c}`} key={index} onClick={(e) =>{ 
+                                                                setCategory(e.target.value)
+                                                               
+                                                            }}>{c}</button>)
                                                         })
                                                     }
                                                 </div>
@@ -120,50 +141,19 @@ export default function Home() {
                                 </div>
                             </li>
                             <div className={style.menuSearch}>
-                                <input value={search} type='search' onChange={(e) => setSearch(e.target.value)} placeholder="Buscar proyecto..." ></input>
+                                <input value={searchs} type='search' onChange={(e) => { handleInputChange(e), setSearchs(e.target.value) }} placeholder="Buscar proyecto..." ></input>
                             </div>
                         </ul>
                     </div>
-                    {/* <form>
-                        <div className={style.filtersContainer}>
-                            <div>
-                                <label>Highest Donations </label>
-                                <select value={ordenss} className={style.select} onChange={(e) => setOrden(e.target.value)}>
-                                    <option value=''> - </option>
-                                    <option value="ASC">Ascendente</option>
-                                    <option value="DESC">Descendente</option>
-                                </select>
+                    { countriess || categoriess 
+                        ?  <div className={style.mensaje_filtros}> 
+                                 Estas buscando en el país = "{countriess || "seleciona un pais" }" 
+                                proyectos de la categoria = "{categoriess || "seleciona una categoria"}" 
                             </div>
-                            <div>
-                                <label>Country </label>
-                                <select value={countriess} className={style.select} onChange={(e) => setCountry(e.target.value)}>
-                                    <option value=''> - </option>
-                                    {
-                                        country?.map((c, index) => {
-                                            return <option value={c} key={index}>{c}</option>
-                                        })
-                                    }
-                                </select>
-                            </div>
-                            <div>
-                                <label>Category </label>
-                                <select value={categoriess} className={style.select} onChange={(e) => setCategory(e.target.value)}>
-                                    <option value=''> - </option>
-                                    {
-                                        category?.map((c, index) => {
-                                            return <option value={c} key={index}>{c}</option>
-                                        })
-                                    }
-                                </select>
-                            </div>
-                            <div>
-                                <input value={search} type='search' onChange={(e) => setSearch(e.target.value)} placeholder="Buscar..." ></input>
-                            </div>
-                            <div>
-                                <button type="button" onClick={() => handlerDeleteSearch()}>Limpiar</button>
-                            </div>
-                        </div>
-                    </form> */}
+                        : <div className={style.mensaje_filtros} > Puedes mejorar tu busqueda usando los filtros</div>
+
+                    }
+                   
                     <Paginated />
                 </div>
             </div>

@@ -18,10 +18,13 @@ import { faCreditCard } from "@fortawesome/free-solid-svg-icons";
 import { faUsers } from "@fortawesome/free-solid-svg-icons";
 import { faLocationDot } from "@fortawesome/free-solid-svg-icons";
 // console.log(process.env.NEXT_PUBLIC_BACK_APP_URL)
+
+
+
 export default function Landing(){
 
 
-
+ 
     const router = useRouter()
     const dispatch = useDispatch()
 
@@ -37,6 +40,8 @@ export default function Landing(){
                   
             }
     }, [dispatch])
+
+
 
     return(
         <>
@@ -84,7 +89,6 @@ export default function Landing(){
                                         <p>Proyectos por país</p>
                                     </div>
                                 </div>
- 
                     </div>
                     <div id="about" className={style.aboutUs}>
                         <AboutUsLanding />
@@ -104,5 +108,3 @@ export default function Landing(){
        </>
     )
 }
-
-

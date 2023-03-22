@@ -11,6 +11,7 @@ import { useRouter } from "next/router";
 import { useDropzone } from "react-dropzone";
 import clienteAxios from "config/clienteAxios";
 import { ClipLoader } from "react-spinners";
+import Swal from "sweetalert2";
 export default function CreateProject() {
   const dispatch = useDispatch();
   const router = useRouter();
@@ -41,6 +42,8 @@ export default function CreateProject() {
   };
 
   const [form, setForm] = useState(initialFormValues);
+  const [message, setMessage] = useState(null);
+
 
   const [errors, setErrors] = useState({
     title: "",
@@ -91,9 +94,36 @@ export default function CreateProject() {
       ) {
         setForm({ ...form, userId: userId, user_name: user_name });
         // console.log(form)
-        await clienteAxios.post("/project", form);
+       
+          try {
+            const response =  await clienteAxios.post("/project", form);
+
+            setForm({
+              title: "",
+              summary: "",
+              description: "",
+              goal: "",
+              country: "",
+              category: [],
+              userId: null,
+              user_name: null,
+            })
+
+            Swal.fire({
+              icon: 'success',
+              title: 'Proyecto creado correctamente',
+              text: 'Tu proyecto se encuentra en revision, te enviamos un correo para mas informacion',
+              timer: 2000,
+              showConfirmButton: false,
+              willClose: () => {
+                 router.push('/home')
+              }
+          })
+          } catch (error) {
+            console.log(error)
+          }
         // dispatch(createProject(form));
-        await router.push("/home");
+
       }
     }
   };
@@ -264,6 +294,8 @@ export default function CreateProject() {
     <Layout>
       <div className={style.containerCreateProject}>
         <form onSubmit={submitHandler} className={style.formContainer}>
+        
+
           <h1 className={style.title}>Crea tu proyecto:</h1>
           <div className={style.formInput}>
             <div>
@@ -419,6 +451,7 @@ export default function CreateProject() {
           >
             Enviar datos
           </button>
+          {message && <p>{message}</p> }  
         </form>
       </div>
     </Layout>
