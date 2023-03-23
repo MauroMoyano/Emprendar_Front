@@ -69,7 +69,7 @@ export default function CardUser({ userId }) {
                 <div className={style.detailPerfil}>
                     <h5>{detailUsuario.user_name}</h5>
                     <p>Reputacion</p>
-                    <p>{detailUsuario.reputation?.reputation} [{detailUsuario.reputation?.count}]</p>
+                    <p>{detailUsuario?.reputation} [{detailUsuario?.count}]</p>
                     {
                         value[0]?.data === 0
                             ? (
@@ -82,8 +82,8 @@ export default function CardUser({ userId }) {
                                             setBandera(!bandera)
                                         }}>
                                             {
-                                                valuess.map(val => {
-                                                    return (<option value={val} >{val}</option>)
+                                                valuess.map((val,i) => {
+                                                    return (<option key={i} value={val} >{val}</option>)
                                                 })
                                             }
                                         </select>
@@ -100,8 +100,8 @@ export default function CardUser({ userId }) {
                                             setBandera(!bandera)
                                         }}>
                                             {
-                                                valuess.map(val => {
-                                                    return (<option value={val} >{val}</option>)
+                                                valuess.map((val,i) => {
+                                                    return (<option key={i} value={val} >{val}</option>)
                                                 })
                                             }
                                         </select>

@@ -1,8 +1,17 @@
+/* eslint-disable */
 import Paginated from "../../components/Paginated";
-import { useDispatch, useSelector } from "react-redux"
-import { changePathToFilterAndSearch, deleteSearchAndFilter, filterAllProjectos, filterCategory, filterCountry, getHomeProjects, orderTop } from "../../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  changePathToFilterAndSearch,
+  deleteSearchAndFilter,
+  filterAllProjectos,
+  filterCategory,
+  filterCountry,
+  getHomeProjects,
+  orderTop,
+} from "../../redux/actions";
 import Layout from "../../components/Layout";
-import style from "./styles/home.module.css"
+import style from "./styles/home.module.css";
 import { useEffect, useState } from "react";
 import { authedUser } from "../../redux/actions";
 import { useRouter } from "next/router";
@@ -13,20 +22,21 @@ import Slider from "components/slider";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDownWideShort } from "@fortawesome/free-solid-svg-icons";
 import { faUsers, faDollarSign, faDeleteLeft } from "@fortawesome/free-solid-svg-icons";
-import { faPhone, faAddressCard, faList, faFlag } from "@fortawesome/free-solid-svg-icons";
+import { faPhone, faAddressCard, faList, faFlag , faMagnifyingGlass} from "@fortawesome/free-solid-svg-icons";
 
 
 
 export default function Home() {
+  const dispatch = useDispatch();
 
-    const dispatch = useDispatch()
+
 
     const { category, country } = useSelector(state => state)
-    const [color, setColor] = useState(false)
+    
 
-    useEffect(() => {
-        dispatch(getHomeProjects())
-    }, [])
+  useEffect(() => {
+    dispatch(getHomeProjects());
+  }, []);
 
     const [ordenss, setOrden] = useState('')
     const [countriess, setCountry] = useState('')
@@ -36,46 +46,42 @@ export default function Home() {
     const [timer, setTimer] = useState(null)
 
 
-    useEffect(() => {
-        let path
-        ordenss !== ''
-            ? path = `orden=${ordenss}&`
-            : path = `orden=&`
-        countriess !== ''
-            ? path = path + `country=${countriess}&`
-            : path = path + `country=&`
-        categoriess !== ''
-            ? path = path + `category=${categoriess}&`
-            : path = path + `category=&`
-        search !== ''
-            ? path = path + `search=${search}`
-            : path = path + `search=`
-        dispatch(changePathToFilterAndSearch(path))
+  useEffect(() => {
+    let path;
+    ordenss !== "" ? (path = `orden=${ordenss}&`) : (path = `orden=&`);
+    countriess !== ""
+      ? (path = path + `country=${countriess}&`)
+      : (path = path + `country=&`);
+    categoriess !== ""
+      ? (path = path + `category=${categoriess}&`)
+      : (path = path + `category=&`);
+    search !== ""
+      ? (path = path + `search=${search}`)
+      : (path = path + `search=`);
+    dispatch(changePathToFilterAndSearch(path));
+  }, [ordenss, countriess, categoriess, search]);
 
-    }, [ordenss, countriess, categoriess, search])
+  /* let toPath = [ordenss, countriess, categoriess] */
 
-    /* let toPath = [ordenss, countriess, categoriess] */
+  const handlerDeleteSearch = () => {
+    setOrden("");
+    setCountry("");
+    setCategory("");
+    setSearch("");
+  };
 
-    const handlerDeleteSearch = () => {
-        setOrden('')
-        setCountry('')
-        setCategory('')
-        setSearch('')
+  const handleInputChange = (event) => {
+    if (timer) {
+      clearTimeout(timer);
     }
 
-    const handleInputChange = (event) => {
-
-        if (timer) {
-            clearTimeout(timer);
-        }
-
-        setTimer(setTimeout(() => {
-            let newValue = event.target.value;
-            setSearch(newValue)
-        }, 2000));
-    };
-
-
+    setTimer(
+      setTimeout(() => {
+        let newValue = event.target.value;
+        setSearch(newValue);
+      }, 2000)
+    );
+  };
 
     return (
         <Layout>
@@ -95,7 +101,7 @@ export default function Home() {
                                                 <input type='radio' name='radio-accordion' defaultChecked="unChecked" />
                                                 <div className={style.accordion__header}><FontAwesomeIcon icon={faDollarSign} className={style.theIcon} />
                                                 
-                                                Meta Economicas</div>
+                                                Meta Economica</div>
                                                 <div className={style.accordion__content} value={ordenss}>
                                                     <button  className={style.accordion__content_selected} onClick={(e) => setOrden(e.target.value)} value=''>-</button>
                                                     <button  className={style.accordion__content_selected} onClick={(e) => setOrden(e.target.value)} value='ASC'>menor a mayor</button>
@@ -149,10 +155,14 @@ export default function Home() {
                     </div>
                     { countriess || categoriess 
                         ?  <div className={style.mensaje_filtros}> 
-                                 Estas buscando en el país = "{countriess || "seleciona un pais" }" 
-                                proyectos de la categoria = "{categoriess || "seleciona una categoria"}" 
+
+                               <div> <FontAwesomeIcon icon={faMagnifyingGlass} /></div>
+                                { countriess ?   <div>{countriess}</div> :null}
+                                { categoriess ?   <div>{categoriess}</div> :null}
+                                {ordenss ===  "ASC" ? <div>{"m - M"}</div>: null}
+                                {ordenss ===  "DESC" ? <div>{"M - m"}</div>: null}
                             </div>
-                        : <div className={style.mensaje_filtros} > Puedes mejorar tu busqueda usando los filtros</div>
+                        :null
 
                     }
                    
@@ -163,6 +173,48 @@ export default function Home() {
     )
 
 }
+
+/*
+div className={style.mensaje_filtros}> 
+                                
+                                 Estas buscando en el país = "{countriess || "seleciona un pais" }" 
+                                proyectos de la categoria = "{categoriess || "seleciona una categoria"}" 
+                            </div>
+                        : <div className={style.mensaje_filtros} > Puedes mejorar tu busqueda usando los filtros</div>
+   <div className={style.helperButtons}>
+        <Link href="#about"><button className={style.buttonLevitation}>Acerca de nosotros</button></Link>
+        <Link href="#questions"><button className={style.buttonLevitation}>Preguntas frecuentes</button></Link>
+    </div>
+
+.helperButtons{
+    display: flex;
+    flex-direction: row;
+    width: fit-content;
+    position: fixed;
+    right: 10px;
+    bottom: 20px;
+    gap: 10px;
+    z-index: 100;
+}
+
+.buttonLevitation{
+    border: none;
+   ccccccc
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: #2e034b;
+    color: aliceblue;
+    font-size: 12px;
+    font-family: 'Montserrat', sans-serif;
+    box-shadow: 0px 2px 8px black;
+}
+
+.buttonLevitation:hover{
+    background-color: #09c7ae;
+    box-shadow: 0px 2px 8px #7eddd0;
+    text-shadow: 0px 2px 8px black;
+}
+ */
 
 
 

@@ -58,11 +58,9 @@ const initialState = {
 const rootReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_HOME_PROJECTS:
-      // console.log("action dentro de get home " + JSON.stringify(action.payload.category))
       return {
         ...state,
-        /* allProjects: action.payload.data, */
-        /* allProjectsCopy: action.payload.data, */
+    
         category: action.payload.category,
         country: action.payload.country,
         detailUsuario: {}
@@ -74,6 +72,7 @@ const rootReducer = (state = initialState, action) => {
         numPages: action.payload.pages
       }
     case GET_USERS_INFITITY_SCROLL:
+      
       return {
         ...state,
         allUsers: state.allUsers.concat(action.payload.data),
@@ -83,19 +82,9 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         allUsers: [],
+        allProjects: [],
         pathUserValue: action.payload
       }
-    /* case DELETE_SEARCH_AND_FILTER:
-      return {
-        ...state,
-        filterProjects: action.payload,
-        searchProjects: action.payload,
-      } */
-    /* case FILTER_OF_ALL_PROJECTS_OR_SEARCH_PROJECTS:
-      return {
-        ...state,
-        filterProjects: action.payload
-      } */
     case RESET_SCROLL:
       return {
         ...state,
@@ -106,11 +95,11 @@ const rootReducer = (state = initialState, action) => {
       return {
         ...state,
         allProjects: [],
+        allUsers : [],
         pathValue: action.payload
       }
 
-    /* case CURRENT_PAGE:
-      return { ...state, currentPage: action.payload }; */
+ 
 
     case GET_DETAIL_PROJECT:
       return {
@@ -127,55 +116,7 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         detailUsuario: action.payload,
       };
-    /* case ORDER_TOP:
-      return {
-        ...state,
-        allProjects:
-          action.payload === "Ascendente"
-            ? [
-              ...state.allProjects.sort(
-                (a, b) => a.amount_collected - b.amount_collected
-              ),
-            ]
-            : [
-              ...state.allProjects.sort(
-                (a, b) => b.amount_collected - a.amount_collected
-              ),
-            ],
-        allProjectsCopy:
-          action.payload === "Ascendente"
-            ? [
-              ...state.allProjects.sort(
-                (a, b) => a.amount_collected - b.amount_collected
-              ),
-            ]
-            : [
-              ...state.allProjects.sort(
-                (a, b) => b.amount_collected - a.amount_collected
-              ),
-            ],
-        currentPage: 0,
-      };
-    case FILTER_CATEGORY:
-      return {
-        ...state,
-        allProjects: state.allProjects.filter((project) =>
-          project.categories.find((c) => c.name === action.payload)
-        ),
-        currentPage: 0,
-      };
-
-    case FILTER_COUNTRY:
-      return {
-        ...state,
-        allProjects: state.allProjects.filter(
-          (project) => project.country.name === action.payload
-        ),
-        currentPage: 0,
-      }; */
-
-    // case CONFIRM_EMAIL:
-    // case CONFIRM_EMAIL_ERROR:
+   
     case SIGNIN_SUCESS:
     case LOGIN_ERROR:
     case SIGNIN_ERROR:
