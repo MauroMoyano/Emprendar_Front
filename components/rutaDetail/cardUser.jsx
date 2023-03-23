@@ -1,3 +1,5 @@
+import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import clienteAxios from "config/clienteAxios";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -69,7 +71,7 @@ export default function CardUser({ userId }) {
                 <div className={style.detailPerfil}>
                     <h5>{detailUsuario.user_name}</h5>
                     <p>Reputacion</p>
-                    <p>{detailUsuario?.reputation} [{detailUsuario?.count}]</p>
+                    <p>{detailUsuario?.reputation} <FontAwesomeIcon icon={faStar} className={style.star}/> [{detailUsuario?.count}]</p>
                     {
                         value[0]?.data === 0
                             ? (
