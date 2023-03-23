@@ -1,10 +1,9 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import style from "./styles/editProject.module.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
     getHomeProjects,
 } from '../redux/actions'
-import { useRouter } from "next/router";
 import clienteAxios from "config/clienteAxios";
 import Swal from "sweetalert2";
 
@@ -15,7 +14,7 @@ import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 
 export default function EditProject({ projectData, closeModal }) {
 
-    console.log('projectData en edit ->', projectData)
+    // console.log('projectData en edit ->', projectData)
 
     const dispatch = useDispatch();
     // const router = useRouter();

@@ -4,12 +4,11 @@ import style from './styles/profileProject.module.css'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons"
 import EditProject from '../components/EditProject'
-import { useState } from "react"
 
 
 export default function ProfileProject({ projectData }) {
 
-    console.log('projectData ->', projectData)
+    // console.log('projectData ->', projectData)
 
     const [isOpen, openModal, closeModal] = useModal(false)
 
