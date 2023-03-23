@@ -30,10 +30,13 @@
 }
 
 .div_datos>h1 {
-    font-style: italic;
-    border-bottom: 2px solid black;
-    display: inline-block;
-    font-size: 27px;
+    padding: 10px 0;
+    background: #2e034b;
+    color: #fff;
+    font-size: 20px;
+    text-transform: uppercase;
+    text-align: center;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .div_userInfo {
@@ -45,11 +48,14 @@
 }
 
 .div_userInfo>h1 {
-    font-style: italic;
-    border-bottom: 2px solid black;
-    display: inline-block;
-    font-size: 27px;
-
+    padding: 10px 0;
+    background: #2e034b;
+    color: #fff;
+    font-size: 20px;
+    text-transform: uppercase;
+    text-align: center;
+    width: 100%;
+    font-family: 'Montserrat', sans-serif;
 }
 
 .div_img {
@@ -165,36 +171,34 @@
 
 }
 
-.div_nombres {
+.div_nombres,
+.div_apellidos {
     /* border: 1px solid green; */
     display: flex;
     width: 50%;
     height: 80px;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 5px;
+    margin-top: -10px;
 
-}
-
-.div_apellidos {
-    /* border: 1px solid blue; */
-    display: flex;
-    width: 50%;
-    height: 80px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 5px;
 }
 
 .div_nombres>h4,
 .div_apellidos>h4 {
     /* border: 1px solid green; */
-    border-bottom: 1.5px solid black;
+    /* border-bottom: 1.5px solid black; */
     padding-bottom: 1px;
     font-weight: normal;
     font-style: italic;
     font-size: 15px;
     display: inline-block;
+    background: #a06cd5;
+    width: 100%;
+    text-align: center;
+    color: aliceblue;
+    padding: 3px 0;
+    border-radius: 0 0 10px 10px;
 }
 
 .input_name,
@@ -206,6 +210,7 @@
     font-weight: bold;
     background-color: transparent;
     cursor: default;
+    text-align: center;
 }
 
 .input_name.edit,
@@ -323,6 +328,15 @@
     position: relative;
 }
 
+.div_valoracion{
+    text-align: center;
+}
+
+.star {
+    color: #ff8000;
+}
+
+
 .div_email>h4 {
     display: inline-block;
     margin-right: 3px;
@@ -377,15 +391,15 @@
 .div_password {
     /* border: 1px solid green; */
     margin-top: 5px;
-    display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
     gap: 2px;
     display: none;
 }
 
 .div_password.visible {
-    display: block
+    display: flex
 }
 
 .password,
@@ -405,8 +419,8 @@
     padding-bottom: 1px;
     font-weight: normal;
     font-style: italic;
-    font-size: 15px;    
-    margin-bottom: 5px;    
+    font-size: 15px;
+    margin-bottom: 5px;
     align-self: flex-start;
 }
 
@@ -438,6 +452,29 @@
     display: inline-block;
 }
 
+.correct_password {
+    color: green;
+    position: absolute;
+    top: 4px;
+    left: 102%;
+    display: none;
+}
+
+.correct_password.visible {
+    display: block;
+}
+
+.wrong_password {
+    color: red;
+    position: absolute;
+    top: 4px;
+    left: 102%;
+}
+
+.wrong_password.hidden {
+    display: none;
+}
+
 .curr_password>input,
 .new_password>input,
 .confirm_password>input {
@@ -464,9 +501,14 @@
 }
 
 .password_buttons {
-    /* border: 1px solid blue; */
+    /* border: 1px solid red; */
     width: 70%;
-    margin-top: 10px;
+    margin: 10px auto;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
 }
 
 .change_password {
@@ -508,7 +550,6 @@
     font-weight: bold;
     background: #9d0208;
     color: #fff;
-    margin-left: 20px;
     cursor: pointer;
     font-family: 'Montserrat', sans-serif;
     transition: all .3s ease;
@@ -549,4 +590,69 @@
 
 .projects_container {
     /* border: 1px solid green; */
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 100vh;
+    overflow-y: scroll;
 }
+
+@media  (max-width: 768px) {
+    .div_extra_info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .container {
+        background: #cfcff8;
+        min-height: 100vh;
+        max-width: 70vw;
+        box-shadow: 0px 2px 15px #000;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .div_datos {
+        margin-top: 20px;
+        padding: 1rem;
+        width: 100%;
+    }
+
+    .input_name,
+    .input_apellido {
+    border: 1px solid transparent;
+    width: 100%;
+    height: 35px;
+    font-size: 12px;
+    font-weight: bold;
+    background-color: transparent;
+    cursor: default;
+    text-align: center;
+    margin-top: -1em;
+}
+.div_valoracion>p,
+.div_email>p {
+    font-size: 12px;
+    margin-top: 5px;
+    max-width: 280px;
+    font-weight: bold;
+}
+
+.div_projects {
+    /* border: 1px solid red; */
+    margin-top: 20px;
+    margin-bottom: 10px;
+    width: 100%;
+    padding: 1rem;
+    border-left: none;
+}
+
+.div_projects h2 {
+    border-top: 2px solid rgba(60, 22, 66, .9);
+}
+
+}
+
+
+

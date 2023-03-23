@@ -9,7 +9,7 @@ export default function AboutUsLanding (){
     return (
         <div className={style.container}>
             <div className={style.titleObject}>
-                <h1>Equipo de Desarrollo:</h1>
+                <h1>Equipo de desarrollo:</h1>
             </div>
 
             <div className={style.cardAbout}>

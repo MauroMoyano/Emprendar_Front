@@ -114,6 +114,9 @@ export default function FormLanding() {
   const [checked, setChecked] = useState(false);
   //Con esta funcion manejamos el estado del checkbox si es true mostramos un formulario de Log In si es false de Sign In
   const handlerCheckbox = (event) => {
+    console.log("hola");
+    console.log( "se  el id",event.target.id);
+    console.log("este es el estado",checked);
     event.target.id === "signIn" ? setChecked(!checked) : setChecked(false);
   };
 
@@ -158,7 +161,8 @@ export default function FormLanding() {
           className={style.chk}
           id="chk"
           aria-hidden="true"
-          defaultChecked={checked}
+          checked ={checked}
+          readOnly
         />
 
         <div className={style.logIn}>
@@ -170,7 +174,7 @@ export default function FormLanding() {
               htmlFor="chk"
               aria-hidden="true"
             >
-              Iniciar Sesion
+              Iniciar Sesión
             </label>
             <input
               className={style.input}
@@ -189,7 +193,7 @@ export default function FormLanding() {
               placeholder="Contraseña"
             />
             <button onClick={() => sendDataLogIn(formLogIn)}>Entrar</button>
-            <Link className={style.password} href='/resetPassword'>Olvide mi contraseña</Link>
+            <Link className={style.password} href='/resetPassword'>Olvidé mi contraseña</Link>
           </form>
         </div>
         <div className={style.sign_In}>
@@ -225,7 +229,7 @@ export default function FormLanding() {
               value={formSignIn.user_name}
               onChange={handlerSignIn}
               type="text"
-              placeholder="Nombre de Usuario"
+              placeholder="Nombre de usuario"
             />
             <input
               className={style.input}
@@ -244,14 +248,6 @@ export default function FormLanding() {
               placeholder="Contraseña"
             />
 
-            {/* <input
-              className={style.input}
-              name="profile_img"
-              value={formSignIn.profile_img}
-              onChange={handlerSignIn}
-              type="text"
-              placeholder="foto"
-            /> */}
 
             <p onClick={handlerCheckbox}>Ya tengo cuenta</p>
             <button onClick={() => sendDataSignIn(formSignIn)}>

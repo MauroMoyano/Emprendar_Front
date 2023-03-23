@@ -35,6 +35,8 @@ font-family: 'Work Sans', sans-serif;
 .img>img{
     width: 100%;
     height: auto;
+    max-height: 300px;
+    object-fit: cover;
 }
 
 .card_title {

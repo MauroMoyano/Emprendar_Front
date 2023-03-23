@@ -44,26 +44,35 @@ export const PaginatedUsers = () => {
             setControl(false)
         }
     }
-
+    //aca voy a guardar los compentes que ya renderice
+    let  renderizados = []
+    
 
     return (
         <div className={style.boxCard}>
             <div className={style.cards}>
                 {
                     allUsers?.map(user => {
-                        return (
-                            <CardsUsers
-                                key={user.id}
-                                userId={user.id}
-                                user_name={user.user_name}
-                                name={user.name}
-                                last_name={user.last_name}
-                                reputation={user.reputation}
-                                profile_img={user.profile_img}
-                                projects={user.projects}
-
-                            />
-                        )
+                        let result = renderizados.findIndex(data => data === user.id )
+                        if (result === -1) {
+                            renderizados.push(user.id)
+                            return (
+                                <CardsUsers
+                                    key={user.id}
+                                    userId={user.id}
+                                    user_name={user.user_name}
+                                    name={user.name}
+                                    last_name={user.last_name}
+                                    reputation={user.reputation}
+                                    profile_img={user.profile_img}
+                                    projects={user.projects}
+    
+                                />
+                            )
+                        } else {
+                          
+                        }
+                      
                     })
                 }
                 <div className={style.buttonContainer}>
