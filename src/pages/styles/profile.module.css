@@ -597,3 +597,62 @@
     max-height: 100vh;
     overflow-y: scroll;
 }
+
+@media  (max-width: 768px) {
+    .div_extra_info {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .container {
+        background: #cfcff8;
+        min-height: 100vh;
+        max-width: 70vw;
+        box-shadow: 0px 2px 15px #000;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .div_datos {
+        margin-top: 20px;
+        padding: 1rem;
+        width: 100%;
+    }
+
+    .input_name,
+    .input_apellido {
+    border: 1px solid transparent;
+    width: 100%;
+    height: 35px;
+    font-size: 12px;
+    font-weight: bold;
+    background-color: transparent;
+    cursor: default;
+    text-align: center;
+    margin-top: -1em;
+}
+.div_valoracion>p,
+.div_email>p {
+    font-size: 12px;
+    margin-top: 5px;
+    max-width: 280px;
+    font-weight: bold;
+}
+
+.div_projects {
+    /* border: 1px solid red; */
+    margin-top: 20px;
+    margin-bottom: 10px;
+    width: 100%;
+    padding: 1rem;
+    border-left: none;
+}
+
+.div_projects h2 {
+    border-top: 2px solid rgba(60, 22, 66, .9);
+}
+
+}
+
+
+
