@@ -145,14 +145,14 @@ const Dashboard = (props) => {
                     <div className={style.sidebar}>
                         <h3>M E N U</h3><hr />
                         <nav className={style.nav}>
-                            <Link href="#main">Dashboard</Link>
+                            <Link href="#stats">Estadísticas</Link>
                             <Link href="#users">Usuarios</Link>
                             <Link href="#projects">Proyectos</Link>
                         </nav>
                     </div>
 
-                    <main className={style.main} id="main">
-                        <div className={style.performance}>
+                    <main className={style.main} >
+                        <div id="stats" className={style.performance}>
                             <h2>Estadísticas generales</h2>
                             <div className={style.performanceContainer}>
                                 <div className={style.infoConainter}>
@@ -190,18 +190,7 @@ const Dashboard = (props) => {
                         <div>
                             <div className={style.users} id="users">
                                 <h2>Usuarios</h2>
-                                <div>
-                                    <button onClick={handlePrevClickUsers}> Atrás</button>
-                                    {
-                                        pageU.map((p, index) => <button
-                                                key={index}
-                                                value={index}
-                                                onClick={handlePageUsers}
-                                            > {index + 1} </button>
-                                        )
-                                    }
-                                    <button onClick={handleNextClickUsers}> Siguiente</button>
-                                </div>
+                                
                                 <table className={style.table}>
 
                                     <thead>
@@ -264,6 +253,19 @@ const Dashboard = (props) => {
                                     ))}
                                     </tbody>
                                 </table>
+                                <div className={style.paginatedContainer}>
+                                    <button onClick={handlePrevClickUsers} className={style.paginatedMenu}> Atrás</button>
+                                    {
+                                        pageU.map((p, index) => <button
+                                                key={index}
+                                                value={index}
+                                                onClick={handlePageUsers}
+                                                className={style.paginatedMenu}
+                                            > {index + 1} </button>
+                                        )
+                                    }
+                                    <button onClick={handleNextClickUsers} className={style.paginatedMenu}> Siguiente</button>
+                                </div>
                             </div>
 
                             <div className={style.projects} id="projects">
@@ -276,16 +278,7 @@ const Dashboard = (props) => {
                                         <option value="espera">En espera</option>
                                         <option value="rechazado">Rechazados</option>
                                     </select>
-                                    <button onClick={handlePrevClick}> Atrás</button>
-                                    {
-                                        pageP.map((p, index) => <button
-                                                key={index}
-                                                value={index}
-                                                onClick={handlePage}
-                                            > {index + 1} </button>
-                                        )
-                                    }
-                                    <button onClick={handleNextClick}> Siguiente</button>
+                                    
 
                                 </div>
 
@@ -313,19 +306,28 @@ const Dashboard = (props) => {
                                                 <Modal
                                                     isOpen={isOpen}
                                                     ariaHideApp={false}
-                                                >
-                                                    <button onClick={closeModal}> X</button>
-                                                    <button className={style.accept} onClick={async () => {
+                                                ><div className={style.modalContainer}>
+                                                    <button onClick={closeModal} className={style.closeModal}><FontAwesomeIcon icon={faCircleXmark} className={style.theIconModalClose}/></button>
+                                                    <div className={style.choiseContainer}>
+                                                        <h2>Este proyecto esta en espera, desea:</h2>
+                                                        <button className={style.accept} onClick={async () => {
                                                         await handlerProject("aceptado", project.id)
                                                         closeModal()
-                                                    }}>Aceptar
-                                                    </button>
-                                                    <button className={style.delete} onClick={async () => {
-                                                        await handlerProject("rechazado", project.id)
-                                                        closeModal()
-                                                    }}>Rechazar
-                                                    </button>
-                                                    <CardProjectDetail obj={project}/>
+                                                        }}>Aceptar
+                                                        </button>
+                                                        <button className={style.delete} onClick={async () => {
+                                                            await handlerProject("rechazado", project.id)
+                                                            closeModal()
+                                                        }}>Rechazar
+                                                        </button>
+                                                    </div>
+                                                    <div className={style.projInfoContainer}>
+                                                        <CardProjectDetail obj={project}/>
+                                                    </div>
+                                                    
+                                                </div>
+                                                    
+                                                    
                                                 </Modal>
                                             </td>
                                             <td>
@@ -374,6 +376,20 @@ const Dashboard = (props) => {
                                     ))}
                                     </tbody>
                                 </table>
+                                <div className={style.paginatedContainer}>
+                                    <button onClick={handlePrevClick} className={style.paginatedMenu}> Atrás</button>
+                                    {
+                                        pageP.map((p, index) => <button
+                                                key={index}
+                                                value={index}
+                                                onClick={handlePage}
+                                                className={style.paginatedMenu}
+                                            > {index + 1} </button>
+                                        )
+                                    }
+                                    <button onClick={handleNextClick} className={style.paginatedMenu}> Siguiente</button>
+                                </div>
+                                
                             </div>
                         </div>
                     </main>

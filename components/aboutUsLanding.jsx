@@ -76,6 +76,15 @@ export default function AboutUsLanding (){
                         <Link target='_blank' rel="noreferrer" href="https://github.com/Santiagoalvarez2022"><FontAwesomeIcon icon={faGithub} className={style.theIcons} /></Link>
                     </div>
                 </div>
+                <div className={style.card}>
+                    <img src="img/diego.jpg" alt="santyperfil" className={style.profileImage} />
+                    <h4>Diego Araujo</h4>
+                    <p>Scrum Master</p>
+                    <div className={style.socialMedias}>
+                        <Link target='_blank' rel="noreferrer" href="https://www.linkedin.com/in/diego-araujo-dev/"><FontAwesomeIcon icon={faLinkedin} className={style.theIcons} /></Link>
+                        <Link href="#"><FontAwesomeIcon icon={faGithub} className={style.theIcons} /></Link>
+                    </div>
+                </div>
             </div>
             
         </div>
