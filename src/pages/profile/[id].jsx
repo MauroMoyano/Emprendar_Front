@@ -7,6 +7,7 @@ import { useRouter } from "next/router";
 import Swal from "sweetalert2";
 import ProfileProject from "components/profileProject";
 import { useDropzone } from "react-dropzone"
+import Link from "next/link";
 
 // import de iconos
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -21,7 +22,7 @@ export default function Profile({ userData, error }) {
     const { user } = useSelector(state => state)
     const router = useRouter()
 
-    console.log('userData ->', userData)
+    // console.log('userData ->', userData)
     // console.log('userData.id ->', userData?.id)
     // console.log('user.id ->', user?.id)
 
@@ -348,11 +349,11 @@ export default function Profile({ userData, error }) {
             newPassword: passwords.newPassword
         }
 
-        
+
 
         try {
             const response = await clienteAxios.post(`${process.env.NEXT_PUBLIC_BACK_APP_URL}/user/config/changepassword`, body)
-            
+
             Swal.fire({
                 icon: 'success',
                 title: response.data?.msg,
@@ -570,9 +571,14 @@ export default function Profile({ userData, error }) {
             }
 
             {!!error &&
-                <div className={style.divError}>
-                    <h1>No se encontró el usuario</h1>
-                    <button onClick={goHome}>Regresar a inicio</button>
+                <div className={style.containerRejected}>
+                    <div className={style.bubbleError}>
+                        <FontAwesomeIcon icon={faCircleXmark} className={style.theIconX} />
+                        <p>Usuario no encontrado</p>
+                        <Link href="/home">
+                            <button className={style.backHome} type='button'>Volver al Home</button>
+                        </Link>
+                    </div>
                 </div>}
 
         </Layout>

@@ -8,25 +8,26 @@ import EditProject from '../components/EditProject'
 
 export default function ProfileProject({ projectData }) {
 
-    console.log('projectData ->', projectData)
+    // console.log('projectData ->', projectData)
 
     const [isOpen, openModal, closeModal] = useModal(false)
 
     const formatGoal = (num) => {
         if (!num) {
-          return 'No info';
+            return 'No info';
         }
-    
+
         const exp = /(\d)(?=(\d{3})+(?!\d))/g;
         const rep = '$1,';
         let arr = num.toString().split('.');
         arr[0] = arr[0].replace(exp, rep);
         return arr[1] ? arr.join('.') : arr[0];
-      }
-    
+    }
+
 
     return (
         <div className={style.card_project}>
+
             <button onClick={openModal}><FontAwesomeIcon icon={faPenToSquare} title='Editar proyecto' /></button>
             <div className={style.div_img}>
                 <img src={projectData.img} alt="Imagen del proyecto" />
@@ -34,9 +35,10 @@ export default function ProfileProject({ projectData }) {
             <h4 className={style.title}>{projectData.title}</h4>
             <h5 className={style.summary} >{projectData.summary}</h5>
             <h5 className={style.amount}>Cantidad recolectada: <br /> ${formatGoal(projectData.amount_collected)} / ${formatGoal(projectData.goal)} </h5>
-            <ModalProject isOpen={isOpen} closeModal={closeModal}>
+            <ModalProject isOpen={isOpen}>
                 <>
-                    <EditProject projectData={projectData} />
+                    
+                    <EditProject projectData={projectData} closeModal={closeModal} />
                 </>
             </ModalProject>
         </div>

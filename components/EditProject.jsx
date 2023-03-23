@@ -1,12 +1,9 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState } from "react";
 import style from "./styles/editProject.module.css";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
-    authedUser,
-    createProject,
     getHomeProjects,
 } from '../redux/actions'
-import { useRouter } from "next/router";
 import clienteAxios from "config/clienteAxios";
 import Swal from "sweetalert2";
 
@@ -15,12 +12,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 
 
-export default function EditProject({ projectData }) {
+export default function EditProject({ projectData, closeModal }) {
 
-    console.log('projectData en edit ->', projectData)
+    // console.log('projectData en edit ->', projectData)
 
     const dispatch = useDispatch();
-    const router = useRouter();
+    // const router = useRouter();
 
     useEffect(() => {
         dispatch(getHomeProjects());
@@ -192,6 +189,22 @@ export default function EditProject({ projectData }) {
         return arr[1] ? arr.join('.') : arr[0];
     }
 
+    const close = ()=>{
+        setForm({
+            title: projectData.title,
+            summary: projectData.summary,
+            description: projectData.description
+        })
+
+        setErrors({
+            title: '',
+            summary: '',
+            description: ''
+        })
+
+        closeModal()
+    }
+
     const isValid =
         form.title !== "" &&
         form.summary !== "" &&
@@ -202,6 +215,7 @@ export default function EditProject({ projectData }) {
 
     return (
         <>
+            <button onClick={close} className={style.modal_close}>X</button>
             <form onSubmit={submitHandler} className={style.formContainer}>
                 <h1 className={style.title}>Edita tu proyecto:</h1>
                 <div className={style.formInput}>

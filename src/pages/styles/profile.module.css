@@ -239,8 +239,11 @@
 
 .userInfo_buttons {
     /* border: 1px solid black; */
-    width: 70%;
-
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
 }
 
 .edit_info {
@@ -282,7 +285,6 @@
     font-weight: bold;
     background: #9d0208;
     color: #fff;
-    margin-left: 20px;
     cursor: pointer;
     font-family: 'Montserrat', sans-serif;
     transition: all .3s ease;
@@ -344,12 +346,15 @@
 
 .div_valoracion>h4,
 .div_email>h4 {
-    border-bottom: 1.5px solid black;
-    padding-bottom: 1px;
     font-weight: normal;
     font-style: italic;
     font-size: 15px;
     display: inline-block;
+
+    background: #a06cd5;
+    color: aliceblue;
+    padding: 3px;
+    border-radius: 5px;
 }
 
 .div_valoracion>p,
@@ -588,6 +593,26 @@
     border-left: 2px solid rgba(60, 22, 66, .9);
 }
 
+.div_projects>h4{
+    /* border: 1px solid green; */
+    margin: 10px auto;
+    text-align: center;
+    font-style: italic;
+    color: #415a77;
+}
+
+.div_projects>h2{
+    text-align: center;
+    font-size: 15px;
+    padding: 10px 0;
+    background: #2e034b;
+    color: #fff;
+    text-transform: uppercase;
+    text-align: center;
+    width: 100%;
+    font-family: 'Montserrat', sans-serif;
+}
+
 .projects_container {
     /* border: 1px solid green; */
     margin-top: 10px;
@@ -596,6 +621,55 @@
     gap: 10px;
     max-height: 100vh;
     overflow-y: scroll;
+}
+
+.containerRejected{
+    min-height: 100vh;
+    background-color: #babafa;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.bubbleError{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 200px;
+    background-color: #cfcff8;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 2px 15px black;
+}
+
+.bubbleError p{
+    font-weight: bold;
+}
+
+.backHome{
+    border: none;
+    border-radius: 5px;
+    background-color: #260157;
+    height: 40px;
+    width: 200px;
+    color: aliceblue;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+.theIconX{
+    font-size: 75px;
+    color: crimson;
+    margin-bottom: 15px;
+}
+
+.backHome:hover{
+    background-color: #592e83;
 }
 
 @media  (max-width: 768px) {
