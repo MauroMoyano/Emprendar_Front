@@ -2,20 +2,24 @@
 
 .container {
     display: flex;
-    min-height: 100vh;
+    min-height: 60vh;
 }
 
 .main {
     flex:5;
-    margin-left: 250px;
+    margin-left: 50px;
+    margin-right: 50px;
+    overflow-y: auto;
+    max-height: 41.35vw;
 }
 
 .sidebar {
-        position: absolute;
-        top: 81px;
+        position: relative;
+        padding-top: 5px;
+        top:0;
         left: 0;
         width: 230px;
-        height: 100%;
+        height: auto;
         text-align: center;
         flex: 1;
         background-color: #260157;
@@ -52,10 +56,14 @@
 }
 
 .performance, .users, .projects {
-    margin-top: 1rem;
+    margin-top: 2.5rem;
     background-color: white;
     border: 1px solid #e1e1e1;
     border-radius: 15px 15px 0 0;
+}
+
+.users, .projects{
+    min-height: 350px;
 }
 
 .performanceContainer {
@@ -64,12 +72,15 @@
     padding: 2rem 0;
 }
 
+
+
 .performance h2, .users h2, .projects h2 {
-    border: 1px solid #e1e1e1;
+    border: 1px solid #260157;
     border-radius: 15px 15px 0 0;
     background-color: #260157;
     padding: 1rem;
     color: aliceblue;
+    text-align: center;
 }
 
 .infoConainter {
@@ -109,16 +120,40 @@
 .avatar {
     max-width: 100%;
     border-radius: 50%;
-    width: 5rem;
-    height:  4rem;
+    width: 60px;
+    height:  auto;
+    object-fit: cover;
 }
 
 .table {
     padding: 1rem 0;
     width: 100%;
     text-align: center;
+}
+
+.paginatedContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.paginatedMenu{
+    border: none;
+    border-radius: 5px;
+    background-color: rgb(10, 10, 10);
+    padding: 10px 10px;
+    margin: 2px;
+    margin-bottom: 15px;
+    color: aliceblue;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.paginatedMenu:hover{
+    background-color: #09c7ae;
 
 }
+
 
 
 .delete, .suspension, .accept {
@@ -126,7 +161,7 @@
     font-weight: bold;
     color: white;
     border: none;
-    border-radius: 10px;
+    border-radius: 5px;
     cursor: pointer;
 }
 
@@ -146,12 +181,14 @@
 
 .accept {
     background-color: #73A839;
+    margin-left: 1rem;
 }
 
 .validated, .invalidated {
     border-radius: 1rem;
     font-weight: bold;
     color: white;
+    padding: 2px 0;
 }
 
 .validated {
@@ -167,11 +204,23 @@
 .filter {
     display: flex;
     padding: 1rem;
+    align-items: center;
+    justify-content: right;
 }
+
+.filter select {
+    margin-left: 6px;
+    border-radius: 4px;
+    height: 30px;
+}
+
 
 .imageProject {
     max-width: 100%;
+    max-height: 60px;
     width: 6rem;
+    object-fit: cover;
+    cursor: pointer;
 }
 
 .progressBar {
@@ -236,4 +285,67 @@
 
 .backHome:hover{
     background-color: #09c7ae;
+}
+
+
+ /* CSS del modal */
+ .modalContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    background-color: #babafa;
+}
+
+.choiseContainer{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    border-radius: 10px;
+    background-color: #260157;
+    height: auto;
+    flex-wrap: wrap;
+    padding: 20px;
+    box-shadow: 0 4px 20px black;
+    z-index: 3;
+}
+
+.choiseContainer h2{
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: aliceblue;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+.projInfoContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0 0 15px 15px;
+    background-color: #f3f3f3;
+    width: 40%;
+    box-shadow: 0 4px 20px black;
+    z-index: 1;
+}
+
+.closeModal{
+    display: flex;
+    position: absolute;
+    right: 0;
+    top: 0;
+    border:none;
+    background-color: aliceblue;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.theIconModalClose{
+    font-size: 45px;
+    color: crimson;
 }
