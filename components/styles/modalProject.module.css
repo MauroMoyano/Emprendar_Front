@@ -21,6 +21,7 @@
     min-width: 320px;
     min-height: 200px;
     max-height: 95vh;
+    max-width: 95vw;
     background-color: #fff;
     padding: 1rem;
     overflow-y: scroll;
