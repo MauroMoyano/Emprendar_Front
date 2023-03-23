@@ -1,13 +1,19 @@
 import Link from 'next/link'
+import { useDispatch } from 'react-redux'
+import { getUser } from 'redux/actions'
 import { useModal } from './ModalProject/hooks/useModal'
 import ModalProject from './ModalProject/ModalProject'
 import style from './styles/CardUsers.module.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faStar } from '@fortawesome/free-solid-svg-icons'
 
 
 
 export const CardsUsers = (user) => {
 
     const [isOpen, openModal, closeModal] = useModal(false)
+
+    const dispatch = useDispatch()
 
     console.log(user);
 
@@ -25,7 +31,7 @@ export const CardsUsers = (user) => {
                                 <p>{user?.name} {user?.last_name}</p>
                             </div>
                             <div className={style.subTitle}>
-                                <p>Reputacion: {user.reputation?.reputation} [{user.reputation?.count}]</p>
+                                <p>Reputacion: {user.reputation?.reputation} <FontAwesomeIcon icon={faStar} className={style.star}/> [{user.reputation?.count}]</p>
                             </div>
                         </div>
                         <div className={style.buttonContainer}>
@@ -36,18 +42,31 @@ export const CardsUsers = (user) => {
                             </Link>
                             <button type='button' onClick={openModal} className={style.button2}>Sus proyectos</button>
                             <ModalProject isOpen={isOpen} closeModal={closeModal}>
-                                <div>
-                                    {
-                                        user.projects?.map(pj => {
-                                            <div>
-                                                {pj?.title}
-                                                <Link href={`/detailUser/${user.userId}/${pj.id}`}>
-                                                    <button type='button' >Ver detalles</button>
-                                                </Link>
-                                            </div>
-                                        })
-                                    }
-                                </div>
+                                <>
+                                    <button className={style.modal_close} onClick={closeModal}>X</button>
+                                    <div className={style.projects}>
+                                        {
+                                            user.project.length !== 0
+                                                ? user.project?.map(pj => {
+                                                    return (
+                                                        <div className={style.project}>
+                                                            <p className={style.titleProject}>
+                                                                {pj?.title}
+                                                            </p>
+                                                            <Link href={`/detailUser/${user.userId}/${pj.id}`}>
+                                                                <button type='button' onClick={() => dispatch(getUser(user.userId))} className={style.buttonProject} >Ver detalles</button>
+                                                            </Link>
+                                                        </div>
+                                                    )
+                                                })
+                                                : (
+                                                    <p className={style.noProject}>
+                                                        Este usuario aún no cuenta con proyectos creados.
+                                                    </p>
+                                                )
+                                        }
+                                    </div>
+                                </>
                             </ModalProject>
                         </div>
                     </div>
