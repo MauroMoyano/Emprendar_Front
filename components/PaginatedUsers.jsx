@@ -65,7 +65,7 @@ export const PaginatedUsers = () => {
                                     last_name={user.last_name}
                                     reputation={user.reputation}
                                     profile_img={user.profile_img}
-                                    projects={user.projects}
+                                    project={user.project}
     
                                 />
                             )
