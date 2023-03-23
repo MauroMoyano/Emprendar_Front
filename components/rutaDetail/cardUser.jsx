@@ -69,7 +69,7 @@ export default function CardUser({ userId }) {
                 <div className={style.detailPerfil}>
                     <h5>{detailUsuario.user_name}</h5>
                     <p>Reputacion</p>
-                    <p>{detailUsuario.reputation?.reputation} [{detailUsuario.reputation?.count}]</p>
+                    <p>{detailUsuario?.reputation} [{detailUsuario?.count}]</p>
                     {
                         value[0]?.data === 0
                             ? (

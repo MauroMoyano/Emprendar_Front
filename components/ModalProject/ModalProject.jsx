@@ -8,7 +8,7 @@ const ModalProject = ({ children, isOpen, closeModal }) => {
 
         <article onClick={closeModal} className={`${style.modal} ${isOpen && style.is_open}`}>
             <div className={style.modal_container} onClick={handleModalContainerClick}>
-                <button className={style.modal_close} onClick={closeModal}>X</button>
+                {/* <button className={style.modal_close} onClick={closeModal}>X</button> */}
                 {children}
             </div>
         </article>
