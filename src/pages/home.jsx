@@ -29,7 +29,7 @@ import { faPhone, faAddressCard, faList, faFlag , faMagnifyingGlass} from "@fort
 export default function Home() {
   const dispatch = useDispatch();
 
-    const dispatch = useDispatch()
+
 
     const { category, country } = useSelector(state => state)
     

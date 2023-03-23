@@ -82,8 +82,8 @@ export default function CardUser({ userId }) {
                                             setBandera(!bandera)
                                         }}>
                                             {
-                                                valuess.map(val => {
-                                                    return (<option value={val} >{val}</option>)
+                                                valuess.map((val,i) => {
+                                                    return (<option key={i} value={val} >{val}</option>)
                                                 })
                                             }
                                         </select>
@@ -100,8 +100,8 @@ export default function CardUser({ userId }) {
                                             setBandera(!bandera)
                                         }}>
                                             {
-                                                valuess.map(val => {
-                                                    return (<option value={val} >{val}</option>)
+                                                valuess.map((val,i) => {
+                                                    return (<option key={i} value={val} >{val}</option>)
                                                 })
                                             }
                                         </select>

@@ -293,7 +293,7 @@ export default function EditProject({ projectData }) {
                                     return null
                                 } else {
                                     return (
-                                        <h3>{`${index + 1}) ${toMayus(elem.name)}`}</h3>
+                                        <h3 key={index}>{`${index + 1}) ${toMayus(elem.name)}`}</h3>
                                     )
                                 }
                             })
