@@ -1,8 +1,17 @@
+/* eslint-disable */
 import Paginated from "../../components/Paginated";
-import { useDispatch, useSelector } from "react-redux"
-import { changePathToFilterAndSearch, deleteSearchAndFilter, filterAllProjectos, filterCategory, filterCountry, getHomeProjects, orderTop } from "../../redux/actions";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  changePathToFilterAndSearch,
+  deleteSearchAndFilter,
+  filterAllProjectos,
+  filterCategory,
+  filterCountry,
+  getHomeProjects,
+  orderTop,
+} from "../../redux/actions";
 import Layout from "../../components/Layout";
-import style from "./styles/home.module.css"
+import style from "./styles/home.module.css";
 import { useEffect, useState } from "react";
 import { authedUser } from "../../redux/actions";
 import { useRouter } from "next/router";
@@ -18,15 +27,16 @@ import { faPhone, faAddressCard, faList, faFlag , faMagnifyingGlass} from "@fort
 
 
 export default function Home() {
+  const dispatch = useDispatch();
 
-    const dispatch = useDispatch()
+
 
     const { category, country } = useSelector(state => state)
     
 
-    useEffect(() => {
-        dispatch(getHomeProjects())
-    }, [])
+  useEffect(() => {
+    dispatch(getHomeProjects());
+  }, []);
 
     const [ordenss, setOrden] = useState('')
     const [countriess, setCountry] = useState('')
@@ -36,46 +46,42 @@ export default function Home() {
     const [timer, setTimer] = useState(null)
 
 
-    useEffect(() => {
-        let path
-        ordenss !== ''
-            ? path = `orden=${ordenss}&`
-            : path = `orden=&`
-        countriess !== ''
-            ? path = path + `country=${countriess}&`
-            : path = path + `country=&`
-        categoriess !== ''
-            ? path = path + `category=${categoriess}&`
-            : path = path + `category=&`
-        search !== ''
-            ? path = path + `search=${search}`
-            : path = path + `search=`
-        dispatch(changePathToFilterAndSearch(path))
+  useEffect(() => {
+    let path;
+    ordenss !== "" ? (path = `orden=${ordenss}&`) : (path = `orden=&`);
+    countriess !== ""
+      ? (path = path + `country=${countriess}&`)
+      : (path = path + `country=&`);
+    categoriess !== ""
+      ? (path = path + `category=${categoriess}&`)
+      : (path = path + `category=&`);
+    search !== ""
+      ? (path = path + `search=${search}`)
+      : (path = path + `search=`);
+    dispatch(changePathToFilterAndSearch(path));
+  }, [ordenss, countriess, categoriess, search]);
 
-    }, [ordenss, countriess, categoriess, search])
+  /* let toPath = [ordenss, countriess, categoriess] */
 
-    /* let toPath = [ordenss, countriess, categoriess] */
+  const handlerDeleteSearch = () => {
+    setOrden("");
+    setCountry("");
+    setCategory("");
+    setSearch("");
+  };
 
-    const handlerDeleteSearch = () => {
-        setOrden('')
-        setCountry('')
-        setCategory('')
-        setSearch('')
+  const handleInputChange = (event) => {
+    if (timer) {
+      clearTimeout(timer);
     }
 
-    const handleInputChange = (event) => {
-
-        if (timer) {
-            clearTimeout(timer);
-        }
-
-        setTimer(setTimeout(() => {
-            let newValue = event.target.value;
-            setSearch(newValue)
-        }, 2000));
-    };
-
-
+    setTimer(
+      setTimeout(() => {
+        let newValue = event.target.value;
+        setSearch(newValue);
+      }, 2000)
+    );
+  };
 
     return (
         <Layout>
