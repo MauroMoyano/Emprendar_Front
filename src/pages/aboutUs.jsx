@@ -167,6 +167,25 @@ const aboutUs = () => {
               </div>
             </div>
             {/*---------------------------------------------------------------------*/}
+            <div className={style.card}>
+              <img src="img/diego.jpg" alt="diego" />
+
+              <div className={style.info}>
+                <p className={style.name}>Diego Araujo</p>
+                <p className={style.carrer}>Scrum Master</p>
+
+                <div className={style.icons}>
+                  <Link href="#">
+                    <FontAwesomeIcon icon={faGithub} />
+                  </Link>
+                  <Link target='_blank' rel="noreferrer"
+                    href="https://www.linkedin.com/in/diego-araujo-dev/">
+                    <FontAwesomeIcon icon={faLinkedin} />
+                  </Link>
+                </div>
+              </div>
+            </div>
+            {/*---------------------------------------------------------------------*/}
           </div>
         </div>
       </div>
