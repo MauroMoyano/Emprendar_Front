@@ -71,20 +71,22 @@ export default function CardUser({ userId }) {
                 <div className={style.detailPerfil}>
                     <h5>{detailUsuario.user_name}</h5>
                     <p>Reputacion</p>
-                    <p>{detailUsuario?.reputation} <FontAwesomeIcon icon={faStar} className={style.star}/> [{detailUsuario?.count}]</p>
+                    <p>{detailUsuario?.reputation} <FontAwesomeIcon icon={faStar} className={style.star} /> [{detailUsuario?.count}]</p>
                     {
                         value[0]?.data === 0
                             ? (
                                 (
-                                    <div>
-                                        valora al usuario:
-                                        <select value={dataToSearchRep?.qualification} onChange={(e) => {
+                                    <div className={style.reputation}>
+                                        <p>
+                                            valora al usuario:
+                                        </p>
+                                        <select className={style.select} value={dataToSearchRep?.qualification} onChange={(e) => {
                                             postRep(e)
                                             setRep(e.target.value)
                                             setBandera(!bandera)
                                         }}>
                                             {
-                                                valuess.map((val,i) => {
+                                                valuess.map((val, i) => {
                                                     return (<option key={i} value={val} >{val}</option>)
                                                 })
                                             }
@@ -94,15 +96,17 @@ export default function CardUser({ userId }) {
                             )
                             : (
                                 (
-                                    <div>
-                                        cambiar valoración:
-                                        <select value={dataToSearchRep?.qualification} onChange={(e) => {
+                                    <div className={style.reputation}>
+                                        <p>
+                                            cambiar valoración:
+                                        </p>
+                                        <select className={style.select} value={dataToSearchRep?.qualification} onChange={(e) => {
                                             putRep(e)
                                             setRep(e.target.value)
                                             setBandera(!bandera)
                                         }}>
                                             {
-                                                valuess.map((val,i) => {
+                                                valuess.map((val, i) => {
                                                     return (<option key={i} value={val} >{val}</option>)
                                                 })
                                             }

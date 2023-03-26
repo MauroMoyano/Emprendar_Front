@@ -1,19 +1,17 @@
-
-
-.cardUser{
+.cardUser {
     padding: 5px;
     display: flex;
     flex-direction: column;
     height: 100%;
     align-items: center;
-  
-} 
 
-.perfil{
+}
+
+.perfil {
     margin-top: 1rem;
     display: flex;
     justify-content: center;
-    
+
     padding: 0 5rem;
 }
 
@@ -23,7 +21,7 @@
     max-width: 100%;
 }
 
-.detailPerfil{
+.detailPerfil {
     display: flex;
 
     display: flex;
@@ -32,17 +30,73 @@
     align-items: center;
 }
 
-.detailPerfil  h5{
+.detailPerfil h5 {
     text-align: center;
     font-size: 25px;
-
+    margin-bottom: .5rem;
 }
 
-.detailPerfil > p{
+
+.detailPerfil>p {
     height: 50%;
     font-size: 20px;
+    margin-bottom: .5rem;
 }
+
+.reputation {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.reputation>p {
+    font-weight: bold;
+    font-size: 20px;
+    margin-bottom: .5rem;
+}
+
 
 .star {
     color: #ff8000;
+}
+
+.select {
+    position: relative;
+    width: 60px;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    text-transform: capitalize;
+    color: #3C1642;
+    background: rgba(0, 0, 0, 0.1);
+    text-align: left;
+    padding: 0 15px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.select option:focus {
+    outline: 1px solid rgba(72, 21, 75, 0.7);
+}
+
+.select::after {
+    content: '';
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg);
+    width: 6px;
+    height: 6px;
+    border-right: 2px solid #fff;
+    border-bottom: 2px solid #fff;
+}
+
+.select:hover {
+    background: #3C1642;
+    color: #fff;
+}
+
+.select.active {
+    background: #222222;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
 }
